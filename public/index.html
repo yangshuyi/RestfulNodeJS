@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="rootApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echodrama</title>
+    <link href="stylesheets/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div ui-view></div>
+<scroll-up></scroll-up>
+
+
+<!-- map -->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5b6ea60af8dda25ddf093faebeeadeab"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<!-- Third part lib -->
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/scrollup/dist/jquery.scrollUp.min.js"></script>
+<script src="lib/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="lib/angular-ui-select/dist/select.js"></script>
+<script src="lib/angular-sanitize/angular-sanitize.js"></script>
+<script src="lib/angular-cache/dist/angular-cache.js"></script>
+<script src="lib/restangular/dist/restangular.js"></script>
+<script src="lib/lodash/dist/lodash.js"></script>
+<script src="lib/ng-file-upload/ng-file-upload.js"></script>
+<script src="lib/ng-file-upload/FileAPI.js"></script>
+<script src="lib/cropperjs/dist/cropper.js"></script>
+
+<!-- component -->
+<script src="javascripts/common/modules.js"></script>
+<script src="javascripts/common/components/ng-scrollUp.js"></script>
+<script src="javascripts/common/components/pagination-grid.js"></script>
+<script src="javascripts/common/components/dialog.js"></script>
+<!-- app -->
+<script src="javascripts/app.js"></script>
+<script src="javascripts/home/modules.js"></script>
+<script src="javascripts/home/homeCtrl.js"></script>
+</body>
+</html>

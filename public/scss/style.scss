@@ -1,0 +1,54 @@
+@import '../lib/bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'style.variables';
+@import 'common.component';
+
+.dialogMask {
+  background: rgba(0,0,0,0.4);
+  z-index: 0;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+.dialog{
+  position: absolute;
+  border: solid royalblue 1px;
+  background: white;
+
+  .head {
+    background: royalblue;
+    padding: 10px 15px;
+    color: white;
+
+    //icons
+    span{
+      margin-left:5px;
+    }
+  }
+
+  .body {
+
+  }
+
+
+
+  a.accordion-toggle i {
+    width: 45px;
+    line-height: 44px;
+    font-size: 20px;
+    margin-top: -10px;
+    text-align: center;
+    margin-right: -15px;
+    background: #c9c9c9;
+  }
+
+  .panel-heading.active a.accordion-toggle i {
+    background: #c52d2f;
+    color: #fff;
+  }
+
+  .panel-heading.active a.accordion-toggle.collapsed i {
+    background: #c52d2f;
+    color: #fff;
+  }
+}
