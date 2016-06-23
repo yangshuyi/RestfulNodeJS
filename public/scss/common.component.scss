@@ -259,3 +259,88 @@
   }
 }
 
+
+
+//dialog
+.dialog{
+  position: absolute;
+  border: solid royalblue 1px;
+  background: white;
+
+  .head {
+    background: royalblue;
+    padding: 10px 15px;
+    color: white;
+
+    //icons
+    span{
+      margin-left:5px;
+    }
+  }
+
+  .no-head {
+    position: absolute;
+    right: 0px;
+    padding: 10px;
+
+    //icons
+    span{
+      margin-left:5px;
+    }
+  }
+
+  .body {
+
+  }
+}
+
+
+.dialogMask {
+  background: rgba(0,0,0,0.4);
+  z-index: 0;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+//panel
+.panel{
+  border: solid #0177D9 1px;
+  background: white;
+
+  .head {
+    background: #0177D9;
+    padding: 10px 15px;
+    color: white;
+
+    //icons
+    span{
+      margin-left:5px;
+    }
+  }
+
+  .body {
+
+  }
+}
+
+.checkbox{
+  .field{
+    background-image: url("../images/icons.png");
+    background-position: -244px -442px;
+    width:26px;
+    height:26px;
+    padding-left: 30px;
+    cursor: pointer;
+  }
+  .field.checked{
+    background-position: -194px -442px;
+  }
+  .field.disabled{
+    background-position: -139px -442px;
+  }
+}
+
+
+
+

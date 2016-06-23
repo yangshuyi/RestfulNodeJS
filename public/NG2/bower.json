@@ -1,0 +1,22 @@
+{
+  "name": "NG2",
+  "homepage": "https://github.com/yangshuyi/RestfulNodeJS",
+  "authors": [
+    "yangshuyi <syang@cccis.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "^4.13.1"
+  }
+}

@@ -3,12 +3,15 @@ angular.module('common.components')
     .directive("dialog", ['$compile', '$timeout', function ($compile, $timeout) {
         var template = '' +
             '<div ng-show="options.isVisible" style="width:{{options.width}};height:{{options.height}};" class="dialog {{options.dialogCls}}">' +
-            '   <div ng-mousedown="headMouseDown($event)" class="head {{options.headCls}}" style="display:flex;">' +
+            '   <div ng-if="options.hasHead" ng-mousedown="headMouseDown($event)" class="head {{options.headCls}}" style="display:flex;">' +
             '       <div style="flex:1">{{options.title}}</div>' +
             '       <div style="margin-left:15px;">' +
             '           <span ng-if="options.collapsible" ng-click="toggle()" ng-class="{true:\'glyphicon glyphicon-triangle-top\',false:\'glyphicon glyphicon-triangle-bottom\'}[options.collapsed]" style="cursor: pointer;"/>' +
             '           <span ng-if="options.closable" title="{{options.closeText}}" ng-click="close()" class="glyphicon glyphicon-remove" style="cursor: pointer;"/>' +
             '       </div>' +
+            '   </div>' +
+            '   <div ng-if="!options.hasHead" class="no-head">' +
+            '       <span ng-if="options.closable" title="{{options.closeText}}" ng-click="close()" class="glyphicon glyphicon-remove" style="cursor: pointer;"/>' +
             '   </div>' +
             '   <div class="body {{options.bodyCls}}" style="overflow: auto; {{options.bodyStyle}}" ng-show="!options.collapsed">' +
             '       <div ng-transclude>/' +
@@ -26,18 +29,20 @@ angular.module('common.components')
             transclude: true,
             link: function ($scope, $element, attrs) {
                 //Options
-                if (!attrs.dialogId) {
+                if (!attrs.popupPanelId) {
                     attrs.$set('dialogId', 'dialog_' + (new Date()).getTime());
                 }
                 $scope.options.title = $scope.options.title || '';
-                $scope.options.isVisible = $scope.options.isVisible == '' || true;
-                $scope.options.collapsible = $scope.options.collapsible || false;
-                $scope.options.collapsed = $scope.options.collapsed || false;
-                $scope.options.closable = $scope.options.closable || true;
+                $scope.options.isVisible = $scope.options.isVisible!=null?$scope.options.isVisible:true;
+                $scope.options.hasHead = $scope.options.hasHead!=null?$scope.options.hasHead:true;
+                $scope.options.autoHide = $scope.options.autoHide!=null?$scope.options.autoHide:true;
+                $scope.options.collapsible = $scope.options.collapsible!=null?$scope.options.collapsible:false;
+                $scope.options.collapsed = $scope.options.collapsed!=null?$scope.options.collapsed:false;
+                $scope.options.closable = $scope.options.closable!=null?$scope.options.closable:true;
                 //$scope.options.destroyOnClose = $scope.options.destroyOnClose || true;
                 $scope.options.closeText = $scope.options.closeText || '关闭';
-                $scope.options.enableDrag = $scope.options.enableDrag || true;
-                $scope.options.modal = $scope.options.modal || true;
+                $scope.options.enableDrag = $scope.options.enableDrag!=null?$scope.options.enableDrag:true;
+                $scope.options.modal = $scope.options.modal!=null?$scope.options.modal:true;
                 //Class
                 $scope.options.dialogCls = $scope.options.dialogCls || '';
                 $scope.options.headCls = $scope.options.headCls || '';
@@ -176,6 +181,21 @@ angular.module('common.components')
 
                         $('body').append($scope.maskElement);
                     }
+
+                    if($scope.options.autoHide == true){
+                        var closeFun = function (e) {
+                            var clickInside = $(e.target).closest('.dialog');
+                            if (clickInside.length <= 0) {
+                                $scope.close();
+                            } else {
+                                $(document).one("click", closeFun);
+                            }
+                        };
+
+                        $timeout(function () {
+                            $(document).one("click", closeFun);
+                        }, 500);
+                    }
                 };
 
                 $scope.isOpened = function () {
@@ -253,6 +273,8 @@ angular.module('common.components')
         var defaultOptions = {
             title: '',
             isVisible: true,
+            hasHead: true,
+            autoHide: false,
             collapsible: true,  //Defines if to show collapsible button.
             collapsed: false, //Defines if the panel is collapsed at initialization.
             closable: true,
@@ -317,7 +339,7 @@ angular.module('common.components')
                             var ctrlLocals = { $scope: $dialogScope};
                             var idx = 1;
                             angular.forEach(resolves, function (value, key) {
-                                $dialogScope[key] = results[idx++];
+                                ctrlLocals[key] = results[idx++];
                             });
 
                             $controller(controllerName, ctrlLocals);

@@ -1,4 +1,4 @@
-angular.module('ngDemoModule').controller('ngDemoCtrl', ['$scope', 'dialogProvider', function ($scope, dialogProvider) {
+angular.module('ngDemoModule').controller('ngDemsssoCtrl', ['$scope', 'dialogProvider', function ($scope, dialogProvider) {
 
         $scope.showDialog = function () {
             var dialogOptions = {
@@ -22,7 +22,7 @@ angular.module('ngDemoModule').controller('ngDemoCtrl', ['$scope', 'dialogProvid
             });
         }
     }])
-    .controller('repairFacilityRemarkCtrl', ['$scope', function ($scope) {
+    .controller('repairFacilityssssRemarkCtrl', ['$scope', function ($scope) {
 
         $scope.value = 'hello world';
         $scope.beforeDialogClose = function () {
