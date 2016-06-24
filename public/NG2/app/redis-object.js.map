@@ -1,0 +1,1 @@
+{"version":3,"file":"redis-object.js","sourceRoot":"","sources":["redis-object.ts"],"names":["RedisObject","RedisObject.constructor"],"mappings":"AAAA;IAIIA,qBAAYA,GAAWA,EAAEA,KAAaA;QAClCC,IAAIA,CAACA,GAAGA,GAAGA,GAAGA,CAACA;QACfA,IAAIA,CAACA,KAAKA,GAAGA,KAAKA,CAACA;IACvBA,CAACA;IACLD,kBAACA;AAADA,CAACA,AARD,IAQC;AARY,mBAAW,cAQvB,CAAA"}

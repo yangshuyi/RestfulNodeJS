@@ -1,0 +1,235 @@
+.pagination-grid tr {
+  height: 28px; }
+.pagination-grid td {
+  padding: 1px 4px !important;
+  vertical-align: middle !important;
+  font-size: 12px !important; }
+.pagination-grid .grid-checkbox-cell {
+  width: 35px;
+  text-align: center; }
+.pagination-grid .cate-radio-cell {
+  width: 25px;
+  text-align: center; }
+.pagination-grid .grid-field-cell {
+  text-align: center; }
+.pagination-grid thead tr > th {
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid #dddddd;
+  padding: 0 4px;
+  background-image: -webkit-linear-gradient(#ffffff, #f5f5f5 60%, #f1f1f1);
+  background-image: -o-linear-gradient(#ffffff, #f5f5f5 60%, #f1f1f1);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), color-stop(60%, #f5f5f5), to(#f1f1f1));
+  background-image: linear-gradient(#ffffff, #f5f5f5 60%, #f1f1f1);
+  background-repeat: no-repeat;
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */ }
+.pagination-grid thead .sortable-head {
+  cursor: pointer; }
+.pagination-grid tbody tr > td {
+  padding: 4px;
+  line-height: 1.2;
+  vertical-align: middle; }
+.pagination-grid tbody .row-highlight {
+  background-color: #e9f3f8; }
+.pagination-grid .grid-page-bar .paged-grid-link {
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  cursor: pointer;
+  text-decoration: none !important; }
+.pagination-grid .grid-page-bar .paged-grid-link:hover {
+  border: 1px solid #c8ebfe;
+  text-decoration: none;
+  background-color: #e9f3f8; }
+.pagination-grid .grid-page-bar .paged-grid-link-active {
+  border: 1px solid #c8ebfe;
+  text-decoration: none !important;
+  background-color: #4f91cc;
+  color: #fff !important; }
+.pagination-grid .grid-page-bar .paged-grid-link-active:hover {
+  border: 1px solid #c8ebfe;
+  text-decoration: none;
+  background-color: #4f91cc;
+  color: #fff; }
+.pagination-grid .grid-page-bar .paged-grid-ctrl-link {
+  padding: 3px; }
+.pagination-grid .grid-page-bar .paged-grid-ctrl-link2 {
+  padding: 3px 4px 3px 2px; }
+.pagination-grid .grid-page-bar .paged-grid-ctrl-link3 {
+  padding: 3px 2px 3px 4px; }
+.pagination-grid .grid-page-bar .paged-grid-num-link {
+  padding: 1px 6px;
+  border: 1px solid transparent;
+  border-radius: 25px;
+  cursor: pointer; }
+.pagination-grid .grid-page-bar .data-count-desc {
+  margin-left: 10px; }
+.pagination-grid .grid-page-bar select {
+  border-radius: 4px;
+  height: 24px;
+  border: 1px solid #ccc;
+  width: 45px; }
+.pagination-grid .no-data {
+  height: 50px;
+  padding-left: 10px !important; }
+
+.bootstrap-upload {
+  /** upload image */ }
+  .bootstrap-upload .image-gallery {
+    table-layout: fixed;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    width: 100%; }
+  .bootstrap-upload .image-gallery td {
+    padding: 5px; }
+  .bootstrap-upload .image-gallery .nav-td {
+    width: 30px; }
+  .bootstrap-upload .image-gallery td .img-div {
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer; }
+  .bootstrap-upload .image-gallery td .img-div:hover {
+    border: 1px solid #17ccd2;
+    background-color: #ccc; }
+  .bootstrap-upload .image-gallery td .img-div-selected {
+    border: 1px solid #17CCD2;
+    background-color: #5699D2;
+    padding: 5px;
+    cursor: pointer; }
+  .bootstrap-upload .image-gallery td .image-name {
+    font-size: 10px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px; }
+  .bootstrap-upload .bootstrap-upload-gallery .upload-act-btn {
+    margin-left: 10px; }
+  .bootstrap-upload .bootstrap-upload-gallery .upload-del-btn {
+    margin-left: 5px; }
+  .bootstrap-upload .prev {
+    background: url("../img/prevAndNext.png") no-repeat;
+    display: block;
+    cursor: pointer;
+    width: 30px;
+    height: 50px; }
+  .bootstrap-upload .prev-disable {
+    background: url("../img/prevAndNext.png") no-repeat 0px -70px;
+    display: block;
+    cursor: pointer;
+    width: 30px;
+    height: 50px; }
+  .bootstrap-upload .next {
+    background: url("../img/prevAndNext.png") no-repeat -175px 0px;
+    display: block;
+    cursor: pointer;
+    width: 30px;
+    height: 50px; }
+  .bootstrap-upload .next-disable {
+    background: url("../img/prevAndNext.png") no-repeat -175px -70px;
+    display: block;
+    cursor: pointer;
+    width: 30px;
+    height: 50px; }
+  .bootstrap-upload #gallery-bg {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: #aaa;
+    z-index: 99001;
+    -moz-opacity: 0.3;
+    opacity: .30;
+    filter: alpha(opacity=30); }
+  .bootstrap-upload #gallery-show {
+    display: none;
+    position: fixed;
+    top: 50px;
+    left: 22%;
+    border: 8px solid #f9f9f9;
+    background-color: white;
+    z-index: 99002;
+    overflow: auto;
+    -moz-box-shadow: 15px 15px 10px #666;
+    -webkit-box-shadow: 15px 15px 10px #666;
+    box-shadow: 15px 15px 10px #666; }
+  .bootstrap-upload #fbplus-close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+    background: transparent url("../img/fbplus.png") -40px 0px;
+    cursor: pointer;
+    z-index: 99999103;
+    display: none; }
+  .bootstrap-upload .ng-bs-upload-button {
+    background: url("../img/attachmentIco.png") no-repeat -10px -217px;
+    padding-left: 16px; }
+  .bootstrap-upload .ng-bs-delete-button {
+    background: url("../img/attachmentIco.png") no-repeat -10px -63px;
+    padding-left: 15px; }
+
+.dialog {
+  position: absolute;
+  border: solid royalblue 1px;
+  background: white; }
+  .dialog .head {
+    background: royalblue;
+    padding: 10px 15px;
+    color: white; }
+    .dialog .head span {
+      margin-left: 5px; }
+  .dialog .no-head {
+    position: absolute;
+    right: 0px;
+    padding: 10px; }
+    .dialog .no-head span {
+      margin-left: 5px; }
+
+.dialogMask {
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.panel {
+  border: solid #0177D9 1px;
+  background: white; }
+  .panel .head {
+    background: #0177D9;
+    padding: 10px 15px;
+    color: white; }
+    .panel .head span {
+      margin-left: 5px; }
+
+.checkbox .field {
+  background-image: url("../images/icons.png");
+  background-position: -244px -442px;
+  width: 26px;
+  height: 26px;
+  padding-left: 30px;
+  cursor: pointer; }
+.checkbox .field.checked {
+  background-position: -194px -442px; }
+.checkbox .field.disabled {
+  background-position: -139px -442px; }
+
+.estimateTotalAmountPopupPanel {
+  background-color: #edf6fb;
+  border: 1px solid #a7bac9; }
+
+.estimateTotalAmountPopupPanel > div {
+  padding: 10px; }
+
+.estimateTotalAmountPopupPanel > div > div {
+  padding: 5px 0px; }
+
+/*# sourceMappingURL=style.css.map */

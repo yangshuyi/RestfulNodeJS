@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var redisManage = require('./routes/redisManage');
 var httpClient = require('./routes/httpClient');
 
 var app = express();
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/redisManage', redisManage);
 app.use('/httpClient', httpClient);
 
 // catch 404 and forward to error handler
