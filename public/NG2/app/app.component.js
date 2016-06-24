@@ -9,61 +9,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //One or more import statements to reference the things we need.
 var core_1 = require('@angular/core');
-var _ = require('lodash');
-var redis_object_1 = require("./redis-object");
-var redis_object_component_1 = require("./redis-object-component");
-//A @Component decorator that tells Angular what template to use and how to create the component.
-//associate metadata with the component class
+var router_deprecated_1 = require('@angular/router-deprecated');
+var redis_manager_component_1 = require("./redis-manager.component");
 var AppComponent = (function () {
     function AppComponent() {
-        //When we're ready to build a substantive application, we can expand this class with properties and application logic.
-        this.title = 'Reids Manager';
-        this.keyword = '';
-        this.redisObjects = data;
+        console.log('AppComponent constructor');
     }
-    AppComponent.prototype.searchByKeyword = function () {
-        var key = '';
-        if (this.keyword instanceof HTMLInputElement) {
-            key = keyword.value;
-        }
-        else {
-            key = this.keyword;
-        }
-        if (!key) {
-            this.redisObjects = data;
-        }
-        else {
-            var result = _.filter(data, function (item) {
-                return item.key.indexOf(key) >= 0;
-            });
-            this.redisObjects = result;
-        }
+    AppComponent.prototype.ngOnInit = function () {
+        console.log('AppComponent ngOnInit');
     };
     AppComponent = __decorate([
+        router_deprecated_1.RouteConfig([
+            {
+                path: '/redisManager',
+                name: 'RedisManager',
+                component: redis_manager_component_1.RedisManagerComponent
+            }
+        ]),
         core_1.Component({
             selector: 'my-app',
             template: '' +
-                '<h1>{{title}}</h1>' +
-                '<label for="keyword">Search Keyword: </label><input id="keyword" [(ngModel)]="keyword" (change)="searchByKeyword()" placeholder="keyword">' +
-                '<hr/>' +
-                '<div *ngIf="keyword && redisObjects">Find [{{redisObjects.length}}] record(s) for Redis Object by keyword [{{keyword}}]' +
-                '<div *ngIf="redisObjects" *ngFor="let redisObject of redisObjects">' +
-                '   <redis-object [redisObject]="redisObject"></redis-object>' +
-                '</div>' +
+                '<router-outlet></router-outlet>' +
                 '',
             styles: [''],
-            directives: [redis_object_component_1.RedisObjectComponent]
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES, redis_manager_component_1.RedisManagerComponent],
+            providers: [
+                router_deprecated_1.ROUTER_PROVIDERS
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 })();
 exports.AppComponent = AppComponent;
-var data = [];
-data.push(new redis_object_1.RedisObject('a', 'value1'));
-data.push(new redis_object_1.RedisObject('aa', 'value2'));
-data.push(new redis_object_1.RedisObject('aaa', 'value3'));
-data.push(new redis_object_1.RedisObject('b', 'value4'));
-data.push(new redis_object_1.RedisObject('bb', 'value5'));
-data.push(new redis_object_1.RedisObject('bbb', 'value6'));
 //# sourceMappingURL=app.component.js.map

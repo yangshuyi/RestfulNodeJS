@@ -1,0 +1,65 @@
+//One or more import statements to reference the things we need.
+import {Component} from '@angular/core';
+import { OnInit } from '@angular/core';
+import {RedisObject} from "./redis-object";
+
+import * as _ from 'lodash';
+import {RedisObjectComponent} from "./redis-object.component";
+import {RedisManagerService} from "./redis-manager.service";
+
+//A @Component decorator that tells Angular what template to use and how to create the component.
+//associate metadata with the component class
+@Component({
+    selector: 'redis-manager', //The selector specifies a simple CSS selector for an HTML element that represents the component.
+    template: '' +
+    '<h1>{{title}}</h1>' +
+    '<label for="keyword">Search Keyword: </label><input id="keyword" [(ngModel)]="keyword" (change)="searchByKeyword()" placeholder="keyword">' +
+    '<hr/>' +
+    '<div *ngIf="keyword && filterRedisObjects">Find [{{filterRedisObjects.length}}] record(s) for Redis Object by keyword [{{keyword}}]</div>' +
+    '<div *ngIf="filterRedisObjects" *ngFor="let redisObject of filterRedisObjects">' +
+    '   <redis-object [redisObject]="redisObject"></redis-object>' +
+    '</div>' +
+    '',
+    styles: [''],
+    directives: [RedisObjectComponent],
+    providers: [RedisManagerService]
+})
+
+//A component class that controls the appearance and behavior of a view through its template.
+//AppComponent is the root of the application
+export class RedisManagerComponent implements OnInit {
+    //When we're ready to build a substantive application, we can expand this class with properties and application logic.
+    title:String = 'Reids Manager';
+    keyword:String = '';
+    redisObjects:RedisObject[];
+    filterRedisObjects:RedisObject[];
+
+    constructor(private redisManagerService:RedisManagerService) {
+        console.log('RedisManagerComponent constructor');
+    }
+
+    ngOnInit() {
+        console.log('RedisManagerComponent ngOnInit');
+        this.redisManagerService.listAll().then(redisObjects =>
+            this.redisObjects = redisObjects);
+    }
+
+    searchByKeyword() {
+        let key = '';
+        if (this.keyword instanceof HTMLInputElement) {
+            key = keyword.value;
+        } else {
+            key = this.keyword;
+        }
+        if (!key) {
+            this.filterRedisObjects = this.redisObjects;
+        } else {
+            var result:RedisObject[] = _.filter(this.redisObjects, function (item) {
+                return item.key.indexOf(key) >= 0;
+            });
+            this.filterRedisObjects = result;
+        }
+    }
+}
+
+

@@ -36,4 +36,4 @@ var RedisObjectComponent = (function () {
     return RedisObjectComponent;
 })();
 exports.RedisObjectComponent = RedisObjectComponent;
-//# sourceMappingURL=redis-object-component.js.map
+//# sourceMappingURL=redis-object.component.js.map
