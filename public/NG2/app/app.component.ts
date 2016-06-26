@@ -1,43 +1,34 @@
 //One or more import statements to reference the things we need.
 import {Component} from '@angular/core';
-import { OnInit } from '@angular/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import {OnInit} from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
-import * as _ from 'lodash';
 import {RedisManagerComponent} from "./redis-manager.component";
-
-@RouteConfig([
-    {
-        path: '/redisManager',
-        name: 'RedisManager',
-        component: RedisManagerComponent
-    }
-])
+import {AppInfo} from "./app-info.model";
+import {AppHeaderComponent} from "./app-header.component";
 
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 @Component({
     selector: 'my-app', //The selector specifies a simple CSS selector for an HTML element that represents the component.
-    template: '' +
+    template: '<app-header [appInfo]="appInfo"></app-header>' +
+    '<a [routerLink]="[\'RedisManager\']">redisManager</a>' +
     '<router-outlet></router-outlet>' +
-    '',
+    'Footer',
     styles: [''],
-    directives: [ROUTER_DIRECTIVES, RedisManagerComponent],
-    providers: [
-        ROUTER_PROVIDERS
-    ]
+    directives: [AppHeaderComponent, RedisManagerComponent, ROUTER_DIRECTIVES]
 })
 
 //A component class that controls the appearance and behavior of a view through its template.
 //AppComponent is the root of the application
 export class AppComponent implements OnInit {
+    appInfo:AppInfo = new AppInfo();
 
     constructor() {
-        console.log('AppComponent constructor');
     }
 
     ngOnInit() {
-      console.log('AppComponent ngOnInit');
+
     }
 
 }

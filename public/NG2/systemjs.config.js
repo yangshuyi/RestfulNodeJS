@@ -9,7 +9,7 @@
         '@angular':                   'node_modules/@angular',
         'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
         'rxjs':                       'node_modules/rxjs',
-        'lodash':                       'node_modules/lodash/lodash.js'
+        'lodash':                     'node_modules/lodash/lodash.js'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {

@@ -6,7 +6,8 @@ var router = express.Router();
 
 // redis 链接
 var redis   = require('redis');
-var client  = redis.createClient('6380', '192.168.200.8');
+//var client  = redis.createClient('6380', '192.168.200.8');
+var client  = redis.createClient('6379', '127.0.0.1');
 
 client.on("connect", function() {
     console.log("connect");

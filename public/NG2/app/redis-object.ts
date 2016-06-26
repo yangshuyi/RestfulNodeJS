@@ -1,8 +1,9 @@
 export class RedisObject{
-    key: String;
+    key: string;
     value: Object;
+    selected: boolean;
 
-    constructor(key: String, value: Object){
+    constructor(key: string, value: Object){
         this.key = key;
         this.value = value;
     }

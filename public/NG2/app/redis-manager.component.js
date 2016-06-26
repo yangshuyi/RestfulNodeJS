@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -30,13 +31,7 @@ var RedisManagerComponent = (function () {
         });
     };
     RedisManagerComponent.prototype.searchByKeyword = function () {
-        var key = '';
-        if (this.keyword instanceof HTMLInputElement) {
-            key = keyword.value;
-        }
-        else {
-            key = this.keyword;
-        }
+        var key = this.keyword;
         if (!key) {
             this.filterRedisObjects = this.redisObjects;
         }
@@ -66,6 +61,6 @@ var RedisManagerComponent = (function () {
         __metadata('design:paramtypes', [redis_manager_service_1.RedisManagerService])
     ], RedisManagerComponent);
     return RedisManagerComponent;
-})();
+}());
 exports.RedisManagerComponent = RedisManagerComponent;
 //# sourceMappingURL=redis-manager.component.js.map

@@ -10,31 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //One or more import statements to reference the things we need.
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var redis_manager_component_1 = require("./redis-manager.component");
-var app_info_model_1 = require("./app-info.model");
-var app_header_component_1 = require("./app-header.component");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
-var AppComponent = (function () {
-    function AppComponent() {
-        this.appInfo = new app_info_model_1.AppInfo();
+var AppHeaderComponent = (function () {
+    function AppHeaderComponent() {
     }
-    AppComponent.prototype.ngOnInit = function () {
+    AppHeaderComponent.prototype.ngOnInit = function () {
     };
-    AppComponent = __decorate([
+    AppHeaderComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: '<app-header [appInfo]="appInfo"></app-header>' +
-                '<a [routerLink]="[\'RedisManager\']">redisManager</a>' +
-                '<router-outlet></router-outlet>' +
-                'Footer',
-            styles: [''],
-            directives: [app_header_component_1.AppHeaderComponent, redis_manager_component_1.RedisManagerComponent, router_1.ROUTER_DIRECTIVES]
+            selector: 'app-footer',
+            template: '' +
+                '<h1>{{title}}</h1>' +
+                '',
+            styles: ['']
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], AppHeaderComponent);
+    return AppHeaderComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.AppHeaderComponent = AppHeaderComponent;
+//# sourceMappingURL=app-footer.component.js.map

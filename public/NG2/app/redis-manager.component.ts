@@ -1,6 +1,6 @@
 //One or more import statements to reference the things we need.
 import {Component} from '@angular/core';
-import { OnInit } from '@angular/core';
+import {OnInit} from '@angular/core';
 import {RedisObject} from "./redis-object";
 
 import * as _ from 'lodash';
@@ -29,8 +29,8 @@ import {RedisManagerService} from "./redis-manager.service";
 //AppComponent is the root of the application
 export class RedisManagerComponent implements OnInit {
     //When we're ready to build a substantive application, we can expand this class with properties and application logic.
-    title:String = 'Reids Manager';
-    keyword:String = '';
+    title:string = 'Reids Manager';
+    keyword:string = '';
     redisObjects:RedisObject[];
     filterRedisObjects:RedisObject[];
 
@@ -45,12 +45,7 @@ export class RedisManagerComponent implements OnInit {
     }
 
     searchByKeyword() {
-        let key = '';
-        if (this.keyword instanceof HTMLInputElement) {
-            key = keyword.value;
-        } else {
-            key = this.keyword;
-        }
+        let key : string= this.keyword;
         if (!key) {
             this.filterRedisObjects = this.redisObjects;
         } else {

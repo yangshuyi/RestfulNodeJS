@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -14,21 +15,21 @@ var RedisManagerService = (function () {
     }
     RedisManagerService.prototype.listAll = function () {
         var RPC_FALG = false;
+        var redisObjects = [];
+        redisObjects.push(new redis_object_1.RedisObject('a', 'value1'));
+        redisObjects.push(new redis_object_1.RedisObject('aa', 'value2'));
+        redisObjects.push(new redis_object_1.RedisObject('aaa', 'value3'));
+        redisObjects.push(new redis_object_1.RedisObject('b', 'value4'));
+        redisObjects.push(new redis_object_1.RedisObject('bb', 'value5'));
+        redisObjects.push(new redis_object_1.RedisObject('bbb', 'value6'));
         if (RPC_FALG) {
             return new Promise(function (resolve) {
-                return setTimeout(function () { return resolve(HEROES); }, 2000);
+                return setTimeout(function () { return resolve(redisObjects); }, 2000);
             } // 2 seconds
              // 2 seconds
             );
         }
         else {
-            var redisObjects = [];
-            redisObjects.push(new redis_object_1.RedisObject('a', 'value1'));
-            redisObjects.push(new redis_object_1.RedisObject('aa', 'value2'));
-            redisObjects.push(new redis_object_1.RedisObject('aaa', 'value3'));
-            redisObjects.push(new redis_object_1.RedisObject('b', 'value4'));
-            redisObjects.push(new redis_object_1.RedisObject('bb', 'value5'));
-            redisObjects.push(new redis_object_1.RedisObject('bbb', 'value6'));
             return Promise.resolve(redisObjects);
         }
     };
@@ -37,6 +38,6 @@ var RedisManagerService = (function () {
         __metadata('design:paramtypes', [])
     ], RedisManagerService);
     return RedisManagerService;
-})();
+}());
 exports.RedisManagerService = RedisManagerService;
 //# sourceMappingURL=redis-manager.service.js.map
