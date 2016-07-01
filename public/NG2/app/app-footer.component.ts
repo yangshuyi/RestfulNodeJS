@@ -8,23 +8,21 @@ import {AppInfo} from "./app-info.model";
 @Component({
     selector: 'app-footer', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     template: '' +
-    '<h1>{{title}}</h1>' +
+    '<div class="container">' +
+    '    <div class="row">' +
+    '       <div class="col-sm-12 center">&copy; 2013 <a target="_blank" href="{{url}}" title="{{footName}}">{{footName}}</a>. All Rights Reserved.</div>' +
+    '   </div>' +
+    '</div>' +
     '',
     styles: ['']
 })
 
 //A component class that controls the appearance and behavior of a view through its template.
 //AppComponent is the root of the application
-export class AppHeaderComponent implements OnInit {
-    appInfo:AppInfo[];
+export class AppFooterComponent implements OnInit {
+    @Input()
+    private appInfo:AppInfo;
 
     constructor() {
     }
-
-    ngOnInit() {
-
-    }
-
 }
-
-

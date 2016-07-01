@@ -12,7 +12,6 @@ import {AppHeaderComponent} from "./app-header.component";
 @Component({
     selector: 'my-app', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     template: '<app-header [appInfo]="appInfo"></app-header>' +
-    '<a [routerLink]="[\'RedisManager\']">redisManager</a>' +
     '<router-outlet></router-outlet>' +
     'Footer',
     styles: [''],

@@ -7,32 +7,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-//One or more import statements to reference the things we need.
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var redis_manager_component_1 = require("./redis-manager.component");
-var app_info_model_1 = require("./app-info.model");
-var app_header_component_1 = require("./app-header.component");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
-var AppComponent = (function () {
-    function AppComponent() {
-        this.appInfo = new app_info_model_1.AppInfo();
+var BootstrapComponent = (function () {
+    function BootstrapComponent() {
+        //When we're ready to build a substantive application, we can expand this class with properties and application logic.
+        this.title = 'NATIVE ANGULAR 2 DIRECTIVES FOR BOOTSTRAP';
+        console.log('RedisManagerComponent constructor');
     }
-    AppComponent.prototype.ngOnInit = function () {
+    BootstrapComponent.prototype.ngOnInit = function () {
     };
-    AppComponent = __decorate([
+    BootstrapComponent.prototype.ngOnDestroy = function () {
+    };
+    BootstrapComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: '<app-header [appInfo]="appInfo"></app-header>' +
-                '<router-outlet></router-outlet>' +
-                'Footer',
+            selector: 'redis-manager',
+            template: '' +
+                '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
+                '',
             styles: [''],
-            directives: [app_header_component_1.AppHeaderComponent, redis_manager_component_1.RedisManagerComponent, router_1.ROUTER_DIRECTIVES]
+            directives: [],
+            providers: []
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], BootstrapComponent);
+    return BootstrapComponent;
 })();
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.BootstrapComponent = BootstrapComponent;
+//# sourceMappingURL=bootstrap.component.js.map

@@ -1,4 +1,5 @@
 //One or more import statements to reference the things we need.
+import { Router, ActivatedRoute }       from '@angular/router';
 import {Component} from '@angular/core';
 import {OnInit} from '@angular/core';
 import {RedisObject} from "./redis-object";
@@ -27,25 +28,39 @@ import {RedisManagerService} from "./redis-manager.service";
 
 //A component class that controls the appearance and behavior of a view through its template.
 //AppComponent is the root of the application
-export class RedisManagerComponent implements OnInit {
+export class RedisManagerComponent implements OnInit, OnDestroy {
     //When we're ready to build a substantive application, we can expand this class with properties and application logic.
     title:string = 'Reids Manager';
     keyword:string = '';
     redisObjects:RedisObject[];
     filterRedisObjects:RedisObject[];
 
-    constructor(private redisManagerService:RedisManagerService) {
+    private routeSubsriber:any;
+
+    constructor(private route:ActivatedRoute,
+                private router:Router,
+                private redisManagerService:RedisManagerService) {
         console.log('RedisManagerComponent constructor');
     }
 
     ngOnInit() {
         console.log('RedisManagerComponent ngOnInit');
+        this.routeSubsriber = this.route.params.subscribe(params => {
+
+        });
+
         this.redisManagerService.listAll().then(redisObjects =>
             this.redisObjects = redisObjects);
     }
 
+    ngOnDestroy() {
+        if (this.routeSubsriber) {
+            this.routeSubsriber.unsubscribe();
+        }
+    }
+
     searchByKeyword() {
-        let key : string= this.keyword;
+        let key:string = this.keyword;
         if (!key) {
             this.filterRedisObjects = this.redisObjects;
         } else {

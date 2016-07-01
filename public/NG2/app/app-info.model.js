@@ -1,4 +1,3 @@
-"use strict";
 var AppInfo = (function () {
     function AppInfo() {
         this.title = 'AngularJS2 cache manager';
@@ -7,15 +6,19 @@ var AppInfo = (function () {
         this.menus = [
             {
                 name: 'Redis Manager',
-                routerLink: '"RedisManager"'
+                routerLink: '/RedisManager'
             },
             {
                 name: 'MongoDB Manager',
-                routerLink: '"MongoDBManager"'
+                routerLink: '/MongoDBManager'
+            },
+            {
+                name: 'Bootstrap',
+                routerLink: '/Bootstrap'
             }
         ];
     }
     return AppInfo;
-}());
+})();
 exports.AppInfo = AppInfo;
 //# sourceMappingURL=app-info.model.js.map

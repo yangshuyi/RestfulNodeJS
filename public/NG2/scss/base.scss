@@ -1,0 +1,103 @@
+$fa-font-path: "../fonts/fontawesome";
+@import "font-awesome.scss";
+
+body {
+  margin: 0px auto;
+  background: #fff;
+  font-family: 'Open Sans', sans-serif;
+  color: #4e4e4e;
+  line-height: 22px;
+}
+
+input, button, select, textarea {
+  outline: none
+}
+
+textarea {
+  resize: none
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  color: #4e4e4e;
+}
+
+h1 {
+  font-size: 36px;
+  color: #fff;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 16px;
+  color: #787878;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+a {
+  color: #c52d2f;
+  -webkit-transition: color 300ms, background-color 300ms;
+  -moz-transition: color 300ms, background-color 300ms;
+  -o-transition: color 300ms, background-color 300ms;
+  transition: color 300ms, background-color 300ms;
+
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover, a:focus {
+  color: #d43133;
+}
+
+hr {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #fff;
+}
+
+
+
+
+
+@-webkit-keyframes scaleIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}

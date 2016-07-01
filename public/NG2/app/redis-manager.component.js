@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,6 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 //One or more import statements to reference the things we need.
+var router_1 = require('@angular/router');
 var core_1 = require('@angular/core');
 var _ = require('lodash');
 var redis_object_component_1 = require("./redis-object.component");
@@ -16,7 +16,9 @@ var redis_manager_service_1 = require("./redis-manager.service");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var RedisManagerComponent = (function () {
-    function RedisManagerComponent(redisManagerService) {
+    function RedisManagerComponent(route, router, redisManagerService) {
+        this.route = route;
+        this.router = router;
         this.redisManagerService = redisManagerService;
         //When we're ready to build a substantive application, we can expand this class with properties and application logic.
         this.title = 'Reids Manager';
@@ -26,9 +28,16 @@ var RedisManagerComponent = (function () {
     RedisManagerComponent.prototype.ngOnInit = function () {
         var _this = this;
         console.log('RedisManagerComponent ngOnInit');
+        this.routeSubsriber = this.route.params.subscribe(function (params) {
+        });
         this.redisManagerService.listAll().then(function (redisObjects) {
             return _this.redisObjects = redisObjects;
         });
+    };
+    RedisManagerComponent.prototype.ngOnDestroy = function () {
+        if (this.routeSubsriber) {
+            this.routeSubsriber.unsubscribe();
+        }
     };
     RedisManagerComponent.prototype.searchByKeyword = function () {
         var key = this.keyword;
@@ -58,9 +67,9 @@ var RedisManagerComponent = (function () {
             directives: [redis_object_component_1.RedisObjectComponent],
             providers: [redis_manager_service_1.RedisManagerService]
         }), 
-        __metadata('design:paramtypes', [redis_manager_service_1.RedisManagerService])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, redis_manager_service_1.RedisManagerService])
     ], RedisManagerComponent);
     return RedisManagerComponent;
-}());
+})();
 exports.RedisManagerComponent = RedisManagerComponent;
 //# sourceMappingURL=redis-manager.component.js.map

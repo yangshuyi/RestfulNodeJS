@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,24 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //One or more import statements to reference the things we need.
 var core_1 = require('@angular/core');
+var app_info_model_1 = require("./app-info.model");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
-var AppHeaderComponent = (function () {
-    function AppHeaderComponent() {
+var AppFooterComponent = (function () {
+    function AppFooterComponent() {
     }
-    AppHeaderComponent.prototype.ngOnInit = function () {
-    };
-    AppHeaderComponent = __decorate([
+    __decorate([
+        Input(), 
+        __metadata('design:type', app_info_model_1.AppInfo)
+    ], AppFooterComponent.prototype, "appInfo", void 0);
+    AppFooterComponent = __decorate([
         core_1.Component({
             selector: 'app-footer',
             template: '' +
-                '<h1>{{title}}</h1>' +
+                '<div class="container">' +
+                '    <div class="row">' +
+                '       <div class="col-sm-12 center">&copy; 2013 <a target="_blank" href="{{url}}" title="{{footName}}">{{footName}}</a>. All Rights Reserved.</div>' +
+                '   </div>' +
+                '</div>' +
                 '',
             styles: ['']
         }), 
         __metadata('design:paramtypes', [])
-    ], AppHeaderComponent);
-    return AppHeaderComponent;
-}());
-exports.AppHeaderComponent = AppHeaderComponent;
+    ], AppFooterComponent);
+    return AppFooterComponent;
+})();
+exports.AppFooterComponent = AppFooterComponent;
 //# sourceMappingURL=app-footer.component.js.map

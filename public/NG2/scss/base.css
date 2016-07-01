@@ -2,7 +2,6 @@
 Error: Invalid CSS after "<": expected "{", was "!DOCTYPE html>"
         on line 5 of font-awesome.scss
         from line 2 of base.scss
-        from line 3 of style.scss
 
 1: 
 2: 
@@ -18,7 +17,6 @@ Error: Invalid CSS after "<": expected "{", was "!DOCTYPE html>"
 Backtrace:
 font-awesome.scss:5
 base.scss:2
-style.scss:3
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/scss/parser.rb:1179:in `expected'
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/scss/parser.rb:1115:in `expected'
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/scss/parser.rb:1110:in `tok!'
@@ -31,19 +29,6 @@ C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/scss/parse
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/engine.rb:404:in `_to_tree'
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/engine.rb:310:in `to_tree'
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:324:in `block in visit_import'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:88:in `block in with_import'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:88:in `with_import'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:323:in `visit_import'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:79:in `block in with_base'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:79:in `with_base'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `visit'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:326:in `block (2 levels) in visit_import'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:326:in `map'
-C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:326:in `block in visit_import'
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:88:in `block in with_import'
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
 C:/cccis/dev/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:88:in `with_import'
@@ -85,4 +70,4 @@ C:/cccis/dev/Ruby22-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CSS after \"<\": expected \"{\", was \"!DOCTYPE html>\"\A         on line 5 of font-awesome.scss\A         from line 2 of base.scss\A         from line 3 of style.scss\A \A 1: \A 2: \A 3: \A 4: \A 5: <!DOCTYPE html>\A 6: <html lang=\"en\" class=\" is-copy-enabled is-u2f-enabled\">\A 7:   <head prefix=\"og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#\">\A 8:     <meta charset='utf-8'>\A 9: \A 10:     <link crossorigin=\"anonymous\" href=\"https://assets-cdn.github.com/assets/frameworks-fef7fdfe41dd435c6d82f93b486dc62bc095ebd12cd24fa2a817c8bb45dc073e.css\" integrity=\"sha256-/vf9/kHdQ1xtgvk7SG3GK8CV69Es0k+iqBfIu0XcBz4=\" media=\"all\" rel=\"stylesheet\" />"; }
+  content: "Error: Invalid CSS after \"<\": expected \"{\", was \"!DOCTYPE html>\"\A         on line 5 of font-awesome.scss\A         from line 2 of base.scss\A \A 1: \A 2: \A 3: \A 4: \A 5: <!DOCTYPE html>\A 6: <html lang=\"en\" class=\" is-copy-enabled is-u2f-enabled\">\A 7:   <head prefix=\"og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#\">\A 8:     <meta charset='utf-8'>\A 9: \A 10:     <link crossorigin=\"anonymous\" href=\"https://assets-cdn.github.com/assets/frameworks-fef7fdfe41dd435c6d82f93b486dc62bc095ebd12cd24fa2a817c8bb45dc073e.css\" integrity=\"sha256-/vf9/kHdQ1xtgvk7SG3GK8CV69Es0k+iqBfIu0XcBz4=\" media=\"all\" rel=\"stylesheet\" />"; }

@@ -7,6 +7,7 @@
     var map = {
         'app':                        'app', // 'dist',
         '@angular':                   'node_modules/@angular',
+        '@angular/router':            'node_modules/@angular/router',
         'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
         'rxjs':                       'node_modules/rxjs',
         'lodash':                     'node_modules/lodash/lodash.js'
@@ -35,7 +36,11 @@
     }
     // Bundled (~40 requests):
     function packUmd(pkgName) {
-        packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+        if (pkgName == "router") {
+            packages['@angular/' + pkgName] = { main: 'index.js', defaultExtension: 'js' };
+        } else {
+            packages['@angular/' + pkgName] = { main: 'bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+        }
     }
     // Most environments should use UMD; some (Karma) need the individual index files
     var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
