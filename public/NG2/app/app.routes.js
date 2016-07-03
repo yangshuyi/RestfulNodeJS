@@ -1,3 +1,4 @@
+"use strict";
 var router_1 = require('@angular/router');
 var redis_manager_component_1 = require("./redis-manager.component");
 var bootstrap_component_1 = require("./bootstrap.component");

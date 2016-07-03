@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,13 +19,13 @@ var BootstrapComponent = (function () {
     }
     BootstrapComponent.prototype.ngOnInit = function () {
     };
-    BootstrapComponent.prototype.ngOnDestroy = function () {
-    };
     BootstrapComponent = __decorate([
         core_1.Component({
             selector: 'redis-manager',
             template: '' +
                 '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
+                '<div>About fontawesome</div>' +
+                '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>' +
                 '',
             styles: [''],
             directives: [],
@@ -33,6 +34,6 @@ var BootstrapComponent = (function () {
         __metadata('design:paramtypes', [])
     ], BootstrapComponent);
     return BootstrapComponent;
-})();
+}());
 exports.BootstrapComponent = BootstrapComponent;
 //# sourceMappingURL=bootstrap.component.js.map

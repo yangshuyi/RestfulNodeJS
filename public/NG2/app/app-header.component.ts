@@ -14,7 +14,7 @@ import {AppInfo} from "./app-info.model";
     '           <div class="col-sm-12 col-xs-12">'+
     '               <div class="search">'+
     '                   <input type="text" autocomplete="off" placeholder="Search">'+
-    '                   <span class="glyphicon glyphicon-search"></span>'+
+    '                   <i class="fa fa-search fa-lg"></i>'+
     '               </div>'+
     '           </div>'+
     '       </div>'+
