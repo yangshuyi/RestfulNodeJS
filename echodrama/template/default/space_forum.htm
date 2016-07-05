@@ -1,0 +1,85 @@
+<!--{eval $_TPL['nosidebar']=1;}-->
+<!--{if $_GET['view']=='listall' OR $_GET['view']=='listme' OR $_GET['view']=='listuser' }-->
+	<!--{eval $_TPL['titles'] = array($searchengine_description,'游泳池');}-->
+<!--{elseif $_GET['view']=='viewposter' OR $_GET['view']=='viewall' }-->
+	<!--{eval $_TPL['titles'] = array($searchengine_description,'游泳池');}-->
+<!--{/if}-->
+	
+<!--{template header}-->
+<div id="searchbar" class="nbox s_clear">
+	<div class="search" >
+		　虫虫小喇叭：<a href="space.php?do=thread&tid=$site_announcement_thread_topitem[tid]" target="_blank">[{$site_announcement_thread_topitem[datelinedisp]}]　{$site_announcement_thread_topitem[subject]}</a>
+	</div>
+</div>
+	
+<div style="background:none repeat scroll 0 0 #F2F2F2;border: 1px solid #CDCDCD;height: 29px;line-height: 29px;">
+	<form id="threadsearchform" method="get" action="space.php?do=forum">
+		<table cellspacing="0" cellpadding="0" style="float:right; height:29px;">
+			<tr>
+				<td>
+					<input type="hidden" id="do" name="do" value="forum"/>
+					<input type="hidden" id="search_submit" name="searchsubmit" value="true"/>
+					<input type="hidden" id="view" name="view" value="$_GET[view]"/>
+					<input type="text" name="searchkey" id="searchkey" title="搜索帖子主题/标签所涵盖的关键字" <!--{if empty($searchkey) }-->value="请输入搜索内容"<!--{else}-->value="$searchkey"<!--{/if}--> autocomplete="off" onfocus="javascript:thread_search_onfocus();" onblur="javascript:thread_search_onblur();" class="t_input"/>
+				</td>
+				<td><img onclick="javascript:thread_search();" src="image/searchbarbtn.jpg"/></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+		<table cellspacing="0" cellpadding="0" style="float:left; height:29px;">
+			<tr>
+				<td align="center" nowrap>
+					<div style="background:url('image/pt_icn.png') no-repeat scroll 7px 8px transparent; width:24px; height:29px;">&nbsp;&nbsp;</div>
+				</td>
+				<td align="center" nowrap>
+					<div style="background:url('image/pt_item.png') no-repeat scroll 30% -1px transparent; width:24px; height:29px;">&nbsp;&nbsp;</div>
+				</td>
+				<td align="center" nowrap>
+					<div style="font-size:14px;">&nbsp;<a href="space.php?do=forum">游泳池</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				</td>
+				<td align="center" nowrap>
+<!--{if $_GET['view']=='listall' OR $_GET['view']=='listme' OR $_GET['view']=='listuser' }-->				
+					<span>今日: <strong>$todaythreadcount</strong><span style="color:#ff8e02;">&nbsp;|&nbsp;</span>帖子: <strong>$threadcount</strong></span>
+<!--{elseif $_GET['view']=='viewposter' OR $_GET['view']=='viewall' }-->
+					&nbsp;
+<!--{/if}-->
+				</td>
+			</tr>
+		</table>
+<script type="text/javascript">
+	//检查提交
+	function thread_search() {
+		if($('searchkey').value=="请输入搜索内容"){
+			$('searchkey').value="";
+		}
+		$('threadsearchform').submit();
+	}
+
+	function thread_search_onfocus() {
+		if($('searchkey').value=="请输入搜索内容"){
+			$('searchkey').value="";
+			$('searchkey').style.color="black";
+		}
+	}
+
+	function thread_search_onblur() {
+		if($('searchkey').value==""){
+			$('searchkey').value="请输入搜索内容";
+			$('searchkey').style.color="gray";
+		}
+	}
+</script>
+	</form>
+</div>
+
+<!--{if $_GET['view']=='listall' OR $_GET['view']=='listme' OR $_GET['view']=='listuser' }-->
+	
+	<!--{template space_forum_list}-->
+
+<!--{elseif $_GET['view']=='viewposter' OR $_GET['view']=='viewall' }-->
+
+	<!--{template space_forum_view}-->
+	
+<!--{/if}-->
+
+<!--{template footer}-->

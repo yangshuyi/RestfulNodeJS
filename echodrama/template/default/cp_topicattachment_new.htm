@@ -1,0 +1,238 @@
+<div class="tabs_header">
+<ul class="tabs">
+	<li class="active"><a href="cp.php?ac=topic&op=newtopicattachment&topicid=$topic[topicid]"><span>提交广播剧相关资源</span></a></li>
+	<li><a href="space.php?do=topic&topicid=$topic[topicid]"><span>返回广播剧页面</span></a></li>
+</ul>
+</div>
+
+<div class="c_form">
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="edit_form" name="edit_form" method="post" action="cp.php?ac=topic&op=savetopicattachment&topicid=$topic[topicid]" enctype="multipart/form-data">
+
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+	<tr>
+		<td width="100">广播剧名</td>
+		<td>
+			<h2>$topic['subject']</h2>
+		</td>
+	</tr>
+	<tr>
+		<td width="100">&nbsp;</td>
+		<td>
+		<!--{if $topic[pic]}-->
+			<div style="width:520;border:1px solid #EBE6C9;" align="center">
+				<img src="$topic[pic]" alt="$topic[subject]" width="<!--{eval echo getsuitablewidth($topic[pic], 520);}-->"/>
+			</div>
+		<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<td width="100">&nbsp;</td>
+		<td>
+			{$topic['productclassname']}&nbsp;,&nbsp;由&nbsp;{$topic['club']}&nbsp;发布。
+		</td>
+	</tr>
+	<tr>
+		<td width="100">CAST：</td>
+		<td>
+			$topic['cast']
+		</td>
+	</tr>
+	<tr>
+		<td width="100">STAFF：</td>
+		<td>
+			$topic['group'];
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2"><h2>广播剧相关资源信息</h2></td>
+	</tr>
+	<tr>
+		<td width="100"></td>
+		<td style="color:red">
+			提交广播剧相关资源规则<br/>
+			1.广播剧相关资源：即广播剧ED，剧本等相关广播剧的周边资源。<br/>
+			2.提交完毕的资源，由管理员审核完毕后，会在广播剧页面上进行显示。<br/>
+			3.提交完毕的资源，无法进行修改，请大家确认提交的内容是否正确，有问题的话，联系管理员进行删除处理。<br/>
+			4.对于有问题的，或是不符要求的资源，管理员会一律删除，请大家配合。<br/>
+			<br/>
+			<br/>
+			5.FT等超过100M的大文件，请大家选择资源类型‘外联资源’，进行外联（空间有限，敬请谅解）。<br/>
+			<br/><span style="color:red">[注]请大家用IE内核的浏览器上传广播剧，否则会导致上传的音频文件丢失，多谢配合。</span>
+		</td>
+	</tr>
+	<tr>
+		<td width="100">资源类型 *</td>
+		<td><select name="attachmentclassid" id="attachmentclassid" onchange="javascript:displayAttachmentClassFileType()">
+			<option value="-1">请选择资源类型</option>
+			<!--{loop $_SGLOBAL[attachmentclass] $key $value}-->
+			<option value="$key"<!--{if $topicattachment[attachmentclassid] == $key}-->
+			selected<!--{/if}--> >$value[classname]</option>
+			<!--{/loop}-->
+		</select></td>
+	</tr>
+	<tr>
+		<td width="100">资源类型描述 </td>
+		<td id="attachmentClassDescription" style="color:red">&nbsp;</td>
+	</tr>
+	<tr>
+		<td width="100">资源名称 *</td>
+		<td><input type="text" id="subject" name="subject" value="" class="t_input" size="80" maxlength="100" /></td>
+	</tr>
+	<tr>
+		<td width="100"><span id="resourcelabel">资源文件</span> *</td>
+		<td>
+			<input id="attachment" name="attachment" value="" type="hidden" />
+			<div id="innerresourcediv">
+				<iframe id="uploadFrame" name="uploadFrame" src="jquploader/unknownupload.htm" width="490" height="85" scrolling="no" frameborder="0"></iframe>
+			</div>
+			<div id="outerresourcediv">
+				<input type="text" id="link" name="link" value="http://" class="t_input" size="80" maxlength="100" />
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td width="100">资源描述 *</td>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px"></textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+			<input type="hidden" id="topicid" name="topicid" value="$topic[topicid]" />
+			<input type="button" name="topicsubmit" value="提交" class="submit" onclick="check_topicattachmentpost();"/>
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/></form>
+</div>
+
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+	function displayAttachmentClassFileType(){
+		var selIndex=$('attachmentclassid').value;
+		if(selIndex=='1'){//音频
+			$('attachmentClassDescription').innerHTML="上传资源文件类型格式只允许：*.mp3";
+			$('resourcelabel').innerHTML="资源文件";
+			$('innerresourcediv').style.display="";
+			$('outerresourcediv').style.display="none";
+		}else if(selIndex=='2'){//图片
+			$('attachmentClassDescription').innerHTML="上传资源文件类型格式只允许：*.jpg|*.png";
+			$('resourcelabel').innerHTML="资源文件";
+			$('innerresourcediv').style.display="";
+			$('outerresourcediv').style.display="none";
+		}else if(selIndex=='3'){//Word文档
+			$('attachmentClassDescription').innerHTML="上传资源文件类型格式只允许：*.doc|*.docx";
+			$('resourcelabel').innerHTML="资源文件";
+			$('innerresourcediv').style.display="";
+			$('outerresourcediv').style.display="none";
+		}else if(selIndex=='4'){//压缩文件
+			$('attachmentClassDescription').innerHTML="上传资源文件类型格式只允许：*.zip|*.rar";
+			$('resourcelabel').innerHTML="资源文件";
+			$('innerresourcediv').style.display="";
+			$('outerresourcediv').style.display="none";
+		}else if(selIndex=='5'){//文本文件
+			$('attachmentClassDescription').innerHTML="上传资源文件类型格式只允许：*.txt";
+			$('resourcelabel').innerHTML="资源文件";
+			$('innerresourcediv').style.display="";
+			$('outerresourcediv').style.display="none";
+		}else if(selIndex=='6'){//外联资源
+			$('resourcelabel').innerHTML="外联资源链接";
+			$('innerresourcediv').style.display="none";
+			$('outerresourcediv').style.display="";
+		}else if(selIndex=='99'){//其它
+			$('attachmentClassDescription').innerHTML="上传资源文件类型格式只允许：*.*";
+			$('resourcelabel').innerHTML="资源文件";
+			$('innerresourcediv').style.display="";
+			$('outerresourcediv').style.display="none";
+		}else{
+			$('attachmentClassDescription').innerHTML=" ";
+		} 
+	}
+	displayAttachmentClassFileType();
+	
+	//检查提交
+	function check_topicattachmentpost() {
+
+		//资源名称
+		if ($("subject").value.trim() == "") {
+			alert("资源名称不能为空！");
+			$("subject").focus();
+			return false;
+		} else if ($("subject").value.trim().length > 80) {
+			alert("资源名称太长，请限制在80个字符内！");
+			$("subject").focus();
+			return false;
+		}
+
+		// 编辑器内容同步
+		edit_save();
+
+		//资源描述
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("资源描述不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+
+		//资源类型
+		if (parseInt($("attachmentclassid").value) <= 0) {
+			alert("资源类型必须选择。");
+			$("attachmentclassid").focus();
+			return false;
+		}
+
+		var selIndex=$('attachmentclassid').value;
+		if(selIndex=='6'){
+			//外部链接
+			if($("link").value.trim() == "") {
+				alert("外联资源链接不能为空。");
+				return false;
+			}
+			
+			$("attachment").value=$("link").value.trim();
+		}
+		else{
+			//资源文件
+			if(document.getElementById("uploadFrame").contentWindow.document.getElementById("file")==null){
+				alert("资源文件必须选择。");
+				return false;
+			}
+			
+			var filePath=document.getElementById("uploadFrame").contentWindow.document.getElementById("file").value;
+			if (filePath.trim() == "") {
+				alert("资源文件必须选择。");
+				return false;
+			}else{
+				$("attachment").value=filePath;
+			}
+		}
+		
+		//验证码
+		if ($('seccode')) {
+			var code = $('seccode').value;
+			var x = new Ajax();
+			x.get('cp.php?ac=common&op=seccode&code=' + code, function(s) {
+				s = trim(s);
+				if (s.indexOf('succeed') == -1) {
+					alert(s);
+					$('seccode').focus();
+					return false;
+				} else {
+					$("edit_form").submit();
+				}
+			});
+		} else {
+			$("edit_form").submit();
+		}
+	}
+</script>

@@ -1,0 +1,249 @@
+<!--{eval $_TPL['nosidebar']=1;}-->
+<!--{template header}-->
+
+<div id="network">
+
+<!--{template portal_intromusic}-->
+
+<!--{template portal_index_searchbar}-->
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:967px;margin:0px auto;margin-top:5px; clear:both;">
+	<tr>
+		<td width="649" valign="top">
+<!--{if 1==1 }-->		
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cabversion=6,0,0,0" width="641" height="370">
+				<param name="movie" value="image/imageslider.swf">
+				<param name="quality" value="high"><param name="wmode" value="opaque">
+				<param name="FlashVars" value="$index_header_flashvar">
+				<embed src="image/imageslider.swf" FlashVars="$index_header_flashvar" quality="high" width="641" height="370" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object>
+<!--{else}-->
+			<a href="space.php?do=event&id=2212" target="_blank"><img src="image/site/PortalIndexHeader_20120119.jpg" width="641" height="370" /></a>
+			<!--img src="attachment/system/intro_sp.png" width="641" height="370" /-->
+<!--{/if}-->			
+		</td>
+		<td width="318" valign="top">
+			<div style="background:url(template/default/image/portal/notice.gif) no-repeat 0px 0px;height:37px;width:317px;margin-bottom:5px;color:#ff6600;text-indent:45px;line-height:37px;">
+				<a href="space.php?do=thread&tid=$site_announcement_thread_topitem[tid]" title="$site_announcement_thread_topitem[subject]" target="_blank"><!--{eval echo getstr($site_announcement_thread_topitem[subject], 40, 0, 0, 0, 0, -1); }--></a>
+			</div>
+			<!--{if empty($_SGLOBAL['supe_uid'])}-->
+				<!--{template portal_index_nologin}-->
+			<!--{else}-->
+				<!--{template portal_index_login}-->
+			<!--{/if}-->
+		</td>
+	</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px;clear:both;width:967px;margin:5px auto;">
+	<tr>
+	    <td style="background:url(template/default/image/portal/indextopiclistbg.jpg) no-repeat 0px 0px;width:250px;height:351px;">
+	    	<div style="padding:5px;border:1px solid #d6d6d6;margin:70px 22px 10px 22px;background-color:#fff;">
+	    		<a href="space.php?do=topic&topicid=$topic_sitejoin_first[topicid]" title="$topic_sitejoin_first[subject]" target="_blank"><img src="$topic_sitejoin_first[picthumb]" width="190"/></a>
+	    	</div>
+	    </td>
+	    <td>
+	    	<div style="background-color:#f1f3f0;margin-top:11px;height:320px;padding-left:20px;padding-top:20px;">
+	      		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	       			<tr>
+	          			<td width="38%">
+	          				<div style="background:url(template/default/image/portal/indextopiclisttitle.gif) no-repeat 0px 0px;height:21px;text-align:right;width:231px;margin-bottom:10px;padding-top:7px;">
+	          					<a href="space.php?do=topic" title="广播剧场" target="_blank"><img src="template/default/image/portal/indextopiclistmore.gif" width="35" height="12"/></a>
+	          				</div>
+	          				<!--{loop $topic_sitejoin_list $value}-->
+				            <table width="231" border="0" cellpadding="0" cellspacing="0" style="background:url(template/default/image/portal/indextopiclistspliter.gif) no-repeat bottom left;height:30px;line-height:30px;">
+				            	<tr>
+					                <td width="73%"><a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank"><!--{eval echo getstr($value[subject], 26, 0, 0, 0, 0, -1); }--></a></td>
+					                <td width="27%" align="right" class="gray">$value[productclassname]</td>
+				              	</tr>
+				            </table>
+				            <!--{/loop}-->
+	           			</td>
+	          			<td width="62%" valign="top">
+	           				<div style="clear:both;height:132px;">
+	              				<div style="background:url(template/default/image/portal/indexvideolistbg.gif) no-repeat right 20px;height:104px;width:35px;float:left;"></div>
+	              				<div style="border:1px solid #d6d6d6;background-color:#fff;height:132px;float:left;width:374px;margin-bottom:15px;">
+	                				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	                  					<tr>
+	                    					<td width="28">
+	                    						<img src="template/default/image/portal/indexvideolisttitle.gif" width="28" height="117" />
+	                    						<a href="space.php?do=video" title="视频映像" target="_blank"><img src="template/default/image/portal/indexvideolistmore.gif" width="28" height="15" /></a>
+	                    					</td>
+	                    					<td width="322" valign="top">
+	                    						<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+	                      							<tr height="30px">
+	                      								<td width="100%" colspan="2" align="center" valign="middle">
+	                        								<span><a href="space.php?do=video&videoid=$video_sitejoin_first[videoid]" title="$video_sitejoin_first['subject']" target="_blank"><!--{eval echo getstr($video_sitejoin_first['subject'], 50, 0, 0, 0, 0, -1); }--></a></span><br />
+	                          							</td>
+	                          						</tr>
+	                          						<tr>
+	                          							<td width="6%" align="center">&nbsp;</td>
+	                        							<td width="94%" valign="top">
+	                        								<span class="gray">由 <!--{if empty($value[clubtagid])}-->$video_sitejoin_first[club]<!--{else}--><a class="black" href="space.php?do=mtag&tagid=$video_sitejoin_first[clubtagid]" target="_blank">$video_sitejoin_first[club]</a><!--{/if}-->&nbsp;发布</span><br />
+	                          								<span class="gray">类型&nbsp;&nbsp;&nbsp;：$video_sitejoin_first[productclassname]</span><br />
+	                          								<span class="gray" title="$video_sitejoin_first[label]">标签&nbsp;&nbsp;&nbsp;：<!--{eval echo getstr($video_sitejoin_first[label], 40, 0, 0, 0, 0, -1); }--></span><br />
+	                          								<span class="gray" title="$video_sitejoin_first[group]">STAFF：<!--{eval echo getstr($video_sitejoin_first[group], 40, 0, 0, 0, 0, -1); }--></span><br />
+	                          								<span class="gray" title="$video_sitejoin_first[cast]">CAST ：<!--{eval echo getstr($video_sitejoin_first[cast], 40, 0, 0, 0, 0, -1); }--></span>
+	                          							</td>
+	                     							</tr>
+	                    						</table>
+	                    					</td>
+	                  					</tr>
+	                				</table>
+	              				</div>
+	            			</div>
+	            			<br/>
+	           				<div style="clear:both;height:132px;">
+	              				<div style="background:url(template/default/image/portal/indexcoverlistbg.gif) no-repeat right 20px;height:93px;width:35px;float:left;"></div>
+	              				<div style="border:1px solid #d6d6d6;background-color:#fff;height:152px;float:left;width:374px;">
+	                				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	                  					<tr>
+	                    					<td width="28">
+	                    						<img src="template/default/image/portal/indexcoverlisttitle.gif" width="28" height="117" />
+	                    						<br/>
+	                    						<a href="space.php?do=cover" title="乐虫翻唱" target="_blank"><img src="template/default/image/portal/indexcoverlistmore.gif" width="28" height="15" /></a>
+	                    					</td>
+	                    					<td width="322" valign="middle">
+	                    						<table width="95%" border="0" align="center" cellpadding="2" cellspacing="0">
+	                    							<!--{loop $cover_sitejoin_list $value}-->
+							                		<tr>
+							                        	<td width="6%" align="center"><img src="template/default/image/portal/arrow05.gif" width="2" height="2" /></td>
+							                        	<td width="80%">
+							                        		<a href="space.php?do=cover&coverid=$value[coverid]" title="$value[subject]" target="_blank"><!--{eval echo getstr($value[subject], 36, 0, 0, 0, 0, -1); }--></a>
+							                        	</td>
+							                        	<td width="14%" align="right">
+							                        		<span class="gray">$value['productclassname']</span>
+							                        	</td>
+							                      	</tr>
+							                   		<!--{/loop}-->
+	                    						</table>
+	                    					</td>
+										</tr>
+	                				</table>
+	              				</div>
+	            			</div>
+	          			</td>
+	        		</tr>
+	      		</table>
+	    	</div>
+	    </td>
+	</tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px;clear:both;width:967px;margin:5px auto;">
+	<tr>
+		<td style="background:url(template/default/image/portal/yyc-leftbg.jpg) no-repeat 0px 0px;width:250px;height:351px;" valign="top">
+			<div style="padding:5px;border:1px solid #d6d6d6;margin:70px 22px 10px 22px;background-color:#fff;">
+				<table width="100%" border="0" cellspacing="0" cellpadding="4" height="230">
+					<tr height="30">
+						<td valign="middle" style="background:url(template/default/image/portal/yyc-line.gif) no-repeat bottom left;height:30px;text-indent:20px;font-size:14px;color:#ff9900;line-height:30px;font-weight:bold;">热门话题 <img src="template/default/image/portal/yyc-hot.gif" width="10" height="14" /></td>
+          			</tr>
+          			<tr>
+            			<td align="center" valign="top"><span title="$forum_sitejoin_first[subject]" class="black"><!--{eval echo getstr($forum_sitejoin_first[subject], 30, 0, 0, 0, 0, -1); }--></span></td>
+          			</tr>
+          			<tr height="165">
+						<td valign="top" class="gray"><div style="width:185px; height:165px; border:none; overflow:hidden;">$forum_sitejoin_first['message']</div></td>
+          			</tr>
+					<tr height="25">
+            			<td align="right"><a href="space.php?do=forum&tid=$forum_sitejoin_first[tid]" class="orange" target="_blank">点击进入详情&gt;&gt;</a></td>
+          			</tr>
+        		</table>
+			</div>
+		</td>
+      	<td>
+      		<div style="background-color:#f1f3f0;margin-top:11px;height:320px;padding-left:20px;padding-top:20px;">
+          		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="49%" valign="top">
+							<div style="background:url(template/default/image/portal/yyc-title.gif) no-repeat 0px 0px;height:21px;text-align:right;width:329px;margin-bottom:10px;padding-top:7px;"><a href="space.php?do=forum" title="更多" target="_blank"><img src="template/default/image/portal/indexforumlatestlistmore.gif" width="35" height="12" /></a></div>
+							<table width="329" border="0" cellpadding="3" cellspacing="0">
+								<tr><td>
+							    	<ul>
+			                <!--{loop $forum_lastest_list $value}-->
+			                    		<li style="padding: 4px 0px;">
+											<span class="orange">[{$value[threadclassname]}]</span>&nbsp;<a href="space.php?do=forum&tid=$value[tid]" title="$value[subject]" target="_blank"><!--{eval echo getstr($value[subject], 40, 0, 0, 0, 0, -1); }--></a>
+			                   			</li>
+			                <!--{/loop}-->
+			                   		</ul>
+			                	</td></tr>
+                  			</table>
+             			</td>
+             			<td width="51%" valign="top">
+             				<div style="background:url(template/default/image/portal/yyc-lj.jpg) no-repeat 0px 0px;height:148px;width:259px;margin-bottom:15px;clear:both;padding:10px 5px 0px 70px;">
+                  				<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				                    <tr>
+										<td><a href="space.php?do=forum&threadclassid=11" target="_blank"><img src="template/default/image/portal/yyc-class-01.gif" width="115" height="58" /></a></td>
+				                      	<td><a href="space.php?do=forum&threadclassid=12" target="_blank"><img src="template/default/image/portal/yyc-class-02.gif" width="115" height="58" /></a></td>
+				                    </tr>
+				                    <tr>
+				                      	<td><a href="space.php?do=forum&threadclassid=13" target="_blank"><img src="template/default/image/portal/yyc-class-03.gif" width="115" height="58" /></a></td>
+				                      	<td><a href="space.php?do=forum&threadclassid=14" target="_blank"><img src="template/default/image/portal/yyc-class-04.gif" width="115" height="58" /></a></td>
+				                    </tr>
+								</table>
+							</div>
+							<div style="background:url(template/default/image/portal/yyc-tj.jpg) no-repeat 0px 0px;height:128px;width:324px;margin-bottom:15px;clear:both;margin-left:10px;">
+                  				<div style="border-bottom:1px solid #ff9900;height:25px;padding-top:5px;text-indent:20px;font-size:14px;font-weight:bold;color:#ff9900;width:95%;margin-left:5px;">版主推荐 <img src="template/default/image/portal/yyc-sitejoin.gif" width="13" height="18" /></div>
+                				<table width="329" border="0" cellpadding="3" cellspacing="0">
+                				<!--{loop $forum_digest_list $value}-->
+				                    <tr>
+										<td width="73%" style="background:url(template/default/image/portal/gbj-li-bottom.gif) no-repeat 40px bottom;height:27px;line-height:25px;padding-left:10px;"><span class="orange">[{$value[threadclassname]}]</span>&nbsp;<a href="space.php?do=forum&tid=$value[tid]" title="$value[subject]" target="_blank"><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a></td>
+				                    </tr>
+				                <!--{/loop}-->
+				          		</table>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</td>
+    </tr>
+</table>
+
+<div class="nbox_portal">
+	<h2 class="ntitle"><span class="r_option"><a href="space.php?do=mtag&view=all" target="_blank">&raquo;&nbsp;更多</a></span>&nbsp;&nbsp;&nbsp;&nbsp;社团工作室 &raquo;</h2>
+	<div class="titlebline"></div>
+	<!--{template portal_index_mtag}-->
+</div>
+
+<div class="nbox_portal" style="width:500px; height:450px; margin-right:5px">
+	<h2 class="ntitle"><span class="r_option"><a href="space.php?do=thread&tid=476" target="_blank">&raquo;&nbsp;申请</a></span>&nbsp;&nbsp;&nbsp;&nbsp;社团宣传&raquo;</h2>
+	<div class="titlebline"></div>
+	<!--{eval $adv_borderwidth=500; }-->
+	<!--{eval $adv_width=492; }-->
+	<!--{eval $adv_height=369; }-->
+	<!--{template portal_topic_advertisement}-->
+</div>
+
+<div class="nbox_portal" style="width:455px;">
+	<h2 class="ntitle"><span class="r_option"><a href="space.php?do=forum&threadclassid={FORUM_XILIJUPING_CLASSID}" target="_blank"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;群组话题汇总&raquo;</h2>
+	<div class="titlebline"></div>
+	<!--{template portal_mtag_threads}-->
+</div>
+
+<div class="nbox_portal">
+	<h2 class="ntitle"><span class="r_option"><a href="http://www.echodrama.com/space.php?do=thread&tid=459" target="_blank">&raquo;&nbsp;申请友情链接</a></span>&nbsp;&nbsp;&nbsp;&nbsp;友情链接&raquo;</h2>
+	<div class="titlebline"></div>
+	<div style="margin-top:10px;">
+		<table width="100%">
+		<!--{eval $index = 0; }-->
+		<!--{loop $externallink_list $value}-->
+			<!--{eval $index += 1 ; }-->
+			<!--{if $index==1 }-->
+			<tr>
+			<!--{/if}-->
+			<!--{if empty($value[logo])}-->
+				<td align="center" valign="middle"><a href="$value[url]" target="_blank" alt="$value[name]">$value[name]<a></td>
+			<!--{else}-->
+				<td align="center" valign="middle"><a href="$value[url]" target="_blank" alt="$value[name]"><img src="$value[logo]" alt="$value[name]" width="92"/><a></td>
+			<!--{/if}-->
+			<!--{if $index==8 }-->
+			</tr>
+				<!--{eval $index = 0 ; }-->
+			<!--{/if}-->
+		<!--{/loop}-->
+		</table>
+	</div>
+</div>
+
+</div>
+
+<!--{template footer}-->

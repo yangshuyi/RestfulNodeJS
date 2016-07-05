@@ -1,0 +1,114 @@
+<table style="padding: 10px; ">
+	<tr>
+		<td valign="top" style="width:320px; height:270px;">
+			<table cellpadding="1" cellspacing="0" width="95%" align="center" border="0">
+				<tr><td style="align:left" colspan="3"><h2 class="subtitle"><span style="border-bottom: 1 dotted #ECB2C5;">&nbsp;&nbsp;第{$dispweek}周点击量排行榜</span></h2></td></tr>
+				<!--{loop $topic_view_weekly_list $key $value}-->
+				<tr height="30px">
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<span class="egz">$value[dispnum]</span>&nbsp;&nbsp;
+					</td>
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a>
+					</td>
+					<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+						<span class="gray">$value[productclassname]</span>
+					</td>
+				</tr>
+				<!--{/loop}-->
+			</table>
+		</td>
+		<td valign="top" style="width:320px; height:270px;">
+			<table cellpadding="1" cellspacing="0" width="95%" align="center" border="0">
+				<tr><td style="align:left" colspan="3"><h2 class="subtitle"><span style="border-bottom: 1 dotted #ECB2C5;">&nbsp;&nbsp;{$dispmonth_gbk}月排行榜</span></h2></td></tr>
+				<!--{loop $topic_view_monthly_list $key $value}-->
+					<tr height="30px">
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<span class="egz">$value[dispnum]</span>&nbsp;&nbsp;
+					</td>
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a>
+					</td>
+					<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+						<span class="gray">$value[productclassname]</span>
+					</td>
+				</tr>
+				<!--{/loop}-->
+			</table>
+		</td>
+		<td valign="top" style="width:320px; height:270px;">
+			<table cellpadding="1" cellspacing="0" width="95%" align="center" border="0">
+				<tr><td style="align:left" colspan="3"><h2 class="subtitle"><span style="border-bottom: 1 dotted #ECB2C5;">&nbsp;&nbsp;{$dispyear}年排行榜</span></h2></td></tr>
+				<!--{loop $topic_view_yearly_list $key $value}-->
+				<tr height="30px">
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<span class="egz">$value[dispnum]</span>&nbsp;&nbsp;
+					</td>
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a>
+					</td>
+					<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+						<span class="gray">$value[productclassname]</span>
+					</td>
+				</tr>
+				<!--{/loop}-->
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" style="width:320px; height:270px;">
+			<table cellpadding="1" cellspacing="0" width="95%" align="center" border="0">
+				<tr><td style="align:left" colspan="3"><h2 class="subtitle"><span style="border-bottom: 1 dotted #ECB2C5;">&nbsp;&nbsp;热评排行榜</span></h2></td></tr>
+				<!--{loop $topic_reply_quarter_list $key $value}-->
+				<tr height="30px">
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<span class="egz">$value[dispnum]</span>&nbsp;&nbsp;
+					</td>
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a>
+					</td>
+					<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+						<span class="gray">$value[productclassname]</span>
+					</td>
+				</tr>
+				<!--{/loop}-->
+			</table>
+		</td>
+		<td valign="top" style="width:320px; height:270px;">
+			<table cellpadding="1" cellspacing="0" width="95%" align="center" border="0">
+				<tr><td style="align:left" colspan="3"><h2 class="subtitle"><span style="border-bottom: 1 dotted #ECB2C5;">&nbsp;&nbsp;收藏排行榜</span></h2></td></tr>
+				<!--{loop $topic_shared_quarter_list $key $value}-->
+					<tr height="30px">
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<span class="egz">$value[dispnum]</span>&nbsp;&nbsp;
+					</td>
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a>
+					</td>
+					<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+						<span class="gray">$value[productclassname]</span>
+					</td>
+				</tr>
+				<!--{/loop}-->
+			</table>
+		</td>
+		<td valign="top" style="width:320px; height:270px;">
+			<table cellpadding="1" cellspacing="0" width="95%" align="center" border="0">
+				<tr><td style="align:left" colspan="3"><h2 class="subtitle"><span style="border-bottom: 1 dotted #ECB2C5;">&nbsp;&nbsp;活跃度排行榜</span></h2></td></tr>
+				<!--{loop $topic_active_quarter_list $key $value}-->
+				<tr height="30px">
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<span class="egz">$value[dispnum]</span>&nbsp;&nbsp;
+					</td>
+					<td nowrap style="border-bottom:1px solid #FFD6A4;">
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a>
+					</td>
+					<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+						<span class="gray">$value[productclassname]</span>
+					</td>
+				</tr>
+				<!--{/loop}-->
+			</table>
+		</td>
+	</tr>
+</table>

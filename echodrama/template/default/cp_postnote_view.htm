@@ -1,0 +1,49 @@
+<div class="c_form">
+<table cellspacing="4" cellpadding="4" class="infotable">
+	<tr>
+		<th width="100" nowrap></th>
+		<td>
+			<h2>提醒方：$postnote[fromusername] -> 被提醒方：$postnote[username]</h2>
+		</td>
+	</tr>
+	<tr>
+		<th width="100" nowrap>贴士标题 *</th>
+		<td>
+			$postnote[subject]
+		</td>
+	</tr>
+	<tr>	
+		<th nowrap>重要级别 *</th>
+		<td>
+			$postnote[importancename]
+		</td>
+	</tr>
+	<tr>
+		<th width="100">提醒时间 *</th>
+		<td>
+			$postnote[notedatedisp]
+		</td>
+	</tr>
+	<tr>
+		<th width="100">内容 *</th>
+		<td>
+			$postnote[description]
+		</td>
+	</tr>
+</table>
+
+<!--{if ( $postnote[fromuid] == $_SGLOBAL['supe_uid'] || $postnote[uid] ==$_SGLOBAL['supe_uid']) }-->
+<table width="100%">			
+	<tr>
+		<td align="right">
+			<span class="pipe">|</span>
+			<a href="cp.php?ac=postnote&op=manage&postnoteid=$postnote[postnoteid]&uid=$postnote[uid]">编辑</a>
+			<span class="pipe">|</span>
+			<a href="cp.php?ac=postnote&op=delete&postnoteid=$postnote[postnoteid]&uid=$postnote[uid]">删除</a>
+			<span class="pipe">|</span>
+		</td>
+	</tr>
+</table>
+<!--{/if}-->
+
+</div>

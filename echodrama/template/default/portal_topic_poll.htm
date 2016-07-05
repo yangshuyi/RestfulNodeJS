@@ -1,0 +1,12 @@
+<table cellspacing="0" cellpadding="0" border=0 width="100%" style="background:url('template/default/image/portal/title-left.gif') no-repeat scroll left top #F9F9F9;">
+	<tr height="35px"><td align="right" valign="bottom" colspan="3" nowrap>&nbsp;<a href="space.php?do=poll" target="_blank">更多</a>&nbsp;&nbsp;&nbsp;&nbsp;投票&raquo;</td></tr>
+<!--{loop $poll_latest_list $key $value}-->
+	<tr height="31px" <!--{if $key%2==1}--> class="alt"<!--{/if}-->>
+		<td nowrap width="1%">&nbsp;&nbsp;</td>
+		<td align="left" style="border-bottom:1px solid #FFD6A4;" nowrap>
+			<span class="egz" title="参与数[00]">[00]</span>&nbsp;&nbsp;<a href="" title="$value['subject']" target="_blank"><!--{eval echo getstr($value[subject], 26, 0, 0, 0, 0, -1); }--></a>
+		</td>
+		<td nowrap width="1%">&nbsp;</td>
+	</tr>
+<!--{/loop}-->
+</table>

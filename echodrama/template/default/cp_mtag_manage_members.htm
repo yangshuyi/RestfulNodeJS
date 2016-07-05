@@ -1,0 +1,148 @@
+<!--{template cp_mtag_manageheader}-->
+<form id="membersactionform" name="membersactionform" method="post" action="">
+<input type="hidden" id="memberid" name="memberid" value="" >
+
+<div id="content" style="width: 640px;">
+	<div class="tabs_header">
+		<ul class="tabs">
+			<li class="null"><a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=memberclass">成员职务类型维护</a></li>
+			<li class="null"><a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=member">新增成员</a></li>
+		</ul>
+	</div>		
+	
+	<div class="topic_list">
+		<table cellspacing="0" cellpadding="0" class="reclisttable" >
+			<thead>
+				<tr>
+					<th>成员</th>
+					<th>成员名</th>
+					<th>加入日期</th>
+					<th>职务</th>
+					<th>权限</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!--{loop $memberlist $key $value}-->
+				<!--{if $key%2==1}-->
+				<tr class="alt">
+				<!--{else}-->
+				<tr>
+				<!--{/if}-->
+					<td align="center">
+						<!--{if empty($value['uid'])}-->
+							<div class="myavatar48"><!--{avatar($value[uid],small)}--></div>
+						<!--{else}-->
+							<div class="myavatar48"><a href="space.php?uid=$value[uid]" target="_blank"><!--{avatar($value[uid],small)}--></a></div>
+							<!--{if empty($value['uip'])}-->
+								<div>$value['username']</div>
+							<!--{else}-->
+								<div class="magicflicker">$value['username']</div>
+							<!--{/if}-->
+						<!--{/if}-->
+					</td>
+					<td align="center">
+						$value['realname']
+					</td>
+					<td align="center">
+						&nbsp;<!--{eval echo sgmdate('Y-m-d',$value['dateline'])}-->&nbsp;
+					</td>
+					<td align="center">
+						&nbsp;$value['memberclassname']&nbsp;  
+					</td>
+					<td align="center">
+						&nbsp;$value['membergradename']&nbsp;
+					</td>
+					<td align="center">
+						<a href="#" onclick="javascript:managemember('$value[memberid]');">管理</a>
+						<!--{if $value['membergradeid']==9}-->
+							　　
+						<!--{else}-->
+							 | <a href="#" onclick="javascript:deletemember('$value[memberid]');">删除</a>
+						<!--{/if}-->
+						<br/>
+						<!--{if empty($value['uid'])}-->
+							<div><a href="cp.php?ac=invite" target="_blank">邀请TA加入</a></div>
+						<!--{/if}-->
+						<!--{if !empty($value['introduce'])}-->
+							<div><a href="#" onclick="displayIntroduce('member_content_$key');return false;">&raquo;成员介绍</a></div>
+						<!--{/if}-->
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6" align="left"><div id="member_content_$key" style="display:none">$value[introduce]</div></td>
+				</tr>	
+			<!--{/loop}-->
+			</tbody>
+		</table>
+		<div class="page">$multi</div>
+	</div>
+</div>
+	
+<div id="sidebar" style="width: 150px;">
+	<div class="cat">
+		<h3>
+			<p class="r_option">
+				<a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=members&membergradeid=$_GET['membergradeid']">全部</a>
+			</p>
+			成员职务
+		</h3>
+		<ul class="post_list line_list">
+			<!--{loop $memberclasslist $key $value}-->
+				<li<!--{if $_GET[memberclassid]==$value[classid]}--> class="current"<!--{/if}-->>
+					<a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=members&memberclassid=$value[classid]&membergradeid=$_GET['membergradeid']">$value[classname]</a>
+				</li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	<div class="cat">
+		<h3>
+			<p class="r_option">
+				<a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=members&memberclassid=$_GET['memberclassid']">全部</a>
+			</p>
+			成员权限
+		</h3>
+		<ul class="post_list line_list">
+			<!--{loop $membergradelist $key $value}-->
+				<li<!--{if $_GET[membergradeid]==$value[classid]}--> class="current"<!--{/if}-->>
+					<a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=members&memberclassid=$_GET['memberclassid']&membergradeid=$value[classid]">$value[classname]</a>
+				</li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+function displayIntroduce(itemid) {
+	if( $(itemid).style.display=='none' )
+	{
+		$(itemid).style.display='block';
+	}
+	else
+	{
+		$(itemid).style.display='none';
+	}
+}
+
+function managemember(memberid){
+	 location.href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=member&memberid="+memberid;
+}
+
+function deletemember(memberid){
+	$('memberid').value=memberid;
+	
+	$('membersactionform').action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=deletemember";
+	$('membersactionform').submit();
+}
+
+//彩虹炫
+var elems = selector('div[class~=magicflicker]'); 
+
+for(var i=0; i<elems.length; i++){
+	magicColor(elems[i]);
+}
+
+</script>
+</form>
+<!--{template cp_mtag_managefooter}-->

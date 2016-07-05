@@ -1,0 +1,182 @@
+<div class="mainarea">
+<div class="maininner">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li <!--{if $_GET['op'] == 'manage'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topicrecommand&op=manage"><span>每周推荐广播剧节目单</span></a></li>
+	</ul>
+</div>
+
+<form id="actionform" name="actionform" method="get" action="">
+<input type="hidden" id="ac" name="ac" value="topicrecommand" />
+<input type="hidden" id="op" name="op" value="" />
+<input type="hidden" id="topicrecommandid" name="topicrecommandid" value="" />
+				
+				
+<div class="bdrcontent">
+	<table width="100%" cellspacing="0" cellpadding="0" class="formtable">
+		<tr>
+			<th width="100px" align="center">开始时间</th>
+			<th width="150px" align="center">广播剧ID</th>
+			<th align="center">剧名</th>
+			<th width="70px" align="center">作品类型</th>
+			<th width="100px" align="center">社团</th>
+			<th width="70px" align="center">操作</th>
+		</tr>
+		<!--{loop $list $value}-->
+		<tr>
+			<td nowrap><!--{eval echo sgmdate('Y-m-d', $value[startdate])}--></td>
+			<td nowrap>$value[topicid]</td>
+			<td ><a href="space.php?do=topic&topicid=$value[topicid]" target="_blank">$value[subject]</a></td>
+			<td nowrap>$value[productclassname]</td>
+			<td nowrap>$value[club]</td>
+			<td nowrap>
+				<input type="button" name="searchsubmit" value="删除" class="submit" onclick="javascript:deletetopicrecommand('$value[topicrecommandid]');"/>
+			</td>
+		</tr>
+	<!--{/loop}-->
+		<tr height="50px">
+			<td colspan="6" valign="middle">
+				<span class="r_option"><input type="button" value="发布每周排行" onclick="javascript:createtopicrank();"></span>
+				新版本的广播剧推荐 每次会按照时间倒序 显示5个广播剧，在编辑保存前，请先设置广播剧的展示海报(缩略版)。
+			</td>
+		</tr>
+		<tr>
+			<td nowrap width="200">
+				<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+				<input type="text" id="startdate" name="startdate" size="10" value=""  
+					onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+			</td>
+			<td nowrap width="200">
+				<input type="text" id="topicid" name="topicid" value="" size="15" onchange="javascript:loadtopicsinglebyid_ajax();"/>
+				<a href="#" onclick="javascript:topicquerymds();">查询</a>
+			</td>
+			<td>
+				<input type="text" id="subject" name="subject" value="" READONLY size="25"/>
+			</td>
+			<td>
+				<input type="text" id="productclassname" name="productclassname" value="" READONLY size="10"/>
+			</td>
+			<td>
+				<input type="text" id="club" name="club" value="" READONLY size="10"/>
+			</td>
+			<td nowrap>
+				<input type="button" name="searchsubmit" value="添加" class="submit" onclick="javascript:savetopicrecommand();"/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="6">
+				新版本的广播剧推荐 每次会按照时间倒序 显示5个广播剧。
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="neverVisible"><div id="__actionform"></div></div>
+</form>
+
+<script type="text/javascript">
+
+function createtopicrank(){
+	var form = $('actionform');
+	form.method="get";
+	form.action="admincp.php?ac=topicrecommand&op=createtopicrank";
+	$("op").value="createtopicrank";
+	form.submit();
+}
+
+function savetopicrecommand(){
+	if ($("startdate").value.trim().length <=0) {
+		alert("请输入开始时间");
+		$("startdate").focus();
+		return false;
+	}
+
+	if ($("topicid").value.trim().length <=0) {
+		alert("请输入广播剧ID");
+		$("topicid").focus();
+		return false;
+	}
+	
+	var form = $('actionform');
+	form.method="get";
+	form.action="admincp.php";
+	$("op").value="save";
+	form.submit();
+}
+
+function deletetopicrecommand(topicrecommandid){
+	if(confirm("你确定要删除该推荐节目吗？")){
+		var form = $('actionform');
+		form.method="get";
+		form.action="admincp.php";
+		$("op").value="delete";
+		$("topicrecommandid").value=topicrecommandid;
+		form.submit();
+	}
+}
+
+
+function topicquerymds(){
+
+	var args=new Object();
+	args.window=window;
+	
+	window.showModalDialog("cp.php?ac=topic&op=querymds&widget=topicid&id="+$('topicid').value,args,"dialogWidth:880px;dialogHeight:600px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+	//window.open("cp.php?ac=topic&op=querymds&widget=topicid&id="+$('topicid').value,args,"width=800px,height=500px,menubar=no,titleBar=no,resizable=no");
+	loadtopicsinglebyid_ajax();
+	
+}
+
+function loadtopicsinglebyid_ajax(){
+	
+	var offset = 0;
+	var duration = 3;
+		
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+		
+	showloading();
+		
+	var form = $('actionform');
+
+	form.action="cp.php?ac=topic&op=loadtopicsinglebyid_ajax&topicid="+$('topicid').value;
+	form.method="post";
+	
+	ajaxpost('actionform', 'loadtopicsinglebyid_ajax_response', 2000);
+}
+
+function loadtopicsinglebyid_ajax_response(){
+	var subject="";
+	var productclassname="";
+	var club="";
+	
+	try{
+		var str=$("__actionform").innerHTML;
+		var paramsArray=str.split(",");
+		if(paramsArray.length==1){
+			$("topicid").value="";
+			$("subject").value="";
+			$("productclassname").value="";
+			$("club").value="";
+			
+		}else{
+			subject=paramsArray[1];
+			productclassname=paramsArray[3];
+			club=paramsArray[4];
+		}
+	}
+	catch(e){
+		alert(e);
+	}
+	
+	$("subject").value=subject;
+	$("productclassname").value=productclassname;
+	$("club").value=club;
+	$("picrecommand").href="admincp.php?ac=topic&op=manage&subop=imagerecommandprocessor&topicid="+$("topicid").value;
+	
+}
+</script>
+
+</div>
+</div>
+

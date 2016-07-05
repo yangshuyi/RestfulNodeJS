@@ -1,0 +1,101 @@
+<!--{template cp_mtag_manageheader}-->
+<form id="tasksactionform" name="tasksactionform" method="post" action="">
+<input type="hidden" id="taskid" name="taskid" value="" >
+
+<div id="content" style="width: 640px;">
+	<div class="tabs_header">
+		<ul class="tabs">
+			<li class="null"><a href="cp.php?ac=mtag&op=manage&subop=taskclass&tagid=$mtag[tagid]">任务类型维护</a></li>
+			<li class="null"><a href="cp.php?ac=mtag&op=manage&subop=task&tagid=$mtag[tagid]">新增成员任务</a></li>
+		</ul>
+	</div>		
+	
+	<div class="topic_list">
+		<table cellspacing="0" cellpadding="0" class="reclisttable" >
+			<thead>
+				<tr>
+					<td align="center" nowrap>重要级别</td>
+					<td align="center" nowrap>是否关闭</td>
+					<td align="center" nowrap>开始/结束</td>
+					<td align="center" nowrap>成员任务名</td>
+					<td align="center" nowrap>任务类型</td>
+					<td align="center" nowrap>操作</td>
+				</tr>
+			</thead>
+			<tbody>
+			<!--{loop $tasklist $key $value}-->
+				<!--{if $key%2==1}-->
+				<tr class="alt">
+				<!--{else}-->
+				<tr>
+				<!--{/if}-->
+					<td align="center" nowrap>
+						$value['importancename']
+					</td>
+					<td align="center" nowrap>
+						$value['closedisp']
+					</td>
+					<td align="center">
+						$value['starttimedisp']<br/>$value['endtimedisp']
+					</td>
+					<td align="left">
+						<a href="space.php?do=mtag&view=task&tagid=$value[tagid]&taskid=$value[taskid]" title="$value[subject]" target="_blank"><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a>
+					</td>
+					<td align="center" nowrap>
+						$value['taskclassname']
+					</td>
+					<td align="center" nowrap>
+						<a href="#" onclick="javascript:managetask('$value[taskid]');">管理</a>
+						 | <a href="#" onclick="javascript:deletetask('$value[taskid]');">删除</a>
+					</td>
+				</tr>
+			<!--{/loop}-->
+			</tbody>
+		</table>
+		<div class="page">$multi</div>
+	</div>
+</div>
+	
+<div id="sidebar" style="width: 150px;">
+	<div class="cat">
+		<h3>
+			<p class="r_option">
+				<a href="cp.php?ac=mtag&op=manage&subop=tasks&tagid=$mtag[tagid]">全部</a>
+			</p>
+			任务类型
+		</h3>
+		<ul class="post_list line_list">
+			<!--{loop $taskclasslist $key $value}-->
+				<li<!--{if $_GET[classid]==$value[classid]}--> class="current"<!--{/if}-->>
+					<a href="cp.php?ac=mtag&op=manage&subop=tasks&tagid=$mtag[tagid]&classid=$value[classid]">$value[classname]</a>
+				</li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+function displayIntroduce(itemid) {
+	if( $(itemid).style.display=='none' )
+	{
+		$(itemid).style.display='block';
+	}
+	else
+	{
+		$(itemid).style.display='none';
+	}
+}
+
+function managetask(taskid){
+	 location.href="cp.php?ac=mtag&op=manage&subop=task&atomop=taskinfo&tagid=$mtag[tagid]&taskid="+taskid+"&return=cpmtagtasks";
+}
+
+function deletetask(taskid){
+	$('tasksactionform').action="cp.php?ac=mtag&op=manage&subop=deletetask&tagid=$mtag[tagid]&taskid="+taskid+"&return=cpmtagtasks";
+	$('tasksactionform').submit();
+}
+
+</script>
+</form>
+<!--{template cp_mtag_managefooter}-->

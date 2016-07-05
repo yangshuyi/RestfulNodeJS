@@ -1,0 +1,315 @@
+<!--{eval $_TPL['titles'] = array('通知');}-->
+<!--{template header}-->
+
+<h2 class="title"><img src="image/icon/pm.gif">通知</h2>
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li><a href="space.php?do=pm"><span>短消息</span></a></li>
+		<li$actives[notice]><a href="space.php?do=notice"><span>通知</span></a></li>
+		<!--{if $_SCONFIG['my_status']}-->
+		<li$actives[userapp]><a href="space.php?do=notice&view=userapp"><span>应用消息</span></a></li>
+		<!--{/if}-->
+	</ul>
+</div>
+
+<!--{if $view=='userapp'}-->
+
+	
+	<script type="text/javascript">
+		function manyou_add_userapp(hash, url) {
+			if(isUndefined(url)) {
+				$(hash).innerHTML = "<tr><td colspan=\"2\">成功忽略了该条应用消息</td></tr>";
+			} else {
+				$(hash).innerHTML = "<tr><td colspan=\"2\">正在引导您进入...</td></tr>";
+			}
+			var x = new Ajax();
+			x.get('do.php?ac=ajax&op=deluserapp&hash='+hash, function(s){
+				if(!isUndefined(url)) {
+					location.href = url;
+				}
+			});
+		}
+	</script>
+	
+	<div id="content" style="width:500px">		
+
+		<style>
+			.topicList table{width:100%;margin:10px 0 5px 0;}
+			.topicList td{color:#333;}
+		</style>
+	
+		<!--{if $list}-->
+		<div class="m_box">
+			
+		<!--{loop $list $key $invite}-->
+			<h3 class="feed_header">
+				<a href="space.php?do=notice&view=userapp&op=del&appid=$invite[0][appid]" class="r_option">忽略该应用的所有邀请</a>
+				<a href="userapp.php?id=$invite[0][appid]&uid=$space[uid]" title="$apparr[$invite[0][appid]]"><img src="http://appicon.manyou.com/icons/$invite[0][appid]" alt="$apparr[$invite[0][appid]]" align="absmiddle" /></a> 
+				您有 <!--{eval echo count($invite);}--> 个 $invite[0][typename] <!--{if $invite[0][type]}-->请求<!--{else}-->邀请<!--{/if}-->
+			</h3>
+			<table cellpadding="0" cellspacing="0" width="100%" class="topic_list">
+			<!--{loop $invite $value}-->
+				<tbody>
+				<tr>
+					<td width="60" valign="top">
+						<div class="avatar48">
+							<a href="space.php?uid=$value[fromuid]" class="avatarlink"><!--{avatar($value[fromuid],small)}--></a>
+						</div>
+					</td>
+					<td id="$value[hash]">
+						$value[myml]
+					</td>
+				</tr>
+				</tbody>
+			<!--{/loop}-->
+			</table>
+		<!--{/loop}-->
+		</div>
+		<div class="page">$multi</div>
+		<!--{else}-->
+		<div class="c_form">
+			没有新的应用请求或邀请
+		</div>
+		<!--{/if}-->
+	</div>
+	
+	<div id="sidebar">
+		<div class="sidebox">
+		<h2 class="title">应用分类</h2>
+		<ul class="line_list">
+			<li><a href="space.php?do=notice&view=userapp">查看全部应用消息</a></li>
+			<!--{loop $apparr $type $val}-->
+			<li><a href="userapp.php?id=$val[0][appid]&uid=$space[uid]" title="$val[0][typename]"><img src="http://appicon.manyou.com/icons/$val[0][appid]" alt="$val[0][typename]" /></a><a href="space.php?do=notice&view=userapp&type=$val[0][appid]"> <!--{eval echo count($val);}--> 个 $val[0][typename] <!--{if $val[0][type]}-->请求<!--{else}-->邀请<!--{/if}--></a></li>
+			<!--{/loop}-->
+		</ul>
+		</div>
+	</div>
+
+<!--{else}-->
+	
+	<div id="content" style="width:500px">		
+		
+		<div class="h_status">
+		提示：当你感觉有些通知对你造成骚扰，请点击通知右侧的屏蔽小图标，屏蔽此类通知。<br/>
+		</div>
+			
+		<!--{if $newnum}-->
+		<div class="mgs_list">
+			<!--{if $space[notenum]}--><div><img src="image/icon/notice.gif"><a href="space.php?do=notice"><strong>$space[notenum]</strong> 条新通知</a></div><!--{/if}-->
+			<!--{if $space[addfriendnum]}--><div><img src="image/icon/friend.gif" alt="" /><a href="cp.php?ac=friend&op=request"><strong>$space[addfriendnum]</strong> 个好友请求</a></div><!--{/if}-->
+			<!--{if $space[mtaginvitenum]}--><div><img src="image/icon/mtag.gif" alt="" /><a href="cp.php?ac=mtag&op=mtaginvite"><strong>$space[mtaginvitenum]</strong> 个群组邀请</a></div><!--{/if}-->
+			<!--{if $space[eventinvitenum]}--><div><img src="image/icon/event.gif" alt="" /><a href="cp.php?ac=event&op=eventinvite"><strong>$space[eventinvitenum]</strong> 个招募活动邀请</a></div><!--{/if}-->
+			<!--{if $space[myinvitenum]}--><div><img src="image/icon/userapp.gif" alt="" /><a href="space.php?do=notice&view=userapp"><strong>$space[myinvitenum]</strong> 个应用消息</a></div><!--{/if}-->
+			<!--{if $space[pokenum]}--><div><img src="image/icon/poke.gif" alt="" /><a href="cp.php?ac=poke"><strong> $space[pokenum]</strong> 个新招呼</a></div><!--{/if}-->
+		</div>
+		<!--{/if}-->
+
+		<div class="h_status">
+			<!--{if $type=='sitepm'}-->
+				<span style="color:red;">来自 应声虫团队 的官方消息。</span>
+			<!--{elseif $type=='profile_realname_confirm'}-->
+			
+			<!--{elseif $type=='profile_realname_change'}-->
+				
+			<!--{elseif $type=='friend'}-->
+				
+			<!--{elseif $type=='wall'}-->
+				
+			<!--{elseif $type=='doing'}-->
+				
+			<!--{elseif $type=='credit'}-->
+				
+			<!--{elseif $type=='topic_audit'}-->
+				<span style="color:red;">当管理员对你上传的广播剧进行审核时，你会收到通知。</span>
+			<!--{elseif $type=='topic_admin_audit'}-->
+				<span style="color:red;">当你有新的广播剧需要审核时，你会收到通知。</span>
+			<!--{elseif $type=='topic_delete'}-->
+				<span style="color:red;">当你之前上传的广播剧被删除时，你会收到通知。</span>
+			<!--{elseif $type=='topiccomment'}-->
+				<span style="color:red;">当你收藏的广播剧被其他用户评论时，你会收到通知。</span>
+			<!--{elseif $type=='cover_delete'}-->
+				<span style="color:red;">当你之前发布的翻唱作品被管理员删除时，你会收到通知。</span>
+			<!--{elseif $type=='covercomment'}-->
+				<span style="color:red;">当你收藏的翻唱作品被其他用户评论时，你会收到通知。</span>
+			<!--{elseif $type=='video_delete'}-->
+				<span style="color:red;">当你之前发布的视频作品被管理员删除时，你会收到通知。</span>
+			<!--{elseif $type=='videocomment'}-->
+				<span style="color:red;">当你收藏的视频作品被其他用户评论时，你会收到通知。</span>
+			<!--{elseif $type=='mtag_manage'}-->
+				<span style="color:red;">当你所在的群组有变动时，你会收到通知。</span>
+			<!--{elseif $type=='mtag_thread_new'}-->
+				<span style="color:red;">当你所关注的群组有新话题发布时，你会收到通知。</span>
+			<!--{elseif $type=='clickthread'}-->
+			
+			<!--{elseif $type=='post'}-->
+				
+			<!--{elseif $type=='piccomment'}-->
+				
+			<!--{elseif $type=='clickpic'}-->
+				
+			<!--{elseif $type=='blogcomment'}-->
+			
+			<!--{elseif $type=='clickblog'}-->
+			
+			<!--{elseif $type=='sharenotice'}-->
+				
+			<!--{elseif $type=='sharecomment'}-->
+				
+			<!--{elseif $type=='event'}-->
+					
+			<!--{elseif $type=='eventcomment'}-->
+				
+			<!--{elseif $type=='eventmember'}-->
+				
+			<!--{elseif $type=='eventmemberstatus'}-->
+				
+			<!--{elseif $type=='poll'}-->
+			
+			<!--{elseif $type=='pollinvite'}-->
+		
+			<!--{elseif $type=='pollcomment'}-->
+			
+			<!--{elseif $type=='report_new'}-->
+			
+			<!--{elseif $type=='report_statechanged'}-->
+		
+			<!--{elseif $type=='reportcomment'}-->
+			<!--{else}-->
+				
+			<!--{/if}-->
+		</div>		
+		<!--{if $list}-->
+		<table cellpadding="0" cellspacing="0" width="100%" class="topic_list">
+		<!--{loop $list $key $value}-->
+			<tbody>
+			<tr>
+			<td width="60" valign="top">
+			<!--{if $value[authorid]}-->
+				<div class="avatar48">
+					<a href="space.php?uid=$value[authorid]" class="avatarlink"><!--{avatar($value[authorid],small)}--></a>
+				</div>
+			<!--{else}-->
+				<div class="avatar48"><img src="image/systempm.gif" width="48" height="48" /></div>
+			<!--{/if}-->
+			</td>
+			<td>
+				
+					<a href="cp.php?ac=common&op=ignore&authorid=$value[authorid]&type=$value[type]" id="a_note_$value[id]" onclick="ajaxmenu(event, this.id)" class="float_cancel">屏蔽</a>
+
+					<div style="padding:10px 0 5px 0;$value[style]">
+						<!--{if $value[authorid]}-->
+						<a href="space.php?uid=$value[authorid]">{$_SN[$value[authorid]]}</a>
+						<!--{/if}-->
+						$value[note]
+						<p class="time">&nbsp;<!--{date('m-d H:i',$value[dateline],1)}--></p>
+					</div>
+					
+					<!--{if $value[authorid] && !$value[isfriend]}-->
+					<p>
+						<a href="cp.php?ac=friend&op=add&uid=$value[authorid]" id="add_note_friend_$value[authorid]" onclick="ajaxmenu(event, this.id, 1)">加为好友</a>
+						<span class="pipe">|</span>
+						<a href="cp.php?ac=poke&op=send&uid=$value[authorid]" id="a_poke_$value[authorid]" onclick="ajaxmenu(event, this.id, 1)">打个招呼</a>
+					</p>
+					<!--{/if}-->
+					
+				</td>
+			</tr>
+			</tbody>
+		<!--{/loop}-->
+		
+		<!--{if $view!='userapp' && $space[notenum]}-->
+			<tbody>
+			<tr>
+			<td width="60">
+			</td>
+			<td align="center"><a href="space.php?do=notice&ignore=all">&raquo; 将后续页面所有未读新通知视为已读</a></td>
+			</tr>
+			</tbody>
+		<!--{/if}-->
+		
+		</table>
+		
+
+		<div class="page">$multi</div>
+		<!--{else}-->
+		<div class="c_form">
+		没有新的通知。
+		</div>
+		<!--{/if}-->
+	</div>
+	
+	<div id="sidebar" style="width:200px">		
+		<div class="sidebox">
+			<h2 class="title">通知分类</h2>
+			<ul class="line_list">
+				<li $pro_actives[all]><a href="space.php?do=notice">查看全部通知</a></li>
+				<li>系统消息</li>
+				<li $pro_actives[sitepm]>　<a href="space.php?do=notice&type=sitepm">&raquo;全站消息</a></li>
+				<li $pro_actives[profile_realname_confirm]>　<a href="space.php?do=notice&type=profile_realname_confirm">&raquo;社团成员名认证</a></li>
+				<li $pro_actives[profile_realname_change]>　<a href="space.php?do=notice&type=profile_realname_change">&raquo;社团成员名修改</a></li>
+				<li $pro_actives[friend]>　<a href="space.php?do=notice&type=friend">&raquo;好友</a></li>
+				<li $pro_actives[wall]>　<a href="space.php?do=notice&type=wall">&raquo;留言</a></li>				
+				<li $pro_actives[doing]>　<a href="space.php?do=notice&type=doing">&raquo;记录回复</a></li>
+				<li $pro_actives[credit]>　<a href="space.php?do=notice&type=credit">&raquo;积分</a></li>
+			
+				<li>声线基地</li>
+				<li $pro_actives[toneinvite]>　<a href="space.php?do=notice&type=toneinvite">&raquo;声线欣赏邀请</a></li>
+				
+				<li>广播剧场</li>
+				<li $pro_actives[topic_audit]>　<a href="space.php?do=notice&type=topic_audit">&raquo;广播剧上传审核通知</a></li>
+				<li $pro_actives[topic_admin_audit]>　<a href="space.php?do=notice&type=topic_admin_audit">&raquo;广播剧审核处理通知</a></li>
+				<li $pro_actives[topic_delete]>　<a href="space.php?do=notice&type=topic_delete">&raquo;广播剧删除通知</a></li>
+				<li $pro_actives[topiccomment]>　<a href="space.php?do=notice&type=topiccomment">&raquo;广播剧新评论通知</a></li>
+				
+				<li>乐虫翻唱</li>
+				<li $pro_actives[cover_delete]>　<a href="space.php?do=notice&type=cover_delete">&raquo;翻唱删除通知</a></li>
+				<li $pro_actives[covercomment]>　<a href="space.php?do=notice&type=covercomment">&raquo;翻唱新评论通知</a></li>
+				<li $pro_actives[coverinvite]>　<a href="space.php?do=notice&type=coverinvite">&raquo;翻唱欣赏邀请</a></li>
+
+				<li>视频映像</li>
+				<li $pro_actives[video_delete]>　<a href="space.php?do=notice&type=video_delete">&raquo;视频删除通知</a></li>
+				<li $pro_actives[videocomment]>　<a href="space.php?do=notice&type=videocomment">&raquo;视频新评论通知</a></li>
+				<li $pro_actives[videoinvite]>　<a href="space.php?do=notice&type=videoinvite">&raquo;视频欣赏邀请</a></li>
+			
+				<li>圈子群组</li>
+				<li $pro_actives[mtag_manage]>　<a href="space.php?do=notice&type=mtag_manage">&raquo;群组内部通知</a></li>
+				<li $pro_actives[mtag_manage]>　<a href="space.php?do=notice&type=mtag_task">&raquo;群组成员任务通知</a></li>
+				<li $pro_actives[mtag_thread_new]>　<a href="space.php?do=notice&type=mtag_thread_new">&raquo;群组新话题通知</a></li>
+				<!-- li><a href="space.php?do=notice&type=clickthread">&raquo;话题表态</a></li -->
+				<li $pro_actives[mtag_post_reply]>　<a href="space.php?do=notice&type=mtag_post_reply">&raquo;话题回复</a></li>
+				
+				<li>图片资源</li>
+				<li $pro_actives[piccomment]>　<a href="space.php?do=notice&type=piccomment">&raquo;图片评论</a></li>
+				<li $pro_actives[clickpic]>　<a href="space.php?do=notice&type=clickpic">&raquo;图片表态</a></li>
+				
+				<li>树洞日记</li>
+				<li $pro_actives[blogcomment]>　<a href="space.php?do=notice&type=blogcomment">&raquo;日记评论</a></li>
+				<li $pro_actives[clickblog]>　<a href="space.php?do=notice&type=clickblog">&raquo;日记表态</a></li>
+				
+				<li>分享交流</li>
+				<li $pro_actives[sharenotice]>　<a href="space.php?do=notice&type=sharenotice">&raquo;分享</a></li>
+				<li $pro_actives[sharecomment]>　<a href="space.php?do=notice&type=sharecomment">&raquo;分享评论</a></li>
+				
+				<li>招募活动</li>
+				<li $pro_actives[event]>　<a href="space.php?do=notice&type=event">&raquo;招募</a></li>
+				<li $pro_actives[eventcomment]>　<a href="space.php?do=notice&type=eventcomment">&raquo;招募活动留言</a></li>
+				<li $pro_actives[eventmember]>　<a href="space.php?do=notice&type=eventmember">&raquo;招募活动成员管理</a></li>
+				<li $pro_actives[eventmemberstatus]>　<a href="space.php?do=notice&type=eventmemberstatus">&raquo;招募活动成员身份</a></li>
+				
+				<li>鸡血投票</li>
+				<li $pro_actives[poll]>　<a href="space.php?do=notice&type=poll">&raquo;投票</a></li>
+				<li $pro_actives[pollinvite]>　<a href="space.php?do=notice&type=pollinvite">&raquo;投票邀请</a></li>
+				<li $pro_actives[pollcomment]>　<a href="space.php?do=notice&type=pollcomment">&raquo;投票评论</a></li>
+
+				<li>举报中心</li>
+				<li $pro_actives[report_new]>　<a href="space.php?do=notice&type=report_new">&raquo;新的举报</a></li>
+				<li $pro_actives[report_statechanged]>　<a href="space.php?do=notice&type=report_statechanged">&raquo;举报状态变更</a></li>
+				<li $pro_actives[reportcomment]>　<a href="space.php?do=notice&type=reportcomment">&raquo;举报评论</a></li>
+			</ul>
+		</div>
+		
+	</div>
+	
+<!--{/if}-->
+<!--{template footer}-->

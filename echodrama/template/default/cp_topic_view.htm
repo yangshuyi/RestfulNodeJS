@@ -1,0 +1,280 @@
+<div class="affiche">
+<form id="actionForm" method="post" action="">
+	<table width="520px" cellspacing="0" cellpadding="0" border=0>
+		<tr>
+			<td align="left">
+				<table width="100%"><tr>
+					<td align="left"  nowrap><span class="gray">$topic[typename]</span></td>
+					<td align="right" nowrap><span class="gray">广播剧编号: $topic[dispnumber]</span>
+					</td>
+  		 		</tr></table>
+			</td>
+		</tr>
+<!--{if $topic[type]=='single'}-->
+		<tr>
+			<td id="event_icon" valign="top" align="left">
+				<!--{if $topic[pic]}-->
+					<div style="width:520;border-top:1px solid #EBE6C9;border-left:1px solid #EBE6C9;border-right:1px solid #EBE6C9;" align="center">
+						<img src="$topic[pic]" alt="$topic[subject]" width="<!--{eval echo getsuitablewidth($topic[pic], 520);}-->"/>
+					</div>
+				<!--{/if}-->
+	<!--{if $topic[audiotype] == 1}-->				
+				<!--{if 1==1 OR empty($topic[kugoupath])}-->
+					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="520" height="20">
+					   	<param name="movie" value="swf/2.swf?file=$topic[mp3path]&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100">
+					    <param name="quality" value="high">
+					  	<param value="transparent" name="wmode">
+					   	<embed src="swf/2.swf?file=$topic[mp3path]&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="520" height="20">
+					</object>
+				<!--{else}-->
+		  			<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="520" height="46">
+				       	<param name="movie" value="$topic[kugoupathdisp]">
+				        <param name="quality" value="high">
+					  	<param value="transparent" name="wmode">
+				       	<embed src="$topic[kugoupathdisp]" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="520" height="46">
+					</object>
+		  		<!--{/if}-->
+	<!--{elseif $topic[audiotype] == 2}-->
+					<object width="520" height="85" type="application/x-shockwave-flash"
+							data="$topic[audioplayerpath_tudou]">
+						<param name="src" value="$topic[audioplayerpath_tudou]"/>
+					</object>
+	<!--{/if}-->
+	  		</td>
+		</tr>
+		<tr>
+			<td>
+	  			<table width="100%" cellspacing="0" cellpadding="0">
+	  				<tr height="30px">
+	  					<td align="left" nowrap>
+						<!--{if $topic[audiotype] == 1}-->
+	  						<!--{if !empty($topic[mp3path])}-->
+	  						<a id="a_download" href="#" onclick="todownload(this, $topic[topicid], '$topic[mp3path]');" target="_blank">下载</a><span class="pipe">|</span>
+		  					<!--{/if}-->
+						<!--{elseif $topic[audiotype] == 2}-->
+		  					<!--{if !empty($topic[audiodownloadpath_rayfile])}-->
+	  						<a id="a_download"  href="$topic[audiodownloadpath_rayfile]" onclick="todownload($topic[topicid]);" target="_blank">飞速RayFile</a><span class="pipe">|</span>
+		  					<!--{/if}-->	
+		  					<!--{if !empty($topic[audiodownloadpath_115])}-->
+	  						<a id="a_download"  href="$topic[audiodownloadpath_115]" onclick="todownload($topic[topicid]);" target="_blank">115网盘</a><span class="pipe">|</span>
+		  					<!--{/if}-->
+		  					<!--{if !empty($topic[audiodownloadpath_zhongzhuan])}-->
+	  						<a id="a_download"  href="$topic[audiodownloadpath_zhongzhuan]" onclick="todownload($topic[topicid]);" target="_blank">QQ中转站</a><span class="pipe">|</span>
+		  					<!--{/if}-->	
+		  				<!--{/if}-->
+	  					<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+	  						<a id="a_toshare"  href="#" onclick="toshare();return false;" target="_blank">收藏</a><span class="pipe">|</span>
+				  			<a href="cp.php?ac=share&type=topic&id=$topic[topicid]" id="a_share_$topic[topicid]" onclick="ajaxmenu(event, this.id, 1)" >站内分享</a><span class="pipe">|</span>
+				  		<!--{/if}-->	
+	  						<!--a href="#" onclick="weiboshare();return false;">分享至新浪微博</a><span class="pipe">|</span-->
+	  						<a id="a_report" href="cp.php?ac=common&op=report&idtype=topicid&id=$topic[topicid]" onclick="ajaxmenu(event, this.id, 1)">举报广播剧错误信息</a>
+						</td>
+	  				</tr>
+	  			</table>
+	  			<div class="neverVisible"><div id="__actionForm"></div></div>
+			</td>
+		</tr>
+<!--{/if}-->
+<!--{if $topic[type]=='album'}-->
+		<tr>
+			<td id="event_icon" valign="top" align="left">
+				<!--{if $topic[pic]}-->
+				<img src="$topic[pic]" alt="$topic[subject]" width="520"/><br/>
+				<!--{/if}-->
+  			</td>
+		</tr>
+		<tr>
+			<td>
+	  			<table cellspacing="0" cellpadding="0">
+	  				<tr height="30px">
+						<td width="170px" align="left" nowrap>
+				  			<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+	  						<a id="a_toshare"  href="#" onclick="toshare();return false;" target="_blank">加入收藏</a><span class="pipe">|</span>
+				  			<!--{/if}-->
+	  					
+				  			<a id="a_report" href="cp.php?ac=common&op=report&idtype=topicid&id=$topic[topicid]" onclick="ajaxmenu(event, this.id, 1)">举报</a><span class="pipe">|</span>
+						</td>
+				  	</tr>
+	  			</table>
+	  			<div class="neverVisible"><div id="__actionForm"></div></div>
+			</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<!--{if $itemcount==0}-->
+		<tr>
+			<td id="event_icon" valign="middle" align="center" height="20" colspan="2">
+			对不起，该专辑目前不包含任何广播剧作品。
+	  		</td>
+		</tr>	
+		<!--{else}-->	
+			<!--{loop $itemlist $key $item}-->
+			<tr>
+				<td id="event_icon" valign="top" align="left" colspan="2">
+					<a href="space.php?do=topic&topicid=$item['topicid']" target="_blank"/>$item['subject']</a>:
+	  			</td>
+			</tr>
+			<tr>
+				<td id="event_icon" valign="top" align="left" colspan="2">
+					<!--{if $item[productexists]}-->
+					<table><tr valign="top">
+						<td>					
+							<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000-$item['topicid']" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="450" height="20">
+				            	<param name="movie" value="swf/2.swf?file=$item['mp3path']&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100">
+					            <param name="quality" value="high">
+							  	<param value="transparent" name="wmode">
+				              	<embed src="swf/2.swf?file=$item['mp3path']&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="450" height="20">
+			  		 		</object>  		
+		  		 		</td>
+						<td>
+							<a href="#" onclick="todownload(this, $item[topicid], '$item[mp3path]');" target="_blank">下载</a>
+		  				</td>
+  		 			</tr></table>
+	  		 		<!--{else}-->	
+	  		 			对不起，该作品已被删除。
+	  				<!--{/if}-->
+	  			</td>
+			</tr>	
+			<!--{/loop}-->	
+		<!--{/if}-->
+<!--{/if}-->
+		<tr>
+			<td align="left">
+				<br/>
+				<table width="100%">
+					<tr>
+						<td width="70px" nowrap><span class="gray">所属团队:　</span></td>
+						<td align="left">&nbsp;<!--{if empty($topic[clubtagid])}-->$topic[club]<!--{else}--><a href="space.php?do=mtag&tagid=$topic[clubtagid]" target="_blank">$topic[club]</a><!--{/if}-->&nbsp;</td>
+					</tr>
+					<tr><td nowrap><span class="gray">作品类型:　</span></td><td align="left">&nbsp;$_SGLOBAL[productclass][$topic[productclassid]][classname]&nbsp;</td></tr>
+					<tr><td nowrap>&nbsp;</td><td>&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">导演　　:　</span></td><td align="left">&nbsp;$topic[director_searchitem]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">监制　　:　</span></td><td align="left">&nbsp;$topic[producer_searchitem]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">策划　　:　</span></td><td align="left">&nbsp;$topic[cehua_searchitem]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">原著　　:　</span></td><td align="left">&nbsp;$topic[yuanzhu]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">编剧　　:　</span></td><td align="left">&nbsp;$topic[writer_searchitem]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">ＣＡＳＴ:　</span></td><td align="left">&nbsp;$topic[cast_searchitem]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">后期制作:　</span></td><td align="left">&nbsp;$topic[effector_searchitem]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">美工　　:　</span></td><td align="left">&nbsp;$topic[photographer_searchitem]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">宣传　　:　</span></td><td align="left">&nbsp;$topic[propagandizer_searchitem]&nbsp;</td></tr>
+					<tr><td nowrap>&nbsp;</td><td>&nbsp;</td></tr>
+<!--{if $topic[type]=='single'}-->
+					<tr><td nowrap><span class="gray">发布时间:　</span></td><td align="left">&nbsp;$topic[producedate]&nbsp;</td></tr>
+					<tr><td nowrap>&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">提供时间:　</span></td><td align="left">&nbsp;$topic[dateline]&nbsp;</td></tr>
+					<tr><td nowrap>&nbsp;</td><td>&nbsp;</td></tr>
+<!--{/if}-->
+<!--{if $topic[type]=='album'}-->
+					<tr><td><span class="gray">完结时间:　</span></td><td align="left">&nbsp;$topic[producedate]&nbsp;</td></tr>
+					<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+<!--{/if}-->
+					<tr><td><span class="gray">作品简介:　</span></td><td>&nbsp;</td></tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="left" >
+					<div style="width:520px;  height:450px;  border:none;  overflow:scroll;">$topicadditioninfo[message]</div>
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+
+<script type="text/javascript">
+
+function weiboshare(){
+	//url = encodeURIComponent("http://www.echodrama.com/space.php?do=topic&topicid=$topic[topicid]");
+	
+	//shareURL = "http://v.t.sina.com.cn/share/share.php?appkey=1895425934&url="+url+"&title=weibomessage&ralateUid=1895425934";
+	//window.open(shareURL);
+}
+
+
+<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+var inShare=$inShare;
+renderShareButton();
+
+function toshare() {
+	
+	var offset = 0;
+	var duration = 3;
+	
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+	
+	showloading();
+	
+	var form = $('actionForm');
+	if(inShare==0){
+		inShare=1;
+		form.action="cp.php?ac=topic&op=share&topicid=$topic[topicid]&toshare="+inShare;
+		
+	}else if(inShare==1){
+		inShare=0;
+		form.action="cp.php?ac=topic&op=share&topicid=$topic[topicid]&toshare="+inShare;
+	}
+	
+	ajaxpost('actionForm', 'renderShareButton', 2000);
+}
+
+function renderShareButton(id, result) {
+  
+	$("__actionForm").style.display = 'none';		
+	
+	if(result!=null){
+		var str=$("__actionForm").innerHTML;
+		var paramsArray=str.split(",");
+		inShare=paramsArray[1];
+		if(inShare==0){
+			$("a_toshare").innerHTML="收藏";
+		}else if(inShare==1){
+			$("a_toshare").innerHTML="取消收藏";
+		}
+	}else{
+		if(inShare==0){
+			$("a_toshare").innerHTML="收藏";
+		}else if(inShare==1){
+			$("a_toshare").innerHTML="取消收藏";
+		}
+	}
+}
+<!--{/if}-->
+
+function todownload(link, topicid, path) {
+	link.href= path;
+	
+	var offset = 0;
+	var duration = 3;
+	
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+	
+	showloading();
+	
+	var form = $('actionForm');
+	form.action="cp.php?ac=topic&op=download&topicid="+topicid;
+	ajaxpost('actionForm', 'renderDownloadButton', 2000);
+}
+
+function renderDownloadButton(id, result) {
+}
+
+<!--{if empty($topicpoll) }-->
+function renderPollStar(value) {
+	if($('a_poll').style.display=="none"){
+		return;
+	}
+	
+	for(var i=1;i<=value;i++) {
+		$('img_poll_'+i).src="/image/sth.gif";
+	}
+	for(var i=value+1;i<=5;i++) {
+		$('img_poll_'+i).src="/image/nst.gif";
+	}
+	$('topicpollvalue').value=value;
+}
+
+<!--{/if}-->
+</script>

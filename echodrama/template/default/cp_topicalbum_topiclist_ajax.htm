@@ -1,0 +1,40 @@
+<input type="hidden" id="topicids" name="topicids" value="$topicids"/>
+<table class="reclisttable">
+	<tr>
+		<th width="150" nowrap>广播剧ID</th>
+		<th width="200" nowrap>剧名</th>
+		<th width="100" nowrap>作品类型</th>
+		<th width="150" nowrap>社团</th>
+		<th width="50"  nowrap>操作</th>
+	</tr>
+	<!--{loop $topiclist $key $value}-->
+	<tr height="20px">
+		<td align="center" nowrap width="150">$value[topicid]</td>
+		<td align="left" ><a href="space.php?do=topic&topicid=$value[topicid]" target="_blank">$value[subject]</a></td>
+		<td align="center" >$value[productclassname]</td>
+		<td align="center" >$value[club]</td>
+		<td align="center" >
+			<input type="button" name="searchsubmit" value="移除" class="submit" onclick="javascript:removetopic('$value[topicid]');"/>
+		</td>
+	</tr>
+	<!--{/loop}-->
+	<tr>
+		<td align="center" nowrap width="200">
+			<input type="text" id="topicid" name="topicid" value="" size="15" onchange="javascript:loadtopicsinglebyid_ajax();"/>
+			<a href="#" onclick="javascript:topicquerymds();">查询</a>
+		</td>
+		<td align="left" >
+			<input type="text" id="topicsubject" name="topicsubject" value="" READONLY size="25"/>
+		</td>
+		<td align="center" >
+			<input type="text" id="topicproductclassname" name="topicproductclassname" value="" READONLY size="10"/>
+		</td>
+		<td align="center" >
+			<input type="text" id="topicclub" name="topicclub" value="" READONLY size="10"/>
+		</td>
+		<td align="center" >
+			<input type="button" name="searchsubmit" value="添加" class="submit" onclick="javascript:addtopic();"/>
+		</td>
+	</tr>
+</table>
+<div class="neverVisible"><div id="__ajaxform"></div></div>

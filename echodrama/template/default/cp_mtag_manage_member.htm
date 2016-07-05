@@ -1,0 +1,306 @@
+<!--{template cp_mtag_manageheader}-->
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=manage&subop=member&tagid=$mtag[tagid]&memberid=$member[memberid]">
+	
+<h1>管理成员</h1>
+<br/>
+<table cellspacing="0" cellpadding="0" class="formtable" width="600px">
+	<tr>
+		<th width="150" nowrap>成员信息　： </th>
+		<td>				
+			<input type="hidden" id="memberid" name="memberid" value="$member[memberid]"/>
+			<input type="hidden" id="uid" name="uid" value="$member[uid]"/>
+			<input type="hidden" id="username" name="username" value="$member[username]"/>
+			<input type="hidden" id="realname" name="realname" value="$member[realname]"/>
+			<!--{if $member[membergradeid] == 9 }-->	
+			群主成员信息不能修改。
+			<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<td nowrap>&nbsp;</td>
+		<td>
+			<table id="user_space" width="100%" border=0>
+				<tr>
+					<td>
+						请确认 该成员 的ID编号：　
+						<input type="text" id="user_space_uid" name="user_space_uid" value="" size="8" maxlength="8" <!--{if $member[membergradeid] != 9 }-->	onchange="javascript:loadresumebyid_ajax();"<!--{else}--> READONLY <!--{/if}--> >
+						<!--{if $member[membergradeid] != 9 }-->	
+						<a href="#" onclick="javascript:resumequerymds();return false;">查询</a>
+						<!--{/if}-->
+					</td>
+				</tr>
+				<tr>
+					<td>
+						成员登陆名：　<input type="text" id="user_space_username" name="user_space_username" value="" style="border:0px;" READONLY/>
+						　
+						社团成员名：　<input type="text" id="user_space_realname" name="user_space_realname" value="" style="border:0px;" READONLY/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<!--{if $member[membergradeid] != 9}-->	
+						[<a href="#" onclick="javascript:displayInputType_user(false);return false;">没有查到该成员</a>]
+						<!--{/if}-->	
+					</td>
+				</tr>
+			</table>
+			<table id="user_nospace" width="100%">
+				<tr>
+					<td>
+						社团成员名：　<input type="text" id="user_nospace_realname" name="user_nospace_realname" value="" style="width: 200px;"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_user(true);return false;">重新确认 成员 的ID编号</a>]
+					</td>
+				</tr>
+			</table>
+			<br/>
+		</td>
+<script type="text/javascript">
+
+	initInputType_user();
+	
+	function initInputType_user() {
+		if($("memberid").value==""){
+			$("user_space_uid").value=$("uid").value;
+			$("user_space_username").value=$("username").value;
+			$("user_space_realname").value=$("realname").value;
+			displayInputType_user(true);
+		}	
+		else{
+			if($("uid").value!="" && $("uid").value!=0){
+				$("user_space_uid").value=$("uid").value;
+				$("user_space_username").value=$("username").value;
+				$("user_space_realname").value=$("realname").value;
+				
+				displayInputType_user(true);
+			}
+			else{
+				$("user_nospace_realname").value=$("realname").value;
+	
+				displayInputType_user(false);
+			}
+		}
+	}
+
+	function displayInputType_user(hasspace) {
+		if( hasspace == true ){
+			$("user_space").style.display="block";
+			$("user_nospace").style.display="none";
+		}
+		else{
+			$("user_space").style.display="none";
+			$("user_nospace").style.display="block";
+		}	
+	}
+
+	function setInputType_user() {
+		if( $("user_space").style.display=="block" ){
+			if($("user_space_uid").value==""){
+				alert("请输入该成员的ID编号！");
+				return false;
+			}
+			$("uid").value = $("user_space_uid").value;
+			$("username").value = $("user_space_username").value;
+			if($("user_space_realname").value==""){
+				$("realname").value = $("user_space_username").value;
+			}
+			else{
+				$("realname").value = $("user_space_realname").value;
+			}
+		}
+		if( $("user_nospace").style.display=="block" ){
+			if($("user_nospace_realname").value==""){
+				alert("请输入该成员的社团成员名！");
+				return false;
+			}
+			if ($("user_nospace_realname").value.length > 20) {
+				alert("社团成员名太长，请限制在20个字符内！");
+				return false;
+			}
+			$("uid").value = 0
+			$("username").value = "";
+			$("realname").value = $("user_nospace_realname").value;
+		}
+		return true;
+	}
+	
+	function resumequerymds(){
+		var args=new Object();
+		args.window=window;
+		
+		window.showModalDialog("cp.php?ac=resume&op=querymds&widget=user_space_uid&id="+$('user_space_uid').value,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+		loadresumebyid_ajax();
+	}
+	
+	function loadresumebyid_ajax(){
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+			
+		showloading();
+			
+		var form = $('ajaxform');
+	
+		form.action="cp.php?ac=resume&op=loadresumebyid_ajax&uid="+$('user_space_uid').value;
+		form.method="post";
+		
+		ajaxpost('ajaxform', 'loadresumebyid_ajax_response', 2000);
+	}
+
+	function loadresumebyid_ajax_response(){
+		
+		var uid="";
+		var username="";
+		var realname="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+			
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				$("user_space_uid").value="";
+				$("user_space_username").value="";
+				$("user_space_realname").value="";
+			}else{
+				uid=paramsArray[0];
+				username=paramsArray[1];
+				realname=paramsArray[2];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("user_space_uid").value=uid;
+		$("user_space_username").value=username;
+		$("user_space_realname").value=realname;
+	}
+
+</script>
+	</tr>
+	<tr>
+		<th width="150" nowrap>成员职务　：*</th>
+		<td align="left" >
+			<select name="memberclassid" id="memberclassid">
+				<option value="-1">请选择职务类型</option>
+				<!--{loop $memberclasslist $key $value}-->
+				<option value="$value[classid]"<!--{if $member[memberclassid] == $value[classid]}-->
+				selected<!--{/if}--> >$value[classname]</option>
+				<!--{/loop}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th width="150" nowrap>成员介绍：</th>
+		<td align="left" >
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="introduce" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$member[introduce]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	<tr>
+		<th width="150" nowrap>&nbsp;</th>
+		<td align="left" >
+			如果不填写该成员介绍，系统会从该成员的自我介绍采集该信息。
+		</td>
+	</tr>
+	<tr>
+		<th width="150" nowrap>成员权限　：*</th>
+		<td align="left" >
+			<select name="membergradeid" id="membergradeid" onchange="javascript:displayGradeDescription()">
+				<!--{if $member[membergradeid] == 9}-->
+					<!--{loop $membergradelist $key $value}-->
+					<!--{if $value[classid]==9}-->
+					<option value="$value[classid]"<!--{if $member[membergradeid] == $value[classid]}-->
+						selected<!--{/if}--> >$value[classname]</option>
+					<!--{/if}-->
+					<!--{/loop}-->
+				<!--{else}-->
+					<option value="-1">请选择权限类型</option>
+					<!--{loop $membergradelist $key $value}-->
+					<!--{if $value[classid]<9}-->
+						<option value="$value[classid]"<!--{if $member[membergradeid] == $value[classid]}-->
+						selected<!--{/if}--> >$value[classname]</option>
+					<!--{/if}-->
+					<!--{/loop}-->
+				<!--{/if}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th width="150" nowrap valign="top">权限类型描述&nbsp;&nbsp;</th>
+		<td id="memberGradeDescription" name="memberGradeDescription" align="left" valign="top">请选择权限类型</td>
+	</tr>
+</table>
+<br/><br/>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+<input type="button" value="保存修改" class="submit" onclick="javascript:postmember();"/>	
+<input type="button" value="放弃修改" class="submit" onclick="javascript:revertmember();"/>	
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+	var memberGradeDescriptionArray=new Array();
+	var key;
+	var value;
+	<!--{loop $membergradelist $value}-->
+	key='$value[classid]';
+	value='$value[description]';
+	memberGradeDescriptionArray[key]=value;
+	<!--{/loop}-->
+
+	function displayGradeDescription() {
+		var selIndex=$('membergradeid').value;
+		if(selIndex=='-1'){
+			$('memberGradeDescription').innerHTML="请选择权限类型";
+		}else{
+			$('memberGradeDescription').innerHTML=memberGradeDescriptionArray[selIndex];
+		}	
+	}
+
+	function postmember(){
+		// 成员
+		var uservalid = setInputType_user();
+		if (uservalid == false) {
+			return false;
+		}
+
+		if($("memberclassid").value=="-1"){
+			alert("请选择成员职务！");
+			$("memberclassid").focus();
+			return;
+		}
+
+		
+		// 编辑器内容同步
+		edit_save();
+		
+		if($("membergradeid").value=="-1"){
+			alert("请选择权限类型！");
+			$("membergradeid").focus();
+			return;
+		}
+
+		$("actionform").submit();
+	}
+
+	function revertmember(){
+		location.href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=members";
+	}
+
+	//init
+	if($('membergradeid').value!="-1"){
+		displayGradeDescription();
+	}
+	
+</script>
+</form>
+<!--{template cp_mtag_managefooter}-->

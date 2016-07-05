@@ -1,0 +1,71 @@
+<!--{eval $_TPL['titles'] = array('举报中心');}-->
+<!--{template header}-->
+
+<h2 class="title"><img src="image/icon/report.gif" />举报中心</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+		<!--{if empty($activereportitemid) }-->
+			<li$actives[needprocess]><a href="space.php?do=report&view=needprocess"><span>未关闭的举报</span></a></li>
+			<li$actives[me]><a href="space.php?do=report&view=me"><span>我的举报</span></a></li>
+			<!--{if $_SGLOBAL['member']['system']==99}-->
+			<li$actives[all]><a href="space.php?do=report&view=all"><span>全部举报</span></a></li>
+			<!--{/if}-->
+		<!--{else}-->
+			<li class="active"><a href="#"><span>当前举报</span></a></li>
+			<li><a href="space.php?do=report"><span>未关闭的举报</span></a></li>
+		<!--{/if}-->
+	</ul>
+</div>
+
+<div id="content">
+	<!--{if empty($activereportitemid) }-->	
+		<div class="h_status">
+			举报状态：<br/>
+			<span class="pipe">|</span>
+			<a href="space.php?do=report&view=$_GET[view]&idtype=$_GET[idtype]" $processstate_actives[all]>全部</a>
+			<span class="pipe">|</span>
+			<a href="space.php?do=report&view=$_GET[view]&idtype=$_GET[idtype]&processstate=0" $processstate_actives[0]>还未处理</a>
+			<span class="pipe">|</span>
+			<a href="space.php?do=report&view=$_GET[view]&idtype=$_GET[idtype]&processstate=1" $processstate_actives[1]>举报确认中</a>
+			<span class="pipe">|</span>
+			<a href="space.php?do=report&view=$_GET[view]&idtype=$_GET[idtype]&processstate=2" $processstate_actives[2]>举报处理中</a>
+			<span class="pipe">|</span>
+			<a href="space.php?do=report&view=$_GET[view]&idtype=$_GET[idtype]&processstate=3" $processstate_actives[3]>等待用户反馈</a>
+			<span class="pipe">|</span>
+			<!--{if $_GET[view]!='needprocess'}-->
+			<a href="space.php?do=report&view=$_GET[view]&idtype=$_GET[idtype]&processstate=4" $processstate_actives[4]>已关闭</a>
+			<span class="pipe">|</span>
+			<!--{/if}-->
+		</div>
+	<!--{/if}-->
+
+	<!--{template space_reportitem_list}-->
+</div>
+
+<div id="sidebar">
+	<!--{if empty($activereportitemid) }-->	
+		<div class="sidebox">
+			<h2 class="title">举报分类</h2>
+			<ul class="post_list line_list">
+				<li $pro_actives[all]><a href="space.php?do=report&view=$_GET[view]">全部</a>
+				<li $pro_actives[toneid]><a href="space.php?do=report&view=$_GET[view]&idtype=toneid&processstate=$_GET[processstate]">声线基地</a></li>
+				<li $pro_actives[topicid]><a href="space.php?do=report&view=$_GET[view]&idtype=topicid&processstate=$_GET[processstate]">广播剧场</a></li>
+				<li $pro_actives[coverid]><a href="space.php?do=report&view=$_GET[view]&idtype=coverid&processstate=$_GET[processstate]">乐虫翻唱</a></li>
+				<li $pro_actives[videoid]><a href="space.php?do=report&view=$_GET[view]&idtype=videoid&processstate=$_GET[processstate]">视频映像</a></li>
+				<li $pro_actives[tagid]><a href="space.php?do=report&view=$_GET[view]&idtype=tagid&processstate=$_GET[processstate]">圈子群组</a></li>
+				<li $pro_actives[threadid]><a href="space.php?do=report&view=$_GET[view]&idtype=threadid&processstate=$_GET[processstate]">群组话题</a></li>
+				<li $pro_actives[postid]><a href="space.php?do=report&view=$_GET[view]&idtype=postid&processstate=$_GET[processstate]">话题回复</a></li>
+				<li $pro_actives[eventid]><a href="space.php?do=report&view=$_GET[view]&idtype=eventid&processstate=$_GET[processstate]">招募活动</a></li>
+				<li $pro_actives[blogid]><a href="space.php?do=report&view=$_GET[view]&idtype=blogid&processstate=$_GET[processstate]">树洞日记</a></li>
+				<li $pro_actives[repasteid]><a href="space.php?do=report&view=$_GET[view]&idtype=repasteid&processstate=$_GET[processstate]">欢乐转帖</a></li>
+				<li $pro_actives[pollid]><a href="space.php?do=report&view=$_GET[view]&idtype=pollid&processstate=$_GET[processstate]">鸡血投票</a></li>
+				<li $pro_actives[albumid]><a href="space.php?do=report&view=$_GET[view]&idtype=albumid&processstate=$_GET[processstate]">相册合辑</a></li>
+				<li $pro_actives[picid]><a href="space.php?do=report&view=$_GET[view]&idtype=picid&processstate=$_GET[processstate]">图片资源</a></li>
+				<li $pro_actives[shareid]><a href="space.php?do=report&view=$_GET[view]&idtype=shareid&processstate=$_GET[processstate]">分享交流</a></li>
+				<!-- li $pro_actives[$value[uid]]><a href="space.php?do=report&view=$_GET[view]&idtype=uid">虫虫窝</a></li-->
+				<li $pro_actives[commentid]><a href="space.php?do=report&view=$_GET[view]&idtype=commentid&processstate=$_GET[processstate]">ＹＹ评论</a></li>
+			</ul>
+		</div>
+	<!--{/if}-->
+</div>
+<!--{template footer}-->

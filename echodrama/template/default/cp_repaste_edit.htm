@@ -1,0 +1,116 @@
+<script language="javascript" src="image/editor/editor_function.js"></script>
+
+<h2 class="title"><img src="image/app/repaste.gif" />欢乐转帖</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+		<!--{if $repaste[repasteid]}-->
+		<li class="active"><a href="cp.php?ac=repaste&repasteid=$repaste[repasteid]"><span>编辑转帖</span></a></li>
+		<!--{/if}-->
+		<li<!--{if empty($repaste[repasteid])}--> class="active"<!--{/if}-->><a href="cp.php?ac=repaste"><span>发表新转帖</span></a></li>
+		<li><a href="space.php?uid=$space[uid]&do=repaste&view=me"><span>返回我的转帖</span></a></li>
+	</ul>
+</div>
+
+<div class="c_form">
+
+	<form id="actionform" name="actionform" method="post" action="cp.php?ac=repaste&op=save&repasteid=$repaste[repasteid]">
+		<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+			<tr>
+				<td nowrap>
+					&nbsp;分类*&nbsp;
+					<select name="classid" id="classid">
+						<option value="0">选择分类</option>
+						<!--{loop $_SGLOBAL[repasteclass] $key $value}-->
+							<option value="$key"<!--{if $repaste[classid] == $key}-->
+							selected<!--{/if}--> >$value[classname]</option>
+						<!--{/loop}-->
+					</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;主题*&nbsp;
+					<input type="text" class="t_input" id="subject" name="subject" value="$repaste[subject]" size="85" onblur="relatekw();" />
+				</td>
+			</tr>
+			<tr>
+				<td nowrap>
+					&nbsp;来源&nbsp;&nbsp;&nbsp;
+					<!--{if empty($repaste[repasteid])}-->
+						<input type="text" class="t_input" id="url" name="url" value="http://" size="110" onblur="relatekw();" />
+					<!--{else}-->
+						<input type="text" class="t_input" id="url" name="url" value="$repaste[url]" size="110" onblur="relatekw();" />
+					<!--{/if}-->
+				</td>
+			</tr>
+			<tr>
+				<td class="gray" nowrap>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请以http://开头
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<a id="doodleBox" href="magic.php?mid=doodle&showid=repaste_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+				<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$repaste[message]</textarea>
+				<iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="400"></iframe>
+				</td>
+			</tr>
+		</table>
+		<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+			<tr>
+				<th width="100">标签</th>
+				<td><input type="text" class="t_input" size="40" id="tag" name="tag" value="$repaste[tag]"> <input type="button" name="clickbutton[]" value="自动获取" class="button" onclick="relatekw();"></td>
+			</tr>
+			<!--{if checkperm('managerepaste')}-->
+			<tr>
+				<th width="100">热度</th>
+				<td>
+					<input type="text" class="t_input" name="hot" id="hot" value="$repaste[hot]" size="5">
+				</td>
+			</tr>
+			<!--{/if}-->
+			<tr>
+				<th width="100">动态选项</th>
+				<td>
+					<input type="checkbox" name="makefeed" id="makefeed" value="1"<!--{if ckprivacy('repaste', 1)}--> checked<!--{/if}-->> 产生动态 (<a href="cp.php?ac=privacy#feed" target="_blank">更改默认设置</a>)
+				</td>
+			</tr>			
+		</table>
+		<input type="hidden" name="repastesubmit" value="true" />
+		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+		<input type="button" id="repastebutton" name="repastebutton" value="保存" onclick="javascript:save()" class="submit" />
+	</form>
+</div>
+
+<script language="javascript">
+
+function save() {
+	// 标题
+	if ($("classid").value==0) {
+		alert("转帖分类不能为空！");
+		$("classid").focus();
+		return false;
+	}
+	
+	// 标题
+	if ($("subject").value.trim() == "") {
+		alert("标题不能为空！");
+		$("subject").focus();
+		return false;
+	} else if ($("subject").value.trim().length > 80) {
+		alert("标题太长，请限制在80个字符内！");
+		$("subject").focus();
+		return false;
+	}
+
+	//url
+	if ($("url").value.trim() != "") {
+		if($("url").value.indexOf("http://")!=0){
+			alert("转帖来源请以http://开头！");
+			$("url").focus();
+			return false;
+		}
+	} 
+
+	// 编辑器内容同步
+	edit_save();
+
+	$("actionform").submit();
+}
+</script>

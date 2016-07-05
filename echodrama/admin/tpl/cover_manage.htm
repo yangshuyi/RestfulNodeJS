@@ -1,0 +1,18 @@
+<div class="mainarea">
+<div class="maininner">
+<h2 class="title"><img src="image/app/cover.gif" />翻唱</h2>
+<div class="tabs_header">
+<ul class="tabs">
+	<li <!--{if $_GET['subop'] == 'manage'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=cover&op=manage&subop=manage&coverid=$cover[coverid]"><span>管理翻唱</span></a></li>
+	<li><a href="admincp.php?ac=cover"><span>返回翻唱列表</span></a></li>
+</ul>
+</div>
+
+<!--{if $_GET['subop'] == 'manage'}-->
+
+	<!--{template admin/tpl/cover_manage_manage}-->
+
+<!--{/if}-->
+
+</div>
+</div>

@@ -1,0 +1,42 @@
+<div id="searchbar" class="nbox s_clear">
+	<div class="search">
+		<form id="topicsearchform" name="topicsearchform" method="get" action="space.php?do=topic&view=single" target="_blank">
+		<table width="97%" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+           		<td align="left" nowrap>
+					广播剧标签：
+					<!--{loop $topiclabel_hot_list $value}-->
+						<a href="space.php?do=topic&view=single&label=$value[label]&orderby=t.dateline DESC" target="_blank">$value[label]</a><span style="color:#ff8e02;">&nbsp;|&nbsp;</span>
+					<!--{/loop}-->
+				</td>
+           		<td align="right" nowrap>
+					<input type="hidden" id="do" name="do" value="topic" />
+					<input type="hidden" id="view" name="view" value="single" />
+					<input type="text" id="subject" name="subject" value="查找广播剧" onfocus="javascript:topic_search_onfocus();" onblur="javascript:topic_search_onblur();" class="t_input" style="color:gray;" tabindex="1" style="width: 160px; border-right: none;" />
+					<input name="button" type="submit" class="searchbnt" id="button" value="搜索" onclick="javascript:topic_search();"/>
+				</td>
+         	</tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	//检查提交
+	function topic_search() {
+		$('topicsearchform').submit();
+	}
+
+	function topic_search_onfocus() {
+		if($('subject').value=="查找广播剧"){
+			$('subject').value="";
+			$('subject').style.color="black";
+		}
+	}
+
+	function topic_search_onblur() {
+		if($('subject').value==""){
+			$('subject').value="查找广播剧";
+			$('subject').style.color="gray";
+		}
+	}
+</script>

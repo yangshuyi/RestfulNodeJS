@@ -6,15 +6,15 @@ export class AppInfo {
     menus:Object = [
         {
             name: 'Redis Manager',
-            routerLink: '/RedisManager'
+            routerLink: '/redisManager'
         },
         {
             name: 'MongoDB Manager',
-            routerLink: '/MongoDBManager'
+            routerLink: '/mongoDBManager'
         },
         {
             name: 'Bootstrap',
-            routerLink: '/Bootstrap'
+            routerLink: '/bootstrap'
         }
     ]
 }

@@ -1,0 +1,253 @@
+<div class="affiche">
+	<div class="block style4" >
+		<table width="100%" cellspacing="5" cellpadding="5" class="formtable">
+			<tr>
+				<td align="left">
+					<br/>
+					<em style="font-size:20px;font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;开心农场欢迎您</em>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<table width="100%" cellspacing="0" cellpadding="0" border=1>
+						<tr>
+							<td align="left" colspan="4">
+								<h2><u>你的虫虫账户:</u></h2>
+							</td>
+							<td align="right" nowrap>
+								<a href="/bbs/viewthread.php?assignfid=17&tid=3784" title="开心农场问题讨论区" target="_blank">开心农场问题讨论区</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="left" width="70px">用户名　：</td>
+							<td align="left" width="200px">{$spaceinfo[username]} [ {$spaceinfo[name]} ] </td>
+							<td align="left" width="70px">可用积分：</td>
+							<td align="left" width="150px">
+								<img src="image/credit.gif">
+								<span style="color:red;font-size:14px;">$spaceinfo[credit]</span>
+								<input type="hidden" id="credit" name="credit" value="$spaceinfo[credit]">
+							</td>
+							<td align="left">
+								&nbsp;
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<form id="edit_form" name="edit_form" method="post" action="cp.php?ac=myfarm&op=exchange">
+					<table width="100%" cellspacing="0" cellpadding="0" border=1>
+						<input type="hidden" id="money" name="money" value="$myfarm[money]"/>
+						<input type="hidden" id="fb" name="fb" value="$myfarm[fb]"/>
+						<tr>
+							<td align="left" colspan="2">
+								<h2><u>你的农场账户:</u></h2>
+							</td>
+							<td align="right" colspan="3">
+								<h2>
+									<u>虫虫积分 对 农场积分 汇率:</u>
+									<span style="color:red;font-size:14px;">1:2</span>
+									<input type="hidden" id="exchangerate_credit_money" name="exchangerate_credit_money" value="2">
+									<u>虫虫积分 对 农场Ｆ币 汇率:</u>
+									<span style="color:red;font-size:14px;">1:0.05</span>
+									<input type="hidden" id="exchangerate_credit_fb" name="exchangerate_credit_fb" value="0.05">
+								</h2>
+								<span style="color:red;">记得是向下取整哦，大家要用计算器算算。</span>
+							</td>
+						</tr>
+						<tr>
+							<td align="left" width="70px">目前积分：</td>
+							<td align="left" width="200px">
+								<img src="image/credit.gif">
+								<span style="color:red;font-size:14px;">$myfarm[money]</span>
+							</td>
+							<td align="left" colspan="3" nowrap>
+								将虫虫积分　<input type="text" id="exchange_credit_money_creditamount" name="exchange_credit_money_creditamount" size="5" maxlength="5" value="0" onchange="javascript:enter_exchange_credit_money_creditamount();"/>　兑换成　 
+								农场积分　<input type="text" id="exchange_credit_money_moneyamount" name="exchange_credit_money_moneyamount" size="5" maxlength="5" value="0" READONLY/>　
+								<input type="button" id="exchangesubmit" name="exchangesubmit" class="submit" value="兑换" onclick="javascript:exchangepost('exchange_credit_money');"/>
+							</td>
+						</tr>
+						<tr>
+							<td align="left" width="70px">目前Ｆ币：</td>
+							<td align="left" width="200px">
+								<img src="image/credit.gif">
+								<span style="color:red;font-size:14px;">$myfarm[fb]</span>
+							</td>
+							<td align="left" colspan="3" nowrap>
+								将虫虫积分　<input type="text" id="exchange_credit_fb_creditamount" name="exchange_credit_fb_creditamount" size="5" maxlength="5" value="0" onchange="javascript:enter_exchange_credit_fb_creditamount();"/>　兑换成　 
+								Ｆ币　　　<input type="text" id="exchange_credit_fb_fbamount" name="exchange_credit_fb_fbamount" size="5" maxlength="5" value="0" READONLY/>　
+								<input type="button" id="exchangesubmit" name="exchangesubmit" class="submit" value="兑换" onclick="javascript:exchangepost('exchange_credit_fb');"/>
+							</td>
+						</tr>
+						<tr>
+							<td align="left" colspan="2">
+								&nbsp;
+							</td>
+							<td align="right" colspan="3">
+								<h2>
+									<u>农场积分 对 虫虫积分 汇率:</u>
+									<span style="color:red;font-size:14px;">10:1</span>
+									<input type="hidden" id="exchangerate_money_credit" name="exchangerate_money_credit" value="0.1">
+									<u>虫虫积分 对 农场Ｆ币 汇率:</u>
+									<span style="color:red;font-size:14px;">20:1</span>
+									<input type="hidden" id="exchangerate_fb_credit" name="exchangerate_fb_credit" value="20">
+								</h2>
+								<span style="color:red;">记得是向下取整哦，大家要用计算器算算。</span>
+							</td>
+						</tr>
+						<tr>
+							<td align="left" width="70px">目前积分：</td>
+							<td align="left" width="200px">
+								<img src="image/credit.gif">
+								<span style="color:red;font-size:14px;">$myfarm[money]</span>
+							</td>
+							<td align="left" colspan="3" nowrap>
+								将农场积分　<input type="text" id="exchange_money_credit_moneyamount" name="exchange_money_credit_moneyamount" size="5" maxlength="5" value="0" onchange="javascript:enter_exchange_money_credit_moneyamount();"/>　兑换成　 
+								虫虫积分　<input type="text" id="exchange_money_credit_creditamount" name="exchange_money_credit_creditamount" size="5" maxlength="5" value="0" READONLY/>　
+								<input type="button" id="exchangesubmit" name="exchangesubmit" class="submit" value="兑换" onclick="javascript:exchangepost('exchange_money_credit');"/>
+							</td>
+						</tr>
+						<tr>
+							<td align="left" width="70px">目前Ｆ币：</td>
+							<td align="left" width="200px">
+								<img src="image/credit.gif">
+								<span style="color:red;font-size:14px;">$myfarm[fb]</span>
+							</td>
+							<td align="left" colspan="3" nowrap>
+								将Ｆ币　　　<input type="text" id="exchange_fb_credit_fbamount" name="exchange_fb_credit_fbamount" size="5" maxlength="5" value="0" onchange="javascript:enter_exchange_fb_credit_fbamount();"/>　兑换成　 
+								虫虫积分　<input type="text" id="exchange_fb_credit_creditamount" name="exchange_fb_credit_creditamount" size="5" maxlength="5" value="0" READONLY/>　
+								<input type="button" id="exchangesubmit" name="exchangesubmit" class="submit" value="兑换" onclick="javascript:exchangepost('exchange_fb_credit');"/>
+							</td>
+						</tr>
+					</table>
+					<script type="text/javascript">
+						 function checkNumberError(String) { 
+						    var Letters = "1234567890";
+						     var i;
+						     var c;
+						     for( i = 0; i < String.length; i ++ )
+						     {
+						       c = String.charAt( i );
+						       if (Letters.indexOf( c ) ==-1)
+						       {
+						        return true;
+						       }
+						     }
+						     return false;
+						}
+											
+						function enter_exchange_credit_money_creditamount() {
+							var credit = $('exchange_credit_money_creditamount').value;
+							
+							if(checkNumberError(credit)){
+								alert("要兑换的虫虫积分必须为数字");
+								$('exchange_credit_money_creditamount').value=0;
+								$('exchange_credit_money_moneyamount').value=0;
+								return false;
+							}
+
+							if( (parseInt($('exchange_credit_money_creditamount').value)) > (parseInt($('credit').value)) ){
+								alert("虫虫积分透支啦");
+								$('exchange_credit_money_creditamount').value=0;
+								$('exchange_credit_money_moneyamount').value=0;
+								return false;
+							}
+
+							$('exchange_credit_money_moneyamount').value = $('exchange_credit_money_creditamount').value * $('exchangerate_credit_money').value;
+							return true;
+						}
+
+						function enter_exchange_credit_fb_creditamount() {
+							var credit = $('exchange_credit_fb_creditamount').value;
+							if(checkNumberError(credit)){
+								alert("要兑换的虫虫积分必须为数字");
+								$('exchange_credit_fb_creditamount').value=0;
+								$('exchange_credit_fb_fbamount').value=0;
+								return false;
+							}
+							if( (parseInt($('exchange_credit_fb_creditamount').value)) > (parseInt($('credit').value)) ){
+								alert("虫虫积分透支啦");
+								$('exchange_credit_fb_creditamount').value=0;
+								$('exchange_credit_money_moneyamount').value=0;
+								return false;
+							}
+
+							$('exchange_credit_fb_fbamount').value = $('exchange_credit_fb_creditamount').value * $('exchangerate_credit_fb').value;
+							return true;
+						}
+						         
+						function enter_exchange_money_credit_moneyamount() {
+							var money = $('exchange_money_credit_moneyamount').value;
+							
+							if(checkNumberError(money)){
+								alert("要兑换的农场积分必须为数字");
+								$('exchange_money_credit_moneyamount').value=0;
+								$('exchange_money_credit_creditamount').value=0;
+								return false;
+							}
+							if( (parseInt($('exchange_money_credit_moneyamount').value)) > (parseInt($('money').value)) ){
+								alert("农场积分透支啦");
+								$('exchange_money_credit_moneyamount').value=0;
+								$('exchange_money_credit_creditamount').value=0;
+								return false;
+							}
+
+							$('exchange_money_credit_creditamount').value = $('exchange_money_credit_moneyamount').value * $('exchangerate_money_credit').value;
+							return true;
+						}
+
+						function enter_exchange_fb_credit_fbamount() {
+							var credit = $('exchange_fb_credit_fbamount').value;
+							if(checkNumberError(credit)){
+								alert("要兑换的农场F币必须为数字");
+								$('exchange_fb_credit_fbamount').value=0;
+								$('exchange_fb_credit_creditamount').value=0;
+								return false;
+							}
+							if( (parseInt($('exchange_fb_credit_fbamount').value)) > (parseInt($('fb').value)) ){
+								alert("农场F币透支啦");
+								$('exchange_fb_credit_fbamount').value=0;
+								$('exchange_fb_credit_creditamount').value=0;
+								return false;
+							}
+
+							$('exchange_fb_credit_creditamount').value = $('exchange_fb_credit_fbamount').value * $('exchangerate_fb_credit').value;
+							return true;
+						}
+
+						function exchangepost( type ){
+							if( type == 'exchange_credit_money'){
+								if(!enter_exchange_credit_money_creditamount()){
+									return false;
+								}
+							}
+							else if( type == 'exchange_credit_fb'){
+								if(!enter_exchange_credit_fb_creditamount()){
+									return false;
+								}
+							}
+							else if( type == 'exchange_money_credit'){
+								if(!enter_exchange_money_credit_moneyamount()){
+									return false;
+								}
+							}
+							else if( type == 'exchange_fb_credit'){
+								if(!enter_exchange_fb_credit_fbamount()){
+									return false;
+								}
+							}
+							else {
+								alert("请选择操作类型");
+								return false;
+							}
+
+							$("edit_form").action="cp.php?ac=myfarm&op=exchange&subop="+type;
+							$("edit_form").submit();
+						}
+					</script>
+					</form>
+				</td>
+		</table>
+	</div>
+</div>

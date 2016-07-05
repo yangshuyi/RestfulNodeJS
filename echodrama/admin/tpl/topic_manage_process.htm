@@ -1,0 +1,152 @@
+<div class="c_form">
+<form id="actionform" name="actionform" method="post" action="" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]" /> 
+<input type="hidden" id="topicid" name="topicid" value="$topic[topicid]" />
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+
+
+<table cellspacing="5" cellpadding="5" width="100%" class="infotable" border=0>
+	<tr>
+		<td align="left">
+			<div class="block style4">
+			<table width="100%">
+				<tr>
+					<th>系统标识:</th><td>$topic[topicid]</td>
+					<th>编号　　:</th><td>$topic[dispnumber]</td>
+					<th>类型　　:</th><td>$topic[productclassname]</td>
+					<th>社团　　:</th><td>$topic[club]</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th><td>&nbsp;</td>
+					<th>论坛同步:</th><td><!--{if $topic[synthreadid]>0}-->有<!--{else}-->无<!--{/if}--></td>
+					<th>图片文件:</th><td><!--{if $topic[picexists]>0}-->有<!--{else}-->无<!--{/if}--></td>
+					<th>音频文件:</th><td><!--{if $topic[productexists]>0}-->有<!--{else}-->无<!--{/if}--></td>
+				</tr>
+			</table>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">修改MP3文件名：<span style="color:red;">$topic[productpath]</span></div>
+			<table width="100%">
+				<tr>
+					<th nowrap>新文件名:</th>
+					<td width="90%"><input id="newproduct" name="newproduct" type="text" value="$topic[product]" size="70"/></td>
+				</tr>
+				<tr>
+					<th>操作:</th>
+					<td>
+						<!--{if $topic[productexists]>0}-->
+						<a id="updateproductpathbtn" href="#" onclick="javascript:updateproductpath()">修改MP3文件名</a> 
+						<script type="text/javascript">
+							function updateproductpath() {
+								$("actionform").action="admincp.php?ac=topic&op=manage&subop=updateproductpath&topicid=$topic[topicid]";
+								$("actionform").submit();
+							}
+						</script>
+						<!--{/if}-->
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">删除剧照：<span style="color:red;">$topic[pic]</span></div>
+			<table width="100%">
+				<tr>
+					<th nowrap>操作:</th>
+					<td width="90%">
+						<!--{if $topic[picexists]>0}-->
+						<a id="deletepicbtn" href="#" onclick="javascript:deletepic()">删除剧照</a>
+						<script type="text/javascript">
+							function deletepic() {
+								$("actionform").action="admincp.php?ac=topic&op=manage&subop=deletepic&topicid=$topic[topicid]";
+								$("actionform").submit();
+							}
+						</script>
+						<!--{/if}-->
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">上传剧照：</div>
+			<table width="100%">
+				<tr>
+					<th nowrap>新剧照:</th>
+					<td width="90%">
+						<input type="file" id="newpic" name="newpic" value="" size="70"/>
+					</td>
+				</tr>
+				<tr>
+					<th>操作:</th>
+					<td>
+						<!--{if $topic[picexists]<=0}-->
+						<a id="uploadpicbtn" href="#" onclick="javascript:uploadpic()">上传剧照</a>
+						<script type="text/javascript">
+							function uploadpic() {
+								if($('newpic').value==""){
+									alert("剧照不能为空");
+									return;
+								}
+								
+								$("actionform").action="admincp.php?ac=topic&op=manage&subop=uploadpic&topicid=$topic[topicid]";
+								$("actionform").submit();
+							}
+						</script>
+						<!--{/if}-->
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">生成剧照Thumb：<span style="color:red;">$topic['picgenthumb']</span></div>
+			<table width="100%">
+				<tr>
+					<th nowrap>操作:</th>
+					<td width="90%">
+						<!--{if $topic[picgenthumbvalid]==0 }-->
+						<a id="genpicthumbbtn" href="#" onclick="javascript:genpicthumb()">生成剧照Thumb</a>
+						<script type="text/javascript">
+							function genpicthumb() {
+								$("actionform").action="admincp.php?ac=topic&op=manage&subop=genpicthumb&topicid=$topic[topicid]";
+								$("actionform").submit();
+							}
+						</script>
+						<!--{/if}-->
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">邮件测试</div>
+			<table width="100%">
+				<tr>
+					<th nowrap>操作:</th>
+					<td width="90%">
+						<a id="mailtestbtn" href="#" onclick="javascript:mailtest()">邮件测试</a>
+						<script type="text/javascript">
+							function mailtest() {
+								$("actionform").action="admincp.php?ac=topic&op=manage&subop=mailtest&topicid=$topic[topicid]";
+								$("actionform").submit();
+							}
+						</script>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+</form>
+</div>
+
+

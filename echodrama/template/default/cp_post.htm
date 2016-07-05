@@ -1,0 +1,133 @@
+<!--{template header}-->
+
+<!--{if $fansgrade>=3 || $fansgrade==0  }-->
+
+<!--{if $_GET['op'] == 'editpost'}-->
+
+
+<h1>编辑</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner" id="__editpostform_$post[pid]}">
+<form id="editpostform_$post[pid]" name="editpostform_$post[pid]" method="post" action="cp.php?ac=thread&op=savepost&pid=$post[pid]">
+<table>
+<tr>
+	<td>
+		<label for="message">编辑内容：</label>
+		<a href="###" id="editface_{$post[pid]}" onclick="showFace(this.id, 'message_{$post[pid]}');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
+		<img src="image/zoomin.gif" onmouseover="this.style.cursor='pointer'" onclick="zoomTextarea('message_{$post[pid]}', 1)">
+		<img src="image/zoomout.gif" onmouseover="this.style.cursor='pointer'" onclick="zoomTextarea('message_{$post[pid]}', 0)">
+		<br />
+		<textarea id="message_{$post[pid]}" name="message" cols="70" onkeydown="ctrlEnter(event, 'editsubmit_btn');" rows="8">$post[message]</textarea>
+			
+	</td>
+</tr>
+<tr>
+	<td>
+	<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+	<input type="hidden" name="tagid" value="$post[tagid]" />
+	<input type="hidden" name="editsubmit" value="true" />
+	<!--{if $_SGLOBAL[inajax]}-->
+	<input type="button" name="editsubmit_btn" id="editsubmit_btn" value="提交" class="submit" onclick="ajaxpost('editpostform_{$post[pid]}', 'post_edit', 2000)" />
+	<!--{else}-->
+	<input type="submit" name="editsubmit_btn" id="editsubmit_btn" value="提交" class="submit" />
+	<!--{/if}-->
+	</td>
+</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+</div>
+
+<!--{elseif $_GET['op'] == 'deletepost'}-->
+
+<h1>删除回复</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner" id="__deletepostform_{$post[pid]}">
+<form id="deletepostform_{$post[pid]}" name="deletepostform_{$post[pid]}" method="post" action="cp.php?ac=thread&op=deletepost&pid=$post[pid]">
+	<p>确定删除指定的回复吗？</p>
+	<p class="btn_line">
+		<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+		<input type="hidden" name="tagid" value="$post[tagid]" />
+		<!--{if $_SGLOBAL[inajax]}-->
+		<input type="hidden" name="deletesubmit" value="true" />
+		<input type="button" name="deletesubmit_btn" value="确定" class="submit" onclick="ajaxpost('deletepostform_{$post[pid]}', 'post_delete', 2000)" />
+		<!--{else}-->
+		<input type="submit" name="deletesubmit" value="确定" class="submit" />
+		<!--{/if}-->
+	</p>
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+</div>
+
+<!--{elseif $_GET['op'] == 'reply'}-->
+
+
+<h1>引用并回复</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner" id="__replypostform_{$post[pid]}">
+<form id="replypostform_{$post[pid]}" name="replypostform_{$post[pid]}" method="post" action="cp.php?ac=thread&op=savepost&pid=$post[pid]">
+	<table>
+		<tbody id="reply_msg_{$post[pid]}">
+			<tr>
+				<td>
+					<label for="message">内容：</label>
+					<a href="###" id="replyface_{$post[pid]}" onclick="showFace(this.id, 'message_pop_{$post[pid]}');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
+					<img src="image/zoomin.gif" onmouseover="this.style.cursor='pointer'" onclick="zoomTextarea('message_pop_{$post[pid]}', 1)">
+	
+					<img src="image/zoomout.gif" onmouseover="this.style.cursor='pointer'" onclick="zoomTextarea('message_pop_{$post[pid]}', 0)">
+	
+					<br />
+					<textarea id="message_pop_{$post[pid]}" name="message" onkeydown="ctrlEnter(event, 'postsubmit_btn');" rows="8" cols="70"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+					<input type="hidden" name="relatedpid" value="$post[pid]">
+					<input type="hidden" name="tid" value="$post[tid]" />
+					<input type="hidden" name="tagid" value="$post[tagid]" />
+					<input type="hidden" name="postsubmit" value="true" />
+					<!--{if $_SGLOBAL[inajax]}-->
+						<input type="button" name="postsubmit_btn" id="postsubmit_btn" value="回复" class="submit" onclick="ajaxpost('replypostform_{$post[pid]}', 'post_add', 2000)" />
+					<!--{else}-->
+						<input type="submit" name="postsubmit_btn" id="postsubmit_btn" value="回复" class="submit" />
+					<!--{/if}-->
+				</td>
+			</tr>
+		</tbody>
+		<tbody id="reply_doodle_{$post[pid]}" style="display: none">
+			<tr>
+				<td>
+					<object id="doodle_{$post[pid]}" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,45,0" width="438" height="304">
+						<param name="quality" value="high" />
+						<param name="allowScriptAccess" value="always" />
+						<param name="movie" value="image/doodle.swf?fid=reply_doodle_{$post[pid]}&oid=message_pop_{$post[pid]}&tid=reply_msg_{$post[pid]}" />
+						<embed src="image/doodle.swf?fid=reply_doodle_{$post[pid]}&oid=message_pop_{$post[pid]}&tid=reply_msg_{$post[pid]}" allowScriptAccess="always" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="438" height="304"></embed>
+					</object>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" name="back_btn" id="back_btn" value="返回" onclick="selpostTab('reply_doodle_{$post[pid]}', 'reply_msg_{$post[pid]}');" class="button" />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+</div>
+
+
+<!--{elseif $_GET['op'] == 'loadpost'}-->
+	<!--{loop $list $value}-->
+		<!--{template space_post_li}-->
+	<!--{/loop}-->
+<!--{/if}-->
+
+<!--{else}-->
+<div class="c_form">
+	你已被该群组屏蔽，不能参与话题讨论。
+</div>
+<!--{/if}-->
+
+<!--{template footer}-->

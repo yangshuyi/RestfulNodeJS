@@ -1,0 +1,105 @@
+<div class="mainarea">
+<div class="maininner">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[album]><a href="admincp.php?ac=topicalbum&op=list&view=album"><span>完结广播剧专辑列表</span></a></li>
+		<li$actives[order]><a href="admincp.php?ac=topicalbum&op=order&view=order"><span>定制排序显示方式</span></a></li>
+		<li class="null"><a href="admincp.php?ac=topicalbum&op=new">添加新专辑</a></li>
+	</ul>
+</div>
+
+<form id="actionform" name="actionform" method="get" action="admincp.php">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="20%">剧名</th>
+				<td width="20%"><input type="text" name="subject" value="$_GET[subject]" /></td>
+				<td width="20%"></td>
+				<th width="20%">所属社团</th>
+				<td width="20%"><input type="text" name="club" value="$_GET[club]" /></td>
+			</tr>
+			<tr>
+				<th>导演</th>
+				<td><input type="text" name="director" value="$_GET[director]" /></td>
+				<td></td>
+				<th>监制</th>
+				<td><input type="text" name="producer" value="$_GET[producer]" /></td>
+			</tr>
+			<tr>
+				<th>编剧</th>
+				<td><input type="text" name="writer" value="$_GET[writer]" /></td>
+				<td></td>
+				<th>Cast</th>
+				<td><input type="text" name="cast" value="$_GET[cast]" /></td>
+			</tr>
+			<tr>
+				<th>后期</th>
+				<td><input type="text" name="effector" value="$_GET[effector]" /></td>
+				<td></td>
+				<th>美工</th>
+				<td><input type="text" name="photographer" value="$_GET[photographer]" /></td>
+			</tr>
+			<tr>
+				<th>作品类型</th>
+				<td>
+					<select name="productclassid" id="productclassid">
+						<option value="-1"></option>
+						<!--{loop $_SGLOBAL[productclass] $key $value}-->
+						<option value="$key"<!--{if $_GET[productclassid] == $key}-->
+						selected<!--{/if}--> >$value[classname]</option>
+						<!--{/loop}-->
+					</select>
+				</td>
+				<td></td>
+				<td colspan="2" align="right">
+					<input type="hidden" name="ac" value="topicalbum" />
+					<input type="hidden" name="op" value="" />
+					<input type="hidden" name="view" value=$view />
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+<!--{if $list}-->
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	<div class="bdrcontent">
+	<!--{if $perpage>100}-->
+		<p>总共有满足条件的数据 <strong>$count</strong> 个</p>
+
+	<!--{else}-->
+		<table width="100%" cellspacing="0" cellpadding="0" class="formtable">
+		<tr>
+			<th align="center">专辑编号</th>
+			<th width="200" align="center" nowrap>剧名</th>
+			<th align="center">广播剧类型</th>
+			<th align="center">社团</th>
+			<th align="center">操作</th>
+		</tr>
+		<!--{loop $list $value}-->
+		<tr>
+			<td align="center">$value[topicid]</td>
+			<td><a href="space.php?do=topic&topicid=$value[topicid]" target="_blank">$value[subject]</a></td>
+			<td align="center">$value[productclassname]</td>
+			<td align="center">$value[club]</td>
+			<td align="center"><a href="admincp.php?ac=topicalbum&op=manage&topicalbumid=$value[topicid]" target="_blank">管理</a></td>
+		</tr>
+		<!--{/loop}-->
+		</table>
+	<!--{/if}-->
+		<div width="100%" class="pages">$multi</div>
+	</div>
+</form>
+<!--{else}-->
+	<div class="bdrcontent">
+		<p>指定条件下还没有数据</p>
+	</div>
+<!--{/if}-->
+</div>
+</div>
+
+<div id="flowDiv" class="flowDiv"></div>
+
+<script type="text/javascript">
+</script>

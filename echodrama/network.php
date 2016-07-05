@@ -1,0 +1,1 @@
+<?php include_once('./common.php'); include_once(S_ROOT.'./portal_index.php'); ?>

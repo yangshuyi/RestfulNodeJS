@@ -1,0 +1,119 @@
+<!--{eval $_TPL['titles'] = array('广播剧场');}-->
+<!--{template header}-->
+
+<!--{if !empty($_SGLOBAL[inajax])}-->
+	<div id="space_photo">
+		<h3 class="feed_header">
+			<a href="cp.php?ac=topic&op=new" class="r_option" target="_blank">上传广播剧</a>
+			收藏的广播剧
+		</h3>
+		<table cellspacing="4" cellpadding="4" width="100%">
+		<!--{loop $list $key $value}-->
+			<tr height="30px">
+				<td width="150px" align="center" valign="top" rowspan="2">
+					<!--{if $view=="single" }-->
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]"><img alt="$value[subject]" src="$value[picthumb]" width="100px" style="padding: 4px; background: #FFF; border: 1px solid #DDD;"/></a><br/>
+					<!--{/if}-->
+					<!--{if $view=="album" }-->
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]"><img alt="$value[subject]" src="$value[picthumb]" width="100px" style="padding: 4px; background: #FFF; border: 1px solid #DDD;"/></a><br/>
+					<!--{/if}-->
+					<!--{if $view=="share"}-->
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]"><img alt="$value[subject]" src="$value[picthumb]" width="100px" style="padding: 4px; background: #FFF; border: 1px solid #DDD;"/></a><br/>
+					<!--{/if}-->
+					<!--{if $view=="me"}-->
+						<a href="cp.php?ac=topic&op=edit&topicid=$value[topicid]" title="$value[subject]"><img alt="$value[subject]" src="$value[picthumb]" width="100px" style="padding: 4px; background: #FFF; border: 1px solid #DDD;"/></a><br/>
+					<!--{/if}-->
+				</td>
+				<td width="470px" colspan="2" align="left" valign="top">
+					<div class="title">
+						<span style="color: #EF9822; float:right; padding: 0px; margin: 0px 0px 0px 0px;">评级：$value[pollsum]</span>
+					</div>
+					<span class="gray">$value[typename]名：</span>
+					<!--{if $view=="single"}-->
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" class="event_title">$value[subject]</a> 
+					<!--{/if}-->
+					<!--{if $view=="album"}-->
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" class="event_title">$value[subject]</a> 
+					<!--{/if}-->
+					<!--{if $view=="share"}-->
+						<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" class="event_title">$value[subject]</a> 
+					<!--{/if}-->
+					<!--{if $view=="me"}-->
+						<a href="cp.php?ac=topic&op=edit&topicid=$value[topicid]" title="$value[subject]" class="event_title">$value[subject]</a> 
+					<!--{/if}-->
+					
+				</td>
+				<td width="24px" >&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="left" valign="top" class="gray">
+					<span class="gray">作品类型: </span>$value[productclassname]<br/>
+					<span class="gray">所属团队: </span>
+					<!--{if empty($value[clubtagid])}-->
+						$value[club]
+					<!--{else}-->
+						<a class="gray" href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a>
+					<!--{/if}-->
+					<br/>
+					<span class="gray">发布时间: </span>$value[producedate]<br/>
+				</td>
+				<td align="left" valign="top" class="gray">
+					<span class="gray">导演: </span>$value[director]<br/>
+					<span class="gray">编剧: </span>$value[writer]<br/>
+					<span class="gray">后期: </span>$value[effector]<br/>
+				</td>
+				<td>&nbsp;</td>
+			</tr>	
+			<tr>
+				<td align="center" class="gray" nowrap>
+					编号: $value[dispnumber]
+				</td>
+				<td colspan="2" align="left">
+					<!--{if $view=="single"}-->
+						<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[downloadnum]&nbsp;&nbsp;次下载,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+					<!--{/if}-->
+					<!--{if $view=="album"}-->
+						<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[downloadnum]&nbsp;&nbsp;次下载,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+					<!--{/if}-->
+					<!--{if $view=="share"}-->
+						<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[downloadnum]&nbsp;&nbsp;次下载,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+					<!--{/if}-->
+					<!--{if $view=="me"}-->
+						<span class="gray">目前状态&nbsp;[</span>&nbsp;$_SGLOBAL[topicauditclass][$value[auditstate]][classname]&nbsp;<span class="gray">]</span>
+					<!--{/if}-->
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr><td colspan="3" style="border-top:1px dashed #ECB2C5;" align="center" >&nbsp;</td><td>&nbsp;</td></tr>	
+		<!--{/loop}-->
+		</table>
+		<div class="footactions">
+			<div class="pages" align="right">$multi</div>
+		</div>
+	</div><br>
+<!--{else}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[single]><a href="space.php?do=topic&view=single"><span>广播剧列表</span></a></li>
+		<li$actives[album]><a href="space.php?do=topic&view=album"><span>完结专辑列表</span></a></li>
+		<li$actives[forecast]><a href="space.php?do=topic&view=forecast"><span>广播剧预告列表</span></a></li>
+		<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+			<li$actives[share]><a href="space.php?do=topic&view=share"><span>我的收藏列表</span></a></li>
+			<li$actives[me]><a href="space.php?do=topic&view=me"><span>待审核的广播剧</span></a></li>
+			<li class="null"><a href="cp.php?ac=topic&op=newforecast">提交广播剧预告</a></li>
+			<li class="null"><a href="cp.php?ac=topic&op=new">添加新广播剧</a></li>
+		<!--{/if}-->
+	</ul>
+</div>
+
+<!--{if $_GET[view] == 'forecast' }-->
+	<!--{template space_topic_list_forecast}-->
+<!--{else}-->
+	<!--{template space_topic_list_produce}-->
+<!--{/if}-->
+
+<!--{/if}-->			
+<!--{template footer}-->

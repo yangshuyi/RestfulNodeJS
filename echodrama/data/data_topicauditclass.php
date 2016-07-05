@@ -1,0 +1,24 @@
+<?php
+if(!defined('IN_UCHOME')) exit('Access Denied');
+$_SGLOBAL['topicauditclass']=Array
+	(
+	0 => Array
+		(
+		'classid' => 0,
+		'classname' => 'Î´ÉóºË',
+		'displayorder' => 1
+		),
+	1 => Array
+		(
+		'classid' => 1,
+		'classname' => 'ÉóºËÎ´Í¨¹ý',
+		'displayorder' => 2
+		),
+	2 => Array
+		(
+		'classid' => 2,
+		'classname' => 'ÉóºËÍ¨¹ý',
+		'displayorder' => 3
+		)
+	)
+?>

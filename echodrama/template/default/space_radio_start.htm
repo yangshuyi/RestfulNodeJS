@@ -1,0 +1,169 @@
+<div class="tabs_header" style="margin-bottom: 1px;">
+	<ul class="tabs">
+		<li id="program_intro_li" class="active"><a href="#" onclick="disp_module('program_intro');return false;"><span>节目介绍</span></a></li>
+		<li id="chatting_room_li" ><a href="#" onclick="disp_module('chatting_room');return false;"><span>聊天室</span></a></li>
+		<li id="program_forecast_li" ><a href="#" onclick="disp_module('program_forecast');return false;"><span>节目预告</span></a></li>
+	</ul>
+	<div class="r_option">
+		<a href="http://www.echodrama.com/bbs/viewthread.php?tid=5054" target="_blank">电台使用帮助</a>&nbsp;&nbsp;
+	</div>
+</div>
+
+<table id="program_intro_content" cellspacing="0" style="width:100%; height:100%; border: 1px solid #FF8901;">
+	<tr align="center" height="100%">
+		<td valign="middle" width="100%">
+			你好，欢迎进入应声虫网络电台。本次直播的节目是：《$radio[subject]》。
+			<br/>直播时间：<!--{date('Y-m-d H:i',$radio[starttime])}--> - <!--{date('Y-m-d H:i',$radio[endtime])}-->
+			<br/>
+			$radio[message]
+		</td>
+	</tr>
+</table>
+
+<table id="chatting_room_content" cellspacing="0" style="width:100%; height:100%; border: 1px solid #FF8901;">
+	<tr align="center"  height="100%">
+		<td>
+		    <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
+				 JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
+				 when JavaScript is disabled.
+			-->
+	        <div id="flashContent" style="width:100%;height:100%">
+	        	<p>
+		        	聊天室需要Adobe Flash Player 10的支持。<br/>
+		        	请点击链接由<a href='http://www.adobe.com/go/getflashplayer' target="_blank">官方</a>下载安装插件下面的按钮，由官方获得插件。<br/>
+		        	你也可以访问<a href="http://www.skycn.com/soft/5671.html" target="_blank">天空软件园</a>，自行下载安装。<br/>
+				</p>
+			 </div>
+		</td>
+	</tr>
+</table>
+
+<table id="program_forecast_content" cellspacing="0" style="width:100%; height:100%; border: 1px solid #FF8901;">
+	<tr align="center" height="100%">
+		<td valign="top" width="100%">
+<table cellspacing="0" border=0 style="width:100%;">
+	<tr>
+		<th colspan="2" nowrap style="border-bottom:  1px solid #FF8901;"><h2>节目预告</h2></th>
+	</tr>
+	<tr>
+		<td nowrap align="center">开始时间 ~ 结束时间</td>
+		<td nowrap align="center">节目名称</td>
+	</tr>
+	<!--{loop $radiolist['future'] $radio}-->
+	<tr onclick="if( $('radio_future_content_$radio[rid]').style.display=='none' ){$('radio_future_content_$radio[rid]').style.display='';}else{$('radio_future_content_$radio[rid]').style.display='none';};">
+		<td>$radio[starttimedisp] ~ $radio[endtimedisp]</td>
+		<td>$radio[subject]</td>
+	</tr>
+	<tr id="radio_future_content_$radio[rid]" style="display:block">
+		<td colspan="2" align="left">$radio[message]</td>
+	</tr>
+	<!--{/loop}-->
+	<tr>
+		<th>&nbsp;</th>
+	</tr>	
+	<tr>
+		<th colspan="2" nowrap style="border-bottom:  1px solid #FF8901;"><h2>过往精彩</h2></th>
+	</tr>
+	<tr>
+		<td nowrap align="center">开始时间 ~ 结束时间</td>
+		<td nowrap align="center">节目名称</td>
+	</tr>
+	<!--{loop $radiolist['history'] $radio}-->
+	<tr onclick="if( $('radio_history_content_$radio[rid]').style.display=='none' ){$('radio_history_content_$radio[rid]').style.display='';}else{$('radio_history_content_$radio[rid]').style.display='none';};">
+		<td>$radio[starttimedisp] ~ $radio[endtimedisp]</td>
+		<td>&nbsp;
+		<!--{if empty($radio[synthreadid])}-->
+			$radio[subject]
+		<!--{else}-->
+			<a class="gray" href="#" target="_blank">$radio[subject]</a>
+		<!--{/if}-->
+		</td>
+	</tr>
+	<tr id="radio_history_content_$radio[rid]" style="display:none">
+		<td colspan="2" align="left">$radio[message]</td>
+	</tr>
+	<!--{/loop}-->
+</table>
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+var disp_module_name = 'program_intro';
+
+
+function disp_module(moduleName){
+	if( moduleName == 'program_intro'){
+		disp_module_name = 'program_intro';
+		
+		$('program_intro_li').className="active";
+		$('chatting_room_li').className="";
+		$('program_forecast_li').className="";
+		
+		$('program_intro_content').style.display="";
+		$('chatting_room_content').style.display="none";
+		$('program_forecast_content').style.display="none";
+	}
+	if( moduleName == 'chatting_room'){
+		disp_module_name = 'chatting_room';
+		
+		$('program_intro_li').className="";
+		$('chatting_room_li').className="active";
+		$('program_forecast_li').className="";
+		
+		$('program_intro_content').style.display="none";
+		$('chatting_room_content').style.display="";
+		$('program_forecast_content').style.display="none";
+	}
+	if( moduleName == 'program_forecast'){
+		disp_module_name = 'program_forecast';
+		
+		$('program_intro_li').className="";
+		$('chatting_room_li').className="";
+		$('program_forecast_li').className="active";
+		
+		$('program_intro_content').style.display="none";
+		$('chatting_room_content').style.display="none";
+		$('program_forecast_content').style.display="";
+	}
+}
+
+disp_module('program_intro');
+
+function flash_check(){
+	var isIE  = (navigator.appVersion.indexOf("MSIE") != -1) ? true : false;
+	var description  ="";
+	var flashVersion = "";
+	if(isIE){
+		var flash=null;
+		try{
+			flash = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+		}
+		catch(ex){}	
+		if(flash){
+			description = flash.GetVariable('$version');
+			flashVersion = parseFloat(description.split(" ")[1].split(",")[0]);
+		}
+	}
+	else{
+		for (var i=0; i < navigator.plugins.length; i++)
+		{
+			if (navigator.plugins[i].name.toLowerCase().indexOf("shockwave flash") >= 0)
+			{
+				description = navigator.plugins[i].description;
+				var words = description.split(" ");
+			    for (var j = 0; j < words.length; ++j)
+				{
+					if ( parseFloat(words[j])>0 ){
+						flashVersion = parseFloat(words[j]);
+						break;
+					}
+				}
+			}
+		}
+	}
+	alert(flashVersion);
+}
+//flash_check();
+</script>
+

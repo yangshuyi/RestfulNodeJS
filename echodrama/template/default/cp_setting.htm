@@ -1,0 +1,296 @@
+<!--{template header}-->
+<!--{template cp_header}-->
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form method="post" action="cp.php?ac=setting&op=savesetting&uid=$space[uid]" class="c_form">
+<div align="center">
+<table width="700px" cellspacing="0" cellpadding="0" border=0>
+<tr height="30px">
+	<td align="left" nowrap><h2>应声虫设置</h2></td>
+	<td>
+		<span style="color:red"></span>
+	</td>
+	<td width="400px">
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;&raquo;自定义首页</th>
+	<td align="left" colspan="2" >
+		<input type="radio" id="loginsucessforwardflag" name="loginsucessforwardflag" value="0"<!--{if $space['loginsucessforwardflag']==0}--> checked<!--{/if}-->> 首页
+		<input type="radio" id="loginsucessforwardflag" name="loginsucessforwardflag" value="1"<!--{if $space['loginsucessforwardflag']==1}--> checked<!--{/if}-->> 广播剧门户
+		<input type="radio" id="loginsucessforwardflag" name="loginsucessforwardflag" value="2"<!--{if $space['loginsucessforwardflag']==2}--> checked<!--{/if}-->> 虫虫窝
+	</td>
+</tr>
+<!--{if 1==2}-->
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;&raquo;自定义快捷链接</th>
+	<td align="left" colspan="2" >
+		<span style="color:red">[注]自定义快捷链接 - 会把你设置的链接显示在首页的欢迎部分。</span>
+	</td>
+</tr>
+<tr height="30px">
+	<td align="left" colspan="3" >
+		<table border=0>
+			<tr height="25">
+				<td width="70" align="center"><h3>编号</h3></td><td width="300" align="center" colspan="2"><h3>名称</h3></td><td align="center"><h3>链接</h3></td>
+			</tr>
+			<tr height="25">
+				<td align="center">No.1</td><td align="center"><a href="#" onclick="javascript:selectdefaultquicklink(1);return false;">[系统设置]</a></td><td align="center"><input type="text" id="quicklink_name_1" name="quicklink_name_1" value="<!--{if empty($space[quicklink_name_1])}-->portal_topic.php<!--{else}-->$space[quicklink_name_1]<!--{/if}-->" class="t_input" size="30" maxlength="80"/></td><td><input type="text" id="quicklink_value_1" name="quicklink_value_1" value="<!--{if empty($space[quicklink_value_1])}-->portal_topic.php<!--{else}-->$space[quicklink_value_1]<!--{/if}-->" class="t_input" size="40" maxlength="80"/></td>
+			</tr>
+			<tr height="25">
+				<td align="center">No.2</td><td align="center"><a href="#" onclick="javascript:selectdefaultquicklink(2);return false;">[系统设置]</a></td><td align="center"><input type="text" id="quicklink_2" name="quicklink_name_2" value="<!--{if empty($space[quicklink_name_2])}-->portal_topic.php<!--{else}-->$space[quicklink_name_2]<!--{/if}-->" class="t_input" size="30" maxlength="80"/></td><td><input type="text" id="quicklink_value_2" name="quicklink_name_2" value="<!--{if empty($space[quicklink_value__2])}-->portal_topic.php<!--{else}-->$space[quicklink_value_2]<!--{/if}-->" class="t_input" size="40" maxlength="80"/></td>
+			</tr>
+			<tr height="25">
+				<td align="center">No.3</td><td align="center"><a href="#" onclick="javascript:selectdefaultquicklink(3);return false;">[系统设置]</a></td><td align="center"><input type="text" id="quicklink_name_3" name="quicklink_name_3" value="<!--{if empty($space[quicklink_name_3])}-->portal_topic.php<!--{else}-->$space[quicklink_name_3]<!--{/if}-->" class="t_input" size="30" maxlength="80"/></td><td><input type="text" id="quicklink_value_3" name="quicklink_value_3" value="<!--{if empty($space[quicklink_value_3])}-->portal_topic.php<!--{else}-->$space[quicklink_value_3]<!--{/if}-->" class="t_input" size="40" maxlength="80"/></td>
+			</tr>
+			<tr height="25">
+				<td align="center">No.4</td><td align="center"><a href="#" onclick="javascript:selectdefaultquicklink(4);return false;">[系统设置]</a></td><td align="center"><input type="text" id="quicklink_name_4" name="quicklink_name_4" value="<!--{if empty($space[quicklink_name_4])}-->portal_topic.php<!--{else}-->$space[quicklink_name_4]<!--{/if}-->" class="t_input" size="30" maxlength="80"/></td><td><input type="text" id="quicklink_value_4" name="quicklink_value_4" value="<!--{if empty($space[quicklink_value_4])}-->portal_topic.php<!--{else}-->$space[quicklink_value_4]<!--{/if}-->" class="t_input" size="40" maxlength="80"/></td>
+			</tr>
+			<tr height="25">
+				<td align="center">No.5</td><td align="center"><a href="#" onclick="javascript:selectdefaultquicklink(5);return false;">[系统设置]</a></td><td align="center"><input type="text" id="quicklink_name_5" name="quicklink_name_5" value="<!--{if empty($space[quicklink_name_5])}-->portal_topic.php<!--{else}-->$space[quicklink_name_5]<!--{/if}-->" class="t_input" size="30" maxlength="80"/></td><td><input type="text" id="quicklink_value_5" name="quicklink_value_5" value="<!--{if empty($space[quicklink_value_5])}-->portal_topic.php<!--{else}-->$space[quicklink_value_5]<!--{/if}-->" class="t_input" size="40" maxlength="80"/></td>
+			</tr>
+			<tr height="25">
+				<td align="center">No.6</td><td align="center"><a href="#" onclick="javascript:selectdefaultquicklink(6);return false;">[系统设置]</a></td><td align="center"><input type="text" id="quicklink_name_6" name="quicklink_name_6" value="<!--{if empty($space[quicklink_name_6])}-->portal_topic.php<!--{else}-->$space[quicklink_name_6]<!--{/if}-->" class="t_input" size="30" maxlength="80"/></td><td><input type="text" id="quicklink_value_6" name="quicklink_value_6" value="<!--{if empty($space[quicklink_value_6])}-->portal_topic.php<!--{else}-->$space[quicklink_value_6]<!--{/if}-->" class="t_input" size="40" maxlength="80"/></td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<!--{/if}-->
+<tr height="30px">
+	<td colspan="2" align="center">
+		&nbsp;
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<td align="left" nowrap><h2>提示音设置</h2></td>
+	<td>
+		&nbsp;
+	</td>
+	<td width="400px">
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;&raquo;首页宣传提示音</th>
+	<td align="left">
+		<input type="radio" id="introflag" name="introflag" value="1"<!--{if $space['introflag']==1}--> checked<!--{/if}-->> 开启
+		<input type="radio" id="introflag" name="introflag" value="0"<!--{if $space['introflag']!=1}--> checked<!--{/if}-->> 关闭
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;&raquo;消息通知提示音</th>
+	<td align="left">
+		<input type="radio" id="notificationflag" name="notificationflag" value="1"<!--{if $space['notificationflag']==1}--> checked<!--{/if}-->> 开启
+		<input type="radio" id="notificationflag" name="notificationflag" value="0"<!--{if $space['notificationflag']!=1}--> checked<!--{/if}-->> 关闭
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<td colspan="2" align="center">
+		&nbsp;
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<td align="left" nowrap><h2>无病呻吟 至 新浪微博 同步设置</h2></td>
+	<td colspan="2">
+		<span style="color:red">[注]已支持表情文字同步。</span>
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;&raquo;开通同步</th>
+	<td align="left">
+		<input type="radio" id="t_sina_flag" name="t_sina_flag" value="1"<!--{if $space['t_sina_flag']==1}--> checked<!--{/if}-->> 开启
+		<input type="radio" id="t_sina_flag" name="t_sina_flag" value="0"<!--{if $space['t_sina_flag']!=1}--> checked<!--{/if}-->> 关闭
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;　新浪登录账号</th>
+	<td align="left">
+		<input type="text" id="t_sina_username" name="t_sina_username" value="$space[t_sina_username]" class="t_input"/>
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;　　　登录密码</th>
+	<td align="left">
+		<input type="text" id="t_sina_password" name="t_sina_password" value="$space[t_sina_password]" class="t_input"/>
+	</td>
+	<td align="center">
+		<input type="button" id="t_sina_testconnection" name="t_sina_testconnection" value="测试连接" class="submit" onclick="t_sina_test();"/>
+		<span id="t_sina_testconnection_status"></span>
+	</td>
+</tr>
+<tr height="30px">
+	<td align="left" nowrap><h2>无病呻吟 至 开心网（kaixin001) 同步设置</h2></td>
+	<td colspan="2">
+		<span style="color:red">[注]暂时不支持表情同步。</span>
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;&raquo;开通同步</th>
+	<td align="left">
+		<input type="radio" id="t_kaixin001_flag" name="t_kaixin001_flag" value="1"<!--{if $space['t_kaixin001_flag']==1}--> checked<!--{/if}-->> 开启
+		<input type="radio" id="t_kaixin001_flag" name="t_kaixin001_flag" value="0"<!--{if $space['t_kaixin001_flag']!=1}--> checked<!--{/if}-->> 关闭
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;　开心网登录账号</th>
+	<td align="left">
+		<input type="text" id="t_kaixin001_username" name="t_kaixin001_username" value="$space[t_kaixin001_username]" class="t_input"/>
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;　　　　登录密码</th>
+	<td align="left">
+		<input type="text" id="t_kaixin001_password" name="t_kaixin001_password" value="$space[t_kaixin001_password]" class="t_input"/>
+	</td>
+	<td align="center">
+		<input type="button" id="t_kaixin001_testconnection" name="t_kaixin001_testconnection" value="测试连接" class="submit" onclick="t_kaixin001_test();"/>
+		<span id="t_kaixin001_testconnection_status"></span>
+	</td>
+</tr>
+<tr height="30px">
+	<td colspan="2" align="center">
+		&nbsp;
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<td align="left" nowrap><h2>手机版-应声虫设置</h2></td>
+	<td>
+		<span style="color:red"></span>
+	</td>
+	<td width="400px">
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<th align="left" nowrap>&nbsp;&nbsp;&raquo;页面效果设置</th>
+	<td align="left">
+		<input type="radio" id="mobilequantityflag" name="mobilequantityflag" value="0"<!--{if $space['mobilequantityflag']==0}--> checked<!--{/if}-->> 一般
+		<input type="radio" id="mobilequantityflag" name="mobilequantityflag" value="1"<!--{if $space['mobilequantityflag']==1}--> checked<!--{/if}-->> 高质量
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr height="30px">
+	<td colspan="2" align="center">
+		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+		<input type="submit" name="settingsubmit" value="保存" class="submit"/>
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+</table>
+</div>
+</form>
+<script type="text/javascript">
+	function selectdefaultquicklink( index ){
+		
+	}
+	
+	function t_sina_test() {
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+					
+		showloading();
+					
+		var form = $('ajaxform');
+			
+		form.action="cp.php?ac=setting&op=t_sina_testconnection&t_sina_username="+$('t_sina_username').value+"&t_sina_password="+$('t_sina_password').value;
+		form.method="post";
+				
+		ajaxpost('ajaxform', 't_sina_test_ajax_response', 2000);
+	}
+
+	function t_sina_test_ajax_response(){
+		var status="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+					
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				$("t_sina_testconnection_status").innerHTML="";
+			}else{
+				status=paramsArray[0];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("t_sina_testconnection_status").innerHTML=status;
+	}
+
+	function t_kaixin001_test() {
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+					
+		showloading();
+					
+		var form = $('ajaxform');
+			
+		form.action="cp.php?ac=setting&op=t_kaixin001_testconnection&t_kaixin001_username="+$('t_kaixin001_username').value+"&t_kaixin001_password="+$('t_kaixin001_password').value;
+		form.method="post";
+				
+		ajaxpost('ajaxform', 't_kaixin001_test_ajax_response', 2000);
+	}
+
+	function t_kaixin001_test_ajax_response(){
+		var status="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+					
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				$("t_kaixin001_testconnection_status").innerHTML="";
+			}else{
+				status=paramsArray[0];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("t_kaixin001_testconnection_status").innerHTML=status;
+	}
+</script>
+<!--{template footer}-->

@@ -1,0 +1,225 @@
+<!--{template header}-->
+<!--{template cp_header}-->
+<div id="mainarea">
+<SCRIPT LANGUAGE="JavaScript">
+	<!--
+	function getbyid(id) {
+	if (document.getElementById) {
+		return document.getElementById(id);
+	} else if (document.all) {
+		return document.all[id];
+	} else if (document.layers) {
+		return document.layers[id];
+	} else {
+		return null;
+	}
+}
+	function menuChange(menu) {
+	var tabobj = getbyid("menutabs");
+	var aobj = tabobj.getElementsByTagName("a");
+	for(i=0; i<aobj.length; i++) {
+		aobj[i].className = '';
+	}
+	getbyid(menu+"tabs").className = 'current';
+	var obj=document.getElementById(menu); 
+	hidediv();
+	obj.style.display="block"; 
+} 
+
+function hidediv() {
+	var musiclist=document.getElementById('musiclist'); 
+		musiclist.style.display="none";
+	var musicadd=document.getElementById('musicadd'); 
+		musicadd.style.display="none";
+	var musicconfig=document.getElementById('musicconfig'); 
+		musicconfig.style.display="none";
+}
+//-->
+</SCRIPT>
+
+	<style>
+	form { margin: 0; padding: 0; }
+
+	.tabs_music { border-bottom: 1px solid #EBE7D3; padding-bottom: 27px; padding-left: 5px; margin: 0 10px; }
+	.tabs_music a, .tabs_music span { float: left; padding: 0 5px; border: 1px solid #EBE7D3;  margin-right: 5px; text-decoration: none; height: 26px; line-height: 26px; background: #FFF; }
+	.tabs_music a.current, .tabs_music span.current { color: #B1770A !important; font-weight: bold; cursor: default; border-bottom: 1px solid #F8F5E5; background: #F8F5E5 !important; }
+	#mainarea .tabs_music a:hover { color: #B1770A; background: transparent; }
+
+
+.block { margin: 0 10px 10px; }
+	.block th { padding: 5px; vertical-align: top; padding-top: 7px; border-bottom: 1px solid #EBE7D3; font-weight: normal; }
+		.block th .help { float: right; font-weight: normal; text-decoration: none; background: #6C6; color: #FFF; padding: 0 0.2em; }
+		.block th em { color: #B1770A; font-style: normal; }
+	.block td { padding: 5px; border-bottom: 1px solid #EBE7D3; }
+	.block p { margin: 0.3em 0; font-size: 12px; }
+		.block td th, .block td td { border: none; }
+	.block h3 { font-size: 1.17em; margin: 8px 0 0; line-height: 1.6em; border-bottom: 1px solid #EBE7D3; color: #B1770A; }
+
+	form { margin: 0; padding: 0; }
+
+	input, textarea { font-family: Arial, Helvetica, sans-serif, "宋体"; font-size: 12px; border:1px solid #A1A1A1; padding: 0.4em;}
+	input:focus, textarea:focus, input.focus, textarea.focus { background-color: #FFF; background-position: 0 -300px; border-color: #00B800; }
+	input[type="radio"] { padding: 0; border: none; }
+
+	</style>
+
+	<!--nav strat-->
+	<div id="menutabs" class="tabs_music">
+		<a href="javascript:menuChange('musicadd');" id="musicaddtabs">添加音乐</a>
+		<a href="javascript:menuChange('musiclist');" id="musiclisttabs" class="current">当前播放列表</a>
+		<a href="javascript:menuChange('musicconfig');" id="musicconfigtabs">播放器配置</a>
+	</div>
+	<!--nav end-->
+
+	<!--musicconfig strat-->
+	<div id="musicconfig" name="musicconfig" style="display:none">
+	  <form method="post" name="theform" id="theform" action="cp.php?ac=music" enctype="multipart/form-data" class="block">
+	   <table width="95%" align="center" border="0" cellspacing="2" cellpadding="2">
+         <!--   <tr>
+	      <td>跨页面播放</td>
+	      <td>$passpage(选中将跨页面播放,并且面板其他设置项目将无效)（此项调整中，暂不开放）</td>
+
+           </tr> -->
+           <tr>
+	      <td>显示模式</td>
+	      <td>$usershowmod</td>
+	    </tr>
+
+	    <tr>
+
+	      <td>开始模式</td>
+	      <td> $userautomod</td>
+	    </tr>
+	    <tr>
+	      <td>播放模式</td>
+	      <td>$usershuffle</td>
+
+	    </tr>
+
+	    $box_color
+
+
+	    <tr>
+	      <td colspan="2"><div align="center"><input name="action" type="hidden" id="action" value="config">
+	          <button type="submit" name="musicsubmit" class="submit" value="true">保存当前面板设置</button></div></td>
+	    </tr>
+	  </table>
+	  <input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	  </form>
+	  </div>
+	<!--musicconfig end-->
+
+	<!--musicadd strat-->
+	  <div id="musicadd" name="musicadd" style="display:none">
+	  <script type="text/javascript">
+		function $(id) {
+			return document.getElementById(id);
+		}
+		function addMenu() {
+			newnode = $("tb_menu_new").rows[0].cloneNode(true);
+			tags = newnode.getElementsByTagName('input');
+			for(i in tags) {
+				tags[i].value = '';
+			}
+			$("tb_menu_new").appendChild(newnode);
+		}
+
+		function exchangeNode(obj, opId) {
+			var currentlyNode = obj.parentNode.parentNode.parentNode;
+			var opIndex = parseInt(currentlyNode.id);
+			var opNode = aimNode = '';
+			var aimId = 0;
+			if(opId == 1) {
+				aimId = opIndex+1;
+				if($('thetable').rows[aimId] == undefined) {
+					alert("节点到最后");
+					return false;
+				}
+			} else {
+				aimId = opIndex-1;
+				if(aimId == 0) {
+					alert("节点到最前");
+					return false;
+				}
+			}
+			opNode = currentlyNode.rows[0].cloneNode(true);
+			aimNode = $('thetable').rows[aimId].parentNode;
+			var caimNode = aimNode.rows[0].cloneNode(true);
+			aimNode.removeChild(aimNode.rows[0]);
+			aimNode.appendChild(opNode);
+			currentlyNode.removeChild(currentlyNode.rows[0]);
+			currentlyNode.appendChild(caimNode);
+		}
+
+		function delMenu(obj) {
+			if($("tb_menu_new").rows.length > 1) {
+				$("tb_menu_new").removeChild(obj.parentNode.parentNode);
+			} else {
+				alert('最后一行不允许删除');
+			}
+		}
+	</script>
+
+	  <form method="post" name="theformmp3add" id="theformmp3add" action="cp.php?ac=music" enctype="multipart/form-data" class="block">
+		 <table width="95%" align="center" border="0" cellspacing="2" cellpadding="2">
+		   <tr>
+		     <td>
+		      <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0">
+		  	  <tr><td>注意:仅支持mp3格式添加,即:必须是以http://开始，以.mp3结尾</td></tr>
+
+		       <tbody id="tb_menu_new">
+		         <tr>
+		           <td>
+		             <table width="95%" align="center" border="0" cellspacing="0" cellpadding="0">
+		               <tr>
+		                 <td colspan="2"><hr size="1" color="#EEEEEE" /></td>
+		               </tr>
+		               <tr>
+		                 <td>mp3地址</td>
+
+		                 <td><input type="text" name="mp3url[]" value="" size="60" maxlength="200" /></td>
+		               </tr>
+		               <tr>
+		                 <td>曲目名</td>
+		                 <td><input type="text" name="mp3name[]" size="20" maxlength="30" />
+		                   为空则自动生成名字</td>
+		               </tr>
+		               <tr>
+
+		                 <td>封面</td>
+		                 <td><input type="text" name="cdbj[]" value="" size="60" maxlength="200" />
+		                     <br />
+		                   完整模式才有效果，建议选择60*60的jpg图片</td>
+		               </tr>
+		           </table></td>
+		           <td><a href="javascript:;" onclick="delMenu(this)"> 删除</a></td>
+
+		         </tr>
+		       </tbody>
+		     </table>
+		     </td>
+		   </tr>
+		   <tr>
+		     <td><div align="center">
+		       <input name="action" type="hidden" id="action" value="addlist" />
+		       <button type="submit" name="addone" class="submit" onclick="addMenu();return false;">再加一个音乐</button>&nbsp;
+			
+		       <button type="submit" name="musicsubmit" class="submit" value="true">提交保存</button>
+			   <input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+			</div></td>
+		   </tr>
+		 </table>
+	   </form>
+	 </div>
+	<!--musicadd end-->
+
+	<!--musiclist start-->
+	<div id="musiclist" name="musiclist" style="display:block;">
+	$mp3_list
+	</div>
+	<!--musiclist end-->
+
+
+
+</div>
+<!--{template footer}-->

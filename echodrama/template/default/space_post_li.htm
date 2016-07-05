@@ -1,0 +1,47 @@
+<!--{if empty($ajax_edit)}--><div id="post_$value[pid]_li"><!--{/if}-->
+<ul class="post_ul">
+	<li>
+	<table width="100%">
+	<tr>
+		<td width="70" valign="top" align="center">
+			<!--{if $value[fakeflag]==1 }-->
+				<div class="myavatar48"><!--{avatar(0,small)}--></div>
+			<!--{else}-->
+				<div class="myavatar48"><a href="space.php?uid=$value[uid]"><!--{avatar($value[uid],small)}--></a></div>
+			<!--{/if}-->
+		</td>
+		<td>
+			<div class="title">
+				<div class="r_option">
+					<span class="pipe">|</span>
+					<!--{if ( ( $fansgrade >= 3 OR $fansgrade==0 ) AND ($value[uid]==$_SGLOBAL[supe_uid]) ) }-->
+						<a href="cp.php?ac=thread&op=editpost&pid=$value[pid]" id="p_$value[pid]_edit" onclick="ajaxmenu(event, this.id, 1)">±à¼­</a>
+						<span class="pipe">|</span>
+					<!--{/if}-->
+					<!--{if ( $membergrade >= 8 OR $value[uid]==$_SGLOBAL[supe_uid]) }-->
+						<a href="cp.php?ac=thread&op=deletepost&pid=$value[pid]" id="p_$value[pid]_delete" onclick="ajaxmenu(event, this.id)">ÆÁ±Î</a>
+						<span class="pipe">|</span>
+					<!--{/if}-->
+					<!--{if ( ( $fansgrade >= 3 OR $fansgrade==0 ) AND $value[uid]!=$_SGLOBAL[supe_uid] ) }-->
+						<a href="cp.php?ac=thread&op=reply&pid=$value[pid]" id="p_$value[pid]_reply" onclick="ajaxmenu(event, this.id, 1);">ÒýÓÃ</a> 
+						<span class="pipe">|</span>
+					<!--{/if}-->
+					<span class="gray">#$value[number]</span>
+				</div>
+				<!--{if $value[fakeflag]==1 }-->
+					$value[fakename]
+				<!--{else}-->
+					<a href="space.php?uid=$value[uid]">$value[username]</a> 
+				<!--{/if}-->					
+				<span class="gray"><!--{date('Y-m-d H:i',$value[dateline],1)}--></span>
+			</div>
+			<div class="detail" id="detail_$value[pid]">
+				$value[message]
+				<!--{if $value[pic]}--><div><a href="$value[pic]" target="_blank"><img src="$value[pic]" class="resizeimg" /></a></div><!--{/if}-->
+			</div>
+		</td>
+	</tr>
+	</table>
+	</li>
+</ul>
+<!--{if empty($ajax_edit)}--></div><!--{/if}-->

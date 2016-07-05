@@ -1,0 +1,212 @@
+<!--{eval $_TPL['titles'] = array($repaste['subject'], '转帖');}-->
+<!--{template header}-->
+
+<!--{if $space[self]}-->
+<h2 class="title"><img src="image/app/repaste.gif" />欢乐转帖</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+		<!--{if $space[friendnum]}--><li$actives[we]><a href="space.php?uid=$space[uid]&do=$do&view=we"><span>好友最新转帖</span></a></li><!--{/if}-->
+		<li class="active"><a href="space.php?uid=$space[uid]&do=$do&view=me"><span>我的转帖</span></a></li>
+		<li><a href="space.php?uid=$space[uid]&do=$do&view=click"><span>我踩过的转帖</span></a></li>
+		<li><a href="space.php?uid=$space[uid]&do=$do&view=all"><span>大家的转帖</span></a></li>
+		<li class="null"><a href="cp.php?ac=repaste">发表新转帖</a></li>
+	</ul>
+	<!--{if $_SGLOBAL[refer]}-->
+	<div class="r_option">
+		<a  href="$_SGLOBAL[refer]">&laquo; 返回上一页</a>
+	</div>
+	<!--{/if}-->
+</div>
+<!--{else}-->
+<!--{eval
+	$_TPL['spacetitle'] = "转帖";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有转帖</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=repaste&id=$repaste[repasteid]\">查看转帖</a>";
+}-->
+<!--{template space_menu}-->
+<!--{/if}-->
+
+<script type="text/javascript" charset="$_SC[charset]" src="source/script_calendar.js"></script>
+
+<div class="entry" style="padding:0 0 10px;">
+
+	<div class="title">
+		<h1<!--{if $repaste[magiccolor]}--> class="magiccolor$repaste[magiccolor]"<!--{/if}-->>$repaste[subject]</h1>
+		<!--{if $repaste[hot]}--><span class="hot"><em>热</em>$repaste[hot]</span><!--{/if}-->
+		<!--{if $repaste['friend']}-->
+		<span class="r_option locked gray">
+		<a href="space.php?uid=$space[uid]&do=$do&view=me&friend=$repaste[friend]" class="gray">{$friendsname[$value[friend]]}</a>
+		</span>
+		<!--{/if}-->
+		<!--{if $repaste[viewnum]}--><span class="gray">已有 $repaste[viewnum] 次阅读</span><!--{/if}-->
+		&nbsp; <span class="gray"><!--{date('Y-m-d H:i',$repaste[dateline],1)}--></span>
+		<!--{if $repaste[tag]}-->
+		&nbsp; <a href="space.php?uid=$repaste[uid]&do=tag">标签</a>:&nbsp;
+		<!--{loop $repaste[tag] $tagid $tagname}-->
+		<a href="space.php?uid=$repaste[uid]&do=tag&id=$tagid">$tagname</a>&nbsp;
+		<!--{/loop}-->
+		<!--{/if}-->
+	</div>
+
+
+	<div id="repaste_article" class="article <!--{if $repaste[magicpaper]}--> magicpaper$repaste[magicpaper]<!--{/if}-->">
+		<div class="resizeimg">
+			<div class="resizeimg2">
+			<div class="resizeimg3">
+			<div class="resizeimg4">
+			<!--{if $_SGLOBAL['ad']['rightside']}-->
+			<div style="float: right; padding:5px;"><!--{ad/rightside}--></div>
+			<!--{/if}-->
+			$repaste[message]
+			</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div style="padding:0 0 10px;">
+	<div style="text-align: right; padding-top:10px; ">
+		<a href="cp.php?ac=share&type=repaste&id=$repaste[repasteid]" id="a_share" onclick="ajaxmenu(event, this.id, 1)" class="a_share">分享</a>
+
+		<!--{if $_SGLOBAL[supe_uid] == $repaste[uid]}-->
+		<a href="cp.php?ac=repaste&repasteid=$repaste[repasteid]&op=edit">编辑</a><span class="pipe">|</span>
+		<a href="cp.php?ac=repaste&repasteid=$repaste[repasteid]&op=delete" id="repaste_delete_$repaste[repasteid]" onclick="ajaxmenu(event, this.id)">删除</a><span class="pipe">|</span>
+		<!--{/if}-->
+		<!--{if checkperm('managerepaste')}-->
+		<a href="cp.php?ac=repaste&repasteid=$repaste[repasteid]&op=edithot" id="repaste_hot_$repaste[repasteid]" onclick="ajaxmenu(event, this.id)">热度</a><span class="pipe">|</span>
+		<!--{/if}-->
+		<a href="cp.php?ac=common&op=report&idtype=repasteid&id=$repaste[repasteid]" id="a_report" onclick="ajaxmenu(event, this.id, 1)">举报</a>
+	</div>
+
+</div>
+
+<div id="content">
+
+	<div id="click_div">
+		<!--{template space_click}-->
+	</div>
+
+	<div class="comments" id="div_main_content">
+		<h2>
+			<a href="#quickcommentform_{$id}" class="r_option">发表评论</a>
+			评论 (<span id="comment_replynum">$repaste[replynum]</span> 个评论)</h2>
+		<div class="page">$multi</div>
+		<div class="comments_list" id="comment">
+			<ul id="comment_ul">
+			<!--{loop $list $value}-->
+				<!--{template space_comment_li}-->
+			<!--{/loop}-->
+			</ul>
+		</div>
+		<div class="page">$multi</div>
+
+		<form id="quickcommentform_{$id}" name="quickcommentform_{$id}" action="cp.php?ac=comment" method="post" class="quickpost">
+
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<a href="###" id="comment_face" title="插入表情" onclick="showFace(this.id, 'comment_message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
+						<!--{if $_SGLOBAL['magic']['doodle']}-->
+						<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
+						<!--{/if}-->
+						<br />
+						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="hidden" name="refer" value="space.php?uid=$repaste[uid]&do=$do&id=$id" />
+						<input type="hidden" name="id" value="$id">
+						<input type="hidden" name="idtype" value="repasteid">
+						<input type="hidden" name="commentsubmit" value="true" />
+						<input type="button" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="评论" onclick="ajaxpost('quickcommentform_{$id}', 'comment_add')" />
+						<div id="__quickcommentform_{$id}"></div>
+					</td>
+				</tr>
+			</table>
+		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" /></form>
+		<br />
+	</div>
+
+</div>
+
+
+<div id="sidebar" style="padding-top:20px;">
+	<!--{if $otherlist}-->
+	<div class="sidebox">
+		<h2 class="title">
+			<a href="space.php?uid=$repaste[uid]&do=repaste&view=me" class="r_option">全部</a>
+			作者的其他最新转帖
+		</h2>
+		<ul class="news_list">
+			<!--{loop $otherlist $value}-->
+			<li style="height:auto;"><a href="space.php?uid=$value[uid]&do=repaste&id=$value[repasteid]">$value[subject]</a></li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	<!--{/if}-->
+
+	<!--{if $newlist}-->
+	<div class="sidebox">
+	<h2 class="title">热门转帖导读</h2>
+		<ul class="news_list">
+			<!--{loop $newlist $value}-->
+			<li style="height:auto;"><a href="space.php?uid=$value[uid]" style="font-weight:bold;">{$_SN[$value[uid]]}</a>: <a href="space.php?uid=$value[uid]&do=repaste&id=$value[repasteid]">$value[subject]</a></li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	<!--{/if}-->
+
+	<!--{if $repaste['related']}-->
+	<!--{loop $repaste['related'] $appid $values}-->
+	<div class="sidebox">
+	<h2 class="title">您可能感兴趣的<!--{if $_SGLOBAL[app][$appid][name]}-->({$_SGLOBAL[app][$appid][name]})<!--{/if}--></h2>
+		<ul class="news_list">
+			<!--{loop $values['data'] $value}-->
+			<li style="height:auto;">$value[html]</li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	<!--{/loop}-->
+	<!--{/if}-->
+	
+</div>
+
+
+<script type="text/javascript">
+<!--
+function closeSide2(oo) {
+	if($('sidebar').style.display == 'none'){
+		$('content').style.cssText = '';
+		$('sidebar').style.display = 'block';
+		oo.innerHTML = '&raquo; 关闭侧边栏';
+	}
+	else{
+		$('content').style.cssText = 'margin: 0pt; width: 810px;';
+		$('sidebar').style.display = 'none';
+		oo.innerHTML = '&laquo; 打开侧边栏';
+	}
+}
+function addFriendCall(){
+	var el = $('friendinput');
+	if(!el || el.value == "")	return;
+	var s = '<input type="checkbox" name="fusername[]" value="'+el.value+'" id="'+el.value+'" checked>';
+	s += '<label for="'+el.value+'">'+el.value+'</label>';
+	s += '<br />';
+	$('friends').innerHTML += s;
+	el.value = '';
+}
+resizeImg('repaste_article','700');
+resizeImg('div_main_content','450');
+
+//彩虹炫
+var elems = selector('div[class~=magicflicker]'); 
+for(var i=0; i<elems.length; i++){
+	magicColor(elems[i]);
+}
+
+-->
+</script>
+
+<!--{template footer}-->

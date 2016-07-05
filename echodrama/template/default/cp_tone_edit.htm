@@ -1,0 +1,143 @@
+<div class="c_form">
+<form id="edit_form" name="edit_form" method="post" action="cp.php?ac=tone&op=edit&toneid=$toneid" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]"/>
+<input type="hidden" id="toneid" name="toneid" value="$tone[toneid]"/>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+	<tr>
+		<th width="100">声线编号</th>
+		<td>$tone[toneid]</td>
+	</tr>
+	<tr>
+		<th width="100">作品</th>
+		<td>
+			<!--{if $tone[fileexists]}-->
+			<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="510" height="20">
+	           	<param name="movie" value="swf/2.swf?file=$tone[mp3path]&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100">
+		        <param name="quality" value="high">
+			  	<param value="transparent" name="wmode">
+	           	<embed src="swf/2.swf?file=$tone[mp3path]&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="510" height="20">
+  		 	</object>  
+  		 	<!--{else}-->	
+  		 		对不起，该作品已被删除。
+  			<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<th width="100">声线类型 *</th>
+		<td><select name="classid" id="classid">
+			<option value="-1">请选择声线类型</option>
+			<!--{loop $_SGLOBAL[toneclass] $key $value}-->
+			<option value="$key"<!--{if $tone[classid] == $key}-->
+			selected<!--{/if}--> >$value[classname]</option>
+			<!--{/loop}-->
+		</select></td>
+	</tr>
+	<tr>
+		<th width="150">标签</th>
+		<td><input type="text" id="label" name="label" value="$tone[label]" class="t_input" size="80" maxlength="100" /></td>
+	</tr>
+	<tr>
+		<th width="100">&nbsp;</th>
+		<td>请用"/"分隔标签关键字</td>
+	</tr>
+	<tr>
+		<th width="100">作品说明*</th>
+		<td>
+			<textarea id="description" name="description" rows="8" cols="80" maxlength="500">$tone[description]</textarea>
+		</td>
+	</tr>
+	<tr>
+		<th width="100">作品来源</th>
+		<td>
+			<textarea id="source" name="source" rows="8" cols="80" maxlength="500">$tone[source]</textarea>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="checkbox" name="makefeed" id="makefeed" value="1" checked> 产生动态 
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+			<input type="button" name="tonesubmit" value="发布" class="submit" onclick="check_tonepost();"/>
+			<input type="button" name="tonedelete" value="删除" class="submit" onclick="check_tonedelete();"/>
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/></form>
+</div>
+
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+
+	//检查删除
+	function check_tonedelete() {
+		if(confirm("你确定要删除该声线吗？")){
+			$("edit_form").action="cp.php?ac=tone&op=delete&toneid=$toneid";
+			$("edit_form").submit();
+		}
+	}
+
+	//检查提交
+	function check_tonepost() {
+
+		//声线类型
+		if (parseInt($("classid").value) < 0) {
+			alert("声线类型必须选择。");
+			$("classid").focus();
+			return false;
+		}
+
+		if (parseInt($("classid").value) < 0) {
+			alert("声线标签必须选择。");
+			$("label").focus();
+			return false;
+		} else if ($("label").value.trim().length > 80) {
+			alert("标签太长，请限制在80个字符内！");
+			$("label").focus();
+			return false;
+		}
+
+		//作品说明
+		if ($("description").value.trim() == "") {
+			alert("作品说明不能为空！");
+			$("description").focus();
+			return false;
+		} else if ($("description").value.trim().length >= 500) {
+			alert("作品说明太长，请限制在500个字符内！");
+			$("description").focus();
+			return false;
+		}
+
+		//作品来源
+		if ($("source").value.trim().length > 80) {
+			alert("作品说明太长，请限制在80个字符内！");
+			$("source").focus();
+			return false;
+		}
+
+		//验证码
+		if ($('seccode')) {
+			var code = $('seccode').value;
+			var x = new Ajax();
+			x.get('cp.php?ac=common&op=seccode&code=' + code, function(s) {
+				s = trim(s);
+				if (s.indexOf('succeed') == -1) {
+					alert(s);
+					$('seccode').focus();
+					return false;
+				} else {
+					$("edit_form").submit();
+				}
+			});
+		} else {
+			$("edit_form").submit();
+		}
+	}
+</script>

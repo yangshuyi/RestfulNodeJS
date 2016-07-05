@@ -1,0 +1,64 @@
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<table cellspacing="0" cellpadding="5" border=0>
+	<tr height="50">
+	<!--{loop $advertisement[itemlist] $key $value}-->
+		<!--{if ($value[itemid] == $item[itemid]) OR empty($item[itemid])}-->
+		<td style="font-weight:700" nowrap>
+			<a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; background: none repeat scroll 0 0 #E5EDF2; border-color: #336699; color: #336699; "
+				href="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=edititem&tagid=$mtag[tagid]&advertisementid=$advertisement[advertisementid]&itemid=$value[itemid]&return=$_GET[return]">$value[tab_name]</a>
+			<!--{if $value[tab_index] > 1 AND !empty($value[itemid])  }-->
+			&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="javascript:deleteitem();return false;">É¾³ý</a>
+			<!--{/if}-->
+		</td>
+		<!--{else}-->
+		<td style="font-weight:700" nowrap>
+			<a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; background: none repeat scroll 0 0 #E5EDF2; border-color: #336699; color: #336699; "
+				href="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=edititem&tagid=$mtag[tagid]&advertisementid=$advertisement[advertisementid]&itemid=$value[itemid]&return=$_GET[return]">$value[tab_name]</a>
+			<!--{if $value[tab_index] > 1 AND !empty($value[itemid])  }-->
+			&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="javascript:deleteitem();return false;">É¾³ý</a>
+			<!--{/if}-->
+		</td>
+		<!--{/if}-->
+	<!--{/loop}-->
+		<td align="left" nowrap>
+			<div class="addbuttonouterdiv"><div class="addbuttoninnerdiv"><a href="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=selectitemclass&tagid=$tagid&advertisementid=$advertisementid&return=$_GET[return]" class="addbutton">ÐÂÔöÒ³Ç©</a></div></div>
+		</td>
+	</tr>
+</table>
+<div style="border:1px solid #ccc;">
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=saveitem&tagid=$mtag[tagid]&advertisementid=$advertisement[advertisementid]&itemid=$item[itemid]&return=$_GET[return]">
+<!--{if $item[tab_classid] == 1 }-->
+
+	<!--{template cp_mtag_manage_advertisement_edititem_classid1}-->
+
+<!--{elseif $item[tab_classid] == 2 }-->
+
+	<!--{template cp_mtag_manage_advertisement_edititem_classid2}-->
+	
+<!--{elseif $item[tab_classid] == 3 }-->
+
+	<!--{template cp_mtag_manage_advertisement_edititem_classid3}-->
+	
+<!--{elseif $item[tab_classid] == 4 }-->
+
+	<!--{template cp_mtag_manage_advertisement_edititem_classid4}-->
+	
+<!--{elseif $item[tab_classid] == 5 }-->
+
+	<!--{template cp_mtag_manage_advertisement_edititem_classid5}-->
+	
+<!--{elseif $item[tab_classid] == 6 }-->
+
+	<!--{template cp_mtag_manage_advertisement_edititem_classid6}-->
+	
+<!--{elseif $item[tab_classid] == 99 }-->
+
+	<!--{template cp_mtag_manage_advertisement_edititem_classid99}-->
+
+<!--{/if}-->	
+</form>
+</div>

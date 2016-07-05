@@ -1,0 +1,13 @@
+<h1>调整热度</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner">
+<form method="post" action="cp.php?ac=repaste&op=edithot&repasteid=$repasteid">
+	<p class="btn_line">
+		新的热度：<input type="text" name="hot" value="$repaste[hot]" size="5"> 
+		<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+		<input type="hidden" name="hotsubmit" value="true" />
+		<input type="submit" name="btnsubmit" value="确定" class="submit" />
+	</p>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+</div>

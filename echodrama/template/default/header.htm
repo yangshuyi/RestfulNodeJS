@@ -1,0 +1,218 @@
+<!--{if empty($_SGLOBAL['inajax'])}-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>
+<!--{if empty($userdefined_headertitle)}-->
+	<!--{if $_TPL['titles']}--><!--{loop $_TPL['titles'] $value}--><!--{if $value}-->$value - <!--{/if}--><!--{/loop}--><!--{/if}--><!--{if $_SN[$space[uid]]}-->{$_SN[$space[uid]]} - <!--{/if}-->$_SCONFIG[sitename]
+<!--{else}-->
+	$userdefined_headertitle
+<!--{/if}-->
+</title>
+<meta name="keywords" content="应声虫,耽美,广播剧,声优,CV,声线,SNS,社团,原创,现代,古风,同人,网配圈,配音,平台" />
+<!--{if empty($searchengine_description)}-->
+<meta name="description" content="应声虫,耽美,广播剧,声优,CV,声线,SNS,社团,原创,现代,古风,同人,网配圈,配音,平台" />
+<!--{else}-->
+<meta name="description" content="$searchengine_description" />
+<!--{/if}-->
+<meta name="baidu_union_verify" content="ebb067bc50f57e4e5e9bc1293a00937b" />
+<meta name="google-site-verification" content="xlL_34qsmOKAkj-8MnqnwdBmLqCxJ3Y87tVy7bL8u4E" />
+<meta http-equiv="content-type" content="text/html; charset=gbk" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_common.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_face.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+<style type="text/css">
+@import url(template/default/style.css);
+<!--{if $_TPL['css']}-->
+@import url(template/default/{$_TPL[css]}.css);
+<!--{/if}-->
+<!--{if !empty($_SGLOBAL['space_theme'])}-->
+@import url(theme/$_SGLOBAL[space_theme]/style.css);
+<!--{elseif $_SCONFIG[template] != 'default'}-->
+@import url(template/$_SCONFIG[template]/style.css);
+<!--{/if}-->
+<!--{if !empty($_SGLOBAL['space_css'])}-->
+$_SGLOBAL[space_css]
+<!--{/if}-->
+</style>
+<link rel="shortcut icon" href="image/favicon.ico" />
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="xmlrpc.php?rsd=$space[uid]" />
+
+<script type="text/javascript">
+if (/msie/i.test (navigator.userAgent)){ //only override IE
+    document.nativeGetElementById = document.getElementById;
+    document.getElementById = function(id){
+		var elem = document.nativeGetElementById(id);
+		if(elem){
+		    //make sure that it is a valid match on id
+		    if(elem.tagName && elem.tagName == "META"){
+		    	//otherwise find the correct element
+				for(var i=1;i<document.all[id].length;i++){
+					return document.all[id][i];
+				}
+		    }
+		    else{
+			    return elem;
+		    }
+		}
+		return null;
+	};
+}
+</script>
+</head>
+<body>
+
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<table class="top" border="0" cellspacing="0" cellpadding="0">
+   	<tr>
+   		<td>
+   			<div class="logo"><a href="http://www.echodrama.com"><img src="template/default/image/portal/logo.jpg"/></a></div>
+   			<div class="myinf">
+				<!--{if $_SGLOBAL[supe_uid]}-->
+	       		<table border="0" cellspacing="0" cellpadding="0">
+	       			<tr>
+	            		<td style="padding: 0 3px;" nowrap class="black"><a href="space.php?uid=$_SGLOBAL[supe_uid]" class="loginuser_thumb"><!--{avatar($_SGLOBAL[supe_uid])}--></a></td>
+	            		<td style="padding: 0 3px;" nowrap class="black"><a href="space.php?uid=$_SGLOBAL[supe_uid]">{$_SGLOBAL[username]}</a></td>
+	            		<td style="padding: 0 3px;" nowrap class="black"><img src="image/credit.gif"/></td>
+	            		<td style="padding: 0 3px;" nowrap class="black"><a href="cp.php?ac=credit" style="font-size:11px;padding:0 0 0 5px;" class="titlea">{$_SGLOBAL[member][credit]}</a><span class="darkyellow">&nbsp;|&nbsp;</span></td>
+						<td style="padding: 0 3px;" nowrap class="black">
+							<!--{if (!empty($_SGLOBAL['member']['allnotenum']) AND !empty($_SGLOBAL['member']['newpm']) ) }-->
+						       	<span class="black">你有</span><a href="space.php?do=notice">$_SGLOBAL['member']['allnotenum']条通知</a>，<a href="space.php?do=pm">$_SGLOBAL['member']['newpm']条消息</a><!--{if !empty($_SGLOBAL['member']['notificationflag'])}--><BGSOUND SRC="/sound.wav"/><!--{/if}--><span class="darkyellow">&nbsp;|&nbsp;</span> 
+					       	<!--{elseif (!empty($_SGLOBAL['member']['allnotenum']) )}-->
+					       		<span class="black">你有</span><a href="space.php?do=notice">$_SGLOBAL['member']['allnotenum']条通知</a><!--{if !empty($_SGLOBAL['member']['notificationflag'])}--><BGSOUND SRC="/sound.wav"/><!--{/if}--><span class="darkyellow">&nbsp;|&nbsp;</span>
+					       	<!--{elseif (!empty($_SGLOBAL['member']['newpm']) )}-->
+					       		<span class="black">你有</span><a href="space.php?do=pm">$_SGLOBAL['member']['newpm']条消息</a><!--{if !empty($_SGLOBAL['member']['notificationflag'])}--><BGSOUND SRC="/sound.wav"/><!--{/if}--><span class="darkyellow">&nbsp;|&nbsp;</span>
+					       	<!--{/if}-->
+					       	<a href="space.php?do=pm" class="titlea">虫虫密语</a><span class="darkyellow">&nbsp;|&nbsp;</span>
+							<!--{if empty($_SCONFIG['closeinvite'])}--><a href="cp.php?ac=invite" class="titlea">邀请</a><span class="darkyellow">&nbsp;|&nbsp;</span><!--{/if}-->
+							<a href="cp.php?ac=task" class="titlea">任务</a><span class="darkyellow">&nbsp;|&nbsp;</span>
+							<a href="cp.php?ac=magic" class="titlea">道具</a><span class="darkyellow">&nbsp;|&nbsp;</span>
+							<a href="cp.php" class="titlea">设置</a><span class="darkyellow">&nbsp;|&nbsp;</span>
+							<a href="cp.php?ac=common&op=logout&uhash=$_SGLOBAL[uhash]" class="titlea">退出</a>
+						</td>
+					</tr>
+				</table>
+				<!--{else}-->
+				<table border="0" cellspacing="0" cellpadding="0">
+	       			<tr>
+	       				<td style="padding: 0 3px;" nowrap>
+	        				<a href="do.php?ac=$_SCONFIG[login_action]" class="titlea">登录</a><span class="darkyellow">&nbsp;|&nbsp;</span><a href="do.php?ac=$_SCONFIG[register_action]" class="titlea">注册</a>
+						</td>
+					</tr>
+				</table>
+				<!--{/if}-->
+			</div>
+			<div class="portalmenu">
+				<div class="portalmenu-left"></div>
+		    	<div class="portalmenu-right">
+		    		<div class="portalmenuli"><div $site_module_actives['portal_index']><a href="portal_index.php">首页</a></div></div>
+		    		<div class="portalmenuli"><div $site_module_actives['portal_topic']><a href="portal_topic.php">广播剧场</a></div></div>
+		    		<div class="portalmenuli"><div $site_module_actives['portal_video']><a href="portal_video.php">视频映像</a></div></div>
+				<div class="portalmenuli"><div $site_module_actives['space_forum']><a href="space.php?do=forum">游泳池</a></div></div>
+		    		<!--{if $_SGLOBAL[supe_uid]}-->
+			       	<div class="portalmenuli"><div $site_module_actives['space_home']><a href="space.php?do=home">声虫资讯</a></div></div>
+			      	<div class="portalmenuli"><div $site_module_actives['space_index']><a href="space.php">虫虫窝</a></div></div>
+			    	<!--{/if}-->
+			    	<div class="portalmenuside"><div class="black">
+			    		<a href="/cp.php?ac=topic&op=new" target="_blank">发布广播剧</a> / 
+			    		<a href="/cp.php?ac=video&op=new" target="_blank">发布视频</a> / 
+			    		<a href="/cp.php?ac=event&op=new" target="_blank">发布招募</a>
+			    	</div></div>
+			    </div>
+		     </div>
+    	</td>
+    </tr>
+</table>
+
+<div id="wrap">
+
+	<!--{if empty($_TPL['nosidebar'])}-->
+	<div id="searchbar" class="nbox s_clear">
+		<div class="search" >
+			　虫虫小喇叭：<a href="space.php?do=thread&tid=$site_announcement_thread_topitem[tid]" target="_blank">[{$site_announcement_thread_topitem[datelinedisp]}]　{$site_announcement_thread_topitem[subject]}</a>
+		</div>
+	</div>
+	<div id="main">
+		<div id="app_sidebar">
+		<!--{if $_SGLOBAL[supe_uid]}-->
+			<ul class="app_list" id="default_userapp">
+				<li><img src="image/icon/profile.gif"/><a href="cp.php?ac=profile">个人资料</a><em><a href="cp.php?ac=profile" class="gray">完善</a></em></li>
+				<li><img src="image/app/doing.gif"/><a href="space.php?do=doing">无病呻吟</a><em><a href="space.php?do=doing&view=me" class="gray">记录</a></em></li>
+				<li><img src="image/app/tone.gif"/><a href="space.php?do=tone">声线基地</a><em><a href="cp.php?ac=tone" class="gray">上传</a></em></li>
+				<li><img src="image/app/topic.gif"/><a href="space.php?do=topic&view=single">广播剧场</a><em><a href="cp.php?ac=topic&op=new" class="gray">上传</a></em></li>
+				<li><img src="image/app/cover.gif"/><a href="space.php?do=cover&view=all">乐虫翻唱</a><em><a href="cp.php?ac=cover&op=new" class="gray">发表</a></em></li>
+				<li><img src="image/app/video.gif"/><a href="space.php?do=video&view=all">视频映像</a><em><a href="cp.php?ac=video&op=new" class="gray">发表</a></em></li>
+				<li><img src="image/app/mtag.gif"/><a href="space.php?do=mtag">我的圈子</a><em><a href="cp.php?ac=thread" class="gray">话题</a></em></li>
+				<li><img src="image/app/event.gif"/><a href="space.php?do=event">招募活动</a><em><a href="cp.php?ac=event" class="gray">发起</a></em></li>
+				<li><img src="image/app/blog.gif"/><a href="space.php?do=blog">树洞日记</a><em><a href="cp.php?ac=blog" class="gray">发表</a></em></li>
+				<li><img src="image/app/repaste.gif"/><a href="space.php?do=repaste">欢乐转帖</a><em><a href="cp.php?ac=repaste" class="gray">发表</a></em></li>
+				<li><img src="image/app/poll.gif"/><a href="space.php?do=poll">鸡血投票</a><em><a href="cp.php?ac=poll" class="gray">发起</a></em></li>
+				<li><img src="image/app/album.gif"/><a href="space.php?do=album">图片资源</a><em><a href="cp.php?ac=upload" class="gray">上传</a></em></li>
+				<li><img src="image/app/share.gif"/><a href="space.php?do=share">分享交流</a><em><a href="space.php?do=share&view=me" class="gray">添加</a></em></li>
+				<li><img src="image/icon/friend.gif"/><a href="space.php?do=friend">寻觅同类</a><em><a href="cp.php?ac=friend&op=search" class="gray">寻找</a></em></li>
+				<li><img src="image/app/forum.gif"/><a href="space.php?do=forum">游泳池</a></li>
+				<li><img src="image/icon/report.gif"/><a href="space.php?do=report">举报中心</a></li>
+				<!--{if ( $_SGLOBAL['administrator'] == 1 ) }-->
+				<li><img src="image/icon/report.gif"/><a href="static.php">全站统计</a></li>
+				<!--{/if}-->
+			</ul>
+			
+			<ul class="app_list topline" id="my_defaultapp">
+			<!--{if $_SCONFIG['my_status']}-->
+				<!--{loop $_SGLOBAL['userapp'] $value}-->
+				<li><img src="http://appicon.manyou.com/icons/$value[appid]"/><a href="userapp.php?id=$value[appid]">$value[appname]</a></li>
+				<!--{/loop}-->
+				
+			<!--{/if}-->
+				<li><img src="image/icon/farm.gif"/><a href="space.php?do=myfarm&view=index">开心农场</a></li>
+			</ul>
+			
+			<!--{if $_SCONFIG['my_status']}-->
+			<ul class="app_list topline" id="my_userapp">
+				<!--{loop $_SGLOBAL['my_menu'] $value}-->
+				<li id="userapp_li_$value[appid]"><img src="http://appicon.manyou.com/icons/$value[appid]"><a href="userapp.php?id=$value[appid]" title="$value[appname]">$value[appname]</a></li>
+				<!--{/loop}-->
+			</ul>
+			<!--{/if}-->
+			
+			<!--{if $_SGLOBAL['my_menu_more']}-->
+			<p class="app_more"><a href="javascript:;" id="a_app_more" onclick="userapp_open();" class="off">展开</a></p>
+			<!--{/if}-->
+			
+			<!--{if $_SCONFIG['my_status']}-->
+			<div class="app_m">
+				<ul>
+					<li><img src="image/app_add.gif"><a href="cp.php?ac=userapp&my_suffix=%2Fapp%2Flist" class="addApp">添加应用</a></li>
+					<li><img src="image/app_set.gif"><a href="cp.php?ac=userapp&op=menu" class="myApp">管理应用</a></li>
+				</ul>
+			</div>
+			<!--{/if}-->
+		
+		<!--{else}-->
+			<div class="bar_text">
+				<form id="loginform" name="loginform" action="do.php?ac=$_SCONFIG[login_action]&ref" method="post">
+				<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+					<p class="title">登录站点</p>
+					<p>用户名</p>
+					<p><input type="text" name="username" id="username" class="t_input" size="15" value="" /></p>
+					<p>密码</p>
+					<p><input type="password" name="password" id="password" class="t_input" size="15" value="" /></p>
+					<p><input type="checkbox" id="cookietime" name="cookietime" value="315360000" checked /><label for="cookietime">记住我</label></p>
+					<p>
+						<input type="submit" id="loginsubmit" name="loginsubmit" value="登录" class="submit" />
+						<input type="button" name="regbutton" value="注册" class="button" onclick="urlto('do.php?ac=$_SCONFIG[register_action]');" />
+					</p>
+				</form>
+			</div>
+		<!--{/if}-->
+		</div>
+
+		<div id="mainarea">
+	<!--{/if}-->
+
+<!--{/if}-->

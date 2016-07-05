@@ -1,0 +1,9 @@
+<table width="100%" border=0 style="background: url(template/default/image/portal/topic_sitejoin_bg.jpg) no-repeat scroll 0 0;" >
+	<tr height="35px"><td align="left" nowrap>&nbsp;</td></tr>
+<!--{loop $topic_sitejoin_list $key $value}-->
+	<tr height="31px"><td align="left" nowrap><h3>&nbsp;<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank">$value[subject]</a></h3></td></tr>
+	<tr><td align="left" nowrap>&nbsp;<span class="black">$value[productclassname]&nbsp;由 <!--{if empty($value[clubtagid])}-->$value[club]<!--{else}--><a class="black" href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a><!--{/if}-->&nbsp;发布</span></td></tr>
+	<tr><td align="left" nowrap>&nbsp;<span class="black" title="$value[cast]">CAST：<!--{eval echo getstr($value[cast], 42, 0, 0, 0, 0, -1); }--></span></td></tr>
+	<tr><td align="left" nowrap>&nbsp;<span class="egz"><span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[downloadnum]&nbsp;&nbsp;次下载,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span></span></td></tr>
+<!--{/loop}-->
+</table>

@@ -1,0 +1,29 @@
+<!--{template header}-->
+
+<!--{template nav_header}-->
+
+<!--{if $topic['type']=='single'}-->
+	<!--{if $_GET['op'] == 'delete'}-->
+	
+	<!--{elseif $_GET['op'] == 'manage'}-->
+	
+		<!--{template cp_topic_manage}-->
+	
+	<!--{elseif $_GET['op'] == 'edit'}-->
+	
+		<!--{template cp_topic_edit}-->
+	
+	<!--{elseif $_GET['op'] == 'new'}-->
+	
+		<!--{template cp_topic_new}-->
+	
+	<!--{elseif $_GET['op'] == 'newfromforecast'}-->
+	
+		<!--{template cp_topic_new}-->
+	
+	<!--{/if}-->
+<!--{elseif $topic['type']=='album'}-->
+	<!--{template cp_topic_new}-->
+<!--{/if}-->
+
+<!--{template footer}-->

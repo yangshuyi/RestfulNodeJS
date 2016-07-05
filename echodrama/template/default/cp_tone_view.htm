@@ -1,0 +1,276 @@
+
+<div class="affiche">
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+	<tr>
+		<th width="100">创作人　</th>
+		<td>$tone[username]</td>
+	</tr>
+	<tr>
+		<th width="100">作品　　</th>
+		<td>
+			<!--{if $tone[fileexists]}--> 
+				<object	classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+					codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"
+					width="400" height="20">
+					<param name="movie" value="swf/2.swf?file=$tone[mp3path]&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100">
+					<param name="quality" value="high">
+					<param value="transparent" name="wmode">
+					<embed	src="swf/2.swf?file=$tone[mp3path]&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100"
+						quality="high"
+						pluginspage="http://www.macromedia.com/go/getflashplayer"
+						type="application/x-shockwave-flash" width="400" height="20">
+				</object>
+			<!--{else}-->
+				对不起，该作品已被删除。 
+			<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<th width="100">声线类型</th>
+		<td>$_SGLOBAL[toneclass][$tone[classid]][classname]</td>
+	</tr>
+	<tr>
+		<th width="100">标签　　</th>
+		<td>$tone[label]</td>
+	</tr>
+
+	<tr>
+		<th width="100" valign="top">作品说明</th>
+		<td>$tone[description]</td>
+	</tr>
+	<tr>
+		<th width="100" valign="top">作品来源</th>
+		<td>$tone[source]</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<table cellspacing="0" cellpadding="0">
+				<form id="actionForm" method="post" action="">
+				<tr>
+	  				<td width="200px" nowrap>
+				  		<!--{if ( (!empty($_SGLOBAL['supe_uid'])) && ($tone[uid]!=$_SGLOBAL['supe_uid']) ) }-->
+	  						<a id="a_shownotification"  href="#" onclick="showNotification();return false;" title="发消息给声线所有者" target="_blank">悄悄话</a><span class="pipe">|</span>
+	  						<a id="a_toshare"  href="#" onclick="toshare();return false;" target="_blank">收藏</a><span class="pipe">|</span>
+				  			<a href="cp.php?ac=share&type=tone&id=$tone[toneid]" id="a_share_$tone[toneid]" onclick="ajaxmenu(event, this.id, 1)">分享</a><span class="pipe">|</span>
+						<!--{/if}-->
+	  				
+				  		<a id="a_report" href="cp.php?ac=common&op=report&idtype=toneid&id=$tone[toneid]" onclick="ajaxmenu(event, this.id, 1)">举报</a><span class="pipe">|</span>
+					</td>
+				  	
+	  					
+	  				<td width="99%">
+						&nbsp;	
+				  	</td>						
+						
+					<!--{if empty($tonepoll) }-->
+			  			<td id="poll_content" width="300px" nowrap>
+				  			<span class="pipe">|</span><span id="span_poll_label" class="gray">请您对该作品进行评级：</span>
+							<img id="img_poll_1" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(1);"/>
+				  			<img id="img_poll_2" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(2);"/>
+				  			<img id="img_poll_3" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(3);"/>
+				  			<img id="img_poll_4" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(4);"/>
+				  			<img id="img_poll_5" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(5);"/>
+				  			<input id="tonepollvalue" name="tonepollvalue" type="hidden" value="0"/>
+				  			<a id="a_poll" href="#" onclick="javascript:toPollValue();return false;">评级</a>
+				  		</td>
+					<!--{else}-->
+						<td id="poll_label" width="120px" nowrap>
+				  			<span class="pipe">|</span><span id="span_poll_label" class="gray">您给予的评级是：</span>
+				  		</td>
+				  		<td id="poll_content" width="100px" nowrap>
+				  			<span class="bigstar$tonepoll[pollvalue]0">　　　　　</span>
+				  		</td>
+					<!--{/if}-->
+				</tr>
+				</form>
+	  		</table>
+	  		<div class="neverVisible"><div id="__actionForm"></div></div>
+		</td>
+	</tr>
+</table>
+</div>
+
+<div id="flowDiv" class="flowDiv" style="position:absolute;z-index=99999;background-color:#EEEEEE;padding:5px;border: 5px solid #FF8E00;">
+<div class="popupmenu_inner">
+	<form id="pmform" name="pmform" method="post" action="cp.php?ac=tone&op=pm&toneid=$tone[toneid]&touid=$tone[uid]&pmid=0" class="ajaxshowdiv">
+	<table cellspacing="0" cellpadding="3">
+	<tr>
+		<th><label for="username" nowrap>收件人：</label></th>
+		<td>
+			<input type="hidden" id="touid" name="touid" value="$tone[uid]"/>
+			<input type="text" id="username" name="username" value="$tone[username]" readonly style="width: 250px;" class="t_input" tabindex="1"/>
+		</td>
+	</tr>
+
+	<tr>
+		<th style="vertical-align: top;" nowrap><label for="message">内容：</label></th>
+		<td><textarea id="message" name="message" cols="40" rows="4" style="width: 250px; height: 150px;" onkeydown="ctrlEnter(event, 'pmsubmit_btn');"></textarea></td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+		<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+		<input type="hidden" name="pmsubmit" value="true" />
+		<input type="button" name="pmsubmit_btn" id="pmsubmit_btn" value="发送" class="submit" onclick="ajaxpost('pmform','sendNotificationResponse',0)" />
+		<input type="button" name="pmclose_btn" id="pmclose_btn" value="取消" class="submit" onclick="javascript:hiddenNotification();" />
+		</td>
+	</tr>
+	</table>
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	</form>
+	<div class="neverVisible"><div id="__pmform"></div></div>
+</div>
+</div>
+
+<script type="text/javascript">
+	var inShare = $inShare;
+//	renderShareButton();
+	hiddenNotification();
+
+	function getoffset(e) {
+		var t = e.offsetTop;
+		var l = e.offsetLeft;
+		while (e = e.offsetParent) {
+			t += e.offsetTop;
+			l += e.offsetLeft;
+		}
+		var rec = new Array(1);
+		rec[0] = t;
+		rec[1] = l;
+		return rec;
+	}
+	
+	function hiddenNotification() {
+		var div = $('flowDiv'); //将要弹出的层   
+		
+		div.style.display = "none"; //div3初始状态是不可见的，设置可为可见   
+
+	}
+
+	function showNotification() {
+		var div = $('flowDiv'); //将要弹出的层   
+		var btn = $('a_shownotification'); //将要弹出的层   
+
+		div.style.display = "block"; //div3初始状态是不可见的，设置可为可见   
+		//div.style.left = event.clientX + document.documentElement.scrollLeft-350;
+		div.style.left = getoffset(btn)[1]+100+"px";
+	
+		div.style.width = 350;
+		div.style.top = getoffset(btn)[0]+25+"px";
+		div.style.height = 250;
+	}
+
+
+	function sendNotificationResponse(id, result) {
+		alert("消息发送成功");
+		hiddenNotification();
+	}
+	
+<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+	function toshare() {
+
+		var offset = 0;
+		var duration = 3;
+
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+
+		showloading();
+
+		var form = $('actionForm');
+		if (inShare == 0) {
+			inShare = 1;
+			form.action = "cp.php?ac=tone&op=share&toneid=$tone[toneid]&toshare=" + inShare;
+
+		} else if (inShare == 1) {
+			inShare = 0;
+			form.action = "cp.php?ac=tone&op=share&toneid=$tone[toneid]&toshare=" + inShare;
+		}
+
+		ajaxpost('actionForm', 'renderShareButton', 2000);
+	}
+
+	function renderShareButton(id, result) {
+		$("__actionForm").style.display = 'none';		
+		
+		if(result!=null){
+			var str=$("__actionForm").innerHTML;
+			var paramsArray=str.split(",");
+			inShare=paramsArray[1];
+			if(inShare==0){
+				$("a_toshare").innerHTML="收藏";
+			}else if(inShare==1){
+				$("a_toshare").innerHTML="取消收藏";
+			}
+		}else{
+			if(inShare==0){
+				$("a_toshare").innerHTML="收藏";
+			}else if(inShare==1){
+				$("a_toshare").innerHTML="取消收藏";
+			}
+		}
+	}
+<!--{/if}-->
+
+
+<!--{if empty($tonepoll) }-->
+	function renderPollStar(value) {
+		if($('a_poll').style.display=="none"){
+			return;
+		}
+		
+		for(var i=1;i<=value;i++) {
+			$('img_poll_'+i).src="/image/sth.gif";
+		}
+		for(var i=value+1;i<=5;i++) {
+			$('img_poll_'+i).src="/image/nst.gif";
+		}
+		$('tonepollvalue').value=value;
+	}
+
+	function toPollValue() {
+		var offset = 0;
+		var duration = 3;
+		
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+		
+		var tonepollvalue=$('tonepollvalue').value;
+		if(tonepollvalue>=1 && tonepollvalue<=5){
+			if(confirm("您确定要将该声线评级为 ["+tonepollvalue+"颗星] 吗？")){
+				showloading();
+				
+				var form = $('actionForm');
+				form.action="cp.php?ac=tone&op=poll&toneid=$tone[toneid]&tonepollvalue="+tonepollvalue;
+				ajaxpost('actionForm', 'renderPollValue', 2000);
+			}
+		}else{
+			alert("请选择评分等级");
+		}
+	}
+
+	function renderPollValue(id, result) {
+	  
+		$("__actionForm").style.display = 'none';		
+		
+		if(result!=null){
+			var str=$("__actionForm").innerHTML;
+			var paramsArray=str.split(",");
+			if(paramsArray.length>1){
+				toneid=paramsArray[0];
+				pollvalue=paramsArray[1];
+
+				$('span_poll_label').innerHTML="您给予的评级是：";
+				$('a_poll').style.display="none";
+				for(var i=1;i<=5;i++) {
+					$('img_poll_'+i).onMouseOver="";
+				}
+				ajaxget('cp.php?ac=tone&op=viewpoll&toneid='+toneid, 'tone_poll_content');
+			}
+		}
+	}
+<!--{/if}-->
+
+</script>

@@ -1,0 +1,86 @@
+<!--{template space_mtagheader}-->
+
+<div class="h_status">
+招募类型：<br/>
+<span class="pipe">|</span>
+<a href="space.php?do=mtag&tagid=$mtag[tagid]&view=events&classid=$_GET[classid]" <!--{if empty($_GET[typeid]) }--> class="active" <!--{/if}-->>全部</a>
+<span class="pipe">|</span>
+<!--{loop $_SGLOBAL[eventtype] $value}-->		
+<a href="space.php?do=mtag&tagid=$mtag[tagid]&view=events&classid=$_GET[classid]&typeid=$value[classid]" <!--{if $_GET[typeid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+<span class="pipe">|</span>
+<!--{/loop}-->
+</div>
+
+<div class="h_status">
+招募职务：<br/>
+<span class="pipe">|</span>
+<a href="space.php?do=mtag&tagid=$mtag[tagid]&view=events&typeid=$_GET[typeid]" <!--{if empty($_GET[classid]) }--> class="active" <!--{/if}-->>全部</a>
+<span class="pipe">|</span>
+<!--{loop $_SGLOBAL[jobclass] $value}-->	
+<!--{if $value[realjob] == 1}-->
+<a href="space.php?do=mtag&tagid=$mtag[tagid]&view=events&typeid=$_GET[typeid]&classid=$_GET[classid]" <!--{if $_GET[classid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+<span class="pipe">|</span>
+<!--{/if}-->
+<!--{if $value[classid] == 7}-->
+<br/>
+<span class="pipe">|</span>
+<!--{/if}-->
+<!--{/loop}-->
+</div>
+
+<!--{if !empty($eventlist)}-->
+<div class="event_list">
+	<ol>
+		<!--{loop $eventlist $key $event}-->
+		<li>
+			<div class="event_icon">
+				<a href="space.php?do=event&id=$event[eventid]"><img class="poster_pre" src="$event[pic]" alt="$event[title]" onerror="this.src='image/event/default.jpg'"></a>
+			</div>
+			<div class="event_content">
+				<h4 class="event_title"><a href="space.php?do=event&id=$event[eventid]">$event[title]</a><span class="gray">[&nbsp;$event[classname]&nbsp;]</span></h4>
+					<ul>
+					<li>
+						<span class="gray">招募时间:</span> 	<!--{eval echo sgmdate("m月d日 H:i", $event[starttime])}--> - <!--{eval echo sgmdate("m月d日 H:i", $event[endtime])}-->
+						<!--{if $event[grade] == 0}-->
+						<span class="event_state"> 待审核</span>
+						<!--{/if}-->
+						<!--{if $event[endtime]<$_SGLOBAL[timestamp]}-->
+						<span class="event_state"> 已结束</span>
+						<!--{elseif $event[deadline]<$_SGLOBAL[timestamp]}-->
+						<span class="event_state"> 报名截止</span>
+						<!--{/if}-->						
+					</li>
+					<!--{if $event[typeid]==5}-->
+						<li><span class="gray">活动地点:</span>$event[location]</li>
+					<!--{else}-->
+						<li><span class="gray">招募人员类型:</span>$event[classname]</li>
+					<!--{/if}-->
+					<li><span class="gray">发起人:</span> <a href="space.php?uid=$event[uid]">$_SN[$event[uid]]</a></li>
+					<!--{if $fevents[$event[eventid]]}-->
+					<li><span class="gray">好友:</span> 
+						<!--{loop $fevents[$event[eventid]] $value}-->
+						<a href="space.php?uid=$value[fuid]">$_SN[$value[fuid]]</a>
+						<!--{if $value[status] == 2}--><span class="gray">参加</span>
+						<!--{elseif $value[status] == 3}--><span class="gray">组织者</span>
+						<!--{elseif $value[status] == 4}--><span class="gray">发起者</span>
+						<!--{else}--><span class="gray">关注</span>
+						<!--{/if}-->
+						&nbsp;
+						<!--{/loop}-->
+					</li>
+					<!--{/if}-->
+					<li style="margin: 5px 0 0;">$event[viewnum] 次查看&nbsp; $event[membernum] 人参加&nbsp; $event[follownum] 人关注</li>
+				</ul>
+			</div>
+		</li>
+		<!--{/loop}-->
+	</ol>
+	<div class="page">$multi</div>
+</div>
+<!--{else}-->
+<div class="c_form">	
+	现在还没有群组活动。
+</div>
+<!--{/if}-->
+
+<!--{template space_mtagfooter}-->

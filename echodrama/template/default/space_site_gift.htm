@@ -1,0 +1,23 @@
+<!--{if !empty($sitegift) }-->
+	<form id="sitegiftform" method="post" action="cp.php?&ac=sitegift">
+		<div class="magichongbao" id="div_site_gift">
+			<a id="a_magic_gift" href="#" onclick="siteGiftPost();return false;">快来抢积分[20]</a>
+		</div>
+		<input type="hidden" id="sitegifttime" name="sitegifttime" value="$_SGLOBAL[timestamp]"/>
+	</form>
+	<div class="neverVisible"><div id="__sitegiftform"></div></div>
+	<div id="div_site_gift_after" style="display:none;">
+		<div class="magichongbao">
+			<a id="a_magic_gift" href="#" onclick="return false;">你下手好快呀</a>
+		</div>
+	</div>
+	<script type="text/javascript">
+	function siteGiftPost(){
+		ajaxpost('sitegiftform', 'afterSiteGiftPost', 2000);
+		$("div_site_gift").style.display = 'none';	
+	}
+	function afterSiteGiftPost(id, result) {
+		$("div_site_gift_after").style.display = 'block';	
+	}
+	</script>
+<!--{/if}-->

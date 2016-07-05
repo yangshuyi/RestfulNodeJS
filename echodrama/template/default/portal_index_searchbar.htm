@@ -1,0 +1,39 @@
+<div class="search">
+	<table width="97%" border="0" align="center" cellpadding="0" cellspacing="0">
+		<tr>
+      		<td align="left" nowrap>
+				目前虫虫共收录<a href="space.php?do=topic&view=single" target="_blank" class="titlea">广播剧[{$topic_single_num[num]}]部</a>，整理<a href="space.php?do=topic&view=album" target="_blank" class="titlea">专辑[{$topic_album_num[num]}]部</a>，<a href="space.php?do=video" target="_blank" class="titlea">视频作品[{$video_num[num]}]部</a>。
+			</td>
+			<td width="300px" align="right" nowrap>
+			<form id="membersearchform" name="membersearchform" method="get" action="cp.php"> 
+				<input type="text" id="searchkey" name="searchkey" value="查找注册会员" onfocus="javascript:member_search_onfocus();" onblur="javascript:member_search_onblur();" class="t_input" style="color:gray;" tabindex="1" style="width: 160px; border-right: none;" />
+				<input name="button" type="submit" class="searchbnt" id="button" value="搜索" onclick="javascript:member_search();"/>
+				<input id="searchsubmit" name="searchsubmit" value="searchsubmit" class="submit" type="hidden">
+				<input type="hidden" name="ac" value="friend">
+				<input type="hidden" name="op" value="search">
+				<input type="hidden" name="type" value="base">
+			</form>
+			</td>
+       	</tr>
+	</table>
+</div>
+<script type="text/javascript">
+	//检查提交
+	function member_search() {
+		$('membersearchform').submit();
+	}
+
+	function member_search_onfocus() {
+		if($('searchkey').value=="查找注册会员"){
+			$('searchkey').value="";
+			$('searchkey').style.color="black";
+		}
+	}
+
+	function member_search_onblur() {
+		if($('searchkey').value==""){
+			$('searchkey').value="查找注册会员";
+			$('searchkey').style.color="gray";
+		}
+	}
+</script>

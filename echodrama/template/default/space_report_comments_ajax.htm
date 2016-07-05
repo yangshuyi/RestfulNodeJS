@@ -1,0 +1,41 @@
+<div class="comments" id="div_main_content">
+	<div class="comments_list" id="comment">
+		<!--{if empty($commentlist) }-->
+			暂无消息
+		<!--{else}-->
+		<ul id="comment_ul">
+			<!--{loop $commentlist $value}-->
+				<!--{template space_comment_li}-->
+			<!--{/loop}-->
+		</ul>
+		<!--{/if}-->
+	</div>
+	<form id="quickcommentform" name="quickcommentform" action="cp.php?ac=comment" method="post" class="quickpost">
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<a href="###" id="comment_face" title="插入表情" onclick="showFace(this.id, 'comment_message');return false;">
+						<img src="image/facelist.gif" align="absmiddle" />
+					</a>
+					<!--{if $_SGLOBAL['magic']['doodle']}-->
+					<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
+					<!--{/if}-->
+					<br />
+					<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="hidden" name="refer" value="#" />
+					<input type="hidden" name="id" value="$reportid">
+					<input type="hidden" name="idtype" value="reportid">
+					<input type="hidden" name="commentsubmit" value="true" />
+					<input type="button" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="发送" 
+						onclick="ajaxpost('quickcommentform', 'comment_add')" />
+					<div id="__quickcommentform"></div>
+				</td>
+			</tr>
+		</table>
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" /></form>
+</div>	
+

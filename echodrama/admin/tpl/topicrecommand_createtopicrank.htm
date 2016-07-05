@@ -1,0 +1,57 @@
+<div class="mainarea">
+<div class="maininner">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li <!--{if $_GET['op'] == 'manage'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topicrecommand&op=manage"><span>每周推荐广播剧节目单</span></a></li>
+		<li <!--{if $_GET['op'] == 'createtopicrank'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topicrecommand&op=createtopicrank"><span>发布每周排行</span></a></li>
+	</ul>
+</div>
+
+<form id="edit_form" name="edit_form" method="post" action="admincp.php?ac=topicrecommand&op=createtopicrank&subop=createtopicrank">
+
+<input type="hidden" id="oauth_token" name="oauth_token" value="$sina[oauth_token]"/>
+<input type="hidden" id="oauth_token_secret" name="oauth_token_secret" value="$sina[oauth_token_secret]"/>
+<input type="hidden" id="url" name="url" value="$sina[url]"/>
+<input type="hidden" id="lastkey_oauth_token" name="lastkey_oauth_token" value="$sina[lastkey_oauth_token]"/>
+<input type="hidden" id="lastkey_oauth_token_secret" name="lastkey_oauth_token_secret" value="$sina[lastkey_oauth_token_secret]"/>
+			
+<table width="100%" cellspacing="3" cellpadding="3"><tr><td align="center" valign="middle">
+<!--{if $_GET['subop'] == 'loginsina'}-->
+	<table width="100%" cellspacing="3" cellpadding="3">
+		<tr height="100">
+			<td align="center">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<a href="$sina[url]">应声虫 - 新浪微博 同步登录</a>
+			</td>
+		</tr>
+	</table>
+<!--{elseif $_GET['subop'] == 'tocreatetopicrank'}-->
+	<table cellspacing="4" cellpadding="4">
+		<tr>
+			<td width="100" valign="top">新浪微博信息：</td>
+			<td>
+				<textarea id="weibo_message" name="weibo_message" rows="8" cols="100">$weibo_message</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<input type="button" name="topicsubmit" value="发布微博" class="submit" onclick="synsina();"/>
+			</td>
+<script type="text/javascript">
+function synsina(){
+	$("edit_form").action = 'admincp.php?ac=topicrecommand&op=createtopicrank&subop=createtopicrank';
+	$("edit_form").submit();
+}
+</script>
+		</tr>
+	</table>
+<!--{/if}-->
+</td></tr></table>
+
+</form>
+</div>
+</div>
+
+

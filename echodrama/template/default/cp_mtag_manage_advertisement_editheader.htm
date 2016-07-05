@@ -1,0 +1,145 @@
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=saveheader&tagid=$mtag[tagid]&advertisementid=$advertisement[advertisementid]&return=$_GET[return]">
+<table cellspacing="4" cellpadding="4" class="infotable">
+	<tr>
+		<td width="100" nowrap>站内宣传作品名 *</td>
+		<td>
+			<input type="text" id="subject" name="subject" value="$advertisement[subject]" size="80" maxlength="100" class="t_input"/>
+		</td>
+	</tr>
+	<tr>	
+		<td nowrap>展现位置 *</td>
+		<td>
+			<select name="location" id="location" >
+				<option value="-1">请选择展现位置 </option>
+				<!--{loop $_SGLOBAL[advertisementlocationclass] $key $value}-->
+				<option value="$value[classid]" <!--{if $advertisement[location] == $value[classid]}-->
+				selected<!--{/if}--> >$value[classname]</option>
+				<!--{/loop}-->
+			</select>
+		</td>
+	</tr>
+	<!--{if !empty($advertisement[advertisementid]) }-->
+	<tr>	
+		<td nowrap>是否开启</td>
+		<td>
+			<input type="radio" id="close" name="close" value="0"<!--{if $advertisement['close']==0}--> checked<!--{/if}-->> 开启
+			<input type="radio" id="close" name="close" value="1"<!--{if $advertisement['close']==1}--> checked<!--{/if}-->> 关闭
+		</td>
+	</tr>
+	<tr>	
+		<td nowrap>&nbsp;</td>
+		<td class="red">
+			开启前，请先预览确认你的站内宣传作品的展示效果。
+		</td>
+	</tr>
+	<!--{/if}-->
+	<tr>	
+		<td nowrap>展示时间</td>
+		<td>
+			<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+			从(包含)
+			<input type="text" name="fromdate" id="fromdate" value="$advertisement[fromdatedisp]" class="t_input" onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+			至(不包含)
+			<input type="text" name="todate" id="todate" value="$advertisement[todatedisp]" class="t_input" onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+		</td>
+	</tr>
+	<tr>
+		<td width="100">宣传说明*</td>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="description" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$advertisement[description]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=1" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" align="center">
+			<input type="hidden" name="nextstep" id="nextstep" value="" />
+			<input type="hidden" name="refer" id="refer" value="$_SGLOBAL[refer]" />
+			<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+			<!--{if empty($advertisement[advertisementid]) }-->
+			<input type="button" value="下一步" class="submit" onclick="javascript:postadvertisement('selectitemclass');"/>	
+			<!--{else}-->
+			<input type="button" value="保存并返回" class="submit" onclick="javascript:postadvertisement('return');"/>	
+			<input type="button" value="删除" class="submit" onclick="javascript:deleteadvertisement();"/>	
+			<!--{/if}-->
+		</td>
+	</tr>
+	<tr height="700">
+		<td colspan="2" align="center" valign="middle">
+			<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+			<input type="text" name="createdate" id="createdate" value="$advertisement[createdate]" class="t_input" onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+		</td>
+	</tr>
+</table>
+</form>
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+//检查删除
+function deleteadvertisement() {
+	if(confirm("你确定要删除该站内宣传作品吗？")){
+		$("actionform").action="cp.php?ac=mtag&op=manage&subop=deleteadvertisement&tagid=$advertisement[tagid]&advertisementid=$advertisement[advertisementid]&return="+$_GET('return');
+		$("actionform").submit();
+	}
+}
+
+function postadvertisement( nextstep ){
+	//站内宣传
+	if ($("subject").value.trim() == "") {
+		alert("站内宣传作品名不能为空！");
+		$("subject").focus();
+		return false;
+	} else if ($("subject").value.trim().length > 80) {
+		alert("站内宣传作品太长，请限制在80个字符内！");
+		$("subject").focus();
+		return false;
+	}
+
+	//展现位置
+	if($("location").value=="-1"){
+		alert("请选择展现位置！");
+		$("location").focus();
+		return false;
+	}
+	
+	// 展示时间
+	if ($("fromdate").value.trim() == "") {
+		alert("展示时间(开始)不能为空！");
+		$("fromdate").focus();
+		return false;
+	}
+	if ($("todate").value.trim() == "") {
+		alert("展示时间(结束)不能为空！");
+		$("todate").focus();
+		return false;
+	}
+//	if ($("todate").value < $("fromdate").value) {
+//		alert("展示时间(开始) 必须早于 展示时间(结束)！");
+//		$("fromdate").focus();
+//		return false;
+//	}
+	
+	// 编辑器内容同步
+	edit_save();
+		
+	// 宣传说明
+	if ($("uchome-ttHtmlEditor").value.trim() == "") {
+		alert("宣传说明不能为空！");
+		$("uchome-ttHtmlEditor").focus();
+		return false;
+	}
+
+	$("nextstep").value = nextstep;
+	if ($("nextstep").value.trim() == "") {
+		alert("请选择处理方式！");
+		return false;
+	}
+
+	$("actionform").submit();
+}
+</script>
+	

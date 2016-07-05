@@ -1,0 +1,19 @@
+<!--{eval $_TPL['nosidebar']=1;}-->
+<!--{template header}-->
+<div align="center">
+<table width="50%" border="1">
+		<tr>
+			<td width="20%">UID</td>
+			<td width="20%">User Name</td>
+			<td width="20%">Credit</td>
+		</tr>
+		<!--{loop $list $value}-->
+		<tr>
+			<td>$value[uid]</td>
+			<td>$value[username]</td>
+			<td>$value[credit]</td>
+		</tr>
+		<!--{/loop}-->
+	</table>
+</div>
+<!--{template footer}-->

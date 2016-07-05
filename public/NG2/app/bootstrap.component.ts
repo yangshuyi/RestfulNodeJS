@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 @Component({
     selector: 'redis-manager', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     template: '' +
-    '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
+    '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
     '<div>About fontawesome</div>'+
     '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>'+
     '',

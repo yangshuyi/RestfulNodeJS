@@ -30,6 +30,7 @@ var RedisManagerComponent = (function () {
         var _this = this;
         console.log('RedisManagerComponent ngOnInit');
         this.routeSubsriber = this.route.params.subscribe(function (params) {
+            console.log('RedisManagerComponent ngOnInit params:' + params);
         });
         this.redisManagerService.listAll().then(function (redisObjects) {
             return _this.redisObjects = redisObjects;
@@ -56,15 +57,19 @@ var RedisManagerComponent = (function () {
         core_1.Component({
             selector: 'redis-manager',
             template: '' +
-                '<h1>{{title}}</h1>' +
-                '<label for="keyword">Search Keyword: </label><input id="keyword" [(ngModel)]="keyword" (change)="searchByKeyword()" placeholder="keyword">' +
-                '<hr/>' +
-                '<div *ngIf="keyword && filterRedisObjects">Find [{{filterRedisObjects.length}}] record(s) for Redis Object by keyword [{{keyword}}]</div>' +
-                '<div *ngIf="filterRedisObjects" *ngFor="let redisObject of filterRedisObjects">' +
-                '   <redis-object [redisObject]="redisObject"></redis-object>' +
+                '<div [class.default]="true" >' +
+                '   <h1>{{title}}</h1>' +
+                '   <label for="keyword">Search Keyword: </label><input id="keyword" [(ngModel)]="keyword" (change)="searchByKeyword()" placeholder="keyword">' +
+                '   <hr/>' +
+                '   <div *ngIf="keyword && filterRedisObjects">Find [{{filterRedisObjects.length}}] record(s) for Redis Object by keyword [{{keyword}}]</div>' +
+                '   <div *ngIf="filterRedisObjects" *ngFor="let redisObject of filterRedisObjects">' +
+                '       <redis-object [redisObject]="redisObject"></redis-object>' +
+                '   </div>' +
                 '</div>' +
                 '',
-            styles: [''],
+            styles: [
+                '.default { background-color: green;}'
+            ],
             directives: [redis_object_component_1.RedisObjectComponent],
             providers: [redis_manager_service_1.RedisManagerService]
         }), 

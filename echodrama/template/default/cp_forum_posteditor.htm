@@ -1,0 +1,85 @@
+<script language="javascript" src="image/editor/editor_function.js"></script>
+
+<div style="margin-top: 10px; border: 1px solid #CDCDCD;">
+	<form id="forumpostactionform" name="forumpostactionform" method="post" action="cp.php?ac=forum&op=savepost&tid=$thread[tid]&pid=$post[pid]">
+		<table cellspacing="0" cellpadding="0" width="100%" class="infotable">
+			<tr style="background:none repeat scroll 0 0 #F2F2F2; margin-top: 1px; height:30px;">
+				<td align="left" valign="middle" colspan="4" nowrap style="border-bottom:1px solid #CDCDCD; ">
+				<!--{if $_GET['op'] == 'replypost' }-->
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;回复&nbsp;：&nbsp;<!--{eval echo getstr(strip_tags($relatedpost[origin_message]), 30, 0, 0, 0, 0, -1); }--></h2>
+				<!--{else}-->
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;<!--{if empty($post)}-->发表回帖<!--{else}-->编辑回帖<!--{/if}-->&nbsp;-&nbsp;回复&nbsp;：&nbsp;$thread[subject]</h2>
+				<!--{/if}-->
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="padding:5px;">
+					<script language="javascript" src="image/editor/editor_function.js"></script>
+					<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+					<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$post[message]</textarea>
+					<iframe src="editor.php?charset=$_SC[charset]&allowhtml=1" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="200"></iframe>
+				</td>
+			</tr>
+			<!--{if empty($post)}-->
+			<tr style="background:none repeat scroll 0 0 #F2F2F2; border-bottom:1px solid #CDCDCD; margin-top: 1px; height:40px;">
+				<td align="left" valign="middle" colspan="4" style="padding:5px;">
+					<!--{if empty($_SGLOBAL[supe_uid])}-->
+					<span>回帖人：</span><input id="uid" name="uid" type="hidden" value=""/><input id="username" name="username" type="text" value="$_SGLOBAL['supe_username']" class="t_input" disabled/>
+					<!--{else}-->
+					<input id="fakemark" name="fakemark" type="checkbox" onclick="$('username').disabled=!this.checked;"/><span>使用马甲</span>
+					<span>回帖人：</span><input id="uid" name="uid" type="hidden" value="$_SGLOBAL['supe_uid']"/><input id="username" name="username" type="text" value="$_SGLOBAL['supe_username']" class="t_input" disabled/>
+					<!--{/if}-->
+				</td>
+			</tr>
+			<!--{else}-->
+			<tr style="background:none repeat scroll 0 0 #F2F2F2; border-bottom:1px solid #CDCDCD; margin-top: 1px; height:40px;">
+				<td align="left" valign="middle" colspan="4" style="padding:5px;">
+					<span>回帖人：</span>
+					<input id="uid" name="uid" type="hidden" value="$post[uid]"/>
+					<input id="username" name="username" type="text" value="$post[username]" class="t_input" disabled/>
+				</td>
+			</tr>
+			<!--{/if}-->
+			<tr style="background:none repeat scroll 0 0 #F2F2F2; border-bottom:1px solid #CDCDCD; margin-top: 1px; height:40px;">
+				<td align="left" valign="middle" colspan="4" style="padding:5px;">
+					<input type="hidden" id="tid" name="tid" value="$thread[tid]" />
+					<input type="hidden" id="pid" name="pid" value="$post[pid]" />
+					<input type="hidden" id="relatedpid" name="relatedpid" value="$relatedpost[pid]" />
+					<input type="hidden" id="op" name="op" value="savethread" />
+					<input type="hidden" id="return" name="return" value="$_SGLOBAL[refer]" />
+<!--{if $editormode=='postview'}-->					
+					<input type="hidden" id="return" name="return" value="" />
+<!--{else}-->
+					<input type="hidden" id="return" name="return" value="$_SGLOBAL[refer]" />
+<!--{/if}-->
+					<input type="hidden" id="selectop" name="selectop" value="$_GET[selectop]" />
+					<input type="hidden" id="formhash" name="formhash" value="<!--{eval echo formhash();}-->" />
+					<input type="button" id="postbutton" name="postbutton" class="submit" value="提交回复" onclick="javascript:postpost();"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<script type="text/javascript">
+	function postpost() {
+		// 编辑器内容同步
+		edit_save();
+
+		// 内容
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("内容不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+
+		//回帖人
+		if( $('username').value.trim() == "") {
+			alert("回帖人不能为空！");
+			$("username").focus();
+			return false;
+		}
+		
+		$("forumpostactionform").submit();
+	}
+</script>

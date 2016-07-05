@@ -1,0 +1,101 @@
+<h2 class="title">投票评级</h2>
+<!--{if $topic[pollnum] > 0 }-->
+<table cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<td colspan="2">
+			<div style="margin-top: 10px; margin-left: 10px; ">
+				<span class="bigstar$topic[polllevel]">　　　　　　$topic[pollavg]</span>	
+			</div>
+		</td>
+	</tr>	
+	<tr>
+		<td colspan="2" style="border-bottom: 1px solid #F2F2F2;">
+			<div style="width:100%; align:center;">　已有<span style="color:#F87F67;">$topic[pollnum]</span>人评价</div>
+		</td >
+	</tr>	
+	<tr>
+		<td>
+			<img src="image/all_star_5.jpg" title="力荐" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $topic[poll_5_rate]px;" class="power"></div>$topic[poll_5_rate]%
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="image/all_star_4.jpg" title="推荐" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $topic[poll_4_rate]px;" class="power"></div>$topic[poll_4_rate]%
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			<img src="image/all_star_3.jpg" title="还行" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $topic[poll_3_rate]px;" class="power"></div>$topic[poll_3_rate]%
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			<img src="image/all_star_2.jpg" title="较差" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $topic[poll_2_rate]px;" class="power"></div>$topic[poll_2_rate]%
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			<img src="image/all_star_1.jpg" title="很差" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $topic[poll_1_rate]px;" class="power"></div>$topic[poll_1_rate]%
+		</td>
+	</tr>
+</table>
+<!--{else}-->
+<table width="100%">
+	<tr>
+		<td align="center">
+			还未有人投票评级。
+		</td>
+	</tr>	
+</table>
+<!--{/if}-->
+<!--{if $_SGLOBAL[supe_uid]>0 }-->
+<hr/>
+	<!--{if empty($topicpoll) }-->
+	
+<table cellspacing="0" cellpadding="0" width="100%">
+	<tr><td nowrap><span id="span_poll_label" class="gray">请您对该作品进行评级：</span></td></tr>
+	<tr><td align="center" nowrap>
+		<img id="img_poll_1" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(1);"/>
+		<img id="img_poll_2" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(2);"/>
+		<img id="img_poll_3" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(3);"/>
+		<img id="img_poll_4" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(4);"/>
+		<img id="img_poll_5" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(5);"/>
+		<input id="topicpollvalue" name="topicpollvalue" type="hidden" value="0"/>
+		<input type="button" value="评级" class="submit" onclick="javascript:setTopicPollValue();return false;"/>
+	</td></tr>
+</table>
+<script type="text/javascript">
+function renderPollStar(value) {
+	for(var i=1;i<=value;i++) {
+		$('img_poll_'+i).src="/image/sth.gif";
+	}
+	for(var i=value+1;i<=5;i++) {
+		$('img_poll_'+i).src="/image/nst.gif";
+	}
+	$('topicpollvalue').value=value;
+}
+</script>						  		
+	<!--{else}-->
+<table cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<td nowrap><span id="span_poll_label" class="gray">您给予的评级是：</span></td>
+		<td nowrap><span class="bigstar$topicpoll[pollvalue]0">　　　　　</span></td>
+	</tr>
+</table>
+	<!--{/if}-->
+<!--{/if}-->

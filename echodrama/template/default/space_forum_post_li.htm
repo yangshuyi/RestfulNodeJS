@@ -1,0 +1,213 @@
+<!--{if empty($ajax_edit)}--><div id="post_$value[pid]_li"><!--{/if}-->
+<ul class="post_ul">
+	<li>
+	<table width="100%" cellspacing="0" cellpadding="0" border=0>
+	<!--{if $value[isthread]==0 }-->
+	<tr height="15px">
+		<td colspan="2" style="background:none repeat scroll 0 0 #F2F2F2; border-bottom: 1px solid #CDCDCD;">&nbsp;</td>
+	</tr>
+	<!--{/if}-->
+	<tr>
+		<td rowspan="4" width="120" valign="top" align="center" style="background:none repeat scroll 0 0 #F2F2F2; border-right: 1px solid #CDCDCD; ">
+			<br/>
+			<!--{if empty($value[uid]) }-->
+			<div class="myavatar48"><!--{avatar(0,small)}--></div>
+			$value[username]<br/>马甲
+			<!--{else}-->
+			<div class="myavatar48"><a href="space.php?uid=$value[uid]" target="_blank"><!--{avatar($value[uid],small)}--></a></div>
+			<a href="space.php?uid=$value[uid]" target="_blank" <!--{eval g_colorbyuid($value[uid]);}-->>$value[username]</a>
+			<br/>
+			<!--{eval g_iconbyuid($value[uid]);}-->
+			<br/>
+			<br/>
+			<ul class="spacemenu_list">
+				<li><img src="image/icon/poke.gif"><a href="cp.php?ac=poke&op=send&uid=$value[uid]" id="a_poke_$value[pid]" onclick="ajaxmenu(event, this.id, 1)">打个招呼</a></li>
+				<li><img src="image/icon/pm.gif"><a href="cp.php?ac=pm&uid=$value[uid]" id="a_pm_$value[pid]" onclick="ajaxmenu(event, this.id, 1)">发送消息</a></li>
+			</ul>
+			<!--{/if}-->
+		</td>
+		<td align="right" valign="middle" nowrap style="background:none repeat scroll 0 0 #FFFFFF;">
+		<!--{if $value[isthread]==1 }-->
+			<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+				<!--{if empty($value['threaduserid']) }-->
+			&nbsp;[<a href="cp.php?ac=forum&op=bookmarkthread&tid=$thread[tid]&tobookmark=1" title="你可以收到来自该帖回复的通知">关注该帖</a>]&nbsp;
+				<!--{else}-->
+			&nbsp;[<a href="cp.php?ac=forum&op=bookmarkthread&tid=$thread[tid]&tobookmark=0">取消关注</a>]&nbsp;
+				<!--{/if}-->
+			<!--{/if}-->
+			
+			<!--{if $_GET[view] == 'viewposter'}-->
+			&nbsp;[<a href="space.php?do=forum&view=viewall&tid=$thread[tid]" >查看全部回帖</a>]&nbsp;
+			<!--{else}-->
+			&nbsp;[<a href="space.php?do=forum&view=viewposter&tid=$thread[tid]" title="只看属于楼主的回复记录">只看楼主回复</a>]&nbsp;
+			<!--{/if}-->
+		<!--{else}-->
+			<div class="title" style="margin-top:5px;margin-right:10px;">
+				<div class="r_option" style="border-bottom:1px solid #dedede;">
+					<span class="gray">　　#<!--{eval echo $value[number]+1; }--></span>
+				</div>
+			</div>
+		<!--{/if}-->
+		</td>
+	</tr>
+	<tr height="150px">
+		<td align="left" valign="top" style="background:none repeat scroll 0 0 #FFFFFF;">
+			<div class="detail" id="detail_$value[pid]" style="margin:10px;">
+		<!--{if empty($value[deleteflag]) }-->
+				$value[message]
+		<!--{elseif $value[deleteflag]==1 }-->
+				---该帖内容已被临时屏蔽---
+		<!--{else}-->
+				---该帖内容已被临时屏蔽---
+		<!--{/if}-->
+			</div>
+		</td>
+	</tr>
+<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+	<tr height="50px">
+		<td id="hotcoldbtncontainer" align="right" valign="middle" style="background:none repeat scroll 0 0 #FFFFFF; margin-right:20px;">	
+			<!--{if $value[isthread]==1 AND $canhotcoldthread }-->
+				<span class="pipe">|</span>
+				<img src="image/forum/addhot.gif" title="顶一下" onclick="hotcoldthread(1);return false;"/>
+				<span class="pipe">|</span>
+				<img src="image/forum/addcold.gif" title="踩一下" onclick="hotcoldthread(0);return false;"/>
+				<span class="pipe">|</span>
+			<!--{/if}-->
+		</td>
+	</tr>
+<script type="text/javascript">
+function hotcoldthread(hot) {
+	var offset = 0;
+	var duration = 3;
+	
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+	
+	showloading();
+	
+	var form = $('actionForm');
+	if(hot == 1){
+		form.action="cp.php?ac=forum&op=hotthread&tid=$thread[tid]";
+	}
+	else{
+		form.action="cp.php?ac=forum&op=coldthread&tid=$thread[tid]";
+	}
+	
+	ajaxpost('actionForm', 'renderHotColdButton', 2000);
+}
+
+function renderHotColdButton(id, result) {
+  
+	$("__actionForm").style.display = 'none';		
+	
+	$("hotcoldbtncontainer").innerHTML="你的表态成功";
+}
+</script>
+<!--{/if}-->
+	<tr>
+		<td align="right" valign="middle" style="background:none repeat scroll 0 0 #FFFFFF; border-top: 1px dashed #CDCDCD; border-bottom: 1px solid #CDCDCD; height:30px;" nowrap>	
+			<span class="pipe">|</span>
+				
+			<!--{if $value[isthread]==1}-->
+				<!--{if (  !empty($_SGLOBAL['forum_admin']) ) }-->
+					<!--{if $thread[displayportal]}-->
+			<a href="cp.php?ac=forum&op=canceldisplayportal&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_displayportal" onclick="ajaxmenu(event, this.id, 0, 2000)">取消首页显示</a>
+			<span class="pipe">|</span>
+					<!--{else}-->
+			<a href="cp.php?ac=forum&op=setdisplayportal&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_displayportal" onclick="ajaxmenu(event, this.id, 0, 2000)">首页显示</a>&nbsp;
+			<span class="pipe">|</span>
+					<!--{/if}-->
+					<!--{if $thread[displayorder]}-->
+			<a href="cp.php?ac=forum&op=canceltop&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_top" onclick="ajaxmenu(event, this.id, 0, 2000)">取消置顶</a>
+			<span class="pipe">|</span>
+					<!--{else}-->
+			<a href="cp.php?ac=forum&op=settop&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_top" onclick="ajaxmenu(event, this.id, 0, 2000)">置顶</a>&nbsp;
+			<span class="pipe">|</span>
+					<!--{/if}-->
+							
+					<!--{if $thread[digest]}-->
+			<a href="cp.php?ac=forum&op=canceldigest&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_digest" onclick="ajaxmenu(event, this.id, 0, 2000)">取消精华</a>
+			<span class="pipe">|</span>
+					<!--{else}-->
+			<a href="cp.php?ac=forum&op=setdigest&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_digest" onclick="ajaxmenu(event, this.id, 0, 2000)">精华</a>
+			<span class="pipe">|</span>
+					<!--{/if}-->
+
+					<!--{if $thread[keepbottom]}-->
+			<a href="cp.php?ac=forum&op=cancelbottom&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_bottom" onclick="ajaxmenu(event, this.id, 0, 2000)">取消压帖</a>
+			<span class="pipe">|</span>
+					<!--{else}-->
+			<a href="cp.php?ac=forum&op=setbottom&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_bottom" onclick="ajaxmenu(event, this.id, 0, 2000)">压帖</a>&nbsp;
+			<span class="pipe">|</span>
+					<!--{/if}-->
+					
+					<!--{if $thread[close]}-->
+			<a href="cp.php?ac=forum&op=cancelclose&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_close" onclick="ajaxmenu(event, this.id, 0, 2000)">取消关闭</a>
+			<span class="pipe">|</span>
+					<!--{else}-->
+			<a href="cp.php?ac=forum&op=setclose&tagid=$thread[tagid]&tid=$thread[tid]" id="t_$thread[tid]_close" onclick="ajaxmenu(event, this.id, 0, 2000)">关闭</a>
+			<span class="pipe">|</span>
+					<!--{/if}-->
+			
+			<a href="cp.php?ac=forum&op=editthread&selectop=admineditthread&tid=$value[tid]" id="p_$value[pid]_edit" >修正帖子</a>
+			<span class="pipe">|</span>
+			
+					<!--{if ( !$value['replynum']>0 ) }-->
+			<a href="cp.php?ac=forum&op=deletethread&tid=$thread[tid]" onclick="if( confirm('确定？')==1){ return true;}else{return false;} ">删除帖子</a>
+			<span class="pipe">|</span>
+					<!--{/if}-->
+			
+					<!--{if ( empty($value[deleteflag]) ) }-->
+			<a href="cp.php?ac=forum&op=hidepost&pid=$value[pid]" onclick="if( confirm('确定？')==1){ return true;}else{return false;} ">屏蔽内容</a>
+			<span class="pipe">|</span>
+					<!--{/if}-->
+			<br/>
+				<!--{/if}-->
+
+				<!--{if ( !$value['replynum']>0 AND ( !empty($value['uid']) AND $value['uid']==$_SGLOBAL[supe_uid] ) ) }-->
+			<a href="cp.php?ac=forum&op=deletethread&tid=$thread[tid]" onclick="if( confirm('确定？')==1){ return true;}else{return false;} ">删除帖子</a>
+			<span class="pipe">|</span>
+				<!--{/if}-->
+
+				<!--{if ( !empty($value['uid']) AND $value['uid']==$_SGLOBAL[supe_uid] ) }-->
+			<a href="cp.php?ac=forum&op=editthread&selectop=editthread&tid=$value[tid]" id="p_$value[pid]_edit" >编辑帖子</a>
+			<span class="pipe">|</span>
+				<!--{/if}-->
+
+			<!--{else}-->
+<!--{if ( $value[tid]==709 AND $value[isthread]==0 ) }-->
+
+<!--{else}-->					
+				<!--{if ( empty($value[deleteflag]) AND !empty($_SGLOBAL['forum_admin']) ) }-->
+			<a href="cp.php?ac=forum&op=hidepost&pid=$value[pid]" onclick="if( confirm('确定？')==1){ return true;}else{return false;} ">屏蔽回帖</a>
+			<span class="pipe">|</span>
+				<!--{/if}-->
+			
+				<!--{if ( empty($value[deleteflag]) AND (!empty($_SGLOBAL['forum_admin']) OR (!empty($value['uid']) AND $value['uid']==$_SGLOBAL[supe_uid])) ) }-->
+			<a href="cp.php?ac=forum&op=deletepost&pid=$value[pid]" onclick="if( confirm('确定？')==1){ return true;}else{return false;} ">删除回帖</a>
+			<span class="pipe">|</span>
+				<!--{/if}-->
+				
+				<!--{if ( !empty($value['uid']) AND $value['uid']==$_SGLOBAL[supe_uid]) }-->
+			<a href="cp.php?ac=forum&op=editpost&selectop=editpost&pid=$value[pid]" id="p_$value[pid]_edit">编辑回帖</a>
+			<span class="pipe">|</span>
+				<!--{/if}-->
+				
+				<!--{if ( !empty($_SGLOBAL['forum_admin']) ) }-->
+			<a href="cp.php?ac=forum&op=editpost&selectop=admineditpost&pid=$value[pid]" id="p_$value[pid]_edit">管理员修正回帖</a>
+			<span class="pipe">|</span>
+				<!--{/if}-->
+				
+			<a href="cp.php?ac=forum&op=replypost&pid=$value[pid]" id="p_$value[pid]_reply">引用</a> 
+			<span class="pipe">|</span>
+					
+		<!--{/if}-->
+<!--{/if}-->
+			<span class="gray">最后编辑时间：<!--{date('Y-m-d H:i',$value[dateline],1)}--></span>
+			<span class="pipe">|</span>
+		</td>
+	</tr></table>
+	</li>
+</ul>
+<!--{if empty($ajax_edit)}--></div><!--{/if}-->

@@ -1,0 +1,30 @@
+<div style="background:none repeat scroll 0 0 #F2F2F2;border: 1px solid #CDCDCD;height: 29px;line-height: 29px;">
+	<table cellspacing="0" cellpadding="0" style="float:left; height:29px;">
+		<tr>
+			<td align="center" nowrap>
+				<div style="background:url('image/pt_icn.png') no-repeat scroll 7px 8px transparent; width:24px; height:29px;">&nbsp;&nbsp;</div>
+			</td>
+			<td align="center" nowrap>
+				<div style="background:url('image/pt_item.png') no-repeat scroll 30% -1px transparent; width:24px; height:29px;">&nbsp;&nbsp;</div>
+			</td>
+			<td align="center" nowrap>
+				<div style="font-size:14px;">&nbsp;<a href="space.php?do=forum">游泳池</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			</td>
+			<td align="center" nowrap>
+				<div style="background:url('image/pt_item.png') no-repeat scroll 30% -1px transparent; width:24px; height:29px;">&nbsp;&nbsp;</div>
+			</td>
+			<td align="center" nowrap>
+				<div style="font-size:14px;">&nbsp;
+				<!--{if empty($post)}-->
+					<a href="cp.php?ac=forum&op=newpost&tid=$thread[tid]">发表回帖</a>
+				<!--{else}-->
+					<a href="cp.php?ac=forum&op=editpost&pid=$post[pid]">编辑回帖</a>
+				<!--{/if}-->
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<!--{eval $editormode='postedit'; }-->
+<!--{template cp_forum_posteditor}-->

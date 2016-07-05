@@ -1,0 +1,123 @@
+<!--{template admin/tpl/header}-->
+
+<div class="mainarea">
+<div class="maininner">
+	<div class="tabs_header">
+		<ul class="tabs">
+			<li$actives[club]><a href="admincp.php?ac=mtag&view=club"><span>社团群组列表</span></a></li>
+			<li$actives[topic]><a href="admincp.php?ac=mtag&view=topic"><span>广播剧群组列表</span></a></li>
+			<li$actives[cv]><a href="admincp.php?ac=mtag&view=cv"><span>CV群组列表</span></a></li>
+			<li$actives[audit]><a href="admincp.php?ac=mtag&view=audit"><span>待审核的群组</span></a></li>
+		</ul>
+	</div>
+	
+	<form method="get" action="admincp.php">
+	<div class="block style4">
+		
+		<table cellspacing="3" cellpadding="3">
+		<tr><th>群组名*</th><td><input type="text" name="tagname" value="$_GET[tagname]"></td>
+			<th>指定群组ID</th>
+			<td>
+				<input type="text" name="tagid" value="$_GET[tagid]" />
+			</td>
+		</tr>
+		<tr><th>结果排序</th>
+		<td colspan="3">
+		<input type="hidden" name="ac" value="mtag">
+		<input type="hidden" name="do" value="mtag" />
+		<input type="hidden" name="view" value="$_GET[view]" />
+		<input type="submit" name="searchsubmit" value="搜索" class="submit">
+		</td>
+		</tr>
+		</table>
+
+	</div>
+	</form>
+
+<!--{if $list}-->
+
+	<form method="post" action="admincp.php?ac=mtag">
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	
+	<div class="bdrcontent">
+	<table cellspacing="0" cellpadding="0" class="formtable">
+	<tr>
+		<th>编号</th>
+		<th>群组名</th>
+		<th>分类</th>
+		<th width="100">群主</th>
+		<th width="80">成立时间</th>
+		<th width="80">用户/粉丝数</th>
+		<th width="80">话题数</th>
+		<th width="80">回帖数</th>
+	</tr>
+	<!--{loop $list $value}-->
+	<tr>
+		<td>
+			<input type="checkbox" name="ids[]" value="$value[tagid]">$value[tagid]
+		</td>
+		<td>
+			<a href="space.php?do=mtag&tagid=$value[tagid]" target="_blank">$value[tagname]</a>
+		</td>
+		<td>
+			<a href="admincp.php?ac=mtag&fieldid=$value[fieldid]">{$_SGLOBAL[profield][$value[fieldid]][title]}</a>
+		</td>
+		<td>$value[creatorname]</td>
+		<td>$value[dateline]</td>
+		<td>$value[membernum]/$value[fansnum]</td>
+		<td>$value[threadnum]</td>
+		<td>$value[postnum]</td>
+	</tr>
+	<!--{/loop}-->
+	</table>
+	</div>
+	
+	<div class="footactions" style="text-align:left;line-height:2.5em;">
+		<input type="hidden" name="mpurl" value="$mpurl">
+		<input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'ids')">全选 &nbsp; 请选择操作类型：<br>
+		
+		<!--{if $_GET[view]=='audit'}-->
+			<input type="radio" name="optype" value="audit">审核<br>
+		<!--{/if}-->
+		<!--{if $_GET[view]==''}-->
+		<input type="radio" name="optype" value="delete"> 删除(群组里面的帖子也会删除)<br>
+		<input type="radio" name="optype" value="close"> 锁定
+		<input type="radio" name="optype" value="open"> 取消锁定<br>
+		<input type="radio" name="optype" value="recommend"> 推荐
+		<input type="radio" name="optype" value="unrecommend"> 取消推荐
+		<br>
+		<input type="radio" name="optype" value="move"> 转移到新分类:
+			<select name="move_newfieldid">
+			<!--{loop $_SGLOBAL[profield] $value}-->
+			<option value="$value[fieldid]">$value[title]</option>
+			<!--{/loop}-->
+			</select>
+		<br>
+		<input type="radio" name="optype" value="merge"> 合并到其他群组:
+			<select name="merge_newfieldid">
+			<!--{loop $_SGLOBAL[profield] $value}-->
+			<option value="$value[fieldid]">$value[title]</option>
+			<!--{/loop}-->
+			</select>
+			群组名：<input type="text" name="newtagname" value="" size="5">
+		<br>
+		<!--{/if}-->
+		<input type="submit" name="opsubmit" value="执行操作" onclick="return confirm('本操作不可恢复，确认继续？');" class="submit">
+	
+		<div class="pages">$multi</div>
+	</div>
+
+	</form>
+<!--{else}-->
+	<div class="bdrcontent">
+		<p>指定条件下还没有数据</p>
+	</div>
+<!--{/if}-->
+</div>
+</div>
+
+<div class="side">
+	<!--{template admin/tpl/side}-->
+</div>
+
+<!--{template admin/tpl/footer}-->

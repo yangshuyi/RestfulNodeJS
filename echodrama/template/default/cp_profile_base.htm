@@ -1,0 +1,248 @@
+<table cellspacing="0" cellpadding="0" class="formtable">
+<tr>
+	<th style="width:10em;">您的登录用户名:</th>
+	<td>
+		<!--{eval echo stripslashes($space['username']);}--> (<a href="cp.php?ac=password">修改登录密码</a>)
+	</td>
+	<td></td>
+</tr>
+<tr>
+	<th style="width:10em;">社团成员名:</th>
+	<td colspan="2">
+		<!--{if $space['namestatus']==1 }-->
+			<span>$space['name']</span>
+			<input type="hidden" id="name" name="name" value="$space[name]" class="t_input" />
+			<img src="image/locked.gif" alt="官方验证通过" height="18"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<a id="a_shownotification" href="#" onclick="javascript:popup_newname_dialog();return false;" >发消息给管理员修改你的成员名</a>。
+		<!--{else}-->
+			<input type="text" id="name" name="name" value="<!--{eval echo stripslashes($space['name']);}-->" class="t_input" />
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--{if !empty($space['name']) }-->
+			<a href="#" onclick="javascript:realname_confirm();return false;">通知管理员实名认证</a>。
+			<!--{/if}-->
+		<!--{/if}-->
+	</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<th style="width:10em;"></th>
+	<td colspan="2" id="realname_result_content">
+	</td>
+</tr>
+<tr>
+	<th style="width:10em;"></th>
+	<td colspan="2">
+		<span style="color:red">[注]此用户名将作为本人的实名认证。如有您参与过的广播剧，虫虫将会密语通知您（还未正式开通）</span>
+	</td>
+</tr>
+<tr>
+	<th style="width:10em;"></th>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+	<th style="width:10em;">性别:</th>
+	<td>
+	<!--{if empty($space[sex])}-->
+		<label for="sexm"><input id="sexm" type="radio" value="1" name="sex"$sexarr[1] />男</label> 
+		<label for="sexw"><input id="sexw" type="radio" value="2" name="sex"$sexarr[2] />女</label>
+		<span style="font-weight:bold;color:red;">(性别选择确定后，将不能再次修改)</span>
+	<!--{else}-->
+		<!--{if $space[sex]==1}-->男<!--{else}-->女<!--{/if}-->
+	<!--{/if}-->
+	</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<th style="width:10em;">婚恋状态:</th>
+	<td>
+		<select id="marry" name="marry">
+			<option value="0">&nbsp;</option>
+			<option value="1"$marryarr[1]>单身</option>
+			<option value="2"$marryarr[2]>非单身</option>
+		</select>
+		<a href="cp.php?ac=friend&op=search&view=sex" target="_blank">&raquo; 查找男女朋友</a>
+	</td>
+	<td>
+		<select name="friend[marry]">
+			<option value="0"{$friendarr[marry][0]}>全用户可见</option>
+			<option value="1"{$friendarr[marry][1]}>仅好友可见</option>
+			<option value="3"{$friendarr[marry][3]}>仅自己可见</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<th>生日:</th>
+	<td>
+		<select id="birthyear" name="birthyear" onchange="showbirthday();">
+			<option value="0">&nbsp;</option>
+			$birthyeayhtml
+		</select> 年 
+		<select id="birthmonth" name="birthmonth" onchange="showbirthday();">
+			<option value="0">&nbsp;</option>
+			$birthmonthhtml
+		</select> 月 
+		<select id="birthday" name="birthday">
+			<option value="0">&nbsp;</option>
+			$birthdayhtml
+		</select> 日
+		<a href="cp.php?ac=friend&op=search&view=birthyear" target="_blank">&raquo; 查找同生日朋友</a>
+	</td>
+	<td>
+		<select name="friend[birth]">
+			<option value="0"{$friendarr[birth][0]}>全用户可见</option>
+			<option value="1"{$friendarr[birth][1]}>仅好友可见</option>
+			<option value="3"{$friendarr[birth][3]}>仅自己可见</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<th>血型:</th>
+	<td>
+		<select id="blood" name="blood">
+			<option value="">&nbsp;</option>
+			$bloodhtml
+		</select>
+	</td>
+	<td>
+		<select name="friend[blood]">
+			<option value="0"{$friendarr[blood][0]}>全用户可见</option>
+			<option value="1"{$friendarr[blood][1]}>仅好友可见</option>
+			<option value="3"{$friendarr[blood][3]}>仅自己可见</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<th>家乡:</th>
+	<td id="birthcitybox">
+		<script type="text/javascript" src="source/script_city.js"></script>
+		<script type="text/javascript">
+		<!--
+		showprovince('birthprovince', 'birthcity', '$space[birthprovince]', 'birthcitybox');
+		showcity('birthcity', '$space[birthcity]', 'birthprovince', 'birthcitybox');
+		
+		//-->
+		</script>
+		<a href="cp.php?ac=friend&op=search&view=birth" target="_blank">&raquo; 查找老乡</a>
+	</td>
+	<td>
+		<select name="friend[birthcity]">
+			<option value="0"{$friendarr[birthcity][0]}>全用户可见</option>
+			<option value="1"{$friendarr[birthcity][1]}>仅好友可见</option>
+			<option value="3"{$friendarr[birthcity][3]}>仅自己可见</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<th>居住地:</th>
+	<td id="residecitybox">
+		<script type="text/javascript">
+		<!--
+		showprovince('resideprovince', 'residecity', '$space[resideprovince]', 'residecitybox');
+		showcity('residecity', '$space[residecity]', 'resideprovince', 'residecitybox');
+		//-->
+		</script>
+		<a href="cp.php?ac=friend&op=search&view=reside" target="_blank">&raquo; 查找同城</a>
+	</td>
+	<td>
+		<select name="friend[residecity]">
+			<option value="0"{$friendarr[residecity][0]}>全用户可见</option>
+			<option value="1"{$friendarr[residecity][1]}>仅好友可见</option>
+			<option value="3"{$friendarr[residecity][3]}>仅自己可见</option>
+		</select>
+	</td>
+</tr>
+<!--{loop $profilefields $value}-->
+<tr>
+	<th>$value[title]<!--{if $value[required]}-->*<!--{/if}-->:</th>
+	<td>
+		$value[formhtml]
+		<!--{if $value[note]}--> <span class="gray">$value[note]</span><!--{/if}-->
+	</td>
+	<td>
+		<select name="friend[field_{$value[fieldid]}]">
+		<!--{eval $field_friendarr = $friendarr["field_$value[fieldid]"];}-->
+			<option value="0"{$field_friendarr[0]}>全用户可见</option>
+			<option value="1"{$field_friendarr[1]}>仅好友可见</option>
+			<option value="3"{$field_friendarr[3]}>仅自己可见</option>
+		</select>
+	</td>
+</tr>
+<!--{/loop}-->
+
+<tr>
+	<th style="width:10em;">&nbsp;</th>
+	<td>
+	<input type="submit" name="nextsubmit" value="继续下一项" class="submit" />
+	<input type="submit" name="profilesubmit" value="保存" class="submit" />
+	</td>
+	<td>&nbsp;</td>
+</tr>
+</table>
+
+<div id="flowDiv" class="flowDiv" style="position:absolute;z-index=99999;background-color:#EEEEEE;padding:5px;border: 5px solid #FF8E00;">
+<div class="popupmenu_inner">
+	<table cellspacing="0" cellpadding="3">
+	<tr>
+		<th style="vertical-align: top;" nowrap><label for="message">你要修改的社团成员名为：</label></th>
+	</tr>
+	<tr>
+		<td><input type="text" id="newname" name="newname" onkeydown="ctrlEnter(event, 'pmsubmit_btn');"/></td>
+	</tr>
+	<tr>
+		<td>
+		<input type="button" name="pmsubmit_btn" id="pmsubmit_btn" value="发送" class="submit" onclick="javascript:realname_change();" />
+		<input type="button" name="pmclose_btn" id="pmclose_btn" value="取消" class="submit" onclick="javascript:hiddenNotification();" />
+		</td>
+	</tr>
+	</table>
+</div>
+</div>
+
+<script type="text/javascript">
+	hiddenNotification();
+	
+	function getoffset(e) {
+		var t = e.offsetTop;
+		var l = e.offsetLeft;
+		while (e = e.offsetParent) {
+			t += e.offsetTop;
+			l += e.offsetLeft;
+		}
+		var rec = new Array(1);
+		rec[0] = t;
+		rec[1] = l;
+		return rec;
+	}
+
+	function popup_newname_dialog() {
+		var div = $('flowDiv'); //将要弹出的层   
+		var btn = $('a_shownotification'); //将要弹出的层   
+
+		div.style.display = "block"; //div3初始状态是不可见的，设置可为可见   
+		//div.style.left = event.clientX + document.documentElement.scrollLeft-350;
+		div.style.left = getoffset(btn)[1]+180+"px";
+	
+		div.style.width = 250;
+		div.style.top = getoffset(btn)[0]-5+"px";
+		div.style.height = 50;
+	}
+
+	function realname_confirm() {
+		ajaxget('cp.php?ac=profile&op=realname_confirm_pm', 'realname_result_content');
+	}
+	function realname_change() {
+		var newname = $("newname").value;
+		if(newname.trim().length==0){
+			alert("请输入新的成员名");
+			return;
+		}
+		ajaxget('cp.php?ac=profile&op=realname_change_pm&newname='+newname, 'realname_result_content');
+		hiddenNotification();
+	}
+	
+	function hiddenNotification() {
+		var div = $('flowDiv'); //将要弹出的层   
+		div.style.display = "none"; //div3初始状态是不可见的，设置可为可见   
+	}
+</script>

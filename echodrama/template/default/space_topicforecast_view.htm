@@ -1,0 +1,142 @@
+<!--{eval $_TPL['titles'] = array($topic[subject],'广播剧预告');}-->
+<!--{template header}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="space.php?do=topic&topicforecastid=$topicforecastid"><span>查看广播剧预告</span></a></li>
+		<li><a href="space.php?do=topic&view=forecast"><span>广播剧预告列表</span></a></li>
+	</ul>
+</div>
+
+<div id="content" style="width: 540px;">
+
+	<!--{template cp_topicforecast_view}-->
+
+	<div class="comments" id="div_main_content">
+		<h2><a href="#quickcommentform" class="r_option">发表评论</a> 评论 (<span id="comment_replynum">$topicforecast[replynum]</span> 个评论)</h2>
+		<div class="page">$multi</div>
+		<div class="comments_list" id="comment">
+			<ul id="comment_ul">
+				<!--{loop $commentlist $value}-->
+				<!--{template space_comment_li}-->
+				<!--{/loop}-->
+			</ul>
+		</div>
+		<div class="page">$multi</div>
+		<form id="quickcommentform" name="quickcommentform" action="cp.php?ac=comment" method="post" class="quickpost">
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<a href="###" id="comment_face" title="插入表情" onclick="showFace(this.id, 'comment_message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a> 
+						<br/>
+						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width: 500px;"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="hidden" name="refer" value="#" /> 
+						<input type="hidden" name="id" value="$topicforecastid"> 
+						<input type="hidden" name="idtype" value="topicforecastid"> 
+						<input type="hidden" name="commentsubmit" value="true" /> 
+						<input type="button" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="评论" onclick="ajaxpost('quickcommentform', 'comment_add')" />
+						<div id="__quickcommentform"></div>
+					</td>
+				</tr>
+			</table>
+			<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"
+		</form>
+		<br/>
+	</div>
+</div>
+<div id="sidebar" style="width: 250px;">
+
+	<!--{if $_SGLOBAL['supe_uid'] == $topicforecast[uid] }-->
+	<div id="topicforecast_operate_content" class="sidebox">
+		<h2 class="title">广播剧预告处理</h2>
+		<table width="100%">
+			<tr>
+				<td align="center">
+					<input type="button" id="editforecast_btn" name="editforecast_btn" class="submit" value="编辑　预告" onclick="javascript:posteditforecast();" />
+					<script type="text/javascript">
+						function posteditforecast() {
+							window.location.href="cp.php?ac=topic&op=editforecast&topicforecastid=$topicforecast[topicforecastid]";
+						}
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<input type="button" id="newfromforecast_btn" name="newfromforecast_btn" class="submit" value="生成广播剧" onclick="javascript:postnewfromforecast();" />
+					<script type="text/javascript">
+						function postnewfromforecast() {
+							window.location.href="cp.php?ac=topic&op=newfromforecast&topicforecastid=$topicforecast[topicforecastid]";
+						}
+					</script>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!--{/if}-->
+
+	<!--{if $_SGLOBAL['supe_uid']>0 }-->
+	<div id="topicforecast_join_content" class="sidebox">
+		<!--{template space_topicforecast_join}-->
+	</div>
+	
+	<script type="text/javascript">
+	function setJoin() {
+		var offset = 0;
+		var duration = 3;
+		
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+		
+		showloading();
+		
+		var form = $('actionForm');
+		form.action="cp.php?ac=topic&op=jointopicforecast&topicforecastid=$topicforecast[topicforecastid]&tojoin=1";
+		ajaxpost('actionForm', 'renderJoin', 2000);
+	}
+
+	function removeJoin() {
+		var offset = 0;
+		var duration = 3;
+		
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+		
+		showloading();
+
+		var form = $('actionForm');
+		form.action="cp.php?ac=topic&op=jointopicforecast&topicforecastid=$topicforecast[topicforecastid]&tojoin=0";
+		ajaxpost('actionForm', 'renderJoin', 2000);
+	}
+
+	function renderJoin(id, result) {
+	  	$("__actionForm").style.display = 'none';		
+		
+		if(result!=null){
+			var str=$("__actionForm").innerHTML;
+			var paramsArray=str.split(",");
+			if(paramsArray.length>1){
+				ajaxget('cp.php?ac=topic&op=viewtopicforcastjoin&topicforecastid=$topicforecast[topicforecastid]', 'topicforecast_join_content');
+			}
+		}
+	}
+	</script>				
+	<!--{/if}-->	
+	<div class="sidebox">
+		<h2 class="title">统计信息</h2>
+		<ul class="news_list">
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$topicforecast[viewnum]&nbsp;次访问</li>
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$topicforecast[joinnum]&nbsp;次关注</li>
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$topicforecast[replynum]&nbsp;次评论</li>
+		</ul>
+	</div>
+</div>
+	
+<!--{template footer}-->

@@ -1,0 +1,50 @@
+<h1>编辑</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner">
+
+	<form id="editpostform_{$pid}" name="editpostform_{$pid}" method="post" action="cp.php?ac=thread&op=edit&pid=$pid&tagid=$tagid&eventid=$eventid">
+		<table>
+			<tr>
+				<th style="vertical-align: top;"><label for="message">内容：</label></th>
+				<td>
+					<a href="###" id="face_{$pid}" onclick="showFace(this.id, 'message_{$pid}');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
+					<img src="image/zoomin.gif" onmouseover="this.style.cursor='pointer'" onclick="zoomTextarea('message_{$pid}', 1)">
+					<img src="image/zoomout.gif" onmouseover="this.style.cursor='pointer'" onclick="zoomTextarea('message_{$pid}', 0)"><br/>
+					<textarea id="message_{$pid}" name="message" onkeydown="ctrlEnter(event, 'posteditsubmit_btn');" <!--{if $post['isthread']}-->rows="18" style="width:98%;"<!--{else}-->rows="8" cols="50"<!--{/if}-->>$post[message]</textarea>
+				</td>
+			</tr>
+			<tbody id="editwebimg">
+				<tr>
+					<th>图片：</th>
+					<td>
+						<input class="t_input" type="text" onfocus="if(this.value == 'http://')this.value='';" onblur="if(this.value=='')this.value='http://'" name="pics[]" value="http://" size="40" />&nbsp;
+						<a href="javascript:;" onclick="insertWebImg(this.previousSibling.previousSibling)">插入</a> &nbsp;
+						<a href="javascript:;" onclick="delRow(this, 'editwebimg')">删除</a>
+					</td>
+				</tr>
+			</tbody>
+			<tr>
+				<th>&nbsp;</th>
+				<td>
+					<a href="javascript:;" onclick="copyRow('editwebimg')">+增加图片</a> <span class="gray">只支持 .jpg、.gif、.png为结尾的URL地址</span>
+				</td>
+			</tr>
+			<tr>
+				<th>&nbsp;</th>
+				<td>
+				<input type="hidden" name="pid" value="$pid">
+				<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+				<input type="hidden" name="posteditsubmit" value="true" />
+				<!--{if $_SGLOBAL[inajax]}-->
+				<input type="button" name="posteditsubmit_btn" id="posteditsubmit_btn" value="提交" class="submit" onclick="ajaxpost('editpostform_{$pid}', 'post_edit', 1)" />
+				<!--{else}-->
+				<input type="submit" name="posteditsubmit_btn" id="posteditsubmit_btn" value="提交" class="submit" />
+				<!--{/if}-->
+				
+				<div id="__editpostform_{$pid}"></div>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	</form>
+</div>

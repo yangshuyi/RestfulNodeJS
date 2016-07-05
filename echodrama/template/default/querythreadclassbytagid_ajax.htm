@@ -1,0 +1,6 @@
+<select name="threadclassid" id="threadclassid">
+	<option value="-1">请选择话题类型</option>
+	<!--{loop $threadclasslist $value}-->
+		<option value="$value[classid]">$value[classname]</option>
+	<!--{/loop}-->
+</select>

@@ -1,0 +1,95 @@
+<table width="100%" border="0" cellpadding="0" cellspacing="10" >
+	<tr>
+    	<td>
+			<!--{loop $mtag_latest_list $key $value}-->
+        	<table width="465px" border="0" cellpadding="0" cellspacing="0" style="background-color:#ededed;line-height:20px;height:100%;">
+        		<tr>
+            		<td align="left" valign="top">
+            			<img src="template/default/image/portal/mtag_new_title.gif" />
+            		</td>
+            		<td valign="top" style="padding:10px;">
+            			<div class="picborder"><div style="width:60px; height:60px;"><img src="$value[picpath]" width="60" height="60" /></div></div>
+            		</td>
+            		<td valign="top" width="99%" style="padding:10px;">
+           				<h2><a href="space.php?do=mtag&tagid=$value[tagid]" title="$value[tagname]" target="_blank">$value[tagname]</a></h2>
+                		<span class="gray">群组团长：</span><span class="black">{$value[creatorname]}<!--{if !empty($value[realname])}-->[{$value[realname]}]<!--{/if}--></span><br/>
+                		<span class="gray">成员/粉丝:</span><span class="black">$value[membernumdisplayvalue]/$value[fansnumdisplayvalue]</span><br/>
+                	</td>
+            	</tr>
+        		<tr height="40px">
+        			<td valign="top">&nbsp;</td>
+            		<td colspan="2" class="egz" align="center" valign="top"><h2 class="egz">$value[message]</h2></td>
+            	</tr>
+        	</table>
+        	<!--{/loop}-->
+		</td>
+    	<td>
+			<!--{loop $mtag_hot_list $key $value}-->
+        	<table width="465px" border="0" cellpadding="0" cellspacing="0" style="background-color:#ededed;line-height:20px;height:100%;">
+        		<tr>
+            		<td align="left" valign="top">
+            			<img src="template/default/image/portal/mtag_hot_title.gif" />
+            		</td>
+            		<td valign="top" style="padding:10px;">
+            			<div class="picborder"><div style="width:60px; height:60px;"><img src="$value[picpath]" width="60" height="60" /></div></div>
+            		</td>
+            		<td valign="top" width="99%" style="padding:10px;">
+           				<h2><a href="space.php?do=mtag&tagid=$value[tagid]" title="$value[tagname]" target="_blank">$value[tagname]</a></h2>
+                		<span class="gray">群组团长：</span><span class="black">{$value[creatorname]}<!--{if !empty($value[realname])}-->[{$value[realname]}]<!--{/if}--></span><br/>
+                		<span class="gray">成员/粉丝:</span><span class="black">$value[membernumdisplayvalue]/$value[fansnumdisplayvalue]</span><br/>
+                	</td>
+            	</tr>
+        		<tr height="40px">
+        			<td valign="top">&nbsp;</td>
+            		<td colspan="2" class="egz" align="center" valign="top"><h2 class="egz">$value[message]</h2></td>
+            	</tr>
+        	</table>
+        	<!--{/loop}-->
+		</td>
+	</tr>
+</table>		
+        
+<table cellspacing="4" cellpadding="4" width="100%">
+	<!--{eval $index=0; }-->
+	<!--{loop $mtag_fans_list $key $value}-->
+			<!--{if $index==0 }-->
+				<!--{eval $left=$value; }-->
+				<!--{eval $index=$index+1; }-->
+			<!--{elseif $index==1 }-->
+				<!--{eval $center=$value; }-->
+				<!--{eval $index=$index+1; }-->
+			<!--{else}-->
+				<!--{eval $right=$value; }-->
+				<!--{eval $index=0; }-->
+				<tr>
+					<td align="center">
+						<div class="picborder" style="width:60px; height:60px;"><a href="space.php?do=mtag&tagid=$left[tagid]" title="$left[tagname]" target="_blank"><img src="$left[picpath]" width="60" height="60" /></a></div>
+					</td>
+					<td align="left" valign="top">
+						<h3><a href="space.php?do=mtag&tagid=$left[tagid]" title="$left[tagname]" target="_blank">$left[tagnamelimit]</a></h3>
+						<p><span class="gray">群组团长:</span>$left[realname]</p>
+						<p><span class="gray">成员/粉丝:</span>$left[membernumdisplayvalue]/$left[fansnumdisplayvalue]</p>
+						<p><span class="gray">话题/回帖:</span>$left[threadnumdisplayvalue]/$left[postnumdisplayvalue]</p>
+					</td>
+					<td align="center">
+						<div class="picborder" style="width:60px; height:60px;"><a href="space.php?do=mtag&tagid=$center[tagid]" title="$center[tagname]" target="_blank"><img src="$center[picpath]" width="60" height="60" /></a></div>
+					</td>
+					<td align="left" valign="top">
+						<h3><a href="space.php?do=mtag&tagid=$center[tagid]" title="$center[tagname]" target="_blank">$center[tagnamelimit]</a></h3>
+						<p><span class="gray">群组团长:</span>$center[realname]</p>
+						<p><span class="gray">成员/粉丝:</span>$center[membernumdisplayvalue]/$center[fansnumdisplayvalue]</p>
+						<p><span class="gray">话题/回帖:</span>$center[threadnumdisplayvalue]/$center[postnumdisplayvalue]</p>
+					</td>
+					<td align="center">
+						<div class="picborder" style="width:60px; height:60px;"><a href="space.php?do=mtag&tagid=$right[tagid]" title="$right[tagname]" target="_blank"><img src="$right[picpath]" width="60" height="60" /></a></div>
+					</td>
+					<td align="left" valign="top">
+						<h3><a href="space.php?do=mtag&tagid=$right[tagid]" title="$right[tagname]" target="_blank">$right[tagnamelimit]</a></h3>
+						<p><span class="gray">团长:</span>$right[realname]</p>
+						<p><span class="gray">成员/粉丝:</span>$right[membernumdisplayvalue]/$right[fansnumdisplayvalue]</p>
+						<p><span class="gray">话题/回帖:</span>$right[threadnumdisplayvalue]/$right[postnumdisplayvalue]</p>
+					</td>
+				</tr>
+			<!--{/if}-->
+	<!--{/loop}-->
+</table>

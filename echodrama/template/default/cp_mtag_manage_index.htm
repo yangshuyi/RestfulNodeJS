@@ -1,0 +1,136 @@
+<!--{template cp_mtag_manageheader}-->
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="actionform" name="actionform" method="post" action="">
+	
+	<table cellspacing="4" cellpadding="4" class="formtable">
+	<tr>
+		<th width="150" nowrap>群组名　　　： </th>
+		<td>$mtag[tagname]</td>
+	</tr>
+	<tr>
+		<th width="150" nowrap>群组签名　　： </th>
+		<td>
+			<input type="text" id="message" name="message" value="$mtag[message]" size="80" maxlength="80" />
+		</td>
+	</tr>
+	<!--{if $mtag[fieldid]==1}-->
+	<!--{/if}-->
+	
+	<!--{if $mtag[fieldid]==2}-->
+	<tr>
+		<th width="150" nowrap>所属社团编号： </th>
+		<td align="left" >
+			<input type="text" id="relatedclubtagid" name="relatedclubtagid" <!--{if $mtag[relatedclubtagid]>0 }-->value="$mtag[relatedclubtagid]"<!--{/if}--> size="8" maxlength="8" onchange="javascript:loadmtagbyid_ajax(1);">
+			<a href="#" onclick="javascript:mtagquerymds(1);">查询</a>		
+		</td>
+	</tr>
+	<tr>
+		<th width="150" nowrap>&nbsp;</th>
+		<td align="left" >
+			如果该社团群组已存在的情况下，请查询并填写该社团群组编号，以便系统将该广播剧群组和社团群组进行动态关联。
+		</td>
+	</tr>
+	<tr>
+		<th width="150" nowrap>所属社团名称： </th>
+		<td align="left" >
+			<input type="text" id="relatedclubtagname" name="relatedclubtagname" value="$mtag[relatedclubtagname]" size="40" maxlength="40" onchange="javascript:clearrelatedclubtagid(1);">
+		</td>
+	</tr>
+	
+	<!--{/if}-->		
+	
+	<tr>
+		<th width="150" nowrap>群组公告　　：*</th>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="announcement" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$mtag[announcement]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+		<input type="button" name="basesubmit" value="提交保存" class="submit" onclick="javascript:postindex();"/>&nbsp;
+		</td>
+	</tr>
+	</table>
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+	function postindex(){
+		var form=$('actionform');
+		//
+		
+		edit_save();
+	
+		// 群组公告
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("群组公告不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+		
+		form.action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=index";
+		form.submit();	
+	}
+
+	function clearrelatedclubtagid(){
+		$("relatedclubtagid").value="";
+	}
+
+	function mtagquerymds(fieldid){
+		var args=new Object();
+		args.window=window;
+			
+		window.showModalDialog("cp.php?ac=mtag&op=querymds&widget=relatedclubtagid&id="+$('relatedclubtagid').value+"&lockfieldid="+fieldid,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+		loadmtagbyid_ajax(fieldid);
+	}
+			
+	function loadmtagbyid_ajax(fieldid){
+		var offset = 0;
+		var duration = 3;
+					
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+					
+		showloading();
+			
+		var form = $('ajaxform');
+	
+		form.action="cp.php?ac=mtag&op=loadmtagbyid_ajax&tagid="+$('relatedclubtagid').value+"&lockfieldid="+fieldid;
+		form.method="post";
+				
+		ajaxpost('ajaxform', 'loadmtagbyid_ajax_response', 2000);
+	}
+
+	function loadmtagbyid_ajax_response(){
+			
+		var tagid="";
+		var tagname="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+					
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				$("relatedclubtagid").value="";
+				$("relatedclubtagname").value="";
+			}else{
+				tagid=paramsArray[0];
+				tagname=paramsArray[1];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+				
+		$("relatedclubtagid").value=tagid;
+		$("relatedclubtagname").value=tagname;
+	}
+</script>
+</form>
+<!--{template cp_mtag_managefooter}-->

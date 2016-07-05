@@ -1,0 +1,396 @@
+<div class="c_form">
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<form id="actionform" name="actionform" method="post" action="" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]"/>
+<input type="hidden" id="topicalbumid" name="topicalbumid" value="$topicalbum[topicalbumid]"/>
+<input type="hidden" id="op" name="op" value=""/>
+<input type="hidden" id="bindingtopicids" name="bindingtopicids" value=""/>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+<!--{if !empty($topicalbum[topicid])}-->
+	<tr>
+		<th align="left" width="100">&nbsp;</th>
+		<td align="right">
+			<ul>
+				<li class="gray">专辑编号: $topicalbum[topicid]</li>
+			</ul>
+		</td>
+	</tr>
+<!--{/if}-->
+	<tr>
+		<th align="left" width="100" nowrap>专辑名 *</th>
+		<td>
+			<input type="text" id="subject" name="subject" value="$topicalbum[subject]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th align="left" width="100" nowrap>标签 *</th>
+		<td>
+			<input type="text" id="label" name="label" value="$topicalbum[label]" size="80" maxlength="100" />
+		</td>
+	</tr>
+<!--{if !empty($topicalbum[topicid])}-->
+	<tr>
+		<th align="left" width="100">&nbsp;</th>
+		<td align="left">
+			<!--{if $topicalbum[pic]}-->
+				<img src="$topicalbum[pic]" alt="$topicalbum[subject]" width="490"/><br/>
+			<!--{else}-->	
+  				对不起，该作品剧照已被删除。
+  			<!--{/if}-->
+		</td>
+	</tr>
+<!--{else}-->
+	<tr>
+		<th align="left" width="100">剧照 *</th>
+		<td>
+			<input type="file" id="pic" name="pic" value="" size="70"/>
+		</td>
+	</tr>
+<!--{/if}-->
+	<tr>
+		<th align="left" width="100">作品简介*</th>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$topicalbum[message]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	<tr>
+		<th align="left" width="100">作品类型 *</th>
+		<td><select name="productclassid" id="productclassid">
+			<option value="-1">请选择作品类型</option>
+			<!--{loop $_SGLOBAL[productclass] $key $value}-->
+			<option value="$key"<!--{if $topicalbum[productclassid] == $key}-->
+			selected<!--{/if}--> >$value[classname]</option>
+			<!--{/loop}-->
+		</select></td>
+	</tr>
+	<tr>
+		<th align="left" width="100">所属社团 *</th>
+		<td>
+			<input type="text" id="club" name="club" value="$topicalbum[club]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th></th>
+		<td>
+			成员与成员之间，请用'/'隔开。
+		</td>
+	</tr>
+	<tr>
+		<th align="left" width="100">导演</th>
+		<td>
+			<input type="text" id="director" name="director" value="$topicalbum[director]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th>监制</th>
+		<td>
+			<input type="text" id="producer" name="producer" value="$topicalbum[producer]"	size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<th>策划</th>
+		<td>
+			<input type="text" id="cehua" name="cehua" value="$topicalbum[cehua]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th>原著</th>
+		<td>
+			<input type="text" id="yuanzhu" name="yuanzhu" value="$topicalbum[yuanzhu]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th align="left" width="100">编剧</th>
+		<td>
+			<input type="text" id="writer" name="writer" value="$topicalbum[writer]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th align="left" width="100">CAST</th>
+		<td>
+			<input type="text" id="cast" name="cast" value="$topicalbum[cast]" size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<th>后期制作</th>
+		<td>
+			<input type="text" id="effector" name="effector" value="$topicalbum[effector]"	size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<th>美工</th>
+		<td>
+			<input type="text" id="photographer" name="photographer" value="$topicalbum[photographer]"	size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<th align="left" width="100">完结时间</th>
+		<td>
+			<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+			<input type="text" id="producedate" name="producedate" value="$topicalbum[producedate]"  onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+		</td>
+	</tr>
+</table>
+<table cellspacing="4" cellpadding="4" width="100%" class="reclisttable">
+	<tr>
+		<th height="40px" align="center" colspan="2" nowrap>相关广播剧列表</th>
+	</tr>
+	<tr>
+		<td id="topic_list_content" align="center" colspan="2" >
+			<script type="text/javascript">
+				function topic_load(){
+					ajaxget('cp.php?ac=topicalbum&op=listtopic&topicalbumid=$topicalbum[topicid]', 'topic_list_content');
+				}
+				topic_load();
+			</script>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2" nowrap>
+			<input type="button" name="topicalbumsubmit" 	value="　保存　" class="submit" onclick="savetopicalbum();"/>
+			<input type="button" name="topicalbumdelete" 	value="　删除　" class="submit" onclick="deletetopicalbum();"/>
+			<!-- input type="button" name="topicalbumsyn" 		value="论坛同步" class="submit" onclick="syntopicalbum();"/ -->
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+</form>
+</div>
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+
+	function addtopic(){
+		if ($("topicid").value.length <=0) {
+			alert("请输入广播剧ID");
+			$("topicid").focus();
+			return false;
+		}
+		var newtopicid=$("topicid").value
+
+		var topicids=$("topicids").value;
+		var newtopicids="";
+		var array=topicids.split(",");
+		for(var i=0;i<array.length;i++){
+			var topicid=array[i];
+			if(newtopicid==topicid){
+				continue;
+			}
+			if(topicid!="" && newtopicids.indexOf(topicid)<0){
+				newtopicids=newtopicids+topicid+",";
+			}
+		}
+
+		newtopicids=newtopicids+$("topicid").value;
+		$("topicids").value=newtopicids;
+		
+		ajaxget('cp.php?ac=topicalbum&op=refreshtopic&topicalbumid=$topicalbum[topicalbumid]&topicids='+newtopicids, 'topic_list_content');
+	}
+
+	function removetopic(removetopicid){
+		if(confirm("你确定要移除该广播剧吗？")){
+			var topicids=$("topicids").value;
+			var newtopicids="";
+			var array=topicids.split(",");
+			for(var i=0;i<array.length;i++){
+				var topicid=array[i];
+				if(removetopicid==topicid){
+					continue;
+				}
+				if(topicid!="" && newtopicids.indexOf(topicid)<0){
+					newtopicids=newtopicids+topicid+",";
+				}
+			}
+			if(newtopicids.length>0){
+				newtopicids=newtopicids.substr(0,newtopicids.length-1);
+			}
+			$("topicids").value=newtopicids;
+		}
+
+		ajaxget('cp.php?ac=topicalbum&op=refreshtopic&topicalbumid=$topicalbum[topicalbumid]&topicids='+newtopicids, 'topic_list_content');
+	}
+	
+	function topicquerymds(){
+		var args=new Object();
+		args.window=window;
+		
+		window.showModalDialog("cp.php?ac=topic&op=querymds&widget=topicid&id="+$('topicid').value,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+		loadtopicsinglebyid_ajax();
+	}
+	
+	function loadtopicsinglebyid_ajax(){
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+			
+		showloading();
+			
+		var form = $('ajaxform');
+	
+		form.action="cp.php?ac=topic&op=loadtopicsinglebyid_ajax&topicid="+$('topicid').value;
+		form.method="post";
+		
+		ajaxpost('ajaxform', 'loadtopicsinglebyid_ajax_response', 2000);
+	}
+	
+	function loadtopicsinglebyid_ajax_response(){
+		
+		var subject="";
+		var productclassname="";
+		var club="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+			
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				$("topicid").value="";
+				$("topicsubject").value="";
+				$("topicproductclassname").value="";
+				$("topicclub").value="";
+			}else{
+				subject=paramsArray[1];
+				productclassname=paramsArray[3];
+				club=paramsArray[4];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("topicsubject").value=subject;
+		$("topicproductclassname").value=productclassname;
+		$("topicclub").value=club;
+		
+	}
+	//删除
+	function deletetopicalbum() {
+		if(confirm("你确定要删除该专辑吗？")){
+			$("actionform").action="admincp.php?ac=topicalbum&op=delete&topicalbumid=$topicalbumid";
+			$("actionform").submit();
+		}
+	}
+
+	//发布
+	function syntopicalbum() {
+		if(confirm("你确定要发布该专辑吗？")){
+			$("actionform").action="cp.php?ac=topicalbum&op=syn&topicalbumid=$topicalbumid";
+			$("actionform").submit();
+		}
+	}
+	
+	//检查提交
+	function savetopicalbum() {
+
+		// 标题
+		if ($("subject").value.trim() == "") {
+			alert("专辑名不能为空！");
+			$("subject").focus();
+			return false;
+		} else if ($("subject").value.trim().length > 80) {
+			alert("专辑名太长，请限制在80个字符内！");
+			$("subject").focus();
+			return false;
+		}
+		
+		// 编辑器内容同步
+		edit_save();
+		
+		// 作品简介
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("作品简介不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+
+		// 作品类型
+		if (parseInt($("productclassid").value) < 0) {
+			alert("作品类型必须选择。");
+			$("productclassid").focus();
+			return false;
+		}
+
+		// 所属社团	
+		if ($("club").value.trim() == "") {
+			alert("所属社团输入不能为空！");
+			$("club").focus();
+			return false;
+		} else if ($("club").value.trim().length > 100) {
+			alert("所属社团输入太长，请限制在100个字符内！");
+			$("club").focus();
+			return false;
+		}
+
+		// 导演	
+		if ($("director").value.trim().length > 100) {
+			alert("导演输入太长，请限制在100个字符内！");
+			$("director").focus();
+			return false;
+		}
+		
+		// 监制
+		if ($("producer").value.trim().length > 200) {
+			alert("监制输入太长，请限制在200个字符内！");
+			$("producer").focus();
+			return false;
+		}
+		
+		// 原著
+		if ($("yuanzhu").value.trim().length > 100) {
+			alert("原著输入太长，请限制在100个字符内！");
+			$("yuanzhu").focus();
+			return false;
+		}
+
+		// 策划
+		if ($("cehua").value.trim().length > 100) {
+			alert("策划输入太长，请限制在100个字符内！");
+			$("cehua").focus();
+			return false;
+		}
+
+
+		// 编剧
+		if ($("writer").value.trim().length > 100) {
+			alert("编剧输入太长，请限制在100个字符内！");
+			$("writer").focus();
+			return false;
+		}
+
+		// CAST
+		if ($("cast").value.trim().length > 200) {
+			alert("CAST输入太长，请限制在200个字符内！");
+			$("cast").focus();
+			return false;
+		}
+
+		// 后期制作
+		if ($("effector").value.trim().length > 200) {
+			alert("后期制作输入太长，请限制在200个字符内！");
+			$("effector").focus();
+			return false;
+		}
+		
+		// 美工
+		if ($("photographer").value.trim().length > 200) {
+			alert("美工输入太长，请限制在200个字符内！");
+			$("photographer").focus();
+			return false;
+		}
+
+		//作品
+		if ($("topicids").value.trim().length > 200) {
+			alert("请至少选择一部作品！");
+			return false;
+		}
+		
+
+		$("actionform").method="post";
+		$("actionform").action="admincp.php?ac=topicalbum&op=save&topicalbumid=$topicalbum[topicid]";
+		$("actionform").submit();
+	}
+</script>

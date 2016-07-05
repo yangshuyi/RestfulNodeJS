@@ -1,0 +1,144 @@
+<div class="mainarea">
+<form id="actionform" name="actionform" method="post" action="admincp.php?ac=topicalbum&op=saveorders">
+	<input type="hidden" id="orders" name="orders" value=""/>
+	<input type="hidden" id="op" name="op" value="saveorder"/>
+	<div class="maininner">
+		<div class="tabs_header">
+			<ul class="tabs">
+				<li$actives[album]><a href="admincp.php?ac=topicalbum&op=list&view=album"><span>完结广播剧专辑列表</span></a></li>
+				<li$actives[order]><a href="admincp.php?ac=topicalbum&op=order&view=order"><span>定制排序显示方式</span></a></li>
+				<li class="null"><a href="admincp.php?ac=topicalbum&op=new">添加新专辑</a></li>
+			</ul>
+		</div>
+		<div style="width:830px;  height:210px;  border:none;  overflow-x:scroll;">
+			<table border=1>
+				<tbody id="topicalbumtbody">
+					<tr id="topicalbumtr">
+						<!--{loop $topicalbumlist $key $value}-->
+						<td id="topicalbumtd_$value[topicid]" align="center" nowrap>
+							<p><a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" target="_blank"><img alt="$value[subject]" src="$value[picthumb]" height="120px"/></a></p>
+							<h3 style="clear:both;"><a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" target="_blank"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></a></h3>
+							<p class="gray">$value[club]&nbsp;发布</p>
+							<input type="radio" name="ids[]" value="$value[topicid]"/>
+						</td>
+						<!--{/loop}-->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="width:840px; height:50px; margin-top:20px;" align="center">
+			&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="left" class="submit" value="《" onclick="javascript:turnleft();"/>&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="save" class="submit" value="保存" onclick="javascript:orderpost();"/>&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="right" class="submit" value="》" onclick="javascript:turnright();"/>&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>
+	</div>
+</form>
+</div>
+
+<script type="text/javascript">
+function orderpost(){
+	var form = $('actionform');
+	var order="";
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.type=="radio") {
+			order=order+e.value+",";
+		}
+	}
+	$('orders').value=order;
+	form.submit();
+}
+function turnleft(){
+	var form = $('actionform');
+	var TR = $('topicalbumtr');
+
+	var element;
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.type=="radio") {
+			if(e.checked){
+				element=e;
+				break;
+			}	
+		}
+	}
+	if(element==null){
+		alert("请选择某一完结专辑！");
+		return;
+	}
+
+	var topicalbumid=element.value;
+	var tdid="topicalbumtd_"+topicalbumid;
+	var selectedTD=document.getElementById(tdid);
+	var selectedTDIndex=selectedTD.cellIndex;
+	if(selectedTDIndex==0){
+		return;
+	}
+
+	var value=selectedTD.innerHTML;
+	
+	TR.deleteCell(selectedTDIndex);
+	var newTD=TR.insertCell(selectedTDIndex-1); 
+
+	//<td id="topicalbumtd_$value[topicid]" align="center" nowrap>
+	newTD.setAttribute("id", selectedTD.id);
+	newTD.setAttribute("align", "center");
+	newTD.setAttribute("nowrap", "true");
+	newTD.innerHTML = value;
+
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.type=="radio" && e.value==topicalbumid) {
+			e.checked=true;
+		}
+	}
+}
+
+function turnright(){
+	var form = $('actionform');
+	var TR = $('topicalbumtr');
+
+	var element;
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.type=="radio") {
+			if(e.checked){
+				element=e;
+				break;
+			}	
+		}
+	}
+	if(element==null){
+		alert("请选择某一完结专辑！");
+		return;
+	}
+
+	var topicalbumid=element.value;
+	var tdid="topicalbumtd_"+topicalbumid;
+	var selectedTD=document.getElementById(tdid);
+	var selectedTDIndex=selectedTD.cellIndex;
+	if(selectedTDIndex>=(TR.cells.length-1)){
+		return;
+	}
+
+	var value=selectedTD.innerHTML;
+	
+	TR.deleteCell(selectedTDIndex);
+	var newTD=TR.insertCell(selectedTDIndex+1); 
+
+	//<td id="topicalbumtd_$value[topicid]" align="center" nowrap>
+	newTD.setAttribute("id", selectedTD.id);
+	newTD.setAttribute("align", "center");
+	newTD.setAttribute("nowrap", "true");
+	newTD.innerHTML = value;
+
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.type=="radio" && e.value==topicalbumid) {
+			e.checked=true;
+		}
+	}
+}
+
+</script>
+

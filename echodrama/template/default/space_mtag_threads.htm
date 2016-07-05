@@ -1,0 +1,107 @@
+<!--{template space_mtagheader}-->
+<form id="actionform" name="actionform" method="get" action="space.php"/>
+<table id="thread_types" cellspacing="0" cellpadding="5" border=0>
+	<tr height="50">
+		<td nowrap><span style="height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; ">话题类型：</span></td>
+	<!--{if empty($_GET[threadclassid]) }-->
+		<td style="font-weight:700" nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; background: none repeat scroll 0 0 #E5EDF2; border-color: #336699; color: #336699; "
+	<!--{else}-->
+		<td nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; " 
+	<!--{/if}-->
+		href="{$theurl}&view=listall&threadclassid=0">全部</a></td>
+	<!--{loop $threadclasslist $value}-->
+		<!--{if $value[classid] == $_GET[threadclassid]}-->
+		<td style="font-weight:700" nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; background: none repeat scroll 0 0 #E5EDF2; border-color: #336699; color: #336699; "
+		<!--{else}-->
+		<td nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; " 
+		<!--{/if}-->
+		href="{$theurl}&threadclassid=$value[classid]">$value[classname]</a></td>
+	<!--{/loop}-->
+		<td width="100%" align="right">
+			<table><tr><td><div class="addbuttonouterdiv"><div class="addbuttoninnerdiv">
+				<a href="cp.php?ac=thread&tagid=$mtag[tagid]" class="addbutton" title="发表话题">发表话题</a>
+			</div></div></td></tr></table>
+		</td>
+	</tr>
+</table>
+
+<table cellspacing="0" cellpadding="0" width="100%">
+	<tr height="30px">
+		<td valign="top" colspan="2">
+			<input type="hidden" id="do" name=do value="mtag"/>
+			<input type="hidden" id="tagid" name="tagid" value="$mtag[tagid]"/>
+			<input type="hidden" id="view" name="view" value="threads"/>
+			
+			<input type="hidden" id="threadclassid" name="threadclassid" value="$_GET[threadclassid]"/>
+			<input type="hidden" id="becheck" name="becheck" value="true"/>
+			<input type="checkbox" id="normal" name="normal" onclick="javascript:query();" <!--{if !empty($_GET[normal]) }--> CHECKED <!--{/if}-->> 普通帖
+			<input type="checkbox" id="close" name="close" onclick="javascript:query();" <!--{if !empty($_GET[close]) }--> CHECKED <!--{/if}-->> 已关闭
+			<input type="checkbox" id="displayorder" name="displayorder" onclick="javascript:query();" <!--{if !empty($_GET[displayorder]) }--> CHECKED <!--{/if}-->> 置顶帖
+			<input type="checkbox" id="digest" name="digest" onclick="javascript:query();" <!--{if !empty($_GET[digest]) }--> CHECKED <!--{/if}-->> 精华帖
+	</tr>
+</table>
+</form>
+<script type="text/javascript">
+	function setthreadclass(threadclassid){
+		if(threadclassid>0){
+			$('threadclassid').value=threadclassid;
+		}else{
+			$('threadclassid').value="";
+		}
+	}
+
+	function query(){
+		$('actionform').submit();
+	}
+</script>
+
+<!--{if $list}-->
+<div style="border: 1px solid #CDCDCD;">
+<div style="background:none repeat scroll 0 0 #F2F2F2; margin-top: 1px;">
+	<table cellspacing="0" cellpadding="0" width="100%" border=0>
+		<tr height="30px">
+			<td width="80px" align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap><h3>类型</h3></td>
+			<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap><h3>主题</h3></td>
+			<td width="100px" align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap><h3>作者</h3></td>
+			<td width="60px"  align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap><h3>回应/阅读</h3></td>
+			<td width="100px" align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap><h3>最后更新</h3></td>
+		</tr>
+	<!--{loop $list $key $value}-->
+		<!--{eval $magicegg = ""}-->							
+		<!--{eval if($value[magicegg]) for($i=0; $i<$value[magicegg]; $i++) $magicegg .= '<img src="image/magic/egg/'.mt_rand(1,6).'.gif" />';}-->
+		<tr height="50px" onmouseover="this.style.background='#FFDA86';" onmouseout="this.style.background='#FFFFFF';" style="background:#ffffff;">
+			<td width="30px" align="center" <!--{if $key<count($list)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+				$value[threadclassname]
+			</td>
+			<td align="left" <!--{if $key<count($list)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+				<span style="color:red;">$value[prefix]</span>
+				$magicegg
+				<a href="space.php?do=thread&tid=$value[tid]" title="$value[subject]" target="_blank" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->><!--{eval echo getstr($value[subject], 60, 0, 0, 0, 0, -1); }--></a>
+				<!--{if $value[hot] > 0 }--><span class="hot"><em>热</em>$value[hot]</span><!--{/if}-->
+				<!--{if $value[cold] > 0 }--><span class="cold"><em>冷</em>$value[cold]</span><!--{/if}-->
+			</td>
+			<td width="100px" align="center" <!--{if $key<count($list)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+				<a href="space.php?uid=$value[uid]" title="$value[username]" target="_blank">$value[username]</a><br>$value[datelinedisp]
+			</td>
+			<td width="40px" align="center" <!--{if $key<count($list)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+				$value[replynum]/$value[viewnum]
+			</td>
+			<!--{if $value[lastauthorid]==0 }-->
+			<td width="100px" align="center" <!--{if $key<count($list)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+				$value[lastauthor]<br>$value[lastpost]
+			</td>
+			<!--{else}-->
+			<td width="100px" align="center" <!--{if $key<count($list)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+				<a href="space.php?uid=$value[lastauthorid]" title="$value[lastauthor]" target="_blank">$value[lastauthor]</a><br>$value[lastpostdisp]
+			</td>
+			<!--{/if}-->
+		</tr>
+	<!--{/loop}-->
+	</table>
+</div>	
+</div>
+<div class="page">$multi</div>
+<!--{else}-->
+<div class="c_form">还没有相关话题。</div>
+<!--{/if}-->
+<!--{template space_mtagfooter}-->

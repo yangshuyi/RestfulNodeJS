@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<main>
+	<postUrl url = "/myfarm/myfarmjson.php?" /><!-- http请求地址 -->
+	<loading url="module/loading.swf?v=4" />
+	<soundFolder url="module/sound/sound.swf" />
+	<folder url = "module/ui//" />
+	<defaultIcon url="module/null.gif" />
+	<version value = "manyou" loginurl = "" language = "cn" />
+	<openControl><!-- 功能开放控制 -->
+		<item name = "tool" open = "true" /><!-- 道具 -->
+		<item name = "pack" open = "true" /><!-- 好友背包 -->
+                <item name="pet" open="true" />
+	</openControl>
+	<security host="222.73.180.83" port="3333" />
+	<moduleList><!-- 模块列表 -->
+			<module name="main" url="module/Main.swf?v=21" statusText="加载主文件..." size="246350">
+			<material url="module/ui/main/xnPlant1.swf?v=0" statusText="加载UI素材..." size="735310" />
+			<material url="module/ui/main/xnPlant2.swf?v=21" statusText="加载UI素材..." size="757292" />
+			<material url="module/ui/main/v1FarmItem.swf?v=0" statusText="加载UI素材..." size="53870" />
+
+			<material url="module/ui/main/matterandcursor.swf?v=7" statusText="加载UI素材..." size="117363" />
+			<material url="module/ui/main/maininterface.swf?v=1" statusText="加载UI素材..." size="43250" />
+			<material url="module/ui/main/xiaoneiPay.swf?v=0" statusText="加载UI素材..." size="8332" />
+			<material url="module/ui/main/dog.swf?v=21" statusText="加载UI素材..." size="77784" />
+			<material url="module/ui/main/commonualUI.swf?v=21" statusText="加载UI素材..." size="181845 " />
+			<material url="module/ui/main/flowers.swf?v=10" statusText="加载UI素材..." size="480281" />
+			<material url="module/ui/main/flowers2.swf?v=21" statusText="加载UI素材..." size="480281" />
+			<material url="module/ui/main/xnFlowerCrop.swf?v=21" statusText="加载UI素材..." size="191085" />
+			<material url="module/ui/main/xnPlantWare.swf?v=21" statusText="加载UI素材..." size="308356" />
+
+			<material url="module/ui/main/bauble.swf?v=21" statusText="加载UI素材..." size="91866" />
+			<material url="module/ui/main/newUI2.swf?v=21" statusText="加载UI素材..." size="91866" />
+			<material url="module/ui/main/xnWaxberry.swf?v=22" statusText="加载UI素材..." size="91866" />
+			<material url="module/ui/main/xnHyacinth.swf?v=21" statusText="加载UI素材..." size="91866" />
+		</module>
+
+		<module name="farm" url="module/Farm.swf?v=21" size="136681">
+
+		</module>
+	</moduleList>
+	<pay>
+		<payment url="/space.php?do=myfarm&view=index&" />
+		<increase url="" />
+	</pay>
+	<debug open="false" />
+	<crops
+		sort="2,3,4,5,6,7,8,9,10,11,1,13,14,15,16,17,18,19,20,21,22,23,26,27,29,31,33,34,35,36,37,1002,101,102,103,104,105,106,107,108">
+			<crop id="40" className="Grass" offsetX="0" offsetY="0" seed="GrassSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,-5,80,-35,120,-24|65,-5,80,-35,120,-24|0,0,0,0,0,0" /> 
+				<nextText value="种子,发芽,小叶子,大叶子,成熟,成熟,已成熟" /> 
+				<cropGrow value="7200,14400,21600,28800,28805,90000000" /> 
+  </crop>
+		
+			<crop id="1" className="Strawberry" offsetX="35" offsetY="-60" seed="StrawberrySeed" harvestNum="3">
+				<insect position="0,0,0,0,0,0|110,-45,70,-10,55,-49,80,-35|110,-45,60,-10,115,-30,80,-35|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="14400,28800,46800,64800,86405,90000000"/>
+			</crop>
+			<crop id="2" className="Radish" offsetX="35" offsetY="-63" seed="RadishSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|61,0,97,-10,112,27,77,-5|61,0,97,-10,112,27,77,-5|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,成熟,成熟,已成熟"/>
+				<cropGrow value="7200,14400,25200,36000,36005,90000000"/>
+			</crop>
+			<crop id="3" className="Carrot" offsetX="35" offsetY="-63" seed="CarrotSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|61,0,97,-10,112,27,77,-5|61,0,97,-10,112,27,77,-5|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,成熟,成熟,已成熟"/>
+				<cropGrow value="7200,18000,32400,46800,46805,90000000"/>
+			</crop>
+			<crop id="4" className="Maize" offsetX="0" offsetY="0" seed="MaizeSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,-50,100,-30,75,8,75,-20|65,-50,100,-30,75,8,75,-20|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="7200,14400,25200,36000,50405,90000000"/>
+			</crop>
+			<crop id="5" className="Potato" offsetX="0" offsetY="0" seed="PotatoSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|45,0,99,-30,129,-24,99,-10|45,0,99,-30,129,-24,99,-10|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="7200,14400,25200,39600,54005,90000000"/>
+			</crop>
+			<crop id="6" className="Melongena" offsetX="0" offsetY="0" seed="MelongenaSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|70,-39,100,-30,77,-5,80,-24|70,-39,100,-30,77,-5,80,-24|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="7200,18000,28800,43200,57605,90000000"/>
+			</crop>
+			<crop id="7" className="Tomato" offsetX="0" offsetY="0" seed="TomatoSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|100,-60,78,-19,125,-30,100,-32|100,-60,78,-19,125,-30,100,-32|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="7200,18000,32400,46800,61205,90000000"/>
+			</crop>
+			<crop id="8" className="Pea" offsetX="0" offsetY="0" seed="PeaSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,13,92,-50,120,-15,92,-11|65,13,92,-50,120,-15,92,-11|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="10800,21600,32400,46800,64805,90000000"/>
+			</crop>
+			<crop id="9" className="Chili" offsetX="0" offsetY="0" seed="ChiliSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,13,50,-50,120,-15,72,-20|65,13,50,-50,120,-15,72,-20|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="10800,25200,39600,54000,72005,90000000"/>
+			</crop>
+			<crop id="10" className="Pumpkin" offsetX="0" offsetY="0" seed="PumpkinSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,13,92,-50,120,-15,85,-11|65,13,92,-50,120,-15,85,-11|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="10800,25200,43200,61200,79205,90000000"/>
+			</crop>
+			<crop id="11" className="Apple" offsetX="0" offsetY="0" seed="AppleSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,13,92,-45,120,-15,92,-11|65,13,92,-45,120,-15,92,-11|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="14400,28800,43200,57600,75605,90000000"/>
+			</crop>
+			<crop id="12" type="crop" className="HamiMelon" offsetX="0" offsetY="0" seed="HamiMelonSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|55,33,45,-10,120,20,85,20|55,33,45,-10,120,20,85,20|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="14400,32400,54000,72000,93600,90000000"/>
+			</crop>
+			<crop id="13" className="Grape" offsetX="0" offsetY="0" seed="GrapeSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,-13,92,-50,120,-30,92,-26|65,-13,92,-50,120,-30,92,-26|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="28800,61200,93600,129600,165605,90000000"/>
+			</crop>
+			<crop id="14" className="Watermelon" offsetX="0" offsetY="0" seed="WatermelonSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|80,-30,60,13,119,13,80,13|80,-30,60,13,119,13,80,13|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="14400,32400,54000,75600,100805,90000000"/>
+			</crop>
+			<crop id="15" className="Banana" offsetX="0" offsetY="0" seed="BananaSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|63,-6,80,-40,111,-13,80,-20|63,-6,80,-40,111,-13,80,-20|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="18000,39600,61200,86400,111605,90000000"/>
+			</crop>
+			<crop id="16" type="crop" className="Lemon" offsetX="0" offsetY="0" seed="LemonSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|63,-6,80,-40,111,-13,80,-20|63,-6,80,-40,111,-13,80,-20|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="21600,46800,72000,97200,126005,90000000"/>
+			</crop>
+			<crop id="17" type="crop" className="Loquat" offsetX="0" offsetY="0" seed="LoquatSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,7,65,-52,112,-20,85,-17|65,3,92,-50,120,-24,92,-25|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="36000,79200,129600,183600,230405,90000000"/>
+			</crop>
+			<crop id="18" className="Peach" offsetX="0" offsetY="0" seed="PeachSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|71,-24,69,-63,116,-53,80,-50|71,-24,69,-63,116,-53,80,-50|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="28800,57600,86400,118800,151205,90000000"/>
+			</crop>
+			<crop id="19" className="Orange" offsetX="0" offsetY="0" seed="OrangeSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|60,-7,80,-39,105,-10,80,-20|60,-7,80,-39,105,-10,80,-20|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="25200,50400,75600,104400,133205,90000000"/>
+			</crop>
+			<crop id="23" className="Pomegranate" offsetX="0" offsetY="0" seed="PomegranateSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|55,-30,92,-40,120,-15,87,-15|55,-30,92,-40,120,-15,87,-15|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="36000,72000,108000,147600,187205,90000000"/>
+			</crop>
+			<crop id="26" className="Pomelo" offsetX="0" offsetY="0" seed="PomeloSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|54,-5,87,-40,130,-21,82,-20|54,-5,87,-40,130,-21,82,-20|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="39600,82800,126000,172800,219605,90000000"/>
+			</crop>
+			<crop id="27" className="Pineapple" offsetX="0" offsetY="0" seed="PineappleSeed" harvestNum="4">
+				<insect position="0,0,0,0,0,0|68,23,95,25,126,-10,82,-15|68,23,95,25,126,-10,82,-15|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="43200,90000,136800,183600,230405,90000000"/>
+			</crop>
+			<crop id="29" className="Coconut" offsetX="0" offsetY="0" seed="CoconutSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|50,-30,96,-45,120,-35,68,-50|50,-43,96,-45,120,-35,68,-50|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="36000,75600,115200,154800,198005,90000000"/>
+			</crop>
+			<crop id="31" className="Calabash" offsetX="0" offsetY="0" seed="CalabashSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|60,-5,80,-45,110,-24,70,-27|60,-5,80,-45,110,-24,70,-27|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="39600,82800,126000,172800,219605,90000000"/>
+			</crop>
+			<crop id="33" className="DragonFruit" offsetX="0" offsetY="0" seed="DragonFruitSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|55,10,80,-40,110,-14,64,-10|55,10,80,-40,110,-14,64,-10|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="46800,97200,147600,198000,252005,90000000"/>
+			</crop>
+			<crop id="34" className="Cherry" offsetX="0" offsetY="0" seed="CherrySeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,-5,80,-35,130,0,87,-5|51,-5,80,-35,140,-10,87,-5|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="50400,100800,151200,205200,259205,90000000"/>
+			</crop>
+			<crop id="35" className="Lichee" offsetX="0" offsetY="0" seed="LicheeSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,-5,80,-35,120,-24,87,-5|65,-5,80,-35,120,-24,87,-5|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="54000,108000,165600,219600,277205,90000000"/>
+			</crop>
+			<crop id="36" type="crop" className="Kiwi" offsetX="0" offsetY="0" seed="KiwiSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|65,-5,80,-35,120,-12,87,-5|65,-5,80,-35,120,-12,87,-5|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="57600,115200,172800,230400,291605,90000000"/>
+			</crop>
+			<crop id="20" type="crop" className="SugarCane" offsetX="0" offsetY="0" seed="SugarCaneSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|72,-50,100,-30,86,8,75,-20|65,-50,100,-30,75,8,75,-20|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="39600,90000,147600,205200,262805,90000000"/>
+			</crop>
+			<crop id="21" type="crop" className="Mushroom" offsetX="0" offsetY="0" seed="MushroomSeed" harvestNum="2">
+				<insect position="0,0,0,0,0,0|70,-20,72,-50,100,12,75,12|100,-33,72,-62,100,12,75,12|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="32400,68400,104400,158400,212405,90000000"/>
+			</crop>
+			<crop id="22" type="crop" className="Waxberry" offsetX="0" offsetY="0" seed="WaxberrySeed" harvestNum="2">
+
+				<insect position="0,0,0,0,0,0|65,-13,92,-58,120,-25,92,-23|65,-13,92,-58,120,-25,92,-23|0,0,0,0,0,0"/>
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟"/>
+				<cropGrow value="28800,72000,129600,187200,234005,90000000"/>
+			</crop>
+			
+
+			<crop id="101" type="flower" fclass="Rose" className="RoseRed" offsetX="0" offsetY="0" seed="RoseRedSeed" harvestNum="2" color="1">
+				<insect position="0,0,0,0,0,0|83,-35,84,10,114,2,76,-20|83,-35,84,10,114,-10,76,-20|0,0,0,0,0,0" />
+				<nextText value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+				<cropGrow value="7200,18000,28800,43200,57605,90000000" />
+			</crop>
+			<crop id="102" type="flower" fclass="Rose" className="RosePink" offsetX="0" offsetY="0" seed="RosePinkSeed" harvestNum="2" color="8">
+				<insect position="0,0,0,0,0,0|83,-35,84,10,114,2,76,-20|83,-35,84,10,114,-10,76,-20|0,0,0,0,0,0" />
+				<nextText value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+				<cropGrow value="7200,18000,28800,43200,57605,90000000" />
+			</crop>
+			<crop id="103" type="flower" fclass="Rose" className="RoseWhite" offsetX="0" offsetY="0" seed="RoseWhiteSeed" harvestNum="2" color="4">
+				<insect position="0,0,0,0,0,0|83,-35,84,10,114,2,76,-20|83,-35,84,10,114,-10,76,-20|0,0,0,0,0,0" />
+				<nextText value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+				<cropGrow value="7200,18000,28800,43200,57605,90000000" />
+			</crop>
+			<crop id="104" type="flower" fclass="Rose" className="RoseYellow" offsetX="0" offsetY="0" seed="RoseYellowSeed" harvestNum="2" color="2">
+				<insect position="0,0,0,0,0,0|83,-35,84,10,114,2,76,-20|83,-35,84,10,114,-10,76,-20|0,0,0,0,0,0" />
+				<nextText value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+				<cropGrow value="7200,18000,28800,43200,57605,90000000" />
+			</crop>
+
+			<crop id="105" type="flower" fclass="Helianthus" className="HelianthusYellow" offsetX="0" offsetY="0" seed="HelianthusYellowSeed" harvestNum="2" color="2">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+				<cropGrow value="10800,25200,43200,64800,86405,90000000" />
+			</crop>
+			<crop id="106" type="flower" fclass="Helianthus" className="HelianthusPink" offsetX="0" offsetY="0" seed="HelianthusPinkSeed" harvestNum="2" color="8">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+				<cropGrow value="10800,25200,43200,64800,86405,90000000" />
+			</crop>
+			<crop id="107" type="flower" fclass="Helianthus" className="HelianthusWhite" offsetX="0" offsetY="0" seed="HelianthusWhiteSeed" harvestNum="2" color="4">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+				<cropGrow value="10800,25200,43200,64800,86405,90000000" />
+			</crop>
+			<crop id="108" type="flower" fclass="Helianthus" className="HelianthusBeige" offsetX="0" offsetY="0" seed="HelianthusBeigeSeed" harvestNum="2" color="10">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+				<cropGrow value="10800,25200,43200,64800,86405,90000000" />
+			</crop>
+			<crop id="109" type="flower" fclass="Carnation"
+			className="CarnationWhite" offsetX="0" offsetY="0"
+			seed="CarnationWhiteSeed" harvestNum="1" color="4">
+			<insect
+				position="0,0,0,0,0,0|78,-30,90,-17,105,-30,78,-8|78,-30,90,-17,105,-30,78,-8|0,0,0,0,0,0" />
+			<nextText
+				value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+			<cropGrow value="10800,25200,46800,68400,93605,90000000" />
+		</crop>
+		
+		<crop id="110" type="flower" fclass="Carnation"
+			className="CarnationPink" offsetX="0" offsetY="0"
+			seed="CarnationPinkSeed" harvestNum="1" color="8">
+			<insect
+				position="0,0,0,0,0,0|78,-30,90,-17,105,-30,78,-8|78,-30,90,-17,105,-30,78,-8|0,0,0,0,0,0" />
+			<nextText
+				value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+			<cropGrow value="10800,25200,46800,68400,93605,90000000" />
+		</crop>
+		
+		<crop id="111" type="flower" fclass="Carnation"
+			className="CarnationYellow" offsetX="0" offsetY="0"
+			seed="CarnationYellowSeed" harvestNum="1" color="2">
+			<insect
+				position="0,0,0,0,0,0|78,-30,90,-17,105,-30,78,-8|78,-30,90,-17,105,-30,78,-8|0,0,0,0,0,0" />
+			<nextText
+				value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+			<cropGrow value="10800,25200,46800,68400,93605,90000000" />
+		</crop>
+		
+		<crop id="112" type="flower" fclass="Carnation"
+			className="CarnationPurple" offsetX="0" offsetY="0"
+			seed="CarnationPurpleSeed" harvestNum="1" color="3">
+			<insect
+				position="0,0,0,0,0,0|78,-30,90,-17,105,-30,78,-8|78,-30,90,-17,105,-30,78,-8|0,0,0,0,0,0" />
+			<nextText
+				value="Seed,Sprout,Baby Leaf,Adult Leaf,Blossom,Ripen,Mature" />
+			<cropGrow value="10800,25200,46800,68400,93605,90000000" />
+		</crop>
+				<crop id="113" type="flower" fclass="Tulip" className="TulipPurple" offsetX="0" offsetY="0" seed="TulipPurpleSeed" harvestNum="2" color="3">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="10800,25200,46800,68400,97205,90000000" />
+
+			</crop>
+			
+			<crop id="114" type="flower" fclass="Tulip" className="TulipRed" offsetX="0" offsetY="0" seed="TulipRedSeed" harvestNum="2" color="1">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="10800,25200,46800,68400,97205,90000000" />
+			</crop>
+			
+			<crop id="115" type="flower" fclass="Tulip" className="TulipPink" offsetX="0" offsetY="0" seed="TulipPinkSeed" harvestNum="2" color="8">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+
+				<cropGrow value="10800,25200,46800,68400,97205,90000000" />
+			</crop>
+			
+			<crop id="116" type="flower" fclass="Tulip" className="TulipWhite" offsetX="0" offsetY="0" seed="TulipWhiteSeed" harvestNum="2" color="4">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="10800,25200,46800,68400,97205,90000000" />
+			</crop>
+			<crop id="117" type="flower" fclass="Daffodil" className="DaffodilWhite" offsetX="0" offsetY="0" seed="DaffodilWhiteSeed" harvestNum="2" color="4">
+				<insect position="0,0,0,0,0,0|55,-20,80,-35,126,-24,78,-18|55,-20,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="14400,28800,54000,75600,100805,90000000" />
+			</crop>
+
+			<crop id="118" type="flower" fclass="Daffodil" className="DaffodilYellow" offsetX="0" offsetY="0" seed="DaffodilYellowSeed" harvestNum="2" color="2">
+				<insect position="0,0,0,0,0,0|55,-20,80,-35,126,-24,78,-18|55,-20,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="14400,28800,54000,75600,100805,90000000" />
+			</crop>
+			<crop id="119" type="flower" fclass="Daffodil" className="DaffodilPink" offsetX="0" offsetY="0" seed="DaffodilPinkSeed" harvestNum="2" color="8">
+				<insect position="0,0,0,0,0,0|55,-20,80,-35,126,-24,78,-18|55,-20,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="14400,28800,54000,75600,100805,90000000" />
+
+			</crop>
+			<crop id="120" type="flower" fclass="Daffodil" className="DaffodilPurple" offsetX="0" offsetY="0" seed="DaffodilPurpleSeed" harvestNum="2" color="3">
+				<insect position="0,0,0,0,0,0|55,-20,80,-35,126,-24,78,-18|55,-20,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="14400,28800,54000,75600,100805,90000000" />
+			</crop>	
+			
+			<crop id="121" type="flower" fclass="Hyacinth" className="HyacinthWhite" offsetX="0" offsetY="0" seed="HyacinthWhiteSeed" harvestNum="2" color="4">
+				<insect position="0,0,0,0,0,0|55,30,80,-15,126,6,78,8|55,30,80,-15,126,6,78,8|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+
+				<cropGrow value="14400,32400,50400,79200,108005,90000000" />
+			</crop>
+			<crop id="122" type="flower" fclass="Hyacinth" className="HyacinthPurple" offsetX="0" offsetY="0" seed="HyacinthPurpleSeed" harvestNum="2" color="3">
+				<insect position="0,0,0,0,0,0|55,30,80,-15,126,6,78,8|55,30,80,-15,126,6,78,8|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="14400,32400,50400,79200,108005,90000000" />
+			</crop>
+			<crop id="123" type="flower" fclass="Hyacinth" className="HyacinthRed" offsetX="0" offsetY="0" seed="HyacinthRedSeed" harvestNum="2" color="1">
+				<insect position="0,0,0,0,0,0|55,30,80,-15,126,6,78,8|55,30,80,-15,126,6,78,8|0,0,0,0,0,0" />
+
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="14400,32400,50400,79200,108005,90000000" />
+			</crop>
+			<crop id="124" type="flower" fclass="Hyacinth" className="HyacinthYellow" offsetX="0" offsetY="0" seed="HyacinthYellowSeed" harvestNum="2" color="2">
+				<insect position="0,0,0,0,0,0|55,30,80,-15,126,6,78,8|55,30,80,-15,126,6,78,8|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="14400,32400,50400,79200,108005,90000000" />
+			</crop>	
+			
+			<crop id="2001" type="toy" fclass="Cat" headName="CatHead" toyName="猫子座" giftName="ToyCat" className="Cat" offsetX="0" offsetY="0" seed="MysterySeed" harvestNum="1" FBPrice="3" charm="40">
+
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="7200,25200,50400,79200,144000,90000000" />
+			</crop>
+			
+			<crop id="2002" type="toy" fclass="Rabbit" headName="RabbitHead" toyName="兔卡巴" giftName="ToyRabbit" className="Rabbit" offsetX="0" offsetY="0" seed="MysterySeed" harvestNum="1" FBPrice="3" charm="40">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="7200,25200,50400,79200,144000,90000000" />
+			</crop>
+
+			<crop id="2003" type="toy" fclass="Pig" headName="PigHead" toyName="猪无戒" giftName="ToyPig" className="Pig" offsetX="0" offsetY="0" seed="MysterySeed" harvestNum="1" FBPrice="3" charm="40">
+				<insect position="0,0,0,0,0,0|60,15,86,25,120,10,78,-8|55,-5,80,-35,126,-24,78,-18|0,0,0,0,0,0" />
+				<nextText value="种子,发芽,小叶子,大叶子,开花,成熟,已成熟" />
+				<cropGrow value="7200,25200,50400,79200,144000,90000000" />
+			</crop>
+			
+
+
+	</crops>
+	<gifts sort="1,2,3,4,5">
+			<flowerGift id="1" type="1" fclass="玫瑰" className="Rose" flowerId="101,102,103,104" number="11,33,99">
+				<item id="1" className="Rose_101_11" words="热情似火" giftName="11朵红色玫瑰花" charm="26" />
+				<item id="2" className="Rose_102_11" words="告白" giftName="11朵粉色玫瑰花" charm="26" />
+				<item id="3" className="Rose_103_11"  words="天真之吻" giftName="11朵白色玫瑰花" charm="26" />
+				<item id="4" className="Rose_104_11"  words="歉意" giftName="11朵黄色玫瑰花" charm="26" />
+				<item id="5" className="Rose_101_33" words="热情似火" giftName="33朵红色玫瑰花" charm="82" />
+				<item id="6" className="Rose_102_33"  words="告白" giftName="33朵粉色玫瑰花" charm="82" />
+				<item id="7" className="Rose_103_33" words="天真之吻" giftName="33朵白色玫瑰花" charm="82" />
+				<item id="8" className="Rose_104_33"  words="歉意" giftName="33朵黄色玫瑰花" charm="82" />
+				<item id="9" className="Rose_101_99" words="热情似火" giftName="99朵红色玫瑰花" charm="246" />
+				<item id="10" className="Rose_102_99"  words="告白" giftName="99朵粉色玫瑰花" charm="246" />
+				<item id="11" className="Rose_103_99"  words="天真之吻" giftName="99朵白色玫瑰花" charm="246" />
+				<item id="12" className="Rose_104_99" words="歉意" giftName="99朵黄色玫瑰花" charm="246" />
+			</flowerGift>
+
+			<flowerGift id="2" type="1" fclass="太阳花" className="Helianthus" flowerId="105,106,107,108" number="11,22,123">
+				<item id="13" className="Helianthus_105_11"  words="激情" giftName="11支黄色太阳花"  charm="54" />
+				<item id="14" className="Helianthus_106_11"  words="幸福" giftName="11支粉色太阳花"  charm="54" />
+				<item id="15" className="Helianthus_107_11"  words="情有独钟" giftName="11支白色太阳花" charm="54" />
+				<item id="16" className="Helianthus_108_11"  words="永远的快乐" giftName="11支米色太阳花" charm="54" />
+				<item id="17" className="Helianthus_105_22"  words="激情" giftName="1束黄色太阳花" charm="110" />
+				<item id="18" className="Helianthus_106_22"   words="幸福" giftName="1束粉色太阳花" charm="110" />
+				<item id="19" className="Helianthus_107_22"  words="情有独钟" giftName="1束白色太阳花" charm="110" />
+				<item id="20" className="Helianthus_108_22"  words="永远的快乐" giftName="1束米色太阳花" charm="110" />
+				<item id="21" className="Helianthus_105_123"  words="激情" giftName="1捧黄色太阳花" charm="614" />
+				<item id="22" className="Helianthus_106_123"  words="幸福" giftName="1捧粉色太阳花" charm="614" />
+				<item id="23" className="Helianthus_107_123"  words="情有独钟" giftName="1捧白色太阳花" charm="614" />
+				<item id="24" className="Helianthus_108_123"  words="永远的快乐" giftName="1捧米色太阳花" charm="614" />
+			</flowerGift>
+			
+			<flowerGift id="3" type="1" fclass="康乃馨" className="Carnation" flowerId="109,110,111,112" number="8,36,88">
+				<item id="25" className="Carnation_109_8"  words="健康" giftName="8支白色康乃馨"  charm="28" />
+				<item id="26" className="Carnation_110_8"  words="青春永驻" giftName="8支粉色康乃馨"  charm="28" />
+				<item id="27" className="Carnation_111_8"  words="友谊天长地久" giftName="'8支黄色康乃馨" charm="28" />
+				<item id="28" className="Carnation_112_8"  words="纯洁友谊" giftName="8支紫色康乃馨" charm="28" />
+				<item id="29" className="Carnation_109_36"  words="健康" giftName="1束白色康乃馨" charm="126" />
+				<item id="30" className="Carnation_110_36"   words="青春永驻" giftName="1束粉色康乃馨" charm="126" />
+				<item id="31" className="Carnation_111_36"  words="友谊天长地久" giftName="1束黄色康乃馨" charm="126" />
+				<item id="32" className="Carnation_112_36"  words="纯洁友谊" giftName="1束紫色康乃馨" charm="126" />
+				<item id="33" className="Carnation_109_88"  words="健康" giftName="1捧白色康乃馨" charm="308" />
+				<item id="34" className="Carnation_110_88"  words="青春永驻" giftName="1捧粉色康乃馨" charm="308" />
+				<item id="35" className="Carnation_111_88"  words="友谊天长地久" giftName="1捧黄色康乃馨" charm="308" />
+				<item id="36" className="Carnation_112_88"  words="纯洁友谊" giftName="1捧紫色康乃馨" charm="308" />
+			</flowerGift>
+				<flowerGift id="3" type="1" fclass="郁金香" className="Tulip" flowerId="113,114,115,116" number="12,44,100">
+				<item id="37" className="Tulip_113_12"  words="信念" giftName="12支紫色郁金香"  charm="66" />
+				<item id="38" className="Tulip_114_12"  words="爱的宣言" giftName="12支红色郁金香"  charm="66" />
+				<item id="39" className="Tulip_115_12"  words="幸福" giftName="12支粉色郁金香" charm="66" />
+				<item id="40" className="Tulip_116_12"  words="纯洁" giftName="12支白色郁金香" charm="66" />
+				<item id="41" className="Tulip_113_44"  words="信念" giftName="1束紫色郁金香" charm="242" />
+				<item id="42" className="Tulip_114_44"   words="爱的宣言" giftName="1束红色郁金香" charm="242" />
+				<item id="43" className="Tulip_115_44"  words="幸福" giftName="1束粉色郁金香" charm="242" />
+				<item id="44" className="Tulip_116_44"  words="纯洁" giftName="1束白色郁金香" charm="242" />
+				<item id="45" className="Tulip_113_100"  words="信念" giftName="1捧紫色郁金香" charm="550" />
+				<item id="46" className="Tulip_114_100"  words="爱的宣言" giftName="1捧红色郁金香" charm="550" />
+				<item id="47" className="Tulip_115_100"  words="幸福" giftName="1捧粉色郁金香" charm="550" />
+				<item id="48" className="Tulip_116_100"  words="纯洁" giftName="1捧白色郁金香" charm="550" />
+			</flowerGift>
+			
+			<flowerGift id="5" type="1" fclass="水仙花" className="Daffodil" flowerId="117,118,119,120" number="6,22,66">
+				<item id="49" className="Daffodil_117_6"  words="敬意" giftName="1小花盆白色水仙花"  charm="20" />
+				<item id="50" className="Daffodil_118_6"  words="好运" giftName="1小花盆黄色水仙花"  charm="20" />
+				<item id="51" className="Daffodil_119_6"  words="等爱" giftName="1小花盆粉色水仙花" charm="20" />
+				<item id="52" className="Daffodil_120_6"  words="惜缘" giftName="1小花盆紫色水仙花" charm="20" />
+				<item id="53" className="Daffodil_117_22"  words="敬意" giftName="1花盆白色水仙花" charm="76" />
+				<item id="54" className="Daffodil_118_22"   words="好运" giftName="1花盆黄色水仙花" charm="76" />
+				<item id="55" className="Daffodil_119_22"  words="等爱" giftName="1花盆粉色水仙花" charm="76" />
+				<item id="56" className="Daffodil_120_22"  words="惜缘" giftName="1花盆紫色水仙花" charm="76" />
+
+				<item id="57" className="Daffodil_117_66"  words="敬意" giftName="1大花盆白色水仙花" charm="230" />
+				<item id="58" className="Daffodil_118_66"  words="好运" giftName="1大花盆黄色水仙花" charm="230" />
+				<item id="59" className="Daffodil_119_66"  words="等爱" giftName="1大花盆粉色水仙花" charm="230" />
+				<item id="60" className="Daffodil_120_66"  words="惜缘" giftName="1大花盆紫色水仙花" charm="230" />
+			</flowerGift>
+			<flowerGift id="6" type="1" fclass="风信子" className="Hyacinth" flowerId="121,122,123,124" number="8,58,88">
+				<item id="61" className="Hyacinth_121_8"  words="默默关怀" giftName="8支白色风信子"  charm="52" />
+				<item id="62" className="Hyacinth_122_8"  words="浪漫情怀" giftName="8支紫色风信子"  charm="52" />
+				<item id="63" className="Hyacinth_123_8"  words="感谢你" giftName="8支红色风信子" charm="52" />
+
+				<item id="64" className="Hyacinth_124_8"  words="幸福围绕" giftName="8支黄色风信子" charm="52" />
+				<item id="65" className="Hyacinth_121_58"  words="默默关怀" giftName="1束白色风信子" charm="376" />
+				<item id="66" className="Hyacinth_122_58"  words="浪漫情怀" giftName="1束紫色风信子" charm="376" />
+				<item id="67" className="Hyacinth_123_58"  words="感谢你" giftName="1束红色风信子" charm="376" />
+				<item id="68" className="Hyacinth_124_58"  words="幸福围绕" giftName="1束黄色风信子" charm="376" />
+				<item id="69" className="Hyacinth_121_88"  words="默默关怀" giftName="1捧白色风信子" charm="572" />
+				<item id="70" className="Hyacinth_122_88"  words="浪漫情怀" giftName="1捧紫色风信子" charm="572" />
+				<item id="71" className="Hyacinth_123_88"  words="感谢你" giftName="1捧红色风信子" charm="572" />
+				<item id="72" className="Hyacinth_124_88"  words="幸福围绕" giftName="1捧黄色风信子" charm="572" />
+
+			</flowerGift>
+			
+
+	</gifts>
+		<mooncake>
+		<item id="3001" className="chaoshiMoonCake"  desc="" cakename="潮式月饼" num="1" charm="40" />
+		<item id="3002" className="tanshaoMoonCake"  desc="" cakename="炭烧月饼" num="1" charm="40" />
+		<item id="3003" className="guangshiMoonCake"  desc="" cakename="广式月饼" num="1" charm="40" />
+		<item id="3004" className="bingpiMoonCake"  desc="" cakename="冰皮月饼" num="1" charm="40" />
+		<item id="3005" className="sushiMoonCake"  desc="" cakename="苏式月饼" num="1" charm="40" />	
+	</mooncake>
+
+		
+	<exchange>
+		<item type="5" random="9" exchangeRule="" number="3" crop="任意9种作物果实各3个就可以兑换1袋狗粮哦，快点去收集吧！"  />
+		<item type="1" random="5" exchangeRule="" number="15" crop="任意5种作物果实各15个就可以兑换1粒玩具种子，快点去收集吧！"  />
+		<item type="3" random="0" exchangeRule="4,7,10,13,15" number="15"  crop="玉米，番茄，葡萄，香蕉，南瓜果实各15个可兑换一个月饼。 \n月饼兑换在11月11日前截止，赶快行动哦！" />
+	</exchange>
+
+</main>

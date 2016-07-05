@@ -1,0 +1,147 @@
+<!--{template space_mtagheader}-->
+<div class="h_status">
+	作品分类：
+	<a href="{$mpurl}" <!--{if empty($_GET[producttype]) }--> class="active" <!--{/if}-->>全部</a>
+	<!--{loop $_SGLOBAL[producttype] $key $value}-->
+	<span class="pipe">|</span>		
+	<a href="{$mpurl}&producttype=$value[classid]" <!--{if $_GET[producttype]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+	<!--{/loop}-->
+</div>
+<div id="search_topic_productclassid" class="h_status">
+	广播剧类型：
+	<a href="{$mpurl}&producttype=$_GET[producttype]" <!--{if empty($_GET[productclassid]) }--> class="active" <!--{/if}-->>全部</a>
+	<!--{loop $_SGLOBAL[productclass] $key $value}-->
+	<span class="pipe">|</span>		
+	<a href="{$mpurl}&producttype=$_GET[producttype]&productclassid=$value[classid]" <!--{if $_GET[productclassid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+	<!--{/loop}-->
+</div>
+<div id="search_cover_productclassid" class="h_status">
+	翻唱类型：
+	<a href="{$mpurl}&producttype=$_GET[producttype]" <!--{if empty($_GET[productclassid]) }--> class="active" <!--{/if}-->>全部</a>
+	<!--{loop $_SGLOBAL[coverproductclass] $key $value}-->
+	<span class="pipe">|</span>		
+	<a href="{$mpurl}&k&producttype=$_GET[producttype]&productclassid=$value[classid]" <!--{if $_GET[productclassid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+	<!--{/loop}-->
+</div>
+<div id="search_video_productclassid" class="h_status">
+	视频类型：
+	<a href="{$mpurl}&producttype=$_GET[producttype]" <!--{if empty($_GET[productclassid]) }--> class="active" <!--{/if}-->>全部</a>
+	<!--{loop $_SGLOBAL[videoproductclass] $key $value}-->
+	<span class="pipe">|</span>		
+	<a href="{$mpurl}&producttype=$_GET[producttype]&productclassid=$value[classid]" <!--{if $_GET[productclassid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+	<!--{/loop}-->
+</div>
+<script>
+	search_option_onload($_GET[producttype]);
+	function search_option_onload(producttype) {
+		if(producttype == 1){
+			$("search_topic_productclassid").style.display='block';
+			$("search_cover_productclassid").style.display='none';
+			$("search_video_productclassid").style.display='none';
+		}
+		else if(producttype == 2){
+			$("search_topic_productclassid").style.display='none';
+			$("search_cover_productclassid").style.display='block';
+			$("search_video_productclassid").style.display='none';
+		}
+		else if(producttype == 3){
+			$("search_topic_productclassid").style.display='none';
+			$("search_cover_productclassid").style.display='none';
+			$("search_video_productclassid").style.display='block';
+		}
+		else{
+			$("search_topic_productclassid").style.display='none';
+			$("search_cover_productclassid").style.display='none';
+			$("search_video_productclassid").style.display='none';
+		}
+	}
+</script>
+<!--{if $productlist }-->
+<div style="border: 1px solid #CDCDCD;">
+<div style="background:none repeat scroll 0 0 #F2F2F2; margin-top: 1px;">
+	<table cellspacing="0" cellpadding="0" width="100%" border=0>
+		<tr height="30px">
+			<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap><h3>作品分类</h3></td>
+			<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap>
+				<h3>
+				<!--{if $_GET[orderby] == 'productnameasc'}-->
+					<a class="titlea" href="{$mpurl}&orderby=productnamedesc" title="按作品名称-按Z-A排序">作品名称</a><img src="image/pointup.gif" height="12px"/>
+				<!--{elseif $_GET[orderby] == 'productnamedesc'}-->
+					<a class="titlea" href="{$mpurl}&orderby=productnameasc" title="按作品名称-按A-X排序">作品名称</a><img src="image/pointdown.gif" height="12px"/>
+				<!--{else}-->
+					<a class="titlea" href="{$mpurl}&orderby=productnamedesc" title="按作品名称-按Z-A排序">作品名称</a>
+				<!--{/if}-->
+				</h3>
+			</td>
+			<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap><h3>作品类型</h3></td>
+			<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap>
+				<h3>
+				<!--{if $_GET[orderby] == 'producedateasc'}-->
+					<a class="titlea" href="{$mpurl}&orderby=producedatedesc" title="按发布日期-由旧至新排序">发布日期</a><img src="image/pointup.gif" height="12px"/>
+				<!--{elseif $_GET[orderby] == 'producedatedesc'}-->
+					<a class="titlea" href="{$mpurl}&orderby=producedateasc" title="按发布日期-由新至旧排序">发布日期</a><img src="image/pointdown.gif" height="12px"/>
+				<!--{else}-->
+					<a class="titlea" href="{$mpurl}&orderby=producedatedesc" title="按发布日期-由新至旧排序">发布日期</a>
+				<!--{/if}-->	
+				</h3>
+			</td>
+			<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap><h3>详细介绍</h3></td>
+		</tr>
+	<!--{loop $productlist $key $value}-->
+		<tr height="50px" onmouseover="this.style.background='#FFDA86';" onmouseout="this.style.background='#FFFFFF';" style="background:#ffffff;">
+			<td width="80px" align="center" <!--{if $key<count($productlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+				&nbsp;$value[producttypename]&nbsp;  
+			</td>
+			<td align="left" <!--{if $key<count($productlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> >
+				<span title="$value[productname]">
+				<!--{if empty($value['productid'])}-->
+					&nbsp;<!--{eval echo getstr($value[productname], 40, 0, 0, 0, 0, -1); }-->&nbsp;
+				<!--{else}-->
+					&nbsp;<a href="$value['producturl']" target="_blank"><!--{eval echo getstr($value[productname], 40, 0, 0, 0, 0, -1); }--></a>&nbsp;
+				<!--{/if}-->
+				</span>
+			</td>
+			<td width="80px" align="center" <!--{if $key<count($productlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> >
+				&nbsp;$value['productclassname']&nbsp;  
+			</td>
+			<td align="center" <!--{if $key<count($productlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> >
+				&nbsp;$value['producedatedisp']&nbsp;
+			</td>
+			<td id="product_item_$key" align="center" <!--{if $key<count($productlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> >
+			<!--{if (!empty($value['introduce']) )}-->
+				<a href="#" onclick="displayIntroduce('product_content_$key');return false;">查看</a>
+			<!--{else}-->
+				&nbsp;
+			<!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5" align="left"><div id="product_content_$key" style="display:none; border-bottom:1px solid #CDCDCD; height:50px">$value[introduce]</div></td>
+		</tr>	
+	<!--{/loop}-->
+	</table>
+	<div class="page">$multi</div>
+</div>	
+</div>
+
+<script>
+	function displayIntroduce(itemid) {
+		if( $(itemid).style.display=='none' )
+		{
+			$(itemid).style.display='block';
+		}
+		else
+		{
+			$(itemid).style.display='none';
+		}
+	}
+</script>
+<!--{else}-->
+<div class="c_form">还没有相关作品。</div>
+<!--{/if}-->
+<br/>
+<span style="color:red">
+[注]群组成员可以去群组管理页面编辑作品。<br/>
+如果在发布广播剧时，选择了指定的群组社团，系统会自动发布一条群组作品信息。
+</span>
+<!--{template space_mtagfooter}-->

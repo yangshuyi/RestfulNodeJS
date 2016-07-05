@@ -1,0 +1,253 @@
+<script language="javascript" src="image/editor/editor_function.js"></script>
+
+<div style="margin-top: 10px; border: 1px solid #CDCDCD;">
+	<form id="actionform" name="actionform" method="post" action="cp.php?ac=forum&op=savethread" enctype="multipart/form-data">
+		<table cellspacing="0" cellpadding="0" width="100%" border="0" >
+			<tr style="background:none repeat scroll 0 0 #F2F2F2; margin-top: 1px; height:30px;">
+				<td align="left" valign="middle" colspan="4" nowrap style="border-bottom:1px solid #CDCDCD; ">
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;<!--{if empty($thread)}-->发表新帖<!--{else}-->编辑帖子<!--{/if}--></h2>
+				</td>
+			</tr>
+			<tr style="height:30px;" >
+				<td nowrap>&nbsp;&nbsp;&nbsp;&nbsp;类型：</td>
+				<td width="120px">
+				<!--{if !empty($_SGLOBAL['forum_admin']) }-->
+					<select name="threadclassid" id="threadclassid" style="width:200px;">
+						<option value="0"></option> 
+					<!--{loop $threadclasslist $value}-->
+						<!--{if $value[classid] == $thread[threadclassid]}-->
+						<option value="$value[classid]" SELECTED>$value[classname]</option>
+						<!--{else}-->
+						<option value="$value[classid]">$value[classname]</option>
+						<!--{/if}-->
+					<!--{/loop}-->
+					</select>
+				<!--{else}-->
+					<select name="threadclassid" id="threadclassid" style="width:200px;">
+					<!--{if !empty($thread[tid]) }-->
+						<!--{loop $threadclasslist $value}-->
+							<!--{if $value[classid] == $thread[threadclassid]}-->
+							<option value="$value[classid]">$value[classname]</option>
+							<!--{/if}-->
+						<!--{/loop}-->
+					<!--{else}-->
+							<option value=""></option>	
+						<!--{loop $threadclasslist $value}-->
+							<option value="$value[classid]">$value[classname]</option>
+						<!--{/loop}-->	
+					<!--{/if}-->
+					</select>
+				<!--{/if}-->
+				</td>
+				<td id="threadClassDescription" nowrap width="420px">&nbsp;</td>
+			</tr>
+			<tr style="height:30px;" >
+				<td nowrap>&nbsp;&nbsp;&nbsp;&nbsp;标题：</td>
+				<td align="left" colspan="2">
+					<input type="text" class="t_input" id="subject" name="subject" value="$thread[subject]" size="80" maxlength="80"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;转贴标记：
+					<input type="checkbox" class="t_input" id="repaste" name="repaste" value="1" <!--{if !empty($thread[repaste])}-->CHECKED<!--{/if}-->/>	
+				</td>
+			</tr>
+			<tr style="height:30px;" >
+				<td nowrap>&nbsp;&nbsp;&nbsp;&nbsp;标签：</td>
+				<td align="left" colspan="2">
+					<input type="text" class="t_input" id="label" name="label" value="$thread[label]" size="40" maxlength="80"/>
+					标签:标签与标签之间，请用'/'隔开。每个标签需控制在8个字符内。
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="padding:5px;">
+					<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+					<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$post[message]</textarea>
+<!--{if $editormode=='threadlist' }-->					
+					<iframe src="editor.php?charset=$_SC[charset]&allowhtml=1" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="200"></iframe>
+<!--{else}-->
+					<iframe src="editor.php?charset=$_SC[charset]&allowhtml=1" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="600"></iframe>
+<!--{/if}-->
+				</td>
+			</tr>
+<!--{if !empty($_SGLOBAL['supe_uid'])}-->
+			<tr>
+				<td colspan="4" style="padding:5px">
+					<hr/>
+					<script type="text/javascript">
+					function edit_album_show(id) {
+						var obj = $('uchome-edit-'+id);
+						if(id == 'album') {
+							$('uchome-edit-pic').style.display = 'none';
+						}
+						if(id == 'pic') {
+							$('uchome-edit-album').style.display = 'none';
+						}
+						if(obj.style.display == '') {
+							obj.style.display = 'none';
+						} else {
+							obj.style.display = '';
+						}
+					}
+					</script>
+					<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+						<tr><th width="100">帖子附件</th><td>
+						<input type="button" name="clickbutton[]" value="上传图片" class="button" onclick="edit_album_show('pic')">
+						<input type="button" name="clickbutton[]" value="插入图片" class="button" onclick="edit_album_show('album')">
+						</td></tr>
+					</table>
+					<table cellspacing="4" cellpadding="4" width="100%" id="uchome-edit-pic" class="infotable" style="display:none;">
+						<tr>
+							<th width="100">&nbsp;</th>
+							<td>
+								<a href="cp.php?ac=upload" target="_blank">&raquo; 上传图片</a>
+								<span style="color:red">[注]图片上传完毕后，请点击“插入图片”按钮，插入刚上传的图片。</span>
+							</td>
+						</tr>
+					</table>
+					<table cellspacing="4" cellpadding="4" width="100%" class="infotable" id="uchome-edit-album" style="display:none;">
+						<tr>
+							<th width="100">&nbsp;</th>
+							<td>
+								选择相册: <select name="view_albumid" onchange="picView(this.value)">
+									<option value="none">选择一个相册</option>
+									<option value="0">默认相册</option>
+									<!--{loop $albums $value}-->
+									<option value="$value[albumid]">$value[albumname]</option>
+									<!--{/loop}-->
+								</select> (点击图片可以插入到内容中)
+								<div id="albumpic_body"></div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+<!--{/if}-->
+<!--{if 1==2 }-->
+<!--{if empty($thread) OR $thread[classid] == FORUM_JISHUJIAOLIU_CLASSID }-->
+			<tr>
+				<td id="specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID" colspan="4" style="padding:5px; display:none;" >
+					<hr/>
+				</td>
+			</tr>
+<!--{/if}-->
+<!--{if empty($thread) OR $thread[classid] == FORUM_ZIYUANHUZHU_CLASSID }-->
+			<tr>
+				<td id="specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID" colspan="4" style="padding:5px; display:none;" >
+					<hr/>
+				</td>
+			</tr>
+<!--{/if}-->
+<!--{if empty($thread) OR $thread[classid] == FORUM_XILIJUPING_CLASSID }-->
+			<tr>
+				<td id="specialdiv_class_FORUM_XILIJUPING_CLASSID" colspan="4" style="padding:5px; display:none;" >
+					<hr/>
+					<!--{template cp_forum_threadeditor_extend_xljp}-->
+				</td>
+			</tr>
+<!--{/if}-->
+<!--{if empty($thread) OR $thread[classid] == FORUM_QIZUIBASHE_CLASSID }-->
+			<tr>
+				<td id="specialdiv_class_FORUM_QIZUIBASHE_CLASSID" colspan="4" style="padding:5px; display:none;" >
+					<hr/>
+				</td>
+			</tr>
+<!--{/if}-->
+<!--{/if}-->
+				
+			<tr style="background:none repeat scroll 0 0 #F2F2F2; border-bottom:1px solid #CDCDCD; margin-top: 1px; height:40px;">
+				<td align="left" valign="middle" colspan="4" style="padding:5px;">
+					<span>发帖人：</span>
+					<input id="uid" name="uid" type="hidden" value="$post[uid]"/>
+					<input id="username" name="username" type="text" value="$post[username]" class="t_input" disabled/>
+				</td>
+			</tr>
+			<tr style="background:none repeat scroll 0 0 #F2F2F2; border-bottom:1px solid #CDCDCD; margin-top: 1px; height:40px;">
+				<td align="left" valign="middle" colspan="4" style="padding:5px;">
+					<input type="hidden" id="tid" name="tid" value="$thread[tid]" />
+					<input type="hidden" id="op" name="op" value="savethread" />
+					<!--{if $editormode=='threadlist' }-->	
+					<input type="hidden" id="return" name="return" value="" />
+					<!--{else}-->	
+					<input type="hidden" id="return" name="return" value="$_SGLOBAL[refer]" />
+					<!--{/if}-->	
+					<input type="hidden" id="selectop" name="selectop" value="$_GET[selectop]" />
+					<input type="hidden" id="formhash" name="formhash" value="<!--{eval echo formhash();}-->" />
+					<input type="button" id="threadbutton" name="threadbutton" class="submit" value="提交发布" onclick="javascript:threadpost(this);"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<script type="text/javascript">
+function displayThreadClassDescription() {
+	var selIndex=$('threadclassid').value;
+	
+	if(selIndex=='{FORUM_JISHUJIAOLIU_CLASSID}'){//技术交流
+		$('threadClassDescription').innerHTML="技术交流：配音技巧交流，后期技术交流等内容。";
+
+		//if( $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID') ) $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID').style.display = '';
+		//if( $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID') ) $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_XILIJUPING_CLASSID') ) $('specialdiv_class_FORUM_XILIJUPING_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID') ) $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID').style.display = 'none';
+	}
+	else if(selIndex=='{FORUM_ZIYUANHUZHU_CLASSID}'){//资源互助
+		$('threadClassDescription').innerHTML="资源互助：音效音效，音乐资源，广播剧资源，资源求助等。";
+		
+		//if( $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID') ) $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID') ) $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID').style.display = '';
+		//if( $('specialdiv_class_FORUM_XILIJUPING_CLASSID') ) $('specialdiv_class_FORUM_XILIJUPING_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID') ) $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID').style.display = 'none';
+	}
+	else if(selIndex=='{FORUM_XILIJUPING_CLASSID}'){//犀利评论
+		$('threadClassDescription').innerHTML="犀利评论：相关的剧评，声评等内容, 欢迎大家推荐自己喜欢的作品。";
+		
+		//if( $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID') ) $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID') ) $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_XILIJUPING_CLASSID') ) $('specialdiv_class_FORUM_XILIJUPING_CLASSID').style.display = '';
+		//if( $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID') ) $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID').style.display = 'none';
+	}
+	else if(selIndex=='{FORUM_QIZUIBASHE_CLASSID}'){//七嘴八舌
+		$('threadClassDescription').innerHTML="七嘴八舌：闲聊，灌水，杂七杂八。";
+		
+		//if( $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID') ) $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID') ) $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_XILIJUPING_CLASSID') ) $('specialdiv_class_FORUM_XILIJUPING_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID') ) $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID').style.display = '';
+	}
+	else{
+		$('threadClassDescription').innerHTML="请选择帖子类型";
+		
+		//if( $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID') ) $('specialdiv_class_FORUM_JISHUJIAOLIU_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID') ) $('specialdiv_class_FORUM_ZIYUANHUZHU_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_XILIJUPING_CLASSID') ) $('specialdiv_class_FORUM_XILIJUPING_CLASSID').style.display = 'none';
+		//if( $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID') ) $('specialdiv_class_FORUM_QIZUIBASHE_CLASSID').style.display = 'none';
+	} 
+}
+displayThreadClassDescription();
+
+function threadpost(obj) {
+		// 话题分类
+		if ($("threadclassid").value=="") {
+			alert("请选择话题分类！");
+			$("threadclassid").focus();
+			return false;
+		} 
+
+		// 标题
+		if ($("subject").value.trim() == "") {
+			alert("标题不能为空！");
+			$("subject").focus();
+			return false;
+		}
+
+		// 标签
+		if ($("label").value.trim() == "") {
+			alert("请最少设置一个关键字标签！");
+			$("label").focus();
+			return false;
+		}
+		
+		edit_save();
+
+		$("actionform").submit();
+}
+</script>

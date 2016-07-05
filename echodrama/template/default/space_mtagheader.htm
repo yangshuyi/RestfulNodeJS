@@ -1,0 +1,121 @@
+<!--{eval $_TPL['titles'] = array($mtag['tagname'], $mtag['title'], '首页');}-->
+<!--{template header}-->
+
+<!--{template nav_header}-->
+
+<div class="affiche" style="margin-top:5px;">
+	<table width="100%" cellspacing="2" cellpadding="2">
+		<tr>
+			<td rowspan="2" width="1px" align="center" valign="top">
+				<div class="threadimg60" style="padding:5px 0 0 1px;"><a href="space.php?do=mtag&tagid=$mtag[tagid]"><img src="$mtag[picpath]" style="width:60px;"></a></div>
+			</td>
+			<td>
+				<h1>&nbsp;&nbsp;&nbsp;&nbsp;$mtag[tagname] 欢迎您</h1>
+			</td>
+			<td width="170px" valign="top">
+				群主　：<a href="space.php?uid=$mtag[creatorid]" target="_blank">$mtag[realname]</a>
+				<br/>
+				成立于：$mtag[dateline]
+			</td>
+			<td rowspan="2" width="200px" valign="top">
+				<!--{if $mtag[fieldid]==1 || $mtag[fieldid]==5 }-->
+					<p>作品数　：$mtag[productnumdisplayvalue]</p>
+					<p>成员数　：$mtag[membernumdisplayvalue]&nbsp;&nbsp;粉丝数　：$mtag[fansnumdisplayvalue]</p>
+					<p>话题数　：$mtag[threadnumdisplayvalue]&nbsp;&nbsp;回帖数　：$mtag[postnumdisplayvalue]</p>
+					<!--p>活跃度　：$mtag[experience]</p-->
+				<!--{/if}-->
+				<!--{if $mtag[fieldid]==2 }-->
+					<p>成员数　：$mtag[membernumdisplayvalue]&nbsp;&nbsp;粉丝数　：$mtag[fansnumdisplayvalue]</p>
+					<p>话题数　：$mtag[threadnumdisplayvalue]&nbsp;&nbsp;回帖数　：$mtag[postnumdisplayvalue]</p>
+					<!--p>活跃度　：$mtag[experience]</p-->
+					<br/>
+					<!--{if !empty($mtag[relatedclubtagname]) }-->
+						所属社团：
+						<!--{if $mtag[relatedclubtagid]>0 }-->
+							<a href="space.php?do=mtag&tagid=$mtag[relatedclubtagid]" target="_blank">$mtag[relatedclubtagname]</a>
+						<!--{else}-->
+							$mtag[relatedclubtagname]
+						<!--{/if}-->
+					<!--{/if}-->
+				<!--{/if}-->
+				<!--{if ($mtag[fieldid]==3 || $mtag[fieldid]==4) }-->
+					<p>成员数　：$mtag[membernumdisplayvalue]</p>
+					<p>粉丝数　：$mtag[fansnumdisplayvalue]</p>
+					<p>话题数　：$mtag[threadnumdisplayvalue]</p>
+					<p>回帖数　：$mtag[postnumdisplayvalue]</p>
+					<!--p>活跃度　：$mtag[experience]</p-->
+				<!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<td class="article" colspan="2" valign="top">
+				<em>&nbsp;&nbsp;&nbsp;&nbsp;<!--{if empty($mtag[message])}-->还没有签名<!--{else}-->$mtag[message]<!--{/if}--></em>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li $actives[index] $actives[creditlog]><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=index"><span>首页</span></a></li>
+		<li$actives[members]><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=members" title="成员列表"><span>成员列表</span></a></li>
+		
+		<!--{if $mtag[fieldid] == 1 || $mtag[fieldid] == 2  || $mtag[fieldid] == 5 }-->
+			<li$actives[products]><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=products" title="作品列表"><span>作品列表</span></a></li>
+		<!--{/if}-->
+		
+		<li$actives[events]><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=events" title="招募活动"><span>招募活动</span></a></li>
+			
+		<!--{if $membergrade>=1 }-->	
+		<li$actives[tasks] $actives[task]><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=tasks" title="成员任务"><span>成员任务</span></a></li>
+		<!--{/if}-->
+		
+		<!--{if 1==2 }-->	
+		<li$actives[attachments] $actives[attachment]><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=attachments" title="附件列表"><span>附件</span></a></li>
+		<!--{/if}-->
+		
+		<li$actives[threads]><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=threads" title="讨论区"><span>讨论区</span></a></li>
+		<li><a href="space.php?do=mtag" title="返回"><span>返回</span></a></li>
+				
+		<!--{if $membergrade>=8 }-->
+			<li class="null"><a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=index">群组管理</a></li>
+		<!--{/if}-->
+		
+		<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+			<!--{if $fansgrade>0 }-->
+				<li class="null"><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=unjoin">取消关注</a></li>
+			<!--{else}-->
+				<li class="null"><a href="space.php?do=mtag&tagid=$mtag[tagid]&view=join">关注该群</a></li>
+			<!--{/if}-->
+		<!--{/if}-->
+	</ul>
+
+	<!--{if $_GET[view] == 'products' }-->
+	<script>
+		function searchProduct() {
+			$('searchform').submit();
+		}
+	</script>
+	<form name="searchform" id="searchform" method="get" action="space.php">
+		<div style="float:right;margin:0 6px 5px 0;">
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<td style="padding: 0;"><input type="text" id="key" name="key" value="<!--{if empty($_GET[key])}-->搜索作品<!--{else}-->$_GET[key]<!--{/if}-->" onfocus="if(this.value=='搜索作品')this.value='';" class="t_input" tabindex="1" style="width: 160px; border-right: none;" /></td>
+					<td style="padding: 0;"><a href="javascript:searchProduct();"><img src="image/search_btn.gif" alt="搜索" /></a></td>
+				</tr>
+			</table>
+		</div>
+		<input type="hidden" name="do" value="mtag">
+		<input type="hidden" name="view" value="$_GET[view]">
+		<input type="hidden" name="tagid" value="$mtag[tagid]">
+		<input type="hidden" name="subop" value="$_GET[subop]">
+		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	</form>
+	<!--{/if}-->
+</div>
+
+<!--{if $_GET[key]}-->
+<div class="h_status">以下是搜索<span style="color:red;font-weight:bold;">$_GET[key]</span> 结果列表</div>
+<!--{/if}-->
+
+<div>

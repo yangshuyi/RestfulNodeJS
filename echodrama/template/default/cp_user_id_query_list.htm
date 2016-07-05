@@ -1,0 +1,24 @@
+总共【<!--{eval echo count($list); }--> 】位用户
+<table width="100%" border=1>
+<!--{eval $index=0; }-->
+<!--{loop $list $value}-->
+<!--{if $index==0 }-->
+<tr>
+<!--{/if}-->
+<td width="10%">
+$value['uid']
+</td>
+
+<!--{if $index==9 }-->
+
+</tr>
+<!--{eval $index=0; }-->
+
+<!--{else}-->
+
+<!--{eval $index=$index+1; }-->
+
+<!--{/if}-->
+
+<!--{/loop}-->
+</table>

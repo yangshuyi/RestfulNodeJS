@@ -1,0 +1,155 @@
+<script language="javascript" src="image/editor/editor_function.js"></script>
+<script language="javascript" src="source/script_blog.js"></script>
+
+<h2 class="title">
+	<img src="image/app/mtag.gif" />
+	<!--{if !empty($mtag)}-->
+		<a href="space.php?do=mtag&id=$mtag[fieldid]">$mtag[fieldname]</a> -
+		<a href="space.php?do=mtag&tagid=$mtag[tagid]">$mtag[tagname]</a>
+	<!--{else}-->
+		发表新话题
+	<!--{/if}-->
+</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+	<!--{if empty($thread)}-->
+		<li class="active"><a href="#"><span>发表新话题</span></a></li>
+	<!--{else}-->
+		<li class="active"><a href="#"><span>编辑话题</span></a></li>
+	<!--{/if}-->
+		
+	<!--{if !empty($tagid) }-->
+		<li><a href="space.php?do=mtag&tagid=$_GET[tagid]&view=threads"><span>返回讨论区</span></a></li>
+	<!--{/if}-->
+	
+	</ul>
+</div>
+
+<div class="c_form">
+
+<style>
+	.userData {behavior:url(#default#userdata);}
+</style>
+
+	<form id="actionform" name="actionform" method="post" action="cp.php?ac=thread&op=savethread&tid=$thread[tid]" enctype="multipart/form-data">
+		
+		<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+		<!--{if empty($tagid) }-->
+			<tr>
+				<td colspan="2" align="left">
+					<select name="tagid" id="tagid" onchange="javascript:threadclass_load();">
+						<option value="-1">请选择你关注的群组</option>
+					<!--{loop $mtaglist $fieldid $value}-->
+						<option value="$value[tagid]">$value[fieldname] - $value[tagname]</option>
+					<!--{/loop}-->
+					</select>
+				</td>
+			</tr>
+		<!--{else}-->
+			<tr>
+				<td colspan="2" align="left">
+					$mtag[tagname]<input type="hidden" id="tagid" name="tagid" value="$tagid" />
+				</td>
+			</tr>
+		<!--{/if}-->
+			<tr>
+				<td width="1%" nowrap>话题标题：</td>
+				<td width="99%" align="left"><input type="text" class="t_input" id="subject" name="subject" value="$thread[subject]" size="100" maxlength="80"/></td>
+			</tr>
+			<tr>
+				<td width="1%" nowrap>话题类型：</td>
+				<!--{if empty($thread[threadclassid]) }-->
+				<td id="threadclass_content"></td>
+					<script type="text/javascript">
+						function threadclass_load(){
+							var tagid=$('tagid').value;
+							ajaxget('cp.php?ac=thread&op=querythreadclassbytagid_ajax&tagid='+tagid, 'threadclass_content');
+						}
+						threadclass_load();
+					</script>
+				<!--{else}-->
+				<td id="threadclass_content">
+					<select name="threadclassid" id="threadclassid">
+						<option value="$thread[threadclassid]">$thread[threadclassname]</option>
+					</select>
+				</td>
+				<!--{/if}-->
+			</tr>
+			<tr>
+				<td colspan="2">
+					<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+					<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$post[message]</textarea>
+					<iframe src="editor.php?charset=$_SC[charset]&allowhtml=<!--{eval echo checkperm('allowhtml')}-->&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="400"></iframe>
+				</td>
+			</tr>
+
+			<!--{if checkperm('seccode')}-->
+			<!--{if $_SCONFIG['questionmode']}-->
+			<tr>
+				<td colspan="2">
+					<p>请回答验证问题</p>
+					<p><!--{eval question();}--></p>
+					<input type="text" id="seccode" name="seccode" value="" size="15" class="t_input" />
+				</td>
+			</tr>
+			<!--{else}-->
+			<tr>
+				<td colspan="2">
+					<p>请填写验证码</p>
+					<script>seccode();</script>
+					<p>请输入上面的4位字母或数字，看不清可<a href="javascript:updateseccode()">更换一张</a></p>
+					<input type="text" id="seccode" name="seccode" value="" size="15" class="t_input" />
+				</td>
+			</tr>
+			<!--{/if}-->
+			<!--{/if}-->
+
+			<tr>
+				<td colspan="2">
+					<input type="checkbox" name="makefeed" id="makefeed" value="1"<!--{if empty($mtag['viewperm']) && ckprivacy('thread', 1)}--> checked<!--{/if}-->> 产生动态 (<a href="cp.php?ac=privacy#feed" target="_blank">更改默认设置</a>)
+				</td>
+			</tr>
+
+		</table>
+		<input type="hidden" id="tid" name="tid" value="$thread[tid]" />
+		<input type="hidden" id="op" name="op" value="savethread" />
+		<input type="hidden" id="formhash" name="formhash" value="<!--{eval echo formhash();}-->" />
+		<input type="button" id="threadbutton" name="threadbutton" class="submit" value="提交发布" onclick="javascript:threadpost();"/>
+	</form>
+</div>
+
+<script type="text/javascript">
+	function threadpost() {
+		// 群组
+		if ($("tagid").value=="-1") {
+			alert("请选择群组！");
+			$("tagid").focus();
+			return false;
+		} 
+
+		// 话题分类
+		if ($("threadclassid").value=="-1") {
+			alert("请选择话题分类！");
+			$("threadclassid").focus();
+			return false;
+		} 
+
+		// 标题
+		if ($("subject").value.trim() == "") {
+			alert("标题不能为空！");
+			$("subject").focus();
+			return false;
+		}
+		
+		// 编辑器内容同步
+		edit_save();
+
+		// 内容
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("内容不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+		$("actionform").submit();
+	}
+</script>

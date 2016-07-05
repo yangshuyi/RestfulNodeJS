@@ -1,0 +1,65 @@
+<h2 class="title">投票评级</h2>
+<!--{if $tone[pollnum] > 0 }-->
+<table cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<td colspan="2">
+			<div style="margin-top: 10px; margin-left: 10px; ">
+				<span class="bigstar$tone[polllevel]">　　　　　　$tone[pollavg]</span>	
+			</div>
+		</td>
+	</tr>	
+	<tr>
+		<td colspan="2" style="border-bottom: 1px solid #F2F2F2;">
+			<div style="width:100%; align:center;">　已有<span style="color:#F87F67;">$tone[pollnum]</span>人评价</div>
+		</td >
+	</tr>	
+	<tr>
+		<td>
+			<img src="image/all_star_5.jpg" title="力荐" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $tone[poll_5_rate]px;" class="power"></div>$tone[poll_5_rate]%
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="image/all_star_4.jpg" title="推荐" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $tone[poll_4_rate]px;" class="power"></div>$tone[poll_4_rate]%
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			<img src="image/all_star_3.jpg" title="还行" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $tone[poll_3_rate]px;" class="power"></div>$tone[poll_3_rate]%
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			<img src="image/all_star_2.jpg" title="较差" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $tone[poll_2_rate]px;" class="power"></div>$tone[poll_2_rate]%
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			<img src="image/all_star_1.jpg" title="很差" />
+		</td>
+		<td valign="middle" nowrap>
+			<div style="width: $tone[poll_1_rate]px;" class="power"></div>$tone[poll_1_rate]%
+		</td>
+	</tr>
+</table>
+<!--{else}-->
+<table width="100%">
+	<tr>
+		<td>
+			还未有人投票评级。
+		</td>
+	</tr>	
+</table>
+<!--{/if}-->

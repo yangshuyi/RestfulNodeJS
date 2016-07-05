@@ -1,0 +1,115 @@
+<div class="c_form">
+
+
+
+<table cellspacing="5" cellpadding="5" width="100%" class="infotable" border=1>
+	<tr>
+		<td align="left">
+			<div class="block style4">Flush Memcache</div>
+			<table width="100%">
+<form id="flushmemcache_actionform" name="actionform" method="post" action="" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]" /> 
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+				<tr>
+					<td nowrap>操作:</td>
+					<td>
+						<a id="flushmemcacheBtn" href="#" onclick="javascript:flushmemcache()">Flush</a> 
+						<script type="text/javascript">
+							function flushmemcache() {
+								$("flushmemcache_actionform").action="admincp.php?ac=topic&op=flushmemcache";
+								$("flushmemcache_actionform").submit();
+							}
+						</script>
+					</td>
+				</tr>
+</form>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">修改MP3文件名：</div>
+			<table width="100%">
+<form id="batchupdateproductpath_actionform" name="actionform" method="post" action="" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]" /> 
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+				<tr>
+					<td nowrap>Topic Range</td>
+					<td nowrap>from:<input id="fromtopicid" name="fromtopicid" type="text" value="" /> To:<input id="totopicid" name="totopicid" type="text" value=""/></td>
+				</tr>
+				<tr>
+					<td nowrap>Topic Prefix</td>
+					<td><input id="topicprefix" name="topicprefix" type="text" value="" /></td>
+				</tr>
+				<tr>
+					<td nowrap>操作:</td>
+					<td>
+						<a id="batchUpdateTopicProductPathBtn" href="#" onclick="javascript:batchupdateproductpath()">修改MP3文件名</a> 
+						<script type="text/javascript">
+							function batchupdateproductpath() {
+								$("batchupdateproductpath_actionform").action="admincp.php?ac=topic&op=batchupdateproductpath";
+								$("batchupdateproductpath_actionform").submit();
+							}
+						</script>
+					</td>
+				</tr>
+</form>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">Manage Topic Quantum</div>
+			<table width="100%">
+<form id="buildtopicquantum_actionform" name="actionform" method="post" action="" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]" /> 
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+				<tr>
+					<td nowrap>操作:</td>
+					<td>
+						<a id="buildtopicquantumBtn" href="#" onclick="javascript:buildtopicquantum()">build topic quantum</a> 
+						<script type="text/javascript">
+							function buildtopicquantum() {
+								$("buildtopicquantum_actionform").action="admincp.php?ac=topic&op=buildtopicquantum";
+								$("buildtopicquantum_ctionform").submit();
+							}
+						</script>
+					</td>
+				</tr>
+</form>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">batch update quantum</div>
+			<table width="100%">
+<form id="batchupdatequantum_actionform" name="actionform" method="post" action="" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]" /> 
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+				<tr>
+					<td nowrap>Topic Range</td>
+					<td nowrap>from:<input id="fromtopicid" name="fromtopicid" type="text" value="" /> To:<input id="totopicid" name="totopicid" type="text" value=""/></td>
+				</tr>
+				<tr>
+					<td nowrap>操作:</td>
+					<td>
+						<a id="batchUpdateTopicProductPathBtn" href="#" onclick="javascript:batchupdatequantum()">batch update quantum</a> 
+						<script type="text/javascript">
+							function batchupdatequantum() {
+								$("batchupdatequantum_actionform").action="admincp.php?ac=topic&op=batchupdatequantum";
+								$("batchupdatequantum_actionform").submit();
+							}
+						</script>
+					</td>
+				</tr>
+</form>
+			</table>
+		</td>
+	</tr>
+
+</table>
+
+</div>
+
+

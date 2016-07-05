@@ -1,0 +1,81 @@
+<table>
+	<!--{eval $index=0; }-->
+	<!--{loop $event_latest_list $key $value}-->
+			<!--{if $index==0 }-->
+				<!--{eval $left=$value; }-->
+				<!--{eval $index=1; }-->
+			<!--{elseif $index==1 }-->
+				<!--{eval $center=$value; }-->
+				<!--{eval $index=2; }-->
+			<!--{else}-->	
+				<!--{eval $right=$value; }-->
+				<!--{eval $index=0; }-->
+				<tr height="130px">
+					<td valign="top" align="center" style="border:1px solid #FFFFFF; ">
+						<a href="space.php?do=event&id=$left[eventid]" target="_blank">
+					<!--{if file_exists($left[poster]) }-->
+						<!--{eval $data=getimagesize($left[poster]); }-->
+						<!--{if ( $data[0] / $data[1]) >1 }-->
+							<img alt="$left[title]" src="$left[poster]" width="110px"/>
+						<!--{else}-->
+							<img alt="$left[title]" src="$left[poster]" height="90px"/>
+						<!--{/if}-->
+					<!--{else}-->
+						$left[title]
+					<!--{/if}-->
+						</a>
+					</td>
+					<td valign="top">
+						<h3><a href="space.php?do=event&id=$left[eventid]" target="_blank" title="$left[title]"><!--{eval echo getstr($left[title], 30, 0, 0, 0, 0, -1); }--></a></h3>
+						<p><span class="gray">招募类型:</span>$left[typename]</p>
+						<p><span class="gray">截至时间:</span>$right[endtime]</p>
+						<p><span class="gray">招募职位:</span><span title="$right[classname]"><!--{eval echo getstr($left[classname], 22, 0, 0, 0, 0, -1); }--></span></p>
+						<p class="egz">$left[viewnum] 人查看<span class="pipe">|</span>$left[membernum] 人参加<span class="pipe">|</span>$left[follownum] 人关注</p>
+					</td>
+					<td valign="top" align="center">
+						<a href="space.php?do=event&id=$center[eventid]" target="_blank">
+					<!--{if file_exists($center[poster]) }-->
+						<!--{eval $data=getimagesize($center[poster]); }-->
+						<!--{if ( $data[0] / $data[1]) >1 }-->
+							<img alt="$center[title]" src="$center[poster]" width="110px"/>
+						<!--{else}-->
+							<img alt="$center[title]" src="$center[poster]" height="90px"/>
+						<!--{/if}-->
+					<!--{else}-->
+						$center[title]
+					<!--{/if}-->
+						</a>
+					</td>
+					<td valign="top">
+						<h3><a href="space.php?do=event&id=$center[eventid]" target="_blank" title="$center[title]"><!--{eval echo getstr($center[title], 30, 0, 0, 0, 0, -1); }--></a></h3>
+						<p><span class="gray">招募类型:</span>$center[typename]</p>
+						<p><span class="gray">截至时间:</span>$center[endtime]</p>
+						<p><span class="gray">招募职位:</span><span title="$center[classname]"><!--{eval echo getstr($center[classname], 22, 0, 0, 0, 0, -1); }--></span></p>
+						<p class="egz">$center[viewnum] 人查看<span class="pipe">|</span>$center[membernum] 人参加<span class="pipe">|</span>$center[follownum] 人关注</p>
+					</td>
+					<td valign="top" align="center">
+						<a href="space.php?do=event&id=$right[eventid]" target="_blank">
+					<!--{if file_exists($right[poster]) }-->
+						<!--{eval $data=getimagesize($right[poster]); }-->
+						<!--{if ( $data[0] / $data[1]) >1 }-->
+							<img alt="$right[title]" src="$right[poster]" width="110px"/>
+						<!--{else}-->
+							<img alt="$right[title]" src="$right[poster]" height="90px"/>
+						<!--{/if}-->
+					<!--{else}-->
+						$right[title]
+					<!--{/if}-->
+						</a>
+					</td>
+					<td valign="top">
+						<h3><a href="space.php?do=event&id=$right[eventid]" target="_blank" title="$right[title]"><!--{eval echo getstr($right[title], 30, 0, 0, 0, 0, -1); }--></a></h3>
+						<p><span class="gray">招募类型:</span>$right[typename]</p>
+						<p><span class="gray">截至时间:</span>$right[endtime]</p>
+						<p><span class="gray">招募职位:</span><span title="$right[classname]"><!--{eval echo getstr($right[classname], 22, 0, 0, 0, 0, -1); }--></span></p>
+						<p class="egz">$right[viewnum] 人查看<span class="pipe">|</span>$right[membernum] 人参加<span class="pipe">|</span>$right[follownum] 人关注</p>
+					</td>
+				</tr>
+			<!--{/if}-->
+	<!--{/loop}-->
+</table>
+

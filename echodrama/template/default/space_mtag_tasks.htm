@@ -1,0 +1,99 @@
+<!--{template space_mtagheader}-->
+<div id="content"  style="width: 540px;">
+<div class="h_status">
+<a href="cp.php?ac=mtag&op=manage&subop=task&tagid=$tagid&return=spacemtagtasks" class="r_option">&raquo; 新建任务</a>
+<input type="checkbox" id="viewme" name="viewme" onclick="javascript:queryformbyviewme('space.php?do=mtag&view=tasks&tagid=$mtag[tagid]&close=$_GET[close]&classid=$_GET[classid]&date=$_GET[date]');" <!--{if $_GET[viewme]==1 }--> CHECKED <!--{/if}-->> <span style="color:black;">只看我的任务</span>
+<input type="checkbox" id="close" name="close" onclick="javascript:queryformbyclose('space.php?do=mtag&view=tasks&tagid=$mtag[tagid]&viewme=$_GET[viewme]&classid=$_GET[classid]&date=$_GET[date]');" <!--{if $_GET[close]==1 }--> CHECKED <!--{/if}-->> <span style="color:black;">显示关闭的任务</span>
+<br/>
+任务类型：<br/>
+<span class="pipe">|</span>
+<a href="space.php?do=mtag&view=tasks&tagid=$mtag[tagid]&date=$_GET[date]" <!--{if empty($_GET[classid]) }--> class="active" <!--{/if}-->>全部</a>
+<span class="pipe">|</span>
+<!--{loop $taskclasslist $key $value}-->
+<a href="space.php?do=mtag&view=tasks&tagid=$mtag[tagid]&classid=$value[classid]&date=$_GET[date]" <!--{if $_GET[classid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+<span class="pipe">|</span>
+<!--{/loop}-->
+
+			
+</div>
+<script type="text/javascript">
+	function queryformbyviewme(url){
+		if($('viewme').checked){
+			window.location.href=url+"&viewme=1";
+		}
+		else{
+			window.location.href=url+"&viewme=0";
+		}
+	}
+	function queryformbyclose(url){
+		if($('close').checked){
+			window.location.href=url+"&close=1";
+		}
+		else{
+			window.location.href=url+"&close=0";
+		}
+	}
+</script>
+
+<!--{if !empty($tasklist)}-->
+	<table width="100%" cellspacing="5" cellpadding="5">
+		<!--{loop $tasklist $key $value}-->
+		<tr>
+			<td style="border-bottom:1px dashed #ECB2C5;">
+				<h4 class="event_title">
+					<!--{if $value[importance]==1 }-->
+					<span style="color:red;">[{$value[importancename]}]</span>
+					<!--{elseif $value[importance]==2 }-->
+					<span style="color:blue;">[{$value[importancename]}]</span>
+					<!--{elseif $value[importance]==3 }-->
+					<span style="color:black;">[{$value[importancename]}]</span>
+					<!--{/if}-->
+					<a href="space.php?do=mtag&view=task&tagid=$value[tagid]&taskid=$value[taskid]" title="$value[subject]"><!--{eval echo getstr($value[subject], 60, 0, 0, 0, 0, -1); }--></a>
+				</h4>
+				<ul>
+					<li>
+						<span class="gray">开始时间　:</span>$value[starttimedisp] ~ $value[endtimedisp]
+					</li>
+					<li>
+						<span class="gray">类型　　　:</span>$value[taskclassname]
+					</li>
+					<li>
+						<span class="gray">发起人　　:</span><a href="space.php?uid=$value[uid]">$value[username][{$realnamemap[$value[uid]]}]</a>
+					</li>
+				</ul>
+				<!--{if $value[uid] == $_SGLOBAL['supe_uid']}-->
+				<a href="cp.php?ac=mtag&op=manage&subop=task&tagid=$tagid&taskid=$value[taskid]&return=spacemtagtasks" class="r_option">编辑该任务</a>
+				<!--{/if}-->
+				<span class="gray">参与成员数:</span>$value[membernum]
+			</td>
+		</tr>
+		<!--{/loop}-->
+	</table>
+	<div class="page">$multi</div>
+
+<!--{else}-->
+	现在还没有群组活动。
+<!--{/if}-->
+</div>
+
+<div id="sidebar" style="width: 250px;">
+	<div class="sidebox">			
+		<h2 class="title">
+			<p class="r_option">
+				<a href="space.php?do=mtag&view=tasks&tagid=$mtag[tagid]&classid=$_GET[classid]&viewme=$_GET[viewme]'">全部</a>
+			</p>
+			日历 
+		</h2>
+		<div class="calendarbox" id="eventcalendar"></div>
+	</div>
+	<script type="text/javascript" charset="$_SC[charset]">
+		function showcalendar(month){
+			var month = month ? "&month="+month : "";
+			var url = "cp.php?ac=mtag&op=taskcalendar"+month+"&tagid=$mtag[tagid]&classid=$_GET[classid]&viewme=$_GET[viewme]&date=$_GET[date]";
+			//alert(url);
+			ajaxget(url, 'eventcalendar');
+		}
+		showcalendar();
+	</script>
+</div>
+<!--{template space_mtagfooter}-->

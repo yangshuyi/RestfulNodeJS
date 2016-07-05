@@ -1,0 +1,64 @@
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=newitemwithclass&tagid=$mtag[tagid]&advertisementid=$advertisement[advertisementid]">
+
+<h3>&raquo; 新建展示页签 - 确认展示类型</h3>
+<br/>
+<table width="100%" cellspacing="4" cellpadding="4" class="infotable"><tr><td align="center">
+<table cellspacing="4" cellpadding="4" border="0">
+	<tr>	
+		<td width="100" nowrap>展现效果类型：</td>
+		<td width="500" >
+			<select name="tab_classid" id="tab_classid" onchange="javascript:displaybyitemclass();">
+				<option value="-1">展现效果类型 </option>
+<!--{if $item[tab_index] == 1  }-->
+				<option value="1">$_SGLOBAL['advertisementitemclass'][1][classname]</option>
+				<option value="2">$_SGLOBAL['advertisementitemclass'][2][classname]</option>
+<!--{else}-->
+				<option value="3">$_SGLOBAL['advertisementitemclass'][3][classname]</option>
+				<option value="4">$_SGLOBAL['advertisementitemclass'][4][classname]</option>
+				<option value="5">$_SGLOBAL['advertisementitemclass'][5][classname]</option>
+				<option value="6">$_SGLOBAL['advertisementitemclass'][6][classname]</option>
+				<option value="99">$_SGLOBAL['advertisementitemclass'][99][classname]</option>
+<!--{/if}-->
+			</select>
+		</td>
+	</tr>
+	<tr height="200px">	
+		<td valign="top" nowrap>展现效果　　：</td>
+		<td id="div_displaydemoimage">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="button" value="编辑页签" class="submit" onclick="javascript:newitemwithclass();"/>	
+		</td>
+	</tr>
+	<tr height="700">
+		<td colspan="2" align="center" valign="middle">
+
+		</td>
+	</tr>
+</table>	
+</td></tr></table>
+</form>
+<script type="text/javascript">
+
+function newitemwithclass(){
+	
+	if($("tab_classid").value=="-1"){
+		alert("请选择展现效果类型 ！");
+		$("tab_classid").focus();
+		return false;
+	}
+	
+	$("actionform").submit();
+}
+
+function displaybyitemclass(){
+	if($("tab_classid").value=="-1"){
+
+	}
+	else{
+		$("div_displaydemoimage").innerHTML="<img src='/image/site/{$_SGLOBAL['advertisementlocationclass'][$advertisement[location]][prefix]}"+$("tab_classid").value+".jpg' class='picborder'/>";
+	}
+}
+
+</script>

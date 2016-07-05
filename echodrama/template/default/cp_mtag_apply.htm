@@ -1,0 +1,24 @@
+	<h1>申请群主</h1>
+	<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+	<div class="popupmenu_inner" id="__pmapplyform_{$tagid}">
+	<form id="pmapplyform_{$tagid}" name="pmapplyform_{$tagid}" method="post" action="cp.php?ac=mtag&op=apply&tagid=$tagid">
+		<table cellspacing="0" cellpadding="3">
+			<tr><td>请输入您申请群主的理由，您的申请会以短消息的方式发送给群主管理员。</td></tr>
+			<tr>
+				<td><textarea id="message" name="message" cols="40" rows="4" tabindex="3" style="width: 400px; height: 150px;" onkeydown="ctrlEnter(event, 'pmsubmit_btn');"></textarea></td>
+			</tr>
+			<tr>
+				<td>
+				<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+				<input type="hidden" name="pmsubmit" value="true" />
+				<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+				<!--{if $_SGLOBAL[inajax]}-->
+				<input type="button" name="pmsubmit_btn" id="pmsubmit_btn" value="申请" class="submit" onclick="ajaxpost('pmapplyform_{$tagid}','',2000)" />
+				<!--{else}-->
+				<input type="submit" name="pmsubmit_btn" id="pmsubmit_btn" value="申请" class="submit" />
+				<!--{/if}-->
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>

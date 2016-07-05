@@ -1,0 +1,85 @@
+<table cellspacing="0" cellpadding="0" border="0" width="100%" height="70px">
+	<tr height="70px"><td nowrap style="padding-left:5px;padding-right:5px;">
+		<div id="portal_topic_forecast_container" style="position:relative; width:100%; height:70px; overflow:hidden; ">
+			<!--{eval $row=0; }-->
+			<!--{loop $topicforecast_latest_list $key $value}-->
+			<div id="portal_topic_forecast_div_$row" style="width:100%;position:absolute;">
+				<table width="100%" height="70px" border="0">
+					<tr>
+						<td align="left" nowrap>
+							<div style="overflow:hidden;">
+							<h3>
+								<span style="color:red;">&nbsp;$value[producedatedisp]&nbsp;</span>
+								<span style="color:black"><!--{if empty($topic_command[clubtagid])}-->$value[club]<!--{else}--><a class="gray" href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a><!--{/if}-->&nbsp;发布:</span>
+								<span style="color:black">$value[productclassname]</span>
+								<a href="space.php?do=topic&view=forecast&topicforecastid=$value[topicforecastid]" title="$value[subject]" target="_blank"><!--{eval echo getstr($value[subject], 28, 0, 0, 0, 0, -1); }--></a>
+							</h3>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<span class="gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CAST ：</span>
+							<span class="gray" title="$value['cast']"><!--{eval echo getstr($value['cast'], 40, 0, 0, 0, 0, -1); }--></span>
+						</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<div style="float: right;">
+								<!--{if $_SGLOBAL['supe_uid']>0 && empty($value[joinedflag])}-->
+									<a id="a_share" href="#" onclick="jointopicforecast($value[topicforecastid]);return false;">关注</a>
+								<!--{/if}-->
+								<span class="pipe">|</span>
+								<span class="egz">已有&nbsp;$value[joinnum]&nbsp;人关注</span>
+							</div>
+							<span class="gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STAFF：</span>
+							<span class="gray" title="$value['group']"><!--{eval echo getstr($value['group'], 40, 0, 0, 0, 0, -1); }--></span>
+						</td>
+					</tr>
+				</table>
+				<!--{eval $row=$row+1; }-->
+			</div>
+			<!--{/loop}-->
+		</div>
+	</td></tr>
+	<form id="actionForm" method="post" action=""></form>
+	<div class="neverVisible"><div id="__actionForm"></div></div>
+</table>
+
+<script language="javascript" type="text/javascript" src="source/script_autoscroll.js"></script>
+<script type="text/javascript">
+var autoScrollClass_topicforecast = new AutoScrollClass('portal_topic_forecast', 50, 70);
+execute_AutoScrollClass(autoScrollClass_topicforecast);
+
+function jointopicforecast(topicforecastid) {
+	var offset = 0;
+	var duration = 3;
+	
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+	
+	showloading();
+	
+	var form = $('actionForm');
+	form.action="cp.php?ac=topic&op=jointopicforecast&topicforecastid="+topicforecastid+"&tojoin=1";
+	ajaxpost('actionForm', 'renderJoinTopicForecastButton', 2000);
+}
+
+function renderJoinTopicForecastButton(id, result) {
+	  
+	$("__actionForm").style.display = 'none';	
+	
+	if(result!=null){
+		var str=$("__actionForm").innerHTML;
+		var paramsArray=str.split(",");
+		if(paramsArray.length>1){
+			topicforecastid=paramsArray[0];
+			subject=paramsArray[1];
+			producedatedisp=paramsArray[2];
+
+			alert("你已经成功关注："+subject+"。该剧将于"+producedatedisp+"发布。尽情期待～");
+		}
+	}	
+}
+</script>

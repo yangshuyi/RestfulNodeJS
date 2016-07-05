@@ -1,0 +1,330 @@
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+	
+<form id="edit_form" name="edit_form" method="post" action="cp.php?ac=resume&op=save&resumeid=$resume[resumeid]" class="c_form">
+<input type="hidden" name="resumeid" id="resumeid" value="$resume[resumeid]"/>
+<table cellspacing="6" cellpadding="0" width="600px">
+	<tr>
+		<td width="100px" nowrap>所属社团：</td>
+		<td>
+			<input type="hidden" id="club" name="club" value="$resume[club]"/>
+			<input type="hidden" id="clubtagid" name="clubtagid" value="$resume[clubtagid]"/>
+			
+			<select id="clubtype" name="clubtype" onchange="javascript:displayInputType_club();">
+				<option value="1">自由人</option>
+				<option value="2">社团</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td nowrap>&nbsp;</td>
+		<td>				
+			<table id="club_free" width="100%">
+				<tr>
+					<td>
+						<input type="text" id="club_free_name" name="club_free_name" value="自由人" style="width: 200px;" READONLY/>
+					</td>
+				</tr>
+			</table>
+			<table id="club_tag" width="100%" border=0>
+				<tr>
+					<td>
+						请确认 该社团/工作室 的编号：　
+						<input type="text" id="club_tag_tagid" name="club_tag_tagid" value="" size="8" maxlength="8" onchange="javascript:loadmtagbyid_ajax('1,5');">
+						<a href="#" onclick="javascript:mtagquerymds('1,5');return false;">查询</a>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						群组名称：　<input type="text" id="club_tag_tagname" name="club_tag_tagname" value="" style="border:0px;" READONLY/>
+						　
+						群组类型：　<input type="text" id="club_tag_fieldname" name="club_tag_fieldname" value="" style="border:0px;" READONLY/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_club_tag(false);return false;">没有查到该群组</a>]
+					</td>
+				</tr>
+			</table>
+			<table id="club_notag" width="100%">
+				<tr>
+					<td>
+						社团/工作室 名称：　<input type="text" id="club_notag_name" name="club_notag_name" value="" style="width: 200px;"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_club_tag(true);return false;">重新确认 社团/工作室 的编号</a>]
+					</td>
+				</tr>
+			</table>
+			<br/>
+		</td>
+<script type="text/javascript">
+
+	initInputType_club();
+	
+	function initInputType_club() {
+		if($("clubtagid").value!="" && $("clubtagid").value!=0){
+			$("clubtype").value=2;
+			$("club_tag_tagid").value=$("clubtagid").value;
+			$("club_tag_tagname").value=$("club").value;
+			
+			displayInputType_club();
+			displayInputType_club_tag(true);
+		}
+		else{
+			if($("club").value=="自由人"){
+				$("clubtype").value=1;
+				$("club_free_name").value="自由人";
+
+				displayInputType_club();
+			}
+			else{
+				$("clubtype").value=2;
+				$("club_notag_name").value=$("club").value;
+
+				displayInputType_club();
+				displayInputType_club_tag(false);
+			}
+		}
+	}
+	
+	function displayInputType_club() {
+		if($("clubtype").value=="1"){
+			$("club_free").style.display="block";
+			$("club_tag").style.display="none";
+			$("club_notag").style.display="none";
+		}
+
+		if($("clubtype").value=="2"){
+			$("club_free").style.display="none";
+			$("club_tag").style.display="block";
+			$("club_notag").style.display="none";
+		}
+	}
+
+	function displayInputType_club_tag(hastag) {
+		if( hastag == true ){
+			$("club_tag").style.display="block";
+			$("club_notag").style.display="none";
+		}
+		else{
+			$("club_tag").style.display="none";
+			$("club_notag").style.display="block";
+		}	
+	}
+
+	function setInputType_club() {
+		if( $("clubtype").value=="1" ){
+			$("clubtagid").value = 0;
+			$("club").value = "自由人";
+		}
+		if( $("clubtype").value=="2" ){
+			if( $("club_tag").style.display=="block" ){
+				if($("club_tag_tagid").value==""){
+					alert("请输入该社团/工作组编号！");
+					return false;
+				}
+				$("clubtagid").value = $("club_tag_tagid").value;
+				$("club").value = $("club_tag_tagname").value;
+			}
+			if( $("club_notag").style.display=="block" ){
+				if ($("club_notag_name").value.length > 80) {
+					alert("社团/工作组名称太长，请限制在80个字符内！");
+					return false;
+				}
+				$("clubtagid").value = 0
+				$("club").value = $("club_notag_name").value.trim();
+			}
+		}
+		return true;
+	}
+	
+	function mtagquerymds(fieldid){
+		var args=new Object();
+		args.window=window;
+		window.showModalDialog("cp.php?ac=mtag&op=querymds&widget=club_tag_tagid&tagid="+$('club_tag_tagid').value+"&lockfieldid="+fieldid
+				,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+		loadmtagbyid_ajax(fieldid);
+	}
+			
+	function loadmtagbyid_ajax(fieldid){
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+					
+		showloading();
+					
+		var form = $('ajaxform');
+			
+		form.action="cp.php?ac=mtag&op=loadmtagbyid_ajax&tagid="+$('club_tag_tagid').value+"&lockfieldid="+fieldid;
+		form.method="post";
+				
+		ajaxpost('ajaxform', 'loadmtagbyid_ajax_response', 2000);
+	}
+
+	function loadmtagbyid_ajax_response(){
+		var tagid="";
+		var tagname="";
+		var fieldname="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+					
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				$("club_tag_tagid").value="";
+				$("club_tag_tagname").value="";
+				$("club_tag_fieldname").value="";
+			}else{
+				tagid=paramsArray[0];
+				tagname=paramsArray[1];
+				fieldname=paramsArray[3];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("club_tag_tagid").value=tagid;
+		$("club_tag_tagname").value=tagname;
+		$("club_tag_fieldname").value=fieldname;
+	}
+
+</script>
+	</tr>
+	<tr>
+		<td valign="top" nowrap>担任职务：</td>
+		<td>
+			<input type="hidden" name="jobid" id="jobid" value="$resume[jobid]"/>
+			<!--{eval $index=1;}-->
+			<!--{loop $_SGLOBAL[jobclass] $key $value}-->
+				<input type="checkbox" id="jobclass_$value[classid]" name="jobclass_$value[classid]" value="$value[classid]"/>$value[classname]&nbsp;&nbsp;
+				<!--{if $index==9 || $index==15 }-->
+					<br/>
+				<!--{/if}-->
+				<!--{eval $index=$index+1;}-->
+			<!--{/loop}-->
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" nowrap>自我介绍：</td>
+		<td>
+			<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="introduce" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$resume[introduce]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="250"></iframe>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+			<input type="button" name="topicsubmit" value="保存" class="submit" onclick="check_resume();"/></td>
+	</tr>	
+	</table>
+	
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	</form>
+</div>
+<script type="text/javascript">
+
+//招募分类
+var jobclass = [];
+<!--{loop $_SGLOBAL[jobclass] $key $value}-->
+jobclass["$key"] = {};
+<!--{loop $value $k $v}-->
+	jobclass["$key"]["$k"] = '<!--{eval echo str_replace(array("\r\n","\r","\n"), "<br>", $v)}-->';
+<!--{/loop}-->
+<!--{/loop}-->
+
+init_jobid();
+
+function init_jobid(){
+	var form=$('edit_form');
+	var fieldvalue=$('jobid').value;
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.type=="checkbox" && e.name.indexOf("jobclass")>=0) {
+			var v=','+e.value+',';
+			if(fieldvalue.indexOf( v )>=0){
+				e.checked=true;
+			}else{
+				e.checked=false;
+			}	
+		}
+	}
+}
+
+function set_jobid(){
+	var form=$('edit_form');
+	var field=$('jobid');
+	var v=",";
+	var isblank=true;
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.type=="checkbox" && e.name.indexOf("jobclass")>=0) {
+			if(e.checked){
+				v=v+e.value+",";
+				isblank=false;
+			}	
+		}
+	}
+
+	if(isblank){
+		field.value="";
+	}else{
+		field.value=v;
+	}
+}
+
+//检查提交
+function check_resume() {
+	
+	// 标题
+	var clubvalid = setInputType_club();
+	
+	if (clubvalid == false) {
+		return false;
+	}
+
+
+	// 自我介绍
+	set_jobid();
+	if ($("jobid").value.trim() == "") {
+		alert("担任职务不能为空！");
+		return false;
+	}
+	
+	// 自我介绍
+	edit_save();
+	if ($("uchome-ttHtmlEditor").value.trim() == "") {
+		alert("自我介绍不能为空！");
+		$("uchome-ttHtmlEditor").focus();
+		return false;
+	}
+
+	//验证码
+	if ($('seccode')) {
+		var code = $('seccode').value;
+		var x = new Ajax();
+		x.get('cp.php?ac=common&op=seccode&code=' + code, function(s) {
+			s = trim(s);
+			if (s.indexOf('succeed') == -1) {
+				alert(s);
+				$('seccode').focus();
+				return false;
+			} else {
+				$("edit_form").submit();
+			}
+		});
+	} else {
+		$("edit_form").submit();
+	}
+}
+</script>

@@ -1,0 +1,87 @@
+<div class="c_form">
+<form id="actionform" name="actionform" method="post" action="" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]" /> 
+<input type="hidden" id="topicalbumid" name="topicalbumid" value="$topicalbum[topicid]" />
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+
+
+<table cellspacing="5" cellpadding="5" width="100%" class="infotable" border=0>
+	<tr>
+		<td align="left">
+			<div class="block style4">
+			<table width="100%">
+				<tr>
+					<th>系统标识:</th><td>$topicalbum[topicid]</td>
+					<th>编号　　:</th><td>$topicalbum[dispnumber]</td>
+					<th>类型　　:</th><td>$topicalbum[productclassname]</td>
+					<th>社团　　:</th><td>$topicalbum[club]</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th><td>&nbsp;</td>
+					<th>论坛同步:</th><td><!--{if $topicalbum[synthreadid]>0}-->有<!--{else}-->无<!--{/if}--></td>
+					<th>图片文件:</th><td><!--{if $topicalbum[picexists]>0}-->有<!--{else}-->无<!--{/if}--></td>
+					<th>&nbsp;</th><td>&nbsp;</td>
+				</tr>
+			</table>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">删除剧照：<span style="color:red;">$topicalbum[pic]</span></div>
+			<table width="100%">
+				<tr>
+					<th nowrap>操作:</th>
+					<td width="90%">
+						<!--{if $topicalbum[picexists]>0}-->
+						<a id="deletepicbtn" href="#" onclick="javascript:deletepic()">删除剧照</a>
+						<script type="text/javascript">
+							function deletepic() {
+								$("actionform").action="admincp.php?ac=topicalbum&op=manage&subop=deletepic&topicalbumid=$topicalbum[topicid]";
+								$("actionform").submit();
+							}
+						</script>
+						<!--{/if}-->
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<div class="block style4">上传剧照：</div>
+			<table width="100%">
+				<tr>
+					<th nowrap>新剧照:</th>
+					<td width="90%">
+						<input type="file" id="newpic" name="newpic" value="" size="70"/>
+					</td>
+				</tr>
+				<tr>
+					<th>操作:</th>
+					<td>
+						<!--{if $topicalbum[picexists]<=0}-->
+						<a id="uploadpicbtn" href="#" onclick="javascript:uploadpic()">上传剧照</a>
+						<script type="text/javascript">
+							function uploadpic() {
+								if($('newpic').value==""){
+									alert("剧照不能为空");
+									return;
+								}
+								
+								$("actionform").action="admincp.php?ac=topicalbum&op=manage&subop=uploadpic&topicalbumid=$topicalbum[topicid]";
+								$("actionform").submit();
+							}
+						</script>
+						<!--{/if}-->
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+</form>
+</div>
+
+

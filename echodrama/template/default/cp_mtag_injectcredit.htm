@@ -1,0 +1,52 @@
+<!--{template header}-->
+
+<!--{if $_GET['op'] == 'injectcredit'}-->
+
+<h1>向群组[<a href="space.php?do=mtag&view=index&tagid=$mtag[tagid]" target="_blank">{$mtag[tagname]}</a>]注入资金：</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner" id="__injectcreditform">
+<form id="injectcreditform" name="injectcreditform" method="post" action="cp.php?ac=mtag&op=injectcredit&tagid=$tagid">
+<table>
+<tr>
+	<td>
+		<label for="message">当前你的积分共有：<img src="image/credit.gif" title="{$_SGLOBAL[member][credit]}"/>&nbsp;&nbsp;{$_SGLOBAL[member][credit]}&nbsp;&nbsp;</label>
+	</td>
+</tr>
+<!--{if $_SGLOBAL[member][credit] <= 0 }-->
+<tr>
+	<td>
+		<label for="message">你的积分不足，不能用来为该群组注入资金。</label>
+	</td>
+</tr>
+<!--{else}-->
+<tr>
+	<td>
+		<label for="message">你可以注入 1 - {$_SGLOBAL[member][credit]}，注意：别把你的积分全部捐出去哦</label>
+	</td>
+</tr>
+<tr>
+	<td>
+		<input type="text" name="credit" id="credit" value="1" class="t_input"/>
+	</td>
+</tr>
+<tr>
+	<td>
+	<input type="hidden" id="usercredit" name="usercredit" value="{$_SGLOBAL[member][credit]}" />
+	<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+	<input type="hidden" name="injectcreditsubmit" value="true" />
+	<!--{if $_SGLOBAL[inajax]}-->
+	<input type="button" name="injectcreditsubmit_btn" id="injectcreditsubmit_btn" value="提交" class="submit" onclick="postinjectcreditwithajax();" />
+	<!--{else}-->
+	<input type="button" name="injectcreditsubmit_btn" id="injectcreditsubmit_btn" value="提交" class="submit" onclick="postinjectcreditwithnormal();" />
+	<!--{/if}-->
+	</td>
+</tr>
+<!--{/if}-->
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+</div>
+
+<!--{/if}-->
+
+<!--{template footer}-->

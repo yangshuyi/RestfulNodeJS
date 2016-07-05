@@ -1,0 +1,117 @@
+<table>
+	<tr>
+		<td onclick="javascript:search_module_load('friend');">用户</td>
+		<td onclick="javascript:search_module_load('topic');">广播剧</td>
+		<td onclick="javascript:search_module_load('video');">视频</td>
+		<td onclick="javascript:search_module_load('mtag');">社团工作室</td>
+	</tr>
+</table>
+<div id="search_module_div_friend">
+	<form method="get" action="cp.php" target="_blank">
+	<table cellspacing="0" cellpadding="0">
+		<tr height="35px;">
+			<td width="20px">&nbsp;</td>
+			<td style="padding: 0;" align="right">
+				<input type="hidden" name="searchmode" value="1" />
+				<input type="hidden" name="ac" value="friend" />
+				<input type="hidden" name="op" value="search" />
+				<input type="text" id="searchkey" name="searchkey" value="" class="t_input" tabindex="1" style="width: 160px; border-right: none;"/>
+			</td>
+			<td style="padding: 0;" align="left"><a href="javascript:searchUser();"><img src="image/search_btn.gif" alt="搜索" /></a></td>
+		</tr>
+	</table>
+	</form>
+	<table cellpadding="1" cellspacing="0" align="center" border="0">
+		<tr>
+			<td><span>目前虫虫窝已经有[{$member_all_count}]人入住～</span></td>
+		</tr>
+	</table>
+</div>
+
+<div id="search_module_div_topic">
+	<form name="topic_subject_actionform" method="get" action="space.php" target="_blank">
+	<table cellspacing="0" cellpadding="0">
+		<tr height="35px;">
+			<td width="20px">&nbsp;</td>
+			<td style="padding: 0;" align="right">
+				<input type="hidden" id="do" name="do" value="topic"/>
+				<input type="text" id="subject" name="subject" value="" class="t_input" tabindex="1" style="width: 160px; border-right: none;"/>
+			</td>
+			<td style="padding: 0;" align="left"><a href="$('topic_subject_actionform').submit();"><img src="image/search_btn.gif" alt="搜索" /></a></td>
+		</tr>
+	</table>
+	</form>
+	<table cellpadding="1" cellspacing="1" align="center" border="0">
+		<tr><td style="align:left" colspan="3"><h2 class="subtitle"><span style="border-bottom: 1 dotted #ECB2C5;">&nbsp;&nbsp;热门的广播剧</span></h2></td></tr>
+		<!--{loop $topic_hotweekly_list $key $value}-->
+			<tr height="30px">
+			<td nowrap style="border-bottom:1px solid #FFD6A4;">
+				<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 26, 0, 0, 0, 0, -1); }--></a>
+			</td>
+			<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+				<span class="gray">$value[productclassname]</span>
+			</td>
+		</tr>
+		<!--{/loop}-->
+	</table>
+</div>
+
+<div id="search_module_div_topic">
+				<form name="video_subject_actionform" method="get" action="space.php" target="_blank">
+				<table cellspacing="0" cellpadding="0">
+					<tr height="35px;">
+						<td width="20px">&nbsp;</td>
+						<td style="padding: 0;" align="right">
+							<input type="hidden" id="do" name="do" value="video"/>
+							<input type="text" id="subject" name="subject" value="" class="t_input" tabindex="1" style="width: 160px; border-right: none;"/>
+						</td>
+						<td style="padding: 0;" align="left"><a href="$('video_subject_actionform').submit();"><img src="image/search_btn.gif" alt="搜索" /></a></td>
+					</tr>
+				</table>
+				</form>
+				<table cellpadding="1" cellspacing="1" align="center" border="0">
+					<tr><td style="align:left" colspan="3"><h2 class="subtitle"><span style="border-bottom: 1 dotted #ECB2C5;">&nbsp;&nbsp;热门的视频映像</span></h2></td></tr>
+					<!--{loop $video_hotweekly_list $key $value}-->
+						<tr height="30px">
+						<td nowrap style="border-bottom:1px solid #FFD6A4;">
+							<a href="space.php?do=video&videoid=$value[videoid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 26, 0, 0, 0, 0, -1); }--></a>
+						</td>
+						<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+							<span class="gray">$value[productclassname]</span>
+						</td>
+					</tr>
+					<!--{/loop}-->
+				</table>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+		<div class="nbox_s side_rbox">
+			<h3 class="ntitle"><span class="r_option"></span>&nbsp;入住社团/工作室查询 &raquo;</h3>
+			<div class="side_rbox_c">
+				<form name="mtag_tagname_actionform" method="get" action="space.php" target="_blank">
+				<table cellspacing="0" cellpadding="0">
+					<tr height="35px;">
+						<td width="20px">&nbsp;</td>
+						<td style="padding: 0;" align="right">
+							<input type="hidden" id="do" name="do" value="mtag"/>
+							<input type="text" id="subject" name="subject" value="" class="t_input" tabindex="1" style="width: 160px; border-right: none;"/>
+						</td>
+						<td style="padding: 0;" align="left"><a href="$('mtag_tagname_actionform').submit();"><img src="image/search_btn.gif" alt="搜索" /></a></td>
+					</tr>
+				</table>
+				</form>
+				<table cellpadding="1" cellspacing="1" align="center" border="0">
+					<tr>
+						<td><a href="space.php?do=mtag" target="_blank">看看哪些社团/工作室在虫虫安家</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</td>
+</tr>
+</table>
+
+<!--{template network_onlineuser}-->
+
+</div>
+<!--{template footer}-->

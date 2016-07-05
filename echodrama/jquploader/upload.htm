@@ -1,0 +1,36 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<script type="text/javascript" src="jquery-1.1.4.js"></script>
+<script type="text/javascript" src="jquery.flash.js"></script>
+<script type="text/javascript" src="jquery.jqUploader.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#jqUploader").jqUploader(
+	{
+		background:'FFFFDF',
+		barColor:'FFDD00',
+		hideSubmit: false
+	});
+});
+function fileuploadsuccess(){
+	
+}
+</script>
+</head>
+<body style="font:12px/1.5em Verdana,'Lucida Grande',Arial,Helvetica,sans-serif;margin: 0px;">
+<form id="uploadForm" enctype="multipart/form-data" action="upload.php" method="POST">
+<table width="100%" height="100%">
+<tr valign="middle"><td align="left">
+<div id="jqUploader" style="valign:middle;align:left;">
+<label for="label">请选择需要上传的音频文件(MP3)</label>
+<input name="MAX_FILE_SIZE" value="104857600" type="hidden" /><br/>
+<input name="file"  id="file"  type="file"/>
+</div>
+</td></tr>
+</table>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<div class="mainarea">
+<div class="maininner">
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="#"><span>CV微博信息编辑</span></a></li>
+	</ul>
+</div>
+
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="edit_form" name="edit_form" method="post" action="admincp.php?ac=cvweibo&op=save&id=$cvweibo[id]">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]"/>
+<input type="hidden" id="id" name="id" value="$cvweibo[id]"/>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+	<tr>
+		<th valign="top" width="100">CV名 *</th>
+		<td valign="top" >
+			<input type="text" id="name" name="name" value="$cvweibo[name]" class="t_input"  size="50" maxlength="100" />
+			<a href="#" onclick="javascript:checkname(); return false;">检查重复</a><div id="checknamestatus"></div>
+		</td>
+	</tr>
+	<tr>
+		<th valign="top" width="100">CV微博名 *</th>
+		<td valign="top" >
+			<input type="text" id="weibo" name="weibo" value="$cvweibo[weibo]" class="t_input"  size="50" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th valign="top" width="100">微博地址 *</th>
+		<td valign="top" >
+<!--{if empty($cvweibo[id])}-->
+			<input type="text" id="url" name="url" value="http://t.sina.com.cn/" class="t_input"  size="50" maxlength="100" />
+<!--{else}-->
+			<input type="text" id="url" name="url" value="$cvweibo[url]" class="t_input"  size="50" maxlength="100" />
+<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<th valign="top" width="100">&nbsp;</th>
+		<td valign="top" >&nbsp;</td>
+	</tr>
+	<tr>
+		<th valign="top" width="100">用户ID</th>
+		<td valign="top" >
+			<input type="text" id="uid" name="uid" value="$cvweibo[uid]" class="t_input" size="8" maxlength="8" onchange="javascript:loadresumebyid_ajax();"/>
+			<a href="#" onclick="javascript:resumequerymds();return false;">查询</a>
+		</td>
+	</tr>
+	<tr>
+		<th valign="top" width="100">用户名</th>
+		<td valign="top" >
+			<input type="text" id="username" name="username" value="$cvweibo[username]" class="t_input"  size="50" maxlength="100" READONLY/>
+		</td>
+	</tr>
+	<tr>
+		<th valign="top" width="100">&nbsp;</th>
+		<td valign="top" >&nbsp;</td>
+	</tr>
+	<tr>
+		<th valign="top" width="100">状态</th>
+		<td valign="top" >
+			<input type="radio" id="status" name="status" value="1"<!--{if $cvweibo[status]==1}--> checked<!--{/if}-->> 开启
+			<input type="radio" id="status" name="status" value="0"<!--{if $cvweibo[status]!=1}--> checked<!--{/if}-->> 禁用
+		</td>
+	</tr>
+	<tr>
+		<th valign="top" width="100">&nbsp;</th>
+		<td valign="top" ><span style="color:red">[注]启用该微博时，请再次确认账号的正确性。</span></td>
+	</tr>
+	<tr>
+		<th width="100"></th>
+		<td>
+			<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+			<input type="button" name="save" value="保存" class="submit" onclick="javascript:savecvweibo();"/>
+			<!--{if !empty($cvweibo[id]) }-->
+			&nbsp;
+			<input type="button" name="delete" value="删除" class="submit" onclick="javascript:deletecvweibo($cvweibo[id]);"/>
+			<!--{/if}-->
+		</td>
+	</tr>
+</table>
+</form>
+<script type="text/javascript">
+
+function savecvweibo(){
+	if ($("name").value.trim().length <=0) {
+		alert("请输入CV名");
+		$("name").focus();
+		return false;
+	}
+	
+	if ($("weibo").value.trim().length <=0) {
+		alert("请输入CV微博名");
+		$("weibo").focus();
+		return false;
+	}
+
+	if ($("url").value.trim().length <=0) {
+		alert("请输入微博地址");
+		$("url").focus();
+		return false;
+	}
+	
+	var form = $('edit_form');
+<!--{if empty($cvweibo[id])}-->
+	form.action="admincp.php?ac=cvweibo&op=save";
+<!--{else}-->
+	form.action="admincp.php?ac=cvweibo&op=save&id="+$cvweibo[id];
+<!--{/if}-->
+	form.submit();
+}
+
+function deletecvweibo(id){
+	if(confirm("你确定要删除该记录吗？")){
+		var form = $('edit_form');
+		form.action="admincp.php?ac=cvweibo&op=delete&id="+id;
+		form.submit();
+	}
+}
+
+function checkname(){
+	if ($("name").value.trim().length <=0) {
+		alert("请输入CV名");
+		$("name").focus();
+		return false;
+	}
+
+	var offset = 0;
+	var duration = 3;
+		
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+				
+	showloading();
+				
+	var form = $('ajaxform');
+		
+<!--{if empty($cvweibo[id])}-->
+	form.action="admincp.php?ac=cvweibo&op=checkname&name="+$("name").value;
+<!--{else}-->
+	form.action="admincp.php?ac=cvweibo&op=checkname&name="+$("name").value+"&id="+$cvweibo[id];
+<!--{/if}-->
+	form.method="post";
+			
+	ajaxpost('ajaxform', 'checkname_ajax_response', 2000);
+}
+
+function checkname_ajax_response(){
+	var name="";
+	var editstatus="";
+	try{
+		var str=$("__ajaxform").innerHTML;
+				
+		var paramsArray=str.split(",");
+		if(paramsArray.length==1){
+			alert(str);
+			$("checknamestatus").innerHTML="";
+		}else{
+			name=paramsArray[0];
+			editstatus=paramsArray[1];
+		}
+	}
+	catch(e){
+		alert(e);
+	}
+	
+	$("checknamestatus").innerHTML=editstatus;
+}
+
+function resumequerymds(){
+	var args=new Object();
+	args.window=window;
+	
+	window.showModalDialog("cp.php?ac=resume&op=querymds&widget=uid&id="+$('uid').value,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+	loadresumebyid_ajax();
+}
+
+function loadresumebyid_ajax(){
+	var offset = 0;
+	var duration = 3;
+		
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+		
+	showloading();
+		
+	var form = $('ajaxform');
+
+	form.action="cp.php?ac=resume&op=loadresumebyid_ajax&uid="+$('uid').value;
+	form.method="post";
+	
+	ajaxpost('ajaxform', 'loadresumebyid_ajax_response', 2000);
+}
+
+function loadresumebyid_ajax_response(){
+	
+	var uid="";
+	var username="";
+	var realname="";
+	try{
+		var str=$("__ajaxform").innerHTML;
+		
+		var paramsArray=str.split(",");
+		if(paramsArray.length==1){
+			alert(str);
+			$("uid").value="";
+			$("username").value="";
+		}else{
+			uid=paramsArray[0];
+			username=paramsArray[1];
+		}
+	}
+	catch(e){
+		alert(e);
+	}
+	
+	$("uid").value=uid;
+	$("username").value=username;
+}
+
+
+
+
+</script>
+
+</div>
+</div>
+

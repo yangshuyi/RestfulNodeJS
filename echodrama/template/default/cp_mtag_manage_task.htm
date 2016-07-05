@@ -1,0 +1,325 @@
+<!--{template cp_mtag_manageheader}-->
+
+<!--{if !empty($task[taskid]) }-->
+<div><h3>成员任务：$task[subject]</h3></div>
+<div class="l_status c_form">
+	
+	<a href="cp.php?ac=mtag&op=manage&subop=task&atomop=taskinfo&tagid=$mtag[tagid]&taskid=$task[taskid]&return=$_GET[return]" <!--{if $_GET[atomop]=='taskinfo' }--> class="active" <!--{/if}-->>任务信息维护</a>
+	<span class="pipe">|</span>
+	<a href="cp.php?ac=mtag&op=manage&subop=task&atomop=taskmember&tagid=$mtag[tagid]&taskid=$task[taskid]&return=$_GET[return]" <!--{if $_GET[atomop]=='taskmember' }--> class="active" <!--{/if}-->>参与成员维护</a>
+</div>
+<!--{/if}-->
+
+<!--{if $_GET[atomop]=='taskinfo' }-->
+
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=manage&subop=task&atomop=taskinfo&tagid=$mtag[tagid]&taskid=$task[taskid]&return=$_GET[return]">
+<table cellspacing="4" cellpadding="4" class="infotable">
+	<tr>
+		<th width="100" nowrap>成员任务名 *</th>
+		<td>
+			<input type="text" id="subject" name="subject" value="$task[subject]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>	
+		<th nowrap>重要级别 *</th>
+		<td>
+			<select name="importance" id="importance" >
+				<option value="-1">请选择重要级别</option>
+				<!--{loop $_SGLOBAL[mtagtaskimptclass] $key $value}-->
+				<option value="$value[classid]" <!--{if $task[importance] == $value[classid]}-->
+				selected<!--{/if}--> >$value[classname]</option>
+				<!--{/loop}-->
+			</select>
+		</td>
+	</tr>
+	<tr>	
+		<th nowrap>任务类型 *</th>
+		<td>
+			<select name="classid" id="classid" >
+				<option value="-1">请选择任务类型</option>
+				<!--{loop $taskclasslist $key $value}-->
+				<option value="$value[classid]" <!--{if $task[classid] == $value[classid]}-->
+				selected<!--{/if}--> >$value[classname]</option>
+				<!--{/loop}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th width="100">开始/结束时间 *</th>
+		<td>
+			<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+			<input type="text" name="starttime" id="starttime" value="$task[starttimedisp]" onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+			　~　
+			<input type="text" name="endtime" id="endtime" value="$task[endtimedisp]" onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+		</td>
+	</tr>
+	<tr>
+		<th width="100">任务说明*</th>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="description" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$task[description]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	</table>
+	<input type="hidden" name="nextstep" id="nextstep" value="" />
+	<input type="hidden" name="refer" id="nextstep" value="$_SGLOBAL[refer]" />
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	<input type="button" value="选择参与成员" class="submit" onclick="javascript:posttask('taskmember');"/>	
+	<input type="button" value="保存" class="submit" onclick="javascript:posttask('return');"/>	
+	<!--{if !empty($task[taskid]) }-->
+		<!--{if empty($task[close]) }-->
+			<input type="button" value="关闭封存" class="submit" onclick="javascript:closetask();"/>	
+		<!--{else}-->
+			<input type="button" value="开放" class="submit" onclick="javascript:unclosetask();"/>	
+		<!--{/if}-->
+	<input type="button" value="删除" class="submit" onclick="javascript:deletetask();"/>	
+	<!--{/if}-->
+</form>
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+//关闭任务
+function closetask() {
+	if(confirm("你确定要关闭该成员任务吗？")){
+		$("actionform").action="cp.php?ac=mtag&op=manage&subop=closetask&tagid=$task[tagid]&taskid=$task[taskid]&return="+$_GET('return');
+		$("actionform").submit();
+	}
+}
+
+//重新开放任务
+function unclosetask() {
+	if(confirm("你确定要开放该成员任务吗？")){
+		$("actionform").action="cp.php?ac=mtag&op=manage&subop=unclosetask&tagid=$task[tagid]&taskid=$task[taskid]&return="+$_GET('return');
+		$("actionform").submit();
+	}
+}
+//检查删除
+function deletetask() {
+	if(confirm("你确定要删除该成员任务吗？")){
+		$("actionform").action="cp.php?ac=mtag&op=manage&subop=deletetask&tagid=$task[tagid]&taskid=$task[taskid]&return="+$_GET('return');
+		$("actionform").submit();
+	}
+}
+
+function posttask( nextstep ){
+	// 成员任务名
+	if ($("subject").value.trim() == "") {
+		alert("成员任务名不能为空！");
+		$("subject").focus();
+		return false;
+	} else if ($("subject").value.trim().length > 80) {
+		alert("成员任务名太长，请限制在80个字符内！");
+		$("subject").focus();
+		return false;
+	}
+
+	//重要级别
+	if($("importance").value=="-1"){
+		alert("请选择重要级别！");
+		$("importance").focus();
+		return;
+	}
+
+	//任务类型
+	if($("classid").value=="-1"){
+		alert("请选择任务类型！");
+		$("classid").focus();
+		return;
+	}
+
+	//开始/结束时间
+	if($("starttime").value.trim() == "") {
+		alert("开始时间不能为空！");
+		$("starttime").focus();
+		return;
+	}
+	else if($("endtime").value.trim() == "") {
+		alert("开始时间不能为空！");
+		$("starttime").focus();
+		return;
+	}
+	else if( $("starttime").value > $("endtime").value ) {
+		alert("开始时间不能晚于结束时间！");
+		$("starttime").focus();
+		return;
+	}	
+	
+	// 编辑器内容同步
+	edit_save();
+		
+	// 任务说明
+	if ($("uchome-ttHtmlEditor").value.trim() == "") {
+		alert("任务说明不能为空！");
+		$("uchome-ttHtmlEditor").focus();
+		return false;
+	}
+
+	$("nextstep").value = nextstep;
+	if ($("nextstep").value.trim() == "") {
+		alert("请选择处理方式！");
+		return false;
+	}
+
+	$("actionform").submit();
+}
+</script>
+
+<!--{/if}-->
+	
+<!--{if $_GET[atomop]=='taskmember' }-->
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=manage&subop=task&atomop=taskmember&tagid=$mtag[tagid]&taskid=$task[taskid]&return=$_GET[return]">
+<div class="r_option"><input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'ids')">选择全部成员</div>
+
+<table cellspacing="0" cellpadding="0" class="reclisttable" border=0>
+	<!--{loop $memberclasslist $memberclass}-->
+	<tr>
+		<td class="affiche" align="left" colspan="8">
+			<h3>$memberclass[classname]</h3>
+		</td>
+	</tr>
+	
+	<!--{if count($members[$memberclass[classid]])==0 }-->
+		<tr height="10px">
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+		</tr>
+	<!--{else}-->
+		<!--{loop $members[$memberclass[classid]] $key $value}-->
+			<!--{if ($key%8)==0}-->
+			<tr>
+			<!--{/if}-->
+				<td id="member_$value['memberid']" align="center" width="12.5%">
+					<!--{if empty($value['uid'])}-->
+						<div class="myavatar48"><!--{avatar($value[uid],small)}--></div>
+					<!--{else}-->
+						<div class="myavatar48"><!--{avatar($value[uid],small)}--></div>
+					<!--{/if}-->
+					<!--{if empty($value['uip'])}-->
+						<div>$value['realname']</div>
+					<!--{else}-->
+						<div class="magicflicker">$value['realname']</div>
+					<!--{/if}-->
+					<div align="center">
+						<!--{if $value['checked']==1 }-->
+							<input type="checkbox" name="memberids[]" value="$value[memberid]" CHECKED>选定
+						<!--{else}-->
+							<input type="checkbox" name="memberids[]" value="$value[memberid]" >选定
+						<!--{/if}-->
+					</div>
+					<div id="member_introduce_$value['memberid']" name="member_introduce_$value['memberid']" style="display:none">
+						$value['introduce']
+					</div>
+				</td>
+			<!--{if $key%8==7}-->
+			</tr>
+			<!--{/if}-->
+		<!--{/loop}-->
+	<!--{/if}-->
+	<!--{/loop}-->
+	<tr height="10px">
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+			<td width="12.5%">&nbsp;</td>
+	</tr>
+</table>
+<input type="hidden" name="nextstep" id="nextstep" value="" />
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+<input type="button" value="保存" class="submit" onclick="javascript:posttaskmember('return');"/>	
+</form>
+<div id="flowDiv" class="flowDiv" style="display:none; position:absolute; z-index=99999; border: 1px solid #EBE6C9; background: #FFCB8C; padding:5px;">
+	<div id="flowDivContent" style="overflow-y:auto;overflow-x:auto;">
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+//彩虹炫
+var elems = selector('div[class~=magicflicker]'); 
+
+for(var i=0; i<elems.length; i++){
+	magicColor(elems[i]);
+}
+
+function getoffset(e) {
+	var t = e.offsetTop;
+	var l = e.offsetLeft;
+	while (e = e.offsetParent) {
+		t += e.offsetTop;
+		l += e.offsetLeft;
+	}
+	var rec = new Array(1);
+	rec[0] = t;
+	rec[1] = l;
+	return rec;
+}
+
+function member_introduce_onclick(memberid, uid, usertagid) {
+	var supe_uid = $_SGLOBAL['supe_uid'];
+	var mtagid = $mtag[tagid];
+	var cellWidget=$("member_"+memberid);
+	var introduceWidget=$("member_introduce_"+memberid);
+	
+	if(uid != supe_uid && introduceWidget.innerHTML==""){
+		return;
+	}
+	
+	var div = $('flowDiv'); //将要弹出的层   
+	var divContent = $('flowDivContent');
+	
+	div.style.display="block"; //div3初始状态是不可见的，设置可为可见   
+	div.style.left=getoffset(cellWidget)[1]+"px";
+	div.style.width=500;
+	div.style.top=(getoffset(cellWidget)[0]+90)+"px";
+	div.style.height=5; 
+	div.style.position="absolute"; //必须指定这个属性，否则div3层无法跟着鼠标动   
+
+	
+	var header = "<div style='width:100%'><p align='right'>";
+	var space = "<a href='space.php?uid="+memberid+"' target='_blank'>访问TA的主页</a>";
+	var usertag = "<a href='space.php?do=mtag&tagid="+usertagid+"' target='_blank'>访问TA的个人群组</a>";
+	var edit = "<a href='cp.php?ac=mtag&op=editmemberintroduce&tagid="+mtagid+"&memberid="+memberid+"'>编辑成员介绍</a>";
+	var close = "<a href='#' onclick='javascript:member_introduce_close();return false;'>关闭</a>";
+	var footer = "</p></div>";
+
+	var html = header + space;
+	if( usertag != '' && usertag > 0){
+		html = html + "<span class='pipe'>|</span>" + usertag;
+	}
+	//alert(uid+"-"+supe_uid);
+	if( uid == supe_uid ){
+		html = html + "<span class='pipe'>|</span>" + edit;
+	}
+	
+	html = html + "<span class='pipe'>|</span>" + close + footer;
+	divContent.innerHTML= html + "<div style='background:white;border: 1px solid #EBE6C9;'>" + introduceWidget.innerHTML + "</div>";
+}
+
+function member_introduce_close() {
+	var div = $('flowDiv'); //将要弹出的层   
+	div.style.display="none";
+}
+
+function posttaskmember( nextstep ){
+	$('nextstep').value=nextstep;
+	$("actionform").submit();
+}
+
+</script>
+
+<!--{/if}-->
+<!--{template cp_mtag_managefooter}-->

@@ -1,0 +1,14 @@
+<table cellspacing="0" cellpadding="0" border=0 width="100%">
+<!--{loop $thread_xilijuping_list $key $value}-->
+	<!--{if $key<999}--> 
+	<tr height="31px" <!--{if $key%2==1}--> class="alt"<!--{/if}-->>
+		<td nowrap width="1%">&nbsp;&nbsp;</td>
+		<td align="left" style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 0px 15px;border-bottom:1px solid #FFD6A4;">
+			<span class="r_option"><span class="egz" title="ä¯ÀÀ[{$value[viewnum]}]´Î£¬»Ø¸´[{$value[replynum]}]´Î">[{$value[replynum]}]</span></span>
+			&nbsp;&nbsp;&nbsp;<span style="color:red; font-weight: bold;">$value[prefix]&nbsp;&nbsp;</span><a href="space.php?do=forum&view=viewall&tid=$value[tid]" title="$value['subject'] - By $value['username']" target="_blank"><!--{eval echo getstr($value[subject], 60, 0, 0, 0, 0, -1); }--></a>
+		</td>
+		<td nowrap width="1%">&nbsp;</td>
+	</tr>
+	<!--{/if}-->
+<!--{/loop}-->
+</table>

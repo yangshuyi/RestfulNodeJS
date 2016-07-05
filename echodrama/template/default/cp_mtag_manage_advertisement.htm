@@ -1,0 +1,50 @@
+<!--{template cp_mtag_manageheader}-->
+<table width="100%"><tr>
+<!--{if !empty($advertisement[advertisementid])}-->
+	<td nowrap>
+		<div class="l_status c_form"><h2>编辑站内宣传：$advertisement[subject]</h2></div>
+	</td>
+	<!--{if $_GET[atomop]=='selectitemclass' OR $_GET[atomop]=='newitemwithclass'}-->
+	
+	<!--{else}-->
+	<td width="400px" align="right" nowrap><div class="l_status c_form">
+		<a href="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=editheader&tagid=$mtag[tagid]&advertisementid=$advertisement[advertisementid]&return=$_GET[return]" <!--{if $_GET[atomop]=='editheader' }--> class="active" <!--{/if}-->>站内宣传信息维护</a>
+		<span class="pipe">|</span>
+		<a href="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=edititem&tagid=$mtag[tagid]&advertisementid=$advertisement[advertisementid]&return=$_GET[return]" <!--{if $_GET[atomop]=='edititem' }--> class="active" <!--{/if}-->>展现页签编辑</a>
+		<span class="pipe">|</span>
+		<a href="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=preview&tagid=$mtag[tagid]&advertisementid=$advertisement[advertisementid]&return=$_GET[return]" <!--{if $_GET[atomop]=='preview' }--> class="active" <!--{/if}-->>预览展示效果</a>
+	</div></td>
+	<!--{/if}-->
+<!--{else}-->
+	<td width="100%" nowrap><h2>新建站内宣传：</h2></td>
+<!--{/if}-->
+</tr></table>
+<!--{if $_GET[atomop]=='editheader' }-->
+
+	<!--{template cp_mtag_manage_advertisement_editheader}-->
+	
+<!--{elseif $_GET[atomop]=='selectitemclass'}-->
+
+	<!--{template cp_mtag_manage_advertisement_selectitemclass}-->
+	
+<!--{elseif $_GET[atomop]=='newitemwithclass' OR $_GET[atomop]=='edititem' }-->
+
+	<!--{template cp_mtag_manage_advertisement_edititem}-->
+	
+<!--{elseif $_GET[atomop]=='preview'}-->
+	
+	<!--{if $advertisement[location]==1}-->
+		<!--{eval $adv_borderwidth=410; }-->
+		<!--{eval $adv_width=369; }-->
+		<!--{eval $adv_height=492; }-->
+	<!--{elseif $advertisement[location]==2}-->
+		<!--{eval $adv_borderwidth=540; }-->
+		<!--{eval $adv_width=492; }-->
+		<!--{eval $adv_height=369; }-->
+	<!--{/if}-->
+
+	<!--{template portal_topic_advertisement}-->
+	
+<!--{/if}-->
+
+<!--{template cp_mtag_managefooter}-->

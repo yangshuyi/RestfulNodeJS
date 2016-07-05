@@ -1,0 +1,41 @@
+<h1>回复</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner">
+<form id="reply_postform_{$post[pid]}" name="reply_postform_{$post[pid]}" method="post" action="cp.php?ac=thread&op=savepost">
+	<table>
+		<tr>
+			<th><label for="message">内容：</label></th>
+			<td>
+				<a href="###" id="face_{$post[pid]}" onclick="showFace(this.id, 'message_{$post[pid]}');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
+				<img src="image/zoomin.gif" onmouseover="this.style.cursor='pointer'" onclick="zoomTextarea('message_{$post[pid]}', 1)">
+				<img src="image/zoomout.gif" onmouseover="this.style.cursor='pointer'" onclick="zoomTextarea('message_{$post[pid]}', 0)"><br/>
+				<textarea id="message_{$post[pid]}" name="message" onkeydown="ctrlEnter(event, 'postsubmit');" rows="8" cols="70"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+				<input type="hidden" name="tid" value="$post[tid]" />
+				<input type="hidden" name="pid" value="$post[pid]" />
+				<!--{if $_SGLOBAL[inajax]}-->
+				<input type="hidden" name="postsubmit" value="true" />
+				<input type="submit" name="postsubmit_btn" id="postsubmit" value="回复" class="submit" onclick="ajaxpost('reply_postform_{$post[pid]}', 'post_add', 1)" />
+				<!--{else}-->
+				<input type="submit" name="postsubmit" id="postsubmit" value="回复" class="submit" />
+				<!--{/if}-->
+				<div id="__reply_postform_{$post[pid]}"></div>
+			</td>
+		</tr>
+	</table>
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+</div>
+
+
+<script type="text/javascript">
+	function postpost(){
+		$('quickpostform_{$thread[tid]}').submit();
+	}
+	
+</script>

@@ -1,0 +1,193 @@
+<!--{eval $_TPL['titles'] = array('转帖');}-->
+
+<!--{template header}-->
+
+<!--{if !empty($_SGLOBAL[inajax])}-->
+	<div id="space_blog" class="feed">
+		<h3 class="feed_header">
+			<a href="cp.php?ac=repaste" class="r_option" target="_blank">发表转帖</a>
+			转帖(共 $count 篇)
+		</h3>
+		<!--{if $count}-->
+		<ul class="line_list">
+		<!--{loop $list $value}-->
+			<li>
+				<span class="gray r_option"><!--{date('m-d H:i',$value[dateline],1)}--></span>
+				<h4><a href="space.php?do=repaste&uid=$space[uid]&id=$value[repasteid]" target="_blank" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->>$value[subject]</a></h4>
+				<div class="detail">
+					$value[message]
+				</div>
+			</li>
+		<!--{/loop}-->
+		</ul>
+		<div class="page">$multi</div>
+		<!--{else}-->
+		<div class="c_form">还没有相关的转帖。</div>
+		<!--{/if}-->
+	</div>
+<!--{else}-->
+
+<!--{if $space[self]}-->
+<div class="searchbar floatright">
+<form method="get" action="space.php">
+	<input name="searchkey" value="" size="15" class="t_input" type="text">
+	<input name="searchsubmit" value="搜索转帖" class="submit" type="submit">
+	<input type="hidden" name="searchmode" value="1" />
+	<input type="hidden" name="do" value="repaste" />
+	<input type="hidden" name="view" value="all" />
+	<input type="hidden" name="orderby" value="dateline" />
+</form>
+</div>
+<h2 class="title"><img src="image/app/repaste.gif" />欢乐转帖</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+		<!--{if $space[friendnum]}--><li$actives[we]><a href="space.php?do=$do&uid=$space[uid]&view=we"><span>好友最新转帖</span></a></li><!--{/if}-->
+		<li$actives[all]><a href="space.php?do=$do&uid=$space[uid]&view=all"><span>大家的转帖</span></a></li>
+		<li$actives[me]><a href="space.php?do=$do&uid=$space[uid]&view=me"><span>我的转帖</span></a></li>
+		<li$actives[click]><a href="space.php?do=$do&uid=$space[uid]&view=click"><span>我表态过的转帖</span></a></li>
+		<li class="null"><a href="cp.php?ac=repaste">发表新转帖</a></li>
+	</ul>
+</div>		
+<!--{else}-->
+<!--{eval 
+	$_TPL['spacetitle'] = "转帖";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?do=$do&uid=$space[uid]&view=me\">TA的所有转帖</a>";
+}-->
+<!--{template space_menu}-->
+<div class="h_status">按照发布时间排序</div>
+<!--{/if}-->
+		
+<div id="content" style="width:640px;">
+	<!--{if $_GET['orderby'] && $_GET['orderby'] != 'dateline'}-->
+	<div class="h_status">
+		排行时间范围：
+		<a href="space.php?do=repaste&view=all&orderby=$_GET[orderby]"{$day_actives[0]}>全部</a><span class="pipe">|</span>
+		<a href="space.php?do=repaste&view=all&orderby=$_GET[orderby]&day=1"{$day_actives[1]}>最近一天</a><span class="pipe">|</span>
+		<a href="space.php?do=repaste&view=all&orderby=$_GET[orderby]&day=2"{$day_actives[2]}>最近两天</a><span class="pipe">|</span>
+		<a href="space.php?do=repaste&view=all&orderby=$_GET[orderby]&day=7"{$day_actives[7]}>最近七天</a><span class="pipe">|</span>
+		<a href="space.php?do=repaste&view=all&orderby=$_GET[orderby]&day=30"{$day_actives[30]}>最近三十天</a><span class="pipe">|</span>
+		<a href="space.php?do=repaste&view=all&orderby=$_GET[orderby]&day=90"{$day_actives[90]}>最近三个月</a><span class="pipe">|</span>
+		<a href="space.php?do=repaste&view=all&orderby=$_GET[orderby]&day=120"{$day_actives[120]}>最近六个月</a>
+	</div>
+	<!--{/if}-->
+	
+	<!--{if $searchkey}-->
+	<div class="h_status">以下是搜索转帖 <span style="color:red;font-weight:bold;">$searchkey</span> 结果列表</div>
+	<!--{/if}-->
+	
+	<!--{if $count}-->
+	<table cellspacing="0" cellpadding="5" width="600">
+		<!--{loop $list $value}-->
+		<tr>
+			<td align="center" width="130px">
+				<div class="avatar48"><a href="space.php?uid=$value[uid]"><!--{avatar($value[uid],small)}--></a></div><br/>
+				<a href="space.php?uid=$value[uid]">{$_SN[$value[uid]]}</a><br/>
+				<span class="gray"><!--{date('Y-m-d H:i',$value[dateline],1)}--></span>
+			</td>
+			<td align="left" valign="top" class="event_title">
+				<br/>
+				<!--{if $_GET['view']!="me"}-->
+				<div class="title">
+					<a href="cp.php?ac=share&type=repaste&id=$value[repasteid]" id="a_share_$value[repasteid]" onclick="ajaxmenu(event, this.id, 1)" class="a_share">分享</a>
+				</div>
+				<!--{/if}-->
+				<div>
+					<h4><a href="space.php?do=$do&uid=$value[uid]&id=$value[repasteid]">$value[subject]</a></h4>
+				</div>	
+				<br/>	
+				<div class="gray">分类　　:&nbsp;$value[classname]</div>
+				<div class="gray">原帖地址:&nbsp;<a href="$value[url]">$value[url]</a></div>
+				<br/>	
+				<!--{if $value['hot']}--><div class="digb">$value[hot]</div><!--{/if}-->
+				<span class="gray">
+					$value[viewnum]<span class="gray">&nbsp;次阅读,&nbsp;</span>$value[replynum]<span class="gray">&nbsp;个评论&nbsp;</span>
+				</span>
+			</td>
+		</tr>
+		<!--{/loop}-->
+	</table>
+	
+	<div class="page">$multi</div>
+	
+	<!--{else}-->
+	<div class="c_form">还没有相关的转帖。</div>
+	<!--{/if}-->
+
+</div>
+
+<div id="sidebar" style="width:150px;">
+
+<!--{if $userlist}-->
+	<div class="cat">
+	<h3>按好友查看</h3>
+	<ul class="post_list line_list">
+		<li>
+			选择好友:<br>
+			<select name="fuidsel" onchange="fuidgoto(this.value);">
+			<option value="">全部好友</option>
+			<!--{loop $userlist $value}-->
+			<option value="$value[fuid]"{$fuid_actives[$value[fuid]]}>{$_SN[$value[fuid]]}</option>
+			<!--{/loop}-->
+			</select>
+		</li>
+	</ul>
+	</div>
+<!--{/if}-->
+	
+<!--{if $classarr}-->
+	<div class="cat">
+	<h3>转帖分类</h3>
+	<ul class="post_list line_list">
+		<li<!--{if !$_GET[classid]}--> class="current"<!--{/if}-->><a href="space.php?do=repaste&uid=$space[uid]&view=me">全部转帖</a></li>
+		<!--{loop $classarr $classid $classname}-->
+		<li<!--{if $_GET[classid]==$classid}--> class="current"<!--{/if}-->>
+			<!--{if $space[self]}-->
+				<a href="cp.php?ac=class&op=edit&classid=$classid" id="c_edit_$classid" onclick="ajaxmenu(event, this.id)" class="c_edit">编辑</a>
+				<a href="cp.php?ac=class&op=delete&classid=$classid" id="c_delete_$classid" onclick="ajaxmenu(event, this.id)" class="c_delete">删除</a>
+			<!--{/if}-->
+			<a href="space.php?do=repaste&uid=$space[uid]&classid=$classid&view=me">$classname</a>
+		</li>
+		<!--{/loop}-->
+	</ul>
+	</div>
+<!--{/if}-->
+
+<!--{if $_GET['view'] == 'click'}-->
+	<div class="cat">
+	<h3>表态动作</h3>
+	<ul class="post_list line_list">
+		<li$click_actives[all]><a href="space.php?do=repaste&view=click">全部动作</a></li>
+		<!--{loop $clicks $value}-->
+		<li{$click_actives[$value[clickid]]}>
+			<a href="space.php?do=repaste&view=click&clickid=$value[clickid]">$value[name]</a>
+		</li>
+		<!--{/loop}-->
+	</ul>
+	</div>
+<!--{elseif $_GET['view'] == 'all'}-->
+	<div class="cat">
+	<h3>排行榜</h3>
+	<ul class="post_list line_list">
+		<li$all_actives[all]><a href="space.php?do=repaste&view=all">推荐阅读</a></li>
+		<li$all_actives[dateline]><a href="space.php?do=repaste&view=all&orderby=dateline">最新发表</a></li>
+		<li$all_actives[hot]><a href="space.php?do=repaste&view=all&orderby=hot&day=$_GET[hotday]">人气排行</a></li>
+		<li$all_actives[replynum]><a href="space.php?do=repaste&view=all&orderby=replynum&day=$_GET[hotday]">评论排行</a></li>
+		<li$all_actives[viewnum]><a href="space.php?do=repaste&view=all&orderby=viewnum&day=$_GET[hotday]">查看排行</a></li>
+		<!--{loop $clicks $value}-->
+		<li{$all_actives['click_'.$value[clickid]]}><a href="space.php?do=repaste&view=all&orderby=click_$value[clickid]&day=$_GET[hotday]">{$value[name]}排行</a></li>
+		<!--{/loop}-->
+	</ul>
+	
+	</div>
+<!--{/if}-->
+
+</div>
+
+<script>
+function fuidgoto(fuid) {
+	window.location.href = "space.php?do=repaste&view=we&fuid="+fuid;
+}
+</script>
+<!--{/if}-->
+	
+<!--{template footer}-->

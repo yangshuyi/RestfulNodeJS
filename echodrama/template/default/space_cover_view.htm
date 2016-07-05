@@ -1,0 +1,116 @@
+<!--{eval $_TPL['titles'] = array($cover[subject],'乐虫翻唱');}-->
+<!--{template header}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="space.php?do=cover&coverid=$coverid"><span>查看翻唱</span></a></li>
+		<li><a href="space.php?do=cover"><span>翻唱列表</span></a></li>
+	</ul>
+</div>
+
+<div id="content" style="width: 590px;">
+
+	<!--{template cp_cover_view}-->
+
+	<div class="comments" id="div_main_content">
+		<h2>快评 (<span id="comment_replynum">$cover[replynum]</span> 个快评)</h2>
+		<div class="page">$multi</div>
+		<div class="comments_list" id="comment">
+			<ul id="comment_ul">
+			<!--{loop $commentlist $value}-->
+				<!--{template space_comment_li}-->
+			<!--{/loop}-->
+			</ul>
+		</div>
+
+		<div class="page">$multi</div>
+
+		<!--{if !$blog[noreply]}-->
+		<form id="quickcommentform" name="quickcommentform" action="cp.php?ac=comment" method="post" class="quickpost">
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<a href="###" id="comment_face" title="插入表情" onclick="showFace(this.id, 'comment_message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
+						<!--{if $_SGLOBAL['magic']['doodle']}-->
+						<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
+						<!--{/if}-->
+						<br />
+						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="hidden" name="refer" value="#" />
+						<input type="hidden" name="id" value="$coverid">
+						<input type="hidden" name="idtype" value="coverid">
+						<input type="hidden" name="commentsubmit" value="true" />
+						<input type="button" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="评论" onclick="ajaxpost('quickcommentform', 'comment_add')" />
+						<div id="__quickcommentform"></div>
+					</td>
+				</tr>
+			</table>
+		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" /></form>
+		<br />
+		<!--{/if}-->
+	</div>	
+</div>
+
+<div id="sidebar" style="width: 200px;">
+
+	<div id="site_gift_content" class="sidebox">
+		<!--{template space_site_gift}-->
+	</div>
+	
+	<div id="link_content" class="sidebox">
+		<h2 class="title">相关链接</h2>
+		<ul class="post_list line_list">
+			<!--{if $cover[clubtagid]>0 }-->
+			<li><a href="space.php?do=mtag&tagid=$cover[clubtagid]" target="_blank">&raquo;访问该社团群组</a></li>
+			<!--{/if}-->
+		</ul>
+	</div>
+		
+	<div id="cover_poll_content" class="sidebox">
+		<!--{template space_cover_poll}-->
+	</div>
+	
+	<div class="sidebox">
+		<h2 class="title">统计信息</h2>
+		<ul class="sidebox">
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$cover[viewnum]&nbsp;次访问</li>
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$cover[joinnum]&nbsp;次收藏</li>
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$cover[replynum]&nbsp;次评论</li>
+		</ul>
+	</div>
+	
+	<!--{if $userothercoverlist}-->
+	<div class="sidebox">
+		<h2 class="title">
+			该用户发布的其他翻唱作品
+		</h2>
+		<ul class="news_list">
+			<!--{loop $userothercoverlist $value}-->
+			<li style="height:auto;"><a href="space.php?do=cover&uid=$value[uid]&coverid=$value[coverid]" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></a></li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	<!--{/if}-->
+	
+	<!--{if $sameproductclassidcoverlist}-->
+	<div class="sidebox">
+		<h2 class="title">
+			同类型的热门翻唱
+		</h2>
+		<ul class="news_list">
+			<!--{loop $sameproductclassidcoverlist $value}-->
+			<li style="height:auto;"><a href="space.php?do=cover&uid=$value[uid]&coverid=$value[coverid]" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></a></li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	<!--{/if}-->
+	
+</div>
+	
+<!--{template footer}-->

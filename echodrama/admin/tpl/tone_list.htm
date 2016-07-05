@@ -1,0 +1,106 @@
+<div class="mainarea">
+<div class="maininner">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="admincp.php?ac=tone"><span>声线列表</span></a></li>
+	</ul>
+</div>
+
+<form id="toneform" name="toneform" method="get" action="admincp.php">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3">
+			<tr>
+				<td colspan="2" align="right">
+					<input type="hidden" name="ac" value="tone" />
+					<input type="hidden" name="do" value="tone" />
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	<div class="bdrcontent">
+		<table width="100%" cellspacing="0" cellpadding="0" class="reclisttable">
+			<tr>
+				<td width="25" colspan="1" align="center">&nbsp;</td>
+				<th width="60" align="center">编号</th>
+				<th align="center">类型</th>
+				<th align="center">标签</th>
+				<th align="center">上传人</th>
+				<th align="center">上传时间</th>
+				<th width="30px" align="center">操作</th>
+			</tr>
+			<!--{loop $list $key $value}-->
+			<tr <!--{if $key%2==1}--> class="alt"<!--{/if}-->>
+				<td><input type="<!--{if $allowbatch}-->checkbox<!--{else}-->radio<!--{/if}-->" name="ids[]" value="$value[toneid]"></td>
+				<td width="60px" nowrap>$value[toneid]</td>
+				<td align="center" nowrap>$value[classname]</td>
+				<td align="left" nowrap>$value[label]</td>
+				<td align="center" nowrap><a href="space.php?uid=$value[uid]" target="_blank">$value[username]</a></td>
+				<td align="center" nowrap>$value[dateline]</td>
+				<td align="center" nowrap><a href="admincp.php?ac=tone&op=manage&toneid=$value[toneid]" target="_blank">管理</a></td>
+			</tr>
+			<!--{/loop}-->
+		</table>
+		<div width="100%" class="pages">$multi</div>
+		</div>
+	</div>
+	<div class="footactions">
+		<input type="hidden" name="mpurl" value="$mpurl">
+		<!--{if $allowbatch && $perpage<=100}-->
+		<input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'ids')">全选
+		<!--{/if}-->
+		
+		<input id="ckdelete" type="radio" value="delete"><label for="ckdelete">批量删除</label>
+		<input id="ckrename" type="radio" value="rename"><label for="rename">批量改名</label>
+		<input type="submit" name="opsubmit" value="执行操作" onclick="doBatchAction();" class="submit">
+	</div>
+</form>
+</div>
+</div>
+
+<script type="text/javascript">
+
+function doBatchAction(){
+	
+	var selids="";
+	var form=$('toneform');
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.name.match("ids")) {
+			if(e.checked){
+				selids=selids+e.value+",";
+			}
+		}
+	}
+	if(selids==""){
+		alert("请选择要操作的记录。");
+	}else{
+		selids=selids+0;
+	}
+	
+	
+	if($('ckdelete').checked){
+		if(confirm('本操作不可恢复，确认继续？')){
+			form.method="POST";
+			form.action="admincp.php?ac=topic&op=batchdelete&selids="+selids;
+			return true;
+		}
+	}
+	else if($('ckrename').checked){
+		if(confirm('本操作不可恢复，确认继续？')){
+			form.method="POST";
+			form.action="admincp.php?ac=tone&op=batchrename&selids="+selids;
+			return true;
+		}
+	}
+	else{
+		alert("请选择批量操作类型。");
+		return false;
+	}
+	return false;
+	
+}
+
+</script>

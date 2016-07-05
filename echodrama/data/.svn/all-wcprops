@@ -1,0 +1,347 @@
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/61/trunk/www/data
+END
+data_imageface.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/10/trunk/www/data/data_imageface.php
+END
+data_creditrule.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/61/trunk/www/data/data_creditrule.php
+END
+data_task.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/10/trunk/www/data/data_task.php
+END
+sendmail.lock
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/10/trunk/www/data/sendmail.lock
+END
+data_labelcolorclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/10/trunk/www/data/data_labelcolorclass.php
+END
+data_profield.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/10/trunk/www/data/data_profield.php
+END
+data_static_tableinfotype.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/10/trunk/www/data/data_static_tableinfotype.php
+END
+cache_top_credit.txt
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/61/trunk/www/data/cache_top_credit.txt
+END
+install.lock
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/10/trunk/www/data/install.lock
+END
+data_mtagstateclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/10/trunk/www/data/data_mtagstateclass.php
+END
+data_magic.php
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/10/trunk/www/data/data_magic.php
+END
+data_app.php
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/10/trunk/www/data/data_app.php
+END
+data_mail.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/10/trunk/www/data/data_mail.php
+END
+runcron_6.lock
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/10/trunk/www/data/runcron_6.lock
+END
+data_ad.php
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/10/trunk/www/data/data_ad.php
+END
+install.sql
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/10/trunk/www/data/install.sql
+END
+data_advertisementlocationclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/10/trunk/www/data/data_advertisementlocationclass.php
+END
+data_repasteclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/10/trunk/www/data/data_repasteclass.php
+END
+data_network.php
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/10/trunk/www/data/data_network.php
+END
+cache_top_friendnum.txt
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/61/trunk/www/data/cache_top_friendnum.txt
+END
+data_mtagtaskimptclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/10/trunk/www/data/data_mtagtaskimptclass.php
+END
+data_topicauditclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/10/trunk/www/data/data_topicauditclass.php
+END
+data_videoproductclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/10/trunk/www/data/data_videoproductclass.php
+END
+data_spam.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/10/trunk/www/data/data_spam.php
+END
+data_jobclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/10/trunk/www/data/data_jobclass.php
+END
+cache_top_gg.txt
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/61/trunk/www/data/cache_top_gg.txt
+END
+data_profilefield.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/10/trunk/www/data/data_profilefield.php
+END
+data_coverproductclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/10/trunk/www/data/data_coverproductclass.php
+END
+data_config.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/10/trunk/www/data/data_config.php
+END
+data_productclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/10/trunk/www/data/data_productclass.php
+END
+data_usergroup_1.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_1.php
+END
+data_usergroup_2.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_2.php
+END
+cache_top_mm.txt
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/61/trunk/www/data/cache_top_mm.txt
+END
+data_usergroup_3.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_3.php
+END
+data_setting.php
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/10/trunk/www/data/data_setting.php
+END
+data_attachmentclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/10/trunk/www/data/data_attachmentclass.php
+END
+data_usergroup_4.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_4.php
+END
+data_userapp.php
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/10/trunk/www/data/data_userapp.php
+END
+index.htm
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/10/trunk/www/data/index.htm
+END
+data_advertisementitemclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/10/trunk/www/data/data_advertisementitemclass.php
+END
+data_usergroup_5.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_5.php
+END
+data_usergroup_6.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_6.php
+END
+data_usergroup_7.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_7.php
+END
+data_usergroup_8.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_8.php
+END
+data_producttype.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_producttype.php
+END
+data_usergroup_9.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_9.php
+END
+data_eventtype.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/10/trunk/www/data/data_eventtype.php
+END
+data_click.php
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/10/trunk/www/data/data_click.php
+END
+stat_setting.xml
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/10/trunk/www/data/stat_setting.xml
+END
+data_censor.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/10/trunk/www/data/data_censor.php
+END
+data_block.php
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/10/trunk/www/data/data_block.php
+END
+cache_top_experience.txt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/61/trunk/www/data/cache_top_experience.txt
+END
+data_usergroup_10.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_10.php
+END
+data_usergroup.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/10/trunk/www/data/data_usergroup.php
+END
+data_toneclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/10/trunk/www/data/data_toneclass.php
+END
+data_usergroup_11.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/10/trunk/www/data/data_usergroup_11.php
+END
+cache_top_viewnum.txt
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/61/trunk/www/data/cache_top_viewnum.txt
+END

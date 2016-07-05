@@ -1,0 +1,58 @@
+<div class="tabs_header" style="margin-bottom: 1px;">
+	<ul class="tabs">
+		<li id="program_forecast_li" ><a href="#" onclick="return false;"><span>节目预告</span></a></li>
+	</ul>
+	<div class="r_option">
+		<a href="http://www.echodrama.com/bbs/viewthread.php?tid=5054" target="_blank">电台使用帮助</a>&nbsp;&nbsp;
+	</div>
+</div>
+
+<table id="program_forecast_content" cellspacing="0" style="width:100%; height:100%; border: 1px solid #FF8901;">
+	<tr align="center" height="100%">
+		<td valign="top" width="100%">
+<table cellspacing="0" border=0 style="width:100%;">
+	<tr>
+		<th colspan="2" nowrap style="border-bottom:  1px solid #FF8901;"><h2>节目预告</h2></th>
+	</tr>
+	<tr>
+		<td nowrap align="center">开始时间 ~ 结束时间</td>
+		<td nowrap align="center">节目名称</td>
+	</tr>
+	<!--{loop $radiolist['future'] $radio}-->
+	<tr onclick="if( $('radio_future_content_$radio[rid]').style.display=='none' ){$('radio_future_content_$radio[rid]').style.display='';}else{$('radio_future_content_$radio[rid]').style.display='none';};">
+		<td>$radio[starttimedisp] ~ $radio[endtimedisp]</td>
+		<td>$radio[subject]</td>
+	</tr>
+	<tr id="radio_future_content_$radio[rid]" style="display:block">
+		<td colspan="2" align="left">$radio[message]</td>
+	</tr>
+	<!--{/loop}-->
+	<tr>
+		<th>&nbsp;</th>
+	</tr>	
+	<tr>
+		<th colspan="2" nowrap style="border-bottom:  1px solid #FF8901;"><h2>过往精彩</h2></th>
+	</tr>
+	<tr>
+		<td nowrap align="center">开始时间 ~ 结束时间</td>
+		<td nowrap align="center">节目名称</td>
+	</tr>
+	<!--{loop $radiolist['history'] $radio}-->
+	<tr onclick="if( $('radio_history_content_$radio[rid]').style.display=='none' ){$('radio_history_content_$radio[rid]').style.display='';}else{$('radio_history_content_$radio[rid]').style.display='none';};">
+		<td>$radio[starttimedisp] ~ $radio[endtimedisp]</td>
+		<td>&nbsp;
+		<!--{if empty($radio[synthreadid])}-->
+			$radio[subject]
+		<!--{else}-->
+			<a class="gray" href="#" target="_blank">$radio[subject]</a>
+		<!--{/if}-->
+		</td>
+	</tr>
+	<tr id="radio_history_content_$radio[rid]" style="display:none">
+		<td colspan="2" align="left">$radio[message]</td>
+	</tr>
+	<!--{/loop}-->
+</table>
+		</td>
+	</tr>
+</table>

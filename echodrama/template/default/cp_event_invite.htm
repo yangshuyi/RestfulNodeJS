@@ -1,0 +1,84 @@
+	<!--{if $event[grade] == -2}-->
+	<div id="content">
+		<p>您现在不能给好友发送邀请，因为此招募活动已经关闭。</p>
+	</div>
+	<!--{elseif $event[grade] <= 0}-->	
+	<div id="content">
+		<p>您现在不能给好友发送邀请，因为招募活动还未通过审核。</p>
+	</div>
+	<!--{elseif $_SGLOBAL[timestamp] > $event[deadline]}-->
+	<div id="content">
+		<p>您现在不能给好友发送邀请，因为招募活动已经截止报名了。</p>
+	</div>
+	<!--{elseif $event[limitnum]>0 && $event[limitnum]<=$event[membernum]}-->
+	<div id="content">
+		<p>您现在不能给好友发送邀请，因为招募活动人数已满。</p>
+	</div>
+	<!--{else}-->
+	<div id="content" style="width: 640px;">
+		<form id="edit_form" name="edit_form" class="c_form" method="post" action="cp.php?ac=event&op=invite&id=$event[eventid]&group=$_GET[group]&page=$page">
+			<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+			<div class="h_status">
+				您可以给未加入本招募活动的好友们发送邀请。
+			</div>
+			<div class="h_status">
+				<!--{if $list}-->
+				<ul class="avatar_list">
+				<!--{loop $list $value}-->
+					<li><div class="avatar48"><a href="space.php?uid=$value[fuid]" title="{$_SN[$value[fuid]]}"><!--{avatar($value[fuid],small)}--></a></div>
+						<p>
+						<a href="space.php?uid=$value[fuid]" title="{$_SN[$value[fuid]]}">{$_SN[$value[fuid]]}</a>
+						</p>
+						<p><!--{if empty($joins[$value[fuid]])}--><input type="hidden" name="names[]" value="$value[fusername]"><input type="checkbox" name="ids[]" value="$value[fuid]">选定<!--{else}-->已邀请<!--{/if}--></p>
+					</li>
+				<!--{/loop}-->
+				</ul>
+				<div class="page">$multi</div>
+				<!--{else}-->
+				<div class="c_form">还没有好友。</div>
+				<!--{/if}-->
+			</div>
+			<p>
+				<!--{if $list}-->
+					<input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'ids')"><label for="chkall">全选</label> &nbsp;
+					<input type="hidden" name="invitesubmit" value="1" />
+					<input type="hidden" id="invitesubmittype" name="invitesubmittype" value="1" />
+					<input type="button" name="bnt_invitesubmit" value="邀请" class="submit" onclick="javascript:invite_selectedfriends();"/>
+					<br/><br/>
+					<input type="button" value="邀请所有好友[消费50积分]" class="submit" onclick="javascript:invite_allfriends();"/>
+					<input type="button" value="邀请所有成员[消费200积分]" class="submit" onclick="javascript:invite_allmembers();">
+				<!--{/if}-->
+			</p>
+			<script type="text/javascript">
+			
+				//检查提交
+				function invite_selectedfriends() {
+					$('invitesubmittype').value=1;//invite with target
+					$("edit_form").submit();
+				}
+			
+				function invite_allfriends() {
+					$('invitesubmittype').value=2;//invite all friends
+					$("edit_form").submit();
+				}
+			
+				function invite_allmembers() {
+					$('invitesubmittype').value=3;//invite all members
+					$("edit_form").submit();
+				}
+				
+			</script>
+		</form>
+	</div>
+	<div id="sidebar" style="width: 150px;">
+		<div class="cat">
+			<h3>好友分类</h3>
+			<ul class="post_list line_list">
+				<li<!--{if $_GET[group]==-1}--> class="current"<!--{/if}-->><a href="cp.php?ac=event&id=$eventid&op=invite&group=-1">全部好友</a></li>
+				<!--{loop $groups $key $value}-->
+				<li<!--{if $_GET[group]==$key}--> class="current"<!--{/if}-->><a href="cp.php?ac=event&id=$eventid&op=invite&group=$key">$value</a></li>
+				<!--{/loop}-->
+			</ul>
+		</div>
+	</div>
+	<!--{/if}-->

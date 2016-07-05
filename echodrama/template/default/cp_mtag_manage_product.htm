@@ -1,0 +1,242 @@
+<!--{template cp_mtag_manageheader}-->
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=manage&subop=product&tagid=$mtag[tagid]&itemid=$item[itemid]">
+<h1>管理作品</h1>
+<br/>
+	<table cellspacing="6" cellpadding="0" width="600px" border=0>
+	<tr>
+		<th width="120" nowrap>作品分类：</th>
+		<td>
+			<select id="producttype" name="producttype">
+				<option value="-1">请选择作品分类</option>
+				<!--{loop $_SGLOBAL[producttype] $key $value}-->
+				<option value="$key"<!--{if $item[producttype] == $value[classid]}-->
+				selected<!--{/if}--> >$value[classname]</option>
+				<!--{/loop}-->
+			</select>
+			<input type="hidden" id="productname" name="productname" value="$item[productname]"/>
+			<input type="hidden" id="productid" name="productid" value="$item[productid]"/>
+		</td>
+	</tr>
+	<tr>
+		<th nowrap>&nbsp;</th>
+		<td>
+			<table id="product_exist" width="100%" border=0>
+				<tr>
+					<td>
+						请确认 该作品 的编号：　
+						<input type="text" id="product_exist_id" name="product_exist_id" value="" size="8" maxlength="8" onchange="javascript:loadproductbyid_ajax();">
+						<a href="#" onclick="javascript:productquerymds();return false;">查询</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						作品名称：　<input type="text" id="product_exist_name" name="product_exist_name" value="" style="border:0px;" size="60" READONLY/><br/>
+						作品类型：　<input type="text" id="product_exist_productclassname" name="product_exist_productclassname" value="" style="border:0px;" size="10" READONLY/><br/>
+						所属团队：　<input type="text" id="product_exist_club" name="product_exist_club" value="" style="border:0px;" size="40" READONLY/>
+						<input type="hidden" id="product_exist_clubtagid" name="product_exist_clubtagid" value=""/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_product(false);return false;">没有查到该作品</a>]
+					</td>
+				</tr>
+			</table>
+			<table id="product_notexist" width="100%">
+				<tr>
+					<td>
+						作品名称：　<input type="text" id="product_notexist_name" name="product_notexist_name" value="" style="width: 200px;"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_product(true);return false;">重新确认 该作品 的编号</a>]
+					</td>
+				</tr>
+			</table>
+		</td>
+<script type="text/javascript">
+	initInputType_product();
+	
+	function initInputType_product() {
+		if( ($("productid").value=="" || $("productid").value==0) && $("productname").value!="" ){
+			displayInputType_product(false);
+			$("product_notexist_name").value = $("productname").value;
+		}
+		else{
+			displayInputType_product(true);
+			$("product_exist_id").value = $("productid").value;
+			$("product_exist_name").value = $("productname").value;
+		}
+	}
+	
+	function displayInputType_product(hasid) {
+		if( hasid == true ){
+			$("product_exist").style.display="block";
+			$("product_notexist").style.display="none";
+			
+		}
+		else{
+			$("product_exist").style.display="none";
+			$("product_notexist").style.display="block";
+		}	
+	}
+
+	function setInputType_product() {
+		if( $("product_exist").style.display=="block" ){
+			if($("product_exist_id").value==""){
+				alert("请输入该作品编号！");
+				return false;
+			}
+			$("productid").value = $("product_exist_id").value;
+			$("productname").value = $("product_exist_name").value.trim();
+		}
+		if( $("product_notexist").style.display=="block" ){
+			if($("product_notexist_name").value.trim()==""){
+				alert("请输入该作品名称！");
+				return false;
+			}
+			else if ($("product_notexist_name").value.length > 80) {
+				alert("作品名称太长，请限制在80个字符内！");
+				return false;
+			}
+			$("productid").value = 0;
+			$("productname").value = $("product_notexist_name").value.trim();
+		}
+		return true;
+	}
+	
+	function productquerymds(){
+		var url="";
+		var param="";
+		if($("producttype").value=="1"){
+			url = "cp.php?ac=topic&op=querymds&widget=product_exist_id&topicid="+$('product_exist_id').value;
+			param = "dialogWidth:850px;dialogHeight:650px;center:yes;help:no;menubar:no;titleBar:no;resizable:no";
+		}
+		else if($("producttype").value=="2"){
+			url = "cp.php?ac=cover&op=querymds&widget=product_exist_id&coverid="+$('product_exist_id').value;
+			param = "dialogWidth:850px;dialogHeight:600px;center:yes;help:no;menubar:no;titleBar:no;resizable:no";
+		}
+		else if($("producttype").value=="3"){
+			url = "cp.php?ac=video&op=querymds&widget=product_exist_id&videoid="+$('product_exist_id').value;
+			param = "dialogWidth:850px;dialogHeight:600px;center:yes;help:no;menubar:no;titleBar:no;resizable:no";
+		}
+		else {
+			alert("请选择作品分类！");
+			$("producttype").focus();
+			return;
+		}
+		
+		var args=new Object();
+		args.window=window;
+		window.showModalDialog( url, args, param);
+		loadproductbyid_ajax();
+	}
+			
+	function loadproductbyid_ajax(){
+		var url="";
+		if($("producttype").value=="1"){
+			url = "cp.php?ac=topic&op=loadtopicsinglebyid_ajax&topicid="+$('product_exist_id').value;
+		}
+		else if($("producttype").value=="2"){
+			url = "cp.php?ac=cover&op=loadcoverbyid_ajax&coverid="+$('product_exist_id').value;
+		}
+		else if($("producttype").value=="3"){
+			url = "cp.php?ac=video&op=loadvideobyid_ajax&videoid="+$('product_exist_id').value;
+		}
+		else {
+			alert("请选择作品分类！");
+			return;
+		}
+
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+					
+		showloading();
+					
+		var form = $('ajaxform');
+			
+		form.action = url;
+		form.method = "post";
+				
+		ajaxpost('ajaxform', 'loadproductbyid_ajax_response', 2000);
+	}
+
+	function loadproductbyid_ajax_response(){
+		var productid="";
+		var productname="";
+		var productclassname="";
+		var productclubtagid="";
+		var productclub="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+					
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				productid="";
+				productname="";
+				productclassname="";
+				productclubtagid="";
+				productclub="";
+			}else{
+				productid = paramsArray[0];
+				productname = paramsArray[1];
+				productclassname = paramsArray[3];
+				productclubtagid = paramsArray[4];
+				productclub = paramsArray[5];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("product_exist_id").value=productid;
+		$("product_exist_name").value=productname;
+		$("product_exist_productclassname").value=productclassname;
+		$("product_exist_clubtagid").value=productclubtagid;
+		$("product_exist_club").value=productclub;
+	}
+
+</script>
+	</tr>
+	<tr>
+		<th width="150" nowrap>作品制作历程：</th>
+		<td align="left" >
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="introduce" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$item[introduce]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+</table>
+<br/><br/>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+<input type="button" value="保存修改" class="submit" onclick="javascript:postproduct();"/>	
+<input type="button" value="放弃修改" class="submit" onclick="javascript:revertproduct();"/>	
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+	function postproduct(){
+		var productvalid = setInputType_product();
+		if(productvalid == false){
+			return;
+		}
+
+		// 编辑器内容同步
+		edit_save();
+
+		$("actionform").submit();
+	}
+
+	function revertproduct(){
+		location.href="cp.php?ac=mtag&op=manage&subop=products&tagid=$mtag[tagid]";
+	}
+</script>
+</form>
+<!--{template cp_mtag_managefooter}-->

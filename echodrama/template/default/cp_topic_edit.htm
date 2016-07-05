@@ -1,0 +1,685 @@
+<div class="tabs_header">
+<ul class="tabs">
+	<li class="active"><a href="cp.php?ac=topic&do=edit&topicid=$topicid"><span>编辑广播剧</span></a></li>
+	<li><a href="space.php?do=topic"><span>返回广播剧列表</span></a></li>
+</ul>
+<!--{if $_SGLOBAL[refer]}-->
+<div class="r_option"><a href="cp.php?ac=topic&op=return&refer=$_SGLOBAL[refer]">&laquo; 返回上一页</a>
+</div>
+<!--{/if}--></div>
+<div class="c_form">
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="edit_form" name="edit_form" method="post" action="cp.php?ac=topic&op=save&topicid=$topicid" enctype="multipart/form-data">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]"/>
+<input type="hidden" id="topicid" name="topicid" value="$topic[topicid]"/>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+	<tr>
+		<td width="100"></td>
+		<td align="right">
+			<ul>
+				<li class="gray">广播剧ID: $topic[topicid]</li>
+			</ul>
+		</td>
+	</tr>
+<!--{if $_SGLOBAL['administrator'] == 1 }-->
+	<tr>
+		<td width="100">&nbsp;</td>
+		<td>
+			<input type="checkbox" id="firstpublish" name="firstpublish" value="1" <!--{if $topic[firstpublish]==1}-->CHECKED<!--{/if}--> /> 是否在应声虫首发该广播剧
+		</td>
+	</tr>
+	<tr>
+		<td width="100">&nbsp;</td>
+		<td>
+			<span style="color:red">首发要求</span>
+		</td>
+	</tr>
+	<tr>
+		<td width="100">&nbsp;</td>
+		<td>
+			<input type="checkbox" id="shorttopic" name="shorttopic" value="1" <!--{if $topic[shorttopic]==1}-->CHECKED<!--{/if}--> /> 是否微小剧
+		</td>
+	</tr>
+	<tr>
+		<td width="100">&nbsp;</td>
+		<td>
+			<input type="checkbox" id="singtonalbum" name="singtonalbum" value="1" <!--{if $topic[singtonalbum]==1}-->CHECKED<!--{/if}--> /> 是否全一期长剧
+		</td>
+	</tr>	
+<!--{/if}-->
+	<tr>
+		<td width="100"></td>
+		<td>
+			<!--{if $topic[pic]}-->
+			<img src="$topic[pic]" alt="$topic[subject]" width="500"/><br/>
+			<!--{/if}-->
+  		</td>
+  	</tr>
+	<tr>
+		<td width="100">剧名 *</td>
+		<td>
+			<input type="text" id="subject" name="subject" value="$topic[subject]" class="t_input"  size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<td width="100">标签</td>
+		<td><input type="text" id="label" name="label" value="$topic[label]" class="t_input"  size="80" maxlength="100" /></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			标签指的是该广播剧的相关属性：时代（古风，现代等），类型（爱情，武侠等），风格（悲剧，搞笑等）。<br/>
+			标签与标签之间，请用'/'隔开。每个标签需控制在8个字符内。
+		</td>
+	</tr>
+	<tr>
+		<td width="100">作品简介*</td>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$topicadditioninfo[message]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+<!--{if 1==1 }-->
+	<tr>
+		<td width="100">作品 *</td>
+		<td>
+			<select name="audiotype" id="audiotype" class="t_input" onchange="javascript:displayAudioType()">
+				<option value="2" <!--{if $topic[audiotype]==2 }-->SELECTED<!--{/if}-->>外联资源</option>
+				<option value="1" <!--{if $topic[audiotype]==1 }-->SELECTED<!--{/if}-->>上传音频</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th width="100">&nbsp</th>
+		<td>
+			<table id="table_audiotype_link">
+				<tr><td>&raquo;&nbsp;在线播放设置：</td></tr>
+				<input type="hidden" id="audioplayerpathtype" name="audioplayerpathtype" value="1"/>
+				<tr><td>　　土豆网Flash链接地址</td></tr>
+				<tr><td>
+					<input type="text" id="audioplayerpath_tudou" name="audioplayerpath_tudou" value="$topic[audioplayerpath_tudou]" class="t_input" size="80" maxlength="500" />
+				</td></tr>
+				<tr><td><span style="color:red">[注]土豆的分享Flash地址，必须为“.swf”结尾。</span></td></tr>
+				<tr><td>&nbsp;</td></tr>
+				<tr><td>&raquo;&nbsp;外联下载设置：</td></tr>
+				<input type="hidden" id="audiodownloadpathtype" name="audiodownloadpathtype" value="1"/>
+				<tr><td>　　飞速RayFile链接地址</td></tr>
+				<tr><td>
+					<input type="text" id="audiodownloadpath_rayfile" name="audiodownloadpath_rayfile" value="$topic[audiodownloadpath_rayfile]" class="t_input" size="80" maxlength="500" />
+				</td></tr>
+				<tr><td>　　115网盘链接地址</td></tr>
+				<tr><td>
+					<input type="text" id="audiodownloadpath_115" name="audiodownloadpath_115" value="$topic[audiodownloadpath_115]" class="t_input" size="80" maxlength="500" />
+				</td></tr>
+				<tr><td>　　QQ中转站链接地址</td></tr>
+				<tr><td>
+					<input type="text" id="audiodownloadpath_zhongzhuan" name="audiodownloadpath_zhongzhuan" value="$topic[audiodownloadpath_zhongzhuan]" class="t_input" size="80" maxlength="500" />
+				</td></tr>
+			</table>
+			<table id="table_audiotype_product"><tr><td>
+				文件路径：$topic[mp3path]
+			</td></tr></table>
+<script type="text/javascript">
+	function displayAudioType() {
+		if (parseInt($("audiotype").value) == 1) {
+			$("table_audiotype_link").style.display="none";
+			$("table_audiotype_product").style.display="block";
+		}
+		else if (parseInt($("audiotype").value) == 2) {
+			$("table_audiotype_link").style.display="block";
+			$("table_audiotype_product").style.display="none";
+		}
+		else{
+			$("table_audiotype_link").style.display="none";
+			$("table_audiotype_product").style.display="none";
+		}
+	}
+	displayAudioType();
+</script>
+		</td>
+	</tr>
+<!--{else}-->
+	<tr>
+		<input type="hidden" id="audiotype" name="audiotype" value="1"/>
+		<td width="100">作品 *</td>
+		<td>
+			<!--{if $topic[productexists]}-->
+			<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="500" height="20">
+	           	<param name="movie" value="swf/2.swf?file=$topic[mp3path]&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100">
+		        <param name="quality" value="high">
+			  	<param value="transparent" name="wmode">
+	    	       	<embed src="swf/2.swf?file=$topic[mp3path]&amp;showDownload=false&amp;backColor=eeeeee&amp;frontColor=000000&amp;songVolume=100" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="500" height="20">
+  		 	</object>  
+  		 	<!--{else}-->	
+  		 		对不起，该作品已被删除。
+  			<!--{/if}-->
+		</td>
+	</tr>
+<!--{/if}-->
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td width="100">作品类型*</td>
+		<td><select name="productclassid" id="productclassid" class="t_input" onchange="javascript:displayProductClassDescription()">
+			<option value="-1">请选择作品类型</option>
+			<!--{loop $_SGLOBAL[productclass] $key $value}-->
+			<option value="$key"<!--{if $topic[productclassid] == $key}-->
+			selected<!--{/if}--> >$value[classname]</option>
+			<!--{/loop}-->
+		</select></td>
+	</tr>
+	<tr>
+		<td width="100">作品类型描述 </td>
+		<td id="productClassDescription">&nbsp;</td>
+	</tr>
+	<tr>
+		<td width="100">所属团队</td>
+		<td>
+			<input type="hidden" id="club" name="club" value="$topic[club]"/>
+			<input type="hidden" id="clubtagid" name="clubtagid" value="$topic[clubtagid]"/>
+			
+			<select id="clubtype" name="clubtype" class="t_input" onchange="javascript:displayInputType_club()">
+				<option value="1">个人剧</option>
+				<option value="2">社团</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td nowrap>&nbsp;</td>
+		<td>				
+			<table id="club_free" width="100%">
+				<tr>
+					<td>
+						<input type="text" id="club_free_name" name="club_free_name" value="个人剧" class="t_input" style="width: 200px;" READONLY/>
+					</td>
+				</tr>
+			</table>
+			<table id="club_tag" width="100%" border=0>
+				<tr>
+					<td>
+						请确认 该社团/工作室 的编号：　
+						<input type="text" id="club_tag_tagid" name="club_tag_tagid" value="" size="8" maxlength="8" class="t_input" onchange="javascript:loadmtagbyid_ajax('1,5');">
+						<a href="#" onclick="javascript:mtagquerymds('1,5');return false;">查询</a>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						群组名称：　<input type="text" id="club_tag_tagname" name="club_tag_tagname" value="" class="t_input" style="border:0px;" READONLY/>
+						　
+						群组类型：　<input type="text" id="club_tag_fieldname" name="club_tag_fieldname" value="" class="t_input" style="border:0px;" READONLY/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_club_tag(false);return false;">没有查到该群组</a>]
+					</td>
+				</tr>
+			</table>
+			<table id="club_notag" width="100%">
+				<tr>
+					<td>
+						社团/工作室 名称：　<input type="text" id="club_notag_name" name="club_notag_name" value="" class="t_input" style="width: 200px;"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_club_tag(true);return false;">重新确认 社团/工作室 的编号</a>]
+					</td>
+				</tr>
+			</table>
+			<br/>
+		</td>
+<script type="text/javascript">
+
+	initInputType_club();
+	
+	function initInputType_club() {
+		if($("clubtagid").value!="" && $("clubtagid").value!=0){
+			$("clubtype").value=2;
+			$("club_tag_tagid").value=$("clubtagid").value;
+			$("club_tag_tagname").value=$("club").value;
+			
+			displayInputType_club();
+			displayInputType_club_tag(true);
+		}
+		else{
+			if($("club").value=="个人剧"){
+				$("clubtype").value=1;
+				$("club_free_name").value="个人剧";
+
+				displayInputType_club();
+			}
+			else{
+				$("clubtype").value=2;
+				$("club_notag_name").value=$("club").value;
+
+				displayInputType_club();
+				displayInputType_club_tag(false);
+			}
+		}
+	}
+	
+	function displayInputType_club() {
+		if($("clubtype").value=="1"){
+			$("club_free").style.display="block";
+			$("club_tag").style.display="none";
+			$("club_notag").style.display="none";
+		}
+
+		if($("clubtype").value=="2"){
+			$("club_free").style.display="none";
+			$("club_tag").style.display="block";
+			$("club_notag").style.display="none";
+		}
+	}
+
+	function displayInputType_club_tag(hastag) {
+		if( hastag == true ){
+			$("club_tag").style.display="block";
+			$("club_notag").style.display="none";
+		}
+		else{
+			$("club_tag").style.display="none";
+			$("club_notag").style.display="block";
+		}	
+	}
+
+	function setInputType_club() {
+		if( $("clubtype").value=="1" ){
+			$("clubtagid").value = 0;
+			$("club").value = "个人剧";
+		}
+		if( $("clubtype").value=="2" ){
+			if( $("club_tag").style.display=="block" ){
+				if($("club_tag_tagid").value==""){
+					alert("请输入该社团/工作组编号！");
+					return false;
+				}
+				$("clubtagid").value = $("club_tag_tagid").value;
+				$("club").value = $("club_tag_tagname").value;
+			}
+			if( $("club_notag").style.display=="block" ){
+				if ($("club_notag_name").value.length > 80) {
+					alert("社团/工作组名称太长，请限制在80个字符内！");
+					return false;
+				}
+				$("clubtagid").value = 0
+				$("club").value = $("club_notag_name").value.trim();
+			}
+		}
+		return true;
+	}
+	
+	function mtagquerymds(fieldid){
+		var args=new Object();
+		args.window=window;
+		window.showModalDialog("cp.php?ac=mtag&op=querymds&widget=club_tag_tagid&tagid="+$('club_tag_tagid').value+"&lockfieldid="+fieldid
+				,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+		loadmtagbyid_ajax(fieldid);
+	}
+			
+	function loadmtagbyid_ajax(fieldid){
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+					
+		showloading();
+					
+		var form = $('ajaxform');
+			
+		form.action="cp.php?ac=mtag&op=loadmtagbyid_ajax&tagid="+$('club_tag_tagid').value+"&lockfieldid="+fieldid;
+		form.method="post";
+				
+		ajaxpost('ajaxform', 'loadmtagbyid_ajax_response', 2000);
+	}
+
+	function loadmtagbyid_ajax_response(){
+		var tagid="";
+		var tagname="";
+		var fieldname="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+					
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				$("club_tag_tagid").value="";
+				$("club_tag_tagname").value="";
+				$("club_tag_fieldname").value="";
+			}else{
+				tagid=paramsArray[0];
+				tagname=paramsArray[1];
+				fieldname=paramsArray[3];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("club_tag_tagid").value=tagid;
+		$("club_tag_tagname").value=tagname;
+		$("club_tag_fieldname").value=fieldname;
+	}
+</script>
+	</tr>	
+	<tr>
+		<td></td>
+		<td>
+			<span style="color:red">
+				[注]以下信息只需要填写成员名，不需要填写角色名和CV的所属社团，以免影响搜索。<br/>
+				成员与成员之间，请用'/'隔开。
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<td>导演</td>
+		<td>
+			<input type="text" id="director" name="director" value="$topic[director]" class="t_input" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<td>监制</td>
+		<td>
+			<input type="text" id="producer" name="producer" value="$topic[producer]" class="t_input" size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<td>策划</td>
+		<td>
+			<input type="text" id="cehua" name="cehua" value="$topic[cehua]" class="t_input" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<td>原著</td>
+		<td>
+			<input type="text" id="yuanzhu" name="yuanzhu" value="$topic[yuanzhu]" class="t_input" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<td>编剧</td>
+		<td>
+			<input type="text" id="writer" name="writer" value="$topic[writer]" class="t_input" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<td>CAST</td>
+		<td>
+			<input type="text" id="cast" name="cast" value="$topic[cast]" class="t_input" size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<td>后期制作</td>
+		<td>
+			<input type="text" id="effector" name="effector" value="$topic[effector]" class="t_input" size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<td>美工</td>
+		<td>
+			<input type="text" id="photographer" name="photographer" value="$topic[photographer]" class="t_input" size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<td>宣传</td>
+		<td>
+			<input type="text" id="propagandizer" name="propagandizer" value="$topic[propagandizer]" class="t_input" size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<td>发布时间</td>
+		<td>
+			<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+			<input type="text" name="producedate" id="producedate" value="$topic[producedate]" class="t_input" onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>微博宣传</td>
+		<td>
+			<span style="color:red">应声虫现已提供新浪微博平台的宣传功能。有需要的同学请自行编辑广播剧的宣传内容。<br/>记得@好对应的CV和STAFF信息呢。</span>
+			<br/>
+			<input type="checkbox" id="weiboflag" name="weiboflag" value="1" onclick="javascript:initWeiboMsg();" <!--{if $topicadditioninfo[weiboflag]==1}-->CHECKED<!--{/if}--> > 手工编辑微博信息
+			<br/>
+			<textarea id="weibomsg" name="weibomsg" rows="8" cols="80" maxlength="500">$topicadditioninfo[weibomsg]</textarea>
+		</td>
+	</tr>
+<script type="text/javascript">
+	initWeiboMsg();
+	
+	function initWeiboMsg(){
+		var weiboFlagCkb = document.getElementById("weiboflag");
+		if(weiboFlagCkb.checked){
+			document.getElementById("weibomsg").style.display = "";
+		}else{
+			document.getElementById("weibomsg").style.display = "none";
+		}
+	}
+</script>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<span style="color:red">[注]微博信息请确认在规定字数内。</span>
+		</td>
+	</tr>
+	<tr>
+		<td>当前审核状态</td>
+		<td>
+<!--{if $topic[auditstatus]==0}-->
+还未审核	
+<!--{elseif $topic[auditstatus]==1}-->
+审核未通过
+<!--{elseif $topic[auditstatus]==2}-->
+审核通过
+<!--{else}-->
+<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<td>审核批注</td>
+		<td>
+			$topic[auditmessage]
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+			<input type="button" name="topicsubmit" value="提交申请" class="submit" onclick="check_topicpost();"/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<span style="color:red">关于上传重复：重复上传的广播剧将会删除，并给予已有广播剧链接</span>		
+			<br/>
+			<br/>
+			<span style="color:red">广播剧发布审核完毕后，你可以在广播剧详细界面里面，添加对应的相关资源（广播剧剧本，ED等），<br/>详细操作可参见<a href="space.php?do=thread&tid=401" target="_blank">《帮助：广播剧模块 - 广播剧相关资源》</a></span>		
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/></form>
+</div>
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+	function displayProductClassDescription() {
+		var selIndex=$('productclassid').value;
+		if(selIndex=='1'){//BG广播剧
+			$('productClassDescription').innerHTML="BG广播剧：带BL色彩的BG，请选择BG。";
+		}else if(selIndex=='2'){//BL广播剧
+			$('productClassDescription').innerHTML="BL广播剧：懂就可以了。";
+		}else if(selIndex=='3'){
+			$('productClassDescription').innerHTML="GL广播剧：懂就可以了。";
+		}else if(selIndex=='4'){//全年龄
+			$('productClassDescription').innerHTML="全年龄广播剧：科幻，恐怖，悬疑，侦探，武侠。";
+		}else if(selIndex=='5'){//恶搞
+			$('productClassDescription').innerHTML="恶搞：对传统的颠覆。";
+		}else if(selIndex=='99'){//其它
+			$('productClassDescription').innerHTML="其他：有声读物。";
+		}else{
+			$('productClassDescription').innerHTML="请选择作品类型";
+		} 
+	}
+	displayProductClassDescription();
+
+	//检查提交
+	function check_topicpost() {
+
+		// 标题
+		if ($("subject").value.trim() == "") {
+			alert("剧名不能为空！");
+			$("subject").focus();
+			return false;
+		} else if ($("subject").value.trim().length > 80) {
+			alert("剧名太长，请限制在80个字符内！");
+			$("subject").focus();
+			return false;
+		}
+
+		// 编辑器内容同步
+		edit_save();
+
+		// 作品简介
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("作品简介不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+		
+<!--{if 1==1 }-->
+		//作品
+		if (parseInt($("audiotype").value) == 2 ) {
+			var audioplayerpath_tudou = $("audioplayerpath_tudou").value.trim();
+			if ( audioplayerpath_tudou == "") {
+				alert("土豆网Flash链接地址不能为空！");
+				$("audioplayerpath_tudou").focus();
+				return false;
+			} else if ( getExt(audioplayerpath_tudou) != 'swf' ) {
+				alert("土豆的分享Flash地址，必须为“.swf”结尾！");
+				$("audioplayerpath_tudou").focus();
+				return false;
+			}
+			
+			var audiodownloadpath_rayfile = $("audiodownloadpath_rayfile").value.trim();
+			var audiodownloadpath_115 = $("audiodownloadpath_115").value.trim();
+			var audiodownloadpath_zhongzhuan = $("audiodownloadpath_zhongzhuan").value.trim();
+			
+			if ( audiodownloadpath_rayfile == "" && audiodownloadpath_115=="" && audiodownloadpath_zhongzhuan=="") {
+				alert("请至少提供一处下载地址！");
+				$("audiodownloadpath_rayfile").focus();
+				return false;
+			}
+		}
+		else if (parseInt($("audiotype").value) == 1 ) {
+			
+		}
+		else{
+			alert("作品必须选择。");
+			return false;
+		}
+<!--{else}-->
+<!--{/if}-->
+
+		// 作品类型
+		if (parseInt($("productclassid").value) < 0) {
+			alert("作品类型必须选择。");
+			$("productclassid").focus();
+			return false;
+		}
+
+		// 所属团队	
+		var clubvalid = setInputType_club();
+		if (clubvalid == false) {
+			$("clubtype").focus();
+			return false;
+		}
+
+		// 导演	
+		if ($("director").value.trim().length > 100) {
+			alert("导演输入太长，请限制在100个字符内！");
+			$("director").focus();
+			return false;
+		}
+		
+		// 监制
+		if ($("producer").value.trim().length > 200) {
+			alert("监制输入太长，请限制在200个字符内！");
+			$("producer").focus();
+			return false;
+		}
+		
+		// 原著
+		if ($("yuanzhu").value.trim().length > 100) {
+			alert("原著输入太长，请限制在100个字符内！");
+			$("yuanzhu").focus();
+			return false;
+		}
+
+		// 策划
+		if ($("cehua").value.trim().length > 100) {
+			alert("策划输入太长，请限制在100个字符内！");
+			$("cehua").focus();
+			return false;
+		}
+
+		// 编剧
+		if ($("writer").value.trim().length > 100) {
+			alert("编剧输入太长，请限制在100个字符内！");
+			$("writer").focus();
+			return false;
+		}
+
+		// CAST
+		if ($("cast").value.trim().length > 200) {
+			alert("CAST输入太长，请限制在200个字符内！");
+			$("cast").focus();
+			return false;
+		}
+		
+		// 后期制作
+		if ($("effector").value.trim().length > 200) {
+			alert("后期制作输入太长，请限制在200个字符内！");
+			$("effector").focus();
+			return false;
+		}
+		
+		// 美工
+		if ($("photographer").value.trim().length > 200) {
+			alert("美工输入太长，请限制在200个字符内！");
+			$("photographer").focus();
+			return false;
+		}
+
+		//验证码
+		if ($('seccode')) {
+			var code = $('seccode').value;
+			var x = new Ajax();
+			x.get('cp.php?ac=common&op=seccode&code=' + code, function(s) {
+				s = trim(s);
+				if (s.indexOf('succeed') == -1) {
+					alert(s);
+					$('seccode').focus();
+					return false;
+				} else {
+					$("edit_form").submit();
+				}
+			});
+		} else {
+			$("edit_form").submit();
+		}
+	}
+</script>

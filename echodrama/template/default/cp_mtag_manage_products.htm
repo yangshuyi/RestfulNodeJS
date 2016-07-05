@@ -1,0 +1,148 @@
+<!--{template cp_mtag_manageheader}-->
+<div class="h_status">
+	作品分类：
+	<a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$tagid&key=$_GET[key]" <!--{if empty($_GET[producttype]) }--> class="active" <!--{/if}-->>全部</a>
+	<!--{loop $_SGLOBAL[producttype] $key $value}-->
+	<span class="pipe">|</span>		
+	<a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$tagid&key=$_GET[key]&producttype=$value[classid]" <!--{if $_GET[producttype]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+	<!--{/loop}-->
+</div>
+<div id="search_topic_productclassid" class="h_status">
+	广播剧类型：
+	<a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$tagid&key=$_GET[key]&producttype=$_GET[producttype]" <!--{if empty($_GET[productclassid]) }--> class="active" <!--{/if}-->>全部</a>
+	<!--{loop $_SGLOBAL[productclass] $key $value}-->
+	<span class="pipe">|</span>		
+	<a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$tagid&key=$_GET[key]&producttype=$_GET[producttype]&productclassid=$value[classid]" <!--{if $_GET[productclassid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+	<!--{/loop}-->
+</div>
+<div id="search_cover_productclassid" class="h_status">
+	翻唱类型：
+	<a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$tagid&key=$_GET[key]&producttype=$_GET[producttype]" <!--{if empty($_GET[productclassid]) }--> class="active" <!--{/if}-->>全部</a>
+	<!--{loop $_SGLOBAL[coverproductclass] $key $value}-->
+	<span class="pipe">|</span>		
+	<a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$tagid&key=$_GET[key]&producttype=$_GET[producttype]&productclassid=$value[classid]" <!--{if $_GET[productclassid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+	<!--{/loop}-->
+</div>
+<div id="search_video_productclassid" class="h_status">
+	视频类型：
+	<a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$tagid&key=$_GET[key]&producttype=$_GET[producttype]" <!--{if empty($_GET[productclassid]) }--> class="active" <!--{/if}-->>全部</a>
+	<!--{loop $_SGLOBAL[videoproductclass] $key $value}-->
+	<span class="pipe">|</span>		
+	<a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$tagid&key=$_GET[key]&producttype=$_GET[producttype]&productclassid=$value[classid]" <!--{if $_GET[productclassid]==$value[classid] }--> class="active" <!--{/if}-->>$value[classname]</a>
+	<!--{/loop}-->
+</div>
+<script>
+	search_option_onload($_GET[producttype]);
+	function search_option_onload(producttype) {
+		if(producttype == 1){
+			$("search_topic_productclassid").style.display='block';
+			$("search_cover_productclassid").style.display='none';
+			$("search_video_productclassid").style.display='none';
+		}
+		else if(producttype == 2){
+			$("search_topic_productclassid").style.display='none';
+			$("search_cover_productclassid").style.display='block';
+			$("search_video_productclassid").style.display='none';
+		}
+		else if(producttype == 3){
+			$("search_topic_productclassid").style.display='none';
+			$("search_cover_productclassid").style.display='none';
+			$("search_video_productclassid").style.display='block';
+		}
+		else{
+			$("search_topic_productclassid").style.display='none';
+			$("search_cover_productclassid").style.display='none';
+			$("search_video_productclassid").style.display='none';
+		}
+	}
+</script>
+
+<form id="productsactionform" name="productsactionform" method="post" action="">
+<input type="hidden" id="itemid" name="itemid" value="" >
+			
+<div class="topic_list">
+	<table cellspacing="0" cellpadding="0" class="reclisttable" >
+		<thead>
+			<tr>
+				<th>作品分类</th>
+				<th>作品名称</th>
+				<th>作品类型</th>
+				<th>发布日期</th>
+				<th>
+					<input type="button" name="productssubmit" value="添加作品" class="submit" onclick="javascript:manageproduct();"/>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		<!--{loop $productlist $key $value}-->
+			<!--{if $key%2==1}-->
+			<tr class="alt">
+			<!--{else}-->
+			<tr>
+			<!--{/if}-->
+				<td align="center">
+					&nbsp;$value[producttypename]&nbsp;  
+				</td>
+				<td align="center">
+					<!--{if empty($value['productid'])}-->
+						&nbsp;$value['productname']&nbsp;
+					<!--{else}-->
+						&nbsp;<a href="$value['producturl']">$value['productname']</a>&nbsp;
+					<!--{/if}-->
+				</td>
+				<td align="center">
+					&nbsp;$value['productclassname']&nbsp;  
+				</td>
+				<td align="center">
+					&nbsp;$value['dispproducedate']&nbsp;
+				</td>
+				<td align="left">
+					<a href="#" onclick="javascript:manageproduct('$value[itemid]');">管理</a>
+					 | <a href="#" onclick="javascript:deleteproduct('$value[itemid]');">删除</a>
+					<!--{if !empty($value['introduce'])}-->
+					 | <a href="#" onclick="displayIntroduce('product_content_$key');return false;">详细</a>
+					<!--{/if}-->
+					<!--{if empty($value['productid'])}-->
+					 | <a href="$value['newurl']" target="_blank">上传</a>
+					<!--{/if}-->
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" align="left"><div id="product_content_$key" style="display:none">$value[introduce]</div></td>
+			</tr>	
+		<!--{/loop}-->
+		</tbody>
+	</table>
+	<div class="page">$multi</div>
+</div>
+
+<script type="text/javascript">
+function displayIntroduce(itemid) {
+	if( $(itemid).style.display=='none' )
+	{
+		$(itemid).style.display='block';
+	}
+	else
+	{
+		$(itemid).style.display='none';
+	}
+}
+
+function manageproduct(itemid){
+	if(itemid == null){
+		location.href="cp.php?ac=mtag&op=manage&subop=product&tagid=$mtag[tagid]";
+	}
+	else{
+		location.href="cp.php?ac=mtag&op=manage&subop=product&tagid=$mtag[tagid]&itemid="+itemid;
+	}
+}
+
+function deleteproduct(itemid){
+	$('itemid').value=itemid;
+	
+	$('productsactionform').action="cp.php?ac=mtag&op=manage&subop=deleteproduct&tagid=$mtag[tagid]";
+	$('productsactionform').submit();
+}
+</script>
+</form>
+<!--{template cp_mtag_managefooter}-->

@@ -1,0 +1,35 @@
+<!--{template header}-->
+<!--{template cp_header}-->
+
+<div class="l_status c_form">
+	<a href="cp.php?ac=resume&op=maintain"$cat_actives[maintain]>自我介绍</a><span class="pipe">|</span>
+	<a href="cp.php?ac=resume&op=current"$cat_actives[current]>目前状态</a><span class="pipe">|</span>
+	<a href="cp.php?ac=resume&op=history"$cat_actives[history]>我的成就</a>
+</div>
+
+<!--{if $_GET['op'] == 'maintain'}-->
+	<!--{template cp_resume_maintain}-->
+	
+	
+<!--{elseif $_GET['op'] == 'current'}-->
+	<!--{template cp_resumecurrent_list}-->
+	
+<!--{elseif $_GET['op'] == 'addcurrent'}-->
+	<!--{template cp_resumecurrent_view}-->
+	
+<!--{elseif $_GET['op'] == 'toeditcurrent'}-->
+	<!--{template cp_resumecurrent_view}-->
+	
+	
+	
+<!--{elseif $_GET['op'] == 'history'}-->
+	<!--{template cp_resumehistory_list}-->
+	
+<!--{elseif $_GET['op'] == 'addhistory'}-->
+
+	<!--{template cp_resumehistory_view}-->
+<!--{elseif $_GET['op'] == 'toedithistory'}-->
+	<!--{template cp_resumehistory_view}-->
+<!--{/if}-->
+	
+<!--{template footer}-->

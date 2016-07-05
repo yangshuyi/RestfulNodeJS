@@ -1,0 +1,120 @@
+<div class="c_form">
+<form id="edit_form" name="edit_form" method="post" action="cp.php?ac=postnote&op=save&postnoteid=$postnoteid">
+<input type="hidden" id="referlink" name="referlink" value="$_SGLOBAL[refer]"/>
+<input type="hidden" id="uid" name="uid" value="$postnote[uid]"/>
+<input type="hidden" id="fromuid" name="fromuid" value="$postnote[fromuid]"/>
+<input type="hidden" id="fromusername" name="fromusername" value="$postnote[fromusername]"/>
+<input type="hidden" id="postnoteid" name="postnoteid" value="$postnote[postnoteid]"/>
+<table cellspacing="4" cellpadding="4" class="infotable">
+	<tr>
+		<th width="100" nowrap></th>
+		<td>
+			<h2>提醒方：$postnote[fromusername] -> 被提醒方：$postnote[username]</h2>
+		</td>
+	</tr>
+	<tr>
+		<th width="100" nowrap>贴士标题 *</th>
+		<td>
+			<input type="text" id="subject" name="subject" value="$postnote[subject]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>	
+		<th nowrap>重要级别 *</th>
+		<td>
+			<select name="importance" id="importance" >
+				<option value="-1">请选择重要级别</option>
+				<!--{loop $_SGLOBAL[mtagtaskimptclass] $key $value}-->
+				<option value="$value[classid]" <!--{if $postnote[importance] == $value[classid]}-->
+				selected<!--{/if}--> >$value[classname]</option>
+				<!--{/loop}-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th width="100">提醒时间 *</th>
+		<td>
+			<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+			<input type="text" name="notedate" id="notedate" value="$postnote[notedatedisp]" onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+		</td>
+	</tr>
+	<tr>
+		<th width="100">内容*</th>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="description" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$postnote[description]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	</table>
+	<input type="button" value="保存" class="submit" onclick="javascript:postpostnote();"/>	
+	<!--{if !empty($postnote[postnoteid]) }-->
+	<input type="button" value="删除" class="submit" onclick="javascript:deletepostnote();"/>	
+	<!--{/if}-->
+
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+</form>
+</div>
+
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+
+	//检查删除
+	function deletepostnote() {
+		if(confirm("你确定要删除该贴士吗？")){
+			$("edit_form").action="cp.php?ac=postnote&op=delete&postnoteid=$postnoteid";
+			$("edit_form").submit();
+		}
+	}
+
+	function postpostnote(){
+
+		if($("fromuid").value.trim() == "") {
+			alert("请选择提醒方！");
+			return;
+		}
+
+		if($("uid").value.trim() == "") {
+			alert("请选择被提醒方！");
+			return;
+		}
+		
+		// 贴士标题
+		if ($("subject").value.trim() == "") {
+			alert("贴士标题不能为空！");
+			$("subject").focus();
+			return false;
+		} else if ($("subject").value.trim().length > 80) {
+			alert("贴士标题太长，请限制在80个字符内！");
+			$("subject").focus();
+			return false;
+		}
+
+		//重要级别
+		if($("importance").value=="-1"){
+			alert("请选择重要级别！");
+			$("importance").focus();
+			return;
+		}
+
+		//提醒时间
+		if($("notedate").value.trim() == "") {
+			alert("请选择提醒时间！");
+			$("starttime").focus();
+			return;
+		}	
+		
+		// 编辑器内容同步
+		edit_save();
+			
+		// 内容
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("内容不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+
+		$("edit_form").submit();
+	}
+
+</script>

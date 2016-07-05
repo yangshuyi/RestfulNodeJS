@@ -1,0 +1,26 @@
+<!--{template space_mtagheader}-->
+<div>
+	<table cellspacing="0" cellpadding="0" width="100%" border="0">
+		<tr class="affiche">
+			<td width="100px" align="center">日期/时间</td>
+			<td width="100px" align="center">用户</td>
+			<td align="center">动作</td>
+		</tr>
+		<!--{loop $creditloglist $value}-->
+		<tr height="60px">
+			<td align="center" valign="middle" nowrap style="border-bottom: 1px solid #EBE6C9;">
+				$value['datelinedisp']
+			</td>			
+			<td align="center" valign="middle" nowrap style="border-bottom: 1px solid #EBE6C9;">
+				<div class="myavatar48"><a href="space.php?uid=$value[uid]" target="_blank"><!--{avatar($value[uid],small)}--></a></div>
+			</td>
+			<td align="left" valign="middle" nowrap style="border-bottom: 1px solid #EBE6C9;">
+				<span><a href="space.php?uid=$value[uid]" target="_blank">$value['username']</a></span>
+				$value['actiontype']&nbsp;&nbsp;<img src="image/credit.gif" title="$mtag[credit]"/><span class="red">$value[creditdisp]</span><br/>
+				<!--{eval echo getstr($value['action'], 40, 0, 0, 0, 0, -1); }-->
+			</td>	
+		</tr>
+		<!--{/loop}-->
+	</table>
+</div>
+<!--{template space_mtagfooter}-->

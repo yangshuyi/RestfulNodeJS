@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/6/trunk/www/source/cron
+END
+cleannotification.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/6/trunk/www/source/cron/cleannotification.php
+END
+myfarm_addcroptask.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/6/trunk/www/source/cron/myfarm_addcroptask.php
+END
+site_daily_static.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/6/trunk/www/source/cron/site_daily_static.php
+END
+myfarm_speedupfertilize.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/6/trunk/www/source/cron/myfarm_speedupfertilize.php
+END
+log.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/6/trunk/www/source/cron/log.php
+END
+cleantrace.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/6/trunk/www/source/cron/cleantrace.php
+END
+topicforecast_confirm.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/6/trunk/www/source/cron/topicforecast_confirm.php
+END
+mtag_task_daily_notification.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/6/trunk/www/source/cron/mtag_task_daily_notification.php
+END
+getfeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/6/trunk/www/source/cron/getfeed.php
+END
+site_mtag_link_rank.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/6/trunk/www/source/cron/site_mtag_link_rank.php
+END
+cleanfeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/6/trunk/www/source/cron/cleanfeed.php
+END
+index.htm
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/6/trunk/www/source/cron/index.htm
+END
+topicranktosina.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/6/trunk/www/source/cron/topicranktosina.php
+END

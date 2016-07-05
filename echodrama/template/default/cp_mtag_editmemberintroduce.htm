@@ -1,0 +1,62 @@
+<h2 class="title"><img src="image/app/mtag.gif" />$mtag[fieldname] - $mtag[tagname]</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[index]><a href="#"><span>设置成员介绍</span></a></li>
+		<li><a href="space.php?do=mtag&view=members&tagid=$mtag[tagid]"><span>返回</span></a></li>
+	</ul>
+</div>
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=editmemberintroduce&tagid=$mtag[tagid]&memberid=$member[memberid]">
+	
+	<table cellspacing="4" cellpadding="4" class="reclisttable">
+		<tr>
+			<th width="150" nowrap>
+				用户登录名：
+			</th>
+			<td>
+				$member['username']
+			</td>
+		</tr>
+		<tr>
+			<th width="150" nowrap>
+				社团成员名：
+			</th>
+			<td>
+				$member['realname']
+			</td>
+		</tr>
+		<tr>
+			<th width="150" nowrap>
+				职位　　　：
+			</th>
+			<td>
+				$member['memberclassname']
+			</td>
+		</tr>
+		<tr>
+			<th width="150" nowrap>成员介绍　：</th>
+			<td align="left" >
+				<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+				<textarea class="userData" name="introduce" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$member[introduce]</textarea>
+				<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+			</td>
+		</tr>
+	</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+<input type="button" value="保存修改" class="submit" onclick="javascript:postmember();"/>	
+<input type="button" value="放弃修改" class="submit" onclick="javascript:revertmember();"/>	
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+	function postmember(){
+
+		// 编辑器内容同步
+		edit_save();
+
+		$("actionform").submit();
+	}
+
+	function revertmember(){
+		location.href="space.php?do=mtag&view=members&tagid=$mtag[tagid]";
+	}
+</script>
+</form>

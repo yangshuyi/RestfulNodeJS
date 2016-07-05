@@ -1,0 +1,17 @@
+<div id="showuser" class="nbox_portal">
+	<h2 class="ntitle"><span class="r_option"><a href="space.php?do=topic&view=all"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;虫虫排排坐&nbsp;&raquo;</h2>
+	<div id="user_wall">
+		<div class="s_clear">
+			<h2><a href="space.php?do=top&view=online">在线成员</a></h2>
+			<ul>
+			<!--{loop $onlinelist $value}-->
+				<li>
+					<a href="space.php?uid=$value[uid]" title="$value[username]" target="_blank" class="uonline" >
+					<!--{avatar($value[uid],small)}-->
+					</a>
+				</li>
+			<!--{/loop}-->
+			</ul>
+		</div>
+	</div>
+</div>

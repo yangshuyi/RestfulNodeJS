@@ -1,0 +1,47 @@
+<!--{template cp_mtag_manageheader}-->
+	<form id="manageform" name="manageform" method="post" action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=$_GET[subop]&uid=$_GET[uid]&grade=$_GET[grade]&group=$_GET[group]&page=$_GET[page]&start=$_GET[start]">
+	
+	<div id="content" style="width: 640px;">
+		<div class="h_status">
+			您可以给未加入本群组的好友们发送邀请。
+		</div>
+	
+	<!--{if $list}-->
+		<div class="h_status">
+			<ul class="avatar_list">
+			<!--{loop $list $value}-->
+				<li><div class="avatar48"><a href="space.php?uid=$value[fuid]" title="{$_SN[$value[fuid]]}"><!--{avatar($value[fuid],small)}--></a></div>
+					<p><a href="space.php?uid=$value[fuid]" title="{$_SN[$value[fuid]]}">{$_SN[$value[fuid]]}</a></p>
+					<p><!--{if empty($joins[$value[fuid]])}--><input type="checkbox" name="ids[]" value="$value[fuid]">选定<!--{else}-->已邀请<!--{/if}--></p>
+				</li>
+			<!--{/loop}-->
+			</ul>
+			<div class="page">$multi</div>
+		</div>
+		<p>
+			<input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'ids')">全选 &nbsp;
+			<input type="submit" name="invitesubmit" value="邀请" class="submit" />
+		</p>
+	
+	<!--{else}-->
+		<div class="c_form">还没有好友。</div>
+	<!--{/if}-->
+
+	</div>
+	
+	<div id="sidebar" style="width: 150px;">
+	<div class="cat">
+		<h3>好友分类</h3>
+		<ul class="post_list line_list">
+			<li<!--{if $_GET[group]==-1}--> class="current"<!--{/if}-->><a href="cp.php?ac=mtag&tagid=$mtag[tagid]&op=manage&subop=invite&group=-1">全部好友</a></li>
+			<!--{loop $groups $key $value}-->
+			<li<!--{if $_GET[group]==$key}--> class="current"<!--{/if}-->><a href="cp.php?ac=mtag&tagid=$mtag[tagid]&op=manage&subop=invite&group=$key">$value</a></li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	</div>
+		
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	</form>
+<!--{template cp_mtag_managefooter}-->
+	

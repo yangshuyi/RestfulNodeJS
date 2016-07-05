@@ -1,0 +1,27 @@
+<div class="mainarea">
+<div class="maininner">
+<h2 class="title"><img src="image/app/topic.gif" />完结广播剧专辑</h2>
+<div class="tabs_header">
+<ul class="tabs">
+	<li <!--{if $_GET['subop'] == 'manage'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topicalbum&op=manage&subop=manage&topicalbumid=$topicalbum[topicid]"><span>编辑专辑</span></a></li>
+	<li <!--{if $_GET['subop'] == 'process'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topicalbum&op=manage&subop=process&topicalbumid=$topicalbum[topicid]"><span>处理专辑</span></a></li>
+	<li <!--{if $_GET['subop'] == 'imagethumbprocessor'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topicalbum&op=manage&subop=imagethumbprocessor&topicalbumid=$topicalbum[topicid]"><span>处理缩略海报</span></a></li>
+	<li><a href="admincp.php?ac=topicalbum&op=list"><span>返回专辑列表</span></a></li>
+</ul>
+</div>
+
+<!--{if $_GET['subop'] == 'manage'}-->
+
+	<!--{template admin/tpl/topicalbum_manage_manage}-->
+
+<!--{elseif $_GET['subop'] == 'process'}-->
+
+	<!--{template admin/tpl/topicalbum_manage_process}-->
+	
+<!--{elseif $_GET['subop'] == 'imagethumbprocessor'}-->
+
+	<!--{template admin/tpl/topicalbum_manage_imagethumbprocessor}-->
+	
+<!--{/if}-->
+
+</div></div>

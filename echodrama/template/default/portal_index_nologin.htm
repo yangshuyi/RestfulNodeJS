@@ -1,0 +1,62 @@
+<div style="background-color:#ebebe9;padding:5px;margin-bottom:8px;">
+	<div style="border:1px solid #d5d5d5;background-color:#fff;padding:10px;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="5">
+			<tr>
+				<td width="27%" style="font-size:14px;color:#000000;font-weight:bold;">登录虫虫</td>
+				<td width="73%" align="right" class="gray"><a href="do.php?ac=lostpasswd">忘记密码</a>&nbsp;|&nbsp;<a href="do.php?ac=$_SCONFIG[register_action]">新用户注册</a><img src="template/default/image/portal/registerarrow.gif" width="5" height="9" /></td>
+			</tr>
+		</table>
+        <form name="loginform" id="loginform" action="do.php?ac=$_SCONFIG[login_action]&$url_plus&ref" method="post">
+			<table width="100%" border="0" cellspacing="0" cellpadding="3">
+				<tr>
+					<td width="16%" height="30" align="right">用户名</td>
+					<td width="57%"><input type="text" name="username" id="username" value="$membername" style="background:url(template/default/image/portal/inputbg.gif) no-repeat 0px 0px;width:142px;height:20px;line-height:20px;border:none;padding:3px;"/></td>
+					<td width="27%" nowrap><input type="checkbox" id="cookietime" name="cookietime" value="315360000" $cookiecheck style="margin-bottom: -2px;" />自动登录 </td>
+        		</tr>
+        		<tr>
+					<td height="30" align="right">密&nbsp;&nbsp;&nbsp;码</td>
+					<td><input type="password" name="password" id="password" value="$password" style="background:url(template/default/image/portal/inputbg.gif) no-repeat 0px 0px;width:142px;height:20px;line-height:20px;border:none;padding:3px;"/></td>
+					<td>
+						<input type="hidden" id="refer" name="refer" value="space.php?do=home" />
+						<input type="hidden" id="loginsubmit" name="loginsubmit" value="登录"/>
+						<input type="hidden" id="formhash" name="formhash" value="<!--{eval echo formhash();}-->" />
+						<img src="template/default/image/portal/denglu.gif" width="57" height="26" onclick="$('loginform').submit();"/>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<div style="width:316px;height:83px;margin-bottom:8px;">
+	<!--{template portal_index_reg}-->
+</div>
+<span style="color:#f60;font-size:14px;margin-left:20px;">快捷菜单&raquo;&nbsp;您可以：</span>
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+	<tr>
+		<td width="48%" style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+			<a href="portal_topic.php" class="titlea" target="_blank" title="访问广播剧发布门户页面,查看最新作品/预告，最热榜单，最活跃的社团，以及相关的招募信息。">访问广播剧门户</a>
+		</td>
+		<td>&nbsp;</td>
+		<td width="48%" style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+			<a href="space.php?do=topic" class="titlea" target="_blank" title="这里有最新最全的广播剧。丰富的检索方式，可以使你用最短的时间，寻找到你的最爱。">检索广播专辑</a>
+		</td>
+	</tr>
+	<tr>
+		<td width="48%" style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+			<a href="space.php?do=video" class="titlea" target="_blank" title="这里有最新最全的视频作品。">检索视频资源</a>
+		</td>
+		<td>&nbsp;</td>
+		<td width="48%" style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+			<a href="space.php?do=cover" class="titlea" target="_blank" title="去听听最新的翻唱作品吧。">查看翻唱资源</a>
+		</td>
+	</tr>
+	<tr>
+		<td width="48%" style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+			<a href="space.php?do=event" class="titlea" target="_blank" title="去看看有啥新的招募信息吧。">查看最新招募</a>
+		</td>
+		<td>&nbsp;</td>
+		<td width="48%" style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+			<a href="space.php?do=forum" class="titlea" target="_blank" title="去游泳池，和大家一起交流欢乐吧。">一起欢乐哈皮</a>
+		</td>
+	</tr>
+</table>

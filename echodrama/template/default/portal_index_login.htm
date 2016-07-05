@@ -1,0 +1,127 @@
+<div style="background-color:#ebebe9;padding:5px;margin-bottom:8px;">
+	<div style="border:1px solid #d5d5d5; background-color:#fff; padding:10px; overflow:hidden; height:295px;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="5">
+			<tr>
+				<td style="font-size:12px;color:#000000;font-weight:bold;">Hi $_SGLOBAL['supe_username'], 欢迎回来～</td>
+				<td width="1%" align="right" class="gray" nowrap><a href="cp.php?ac=common&op=logout&uhash=$_SGLOBAL[uhash]">退出</a><img src="template/default/image/portal/registerarrow.gif" width="5" height="9" /></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<a href="space.php?do=mtag&tagid=8&view=threads&normal=on&digest=on&displayorder=on&threadclassid=31" target="_blank" title="问题求助"><img src="template/default/image/portal/bnt-question.jpg" /></a>
+					<a href="space.php?do=mtag&tagid=8&view=threads&&normal=on&digest=on&displayorder=on&threadclassid=1069" target="_blank" title="虫虫帮助"><img src="template/default/image/portal/bnt-help.jpg" /></a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div style="overflow:hidden; height:232px;"><table width="100%" border="0" cellspacing="0" cellpadding="5">
+
+						<!--{if (!empty($_SGLOBAL['member']['allnotenum']) OR !empty($_SGLOBAL['member']['newpm']) ) }-->
+						<!--{eval $member = $_SGLOBAL['member'];}-->
+						<tr><td>
+							<div style="height:30px;"><span style="color:#f60;font-size:14px;width:100%;">你有以下通知需要处理：</span></div>
+						</td></tr>
+						<tr><td>
+							<ul class="label_ul" style="width:100%; padding:0px;">
+								<!--{if $member[newpm]}-->
+								<li style="width:130px;">
+									<img src="image/icon/userapp.gif" width="16" alt="" /> <a href="space.php?do=pm">朋友给你的留言</a>
+								</li>
+								<!--{/if}-->
+								<!--{if $member[notenum]}-->
+								<li style="width:130px;">
+									<img src="image/icon/userapp.gif" width="16" alt="" /> <a href="space.php?do=notice"><strong>$member[notenum]</strong> 个新通知</a>
+								</li>
+								<!--{/if}-->
+								<!--{if $member[pokenum]}-->
+								<li style="width:130px;">
+									<img src="image/icon/poke.gif" width="16" alt="" /> <a href="cp.php?ac=poke"><strong>$member[pokenum]</strong> 个新招呼</a>
+								</li>
+								<!--{/if}-->
+							
+								<!--{if $member[addfriendnum]}-->
+								<li style="width:130px;">
+									<img src="image/icon/friend.gif" width="16" alt="" /> <a href="cp.php?ac=friend&op=request"><strong>$member[addfriendnum]</strong> 个好友请求</a>
+								</li>
+								<!--{/if}-->
+								<!--{if $member[mtaginvitenum]}-->
+								<li style="width:130px;">
+									<img src="image/icon/mtag.gif" width="16" alt="" /> <a href="cp.php?ac=mtag&op=mtaginvite"><strong>$member[mtaginvitenum]</strong> 个群组邀请</a>
+								</li>
+								<!--{/if}-->
+					
+								<!--{if $member[eventinvitenum]}-->
+								<li style="width:130px;">
+									<img src="image/icon/event.gif" width="16" alt="" /> <a href="cp.php?ac=event&op=eventinvite"><strong>$member[eventinvitenum]</strong> 个招募邀请</a>
+								</li>
+								<!--{/if}-->		
+							</ul>
+						</td></tr>
+						<!--{/if}-->
+						<!--{if (!empty($_SGLOBAL['member']['allnotenum']) OR !empty($_SGLOBAL['member']['newpm']) ) }-->
+						<tr height="45px"><td valign="bottom">
+							<span style="color:#f60;font-size:14px;width:100%;">快捷菜单&raquo;&nbsp;您可以：</span>
+						</td></tr>
+						<!--{else}-->
+						<tr height="20px"><td valign="bottom">
+							<span style="color:#f60;font-size:14px;width:100%;">快捷菜单&raquo;&nbsp;您可以：</span>
+						</td></tr>
+						<!--{/if}-->
+						<tr><td>
+							<table width="100%" border="0" cellspacing="0" cellpadding="3">
+								<tr>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="portal_topic.php" class="titlea" target="_blank" title="访问广播剧发布门户页面,查看最新作品/预告，最热榜单，最活跃的社团，以及相关的招募信息。">访问广播剧门户</a>
+									</td>
+									<td>&nbsp;</td>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="space.php" class="titlea" target="_blank" title="去自己的主页看看">访问我的主页</a>
+									</td>
+								</tr>
+								<tr>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="space.php?do=topic" class="titlea" target="_blank" title="这里有最新最全的广播剧。丰富的检索方式，可以使你用最短的时间，寻找到你的最爱。">检索广播专辑</a>
+									</td>
+									<td>&nbsp;</td>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="space.php?do=doing" class="titlea" target="_blank" title="发布你现在的心情">发布我的心情</a>
+									</td>
+								</tr>
+								<tr>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="space.php?do=video" class="titlea" target="_blank" title="这里有最新最全的视频作品。">检索视频资源</a>
+									</td>
+									<td>&nbsp;</td>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="space.php?do=forum" class="titlea" target="_blank" title="去游泳池，和大家一起交流欢乐吧。">一起欢乐哈皮</a>
+									</td>
+								</tr>
+								<tr>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="space.php?do=tone" class="titlea" target="_blank" title="这里有大量的声线信息。">检索声线资源</a>
+									</td>
+									<td>&nbsp;</td>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="space.php?do=event" class="titlea" target="_blank" title="去看看有啥新的招募信息吧。">查看最新招募</a>
+									</td>
+								</tr>
+								<tr>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+											<a href="space.php?do=cover" class="titlea" target="_blank" title="去听听最新的翻唱作品吧。">检索翻唱资源</a>
+									</td>
+									<td>&nbsp;</td>
+									<td width="48%" nowrap style="background:url(template/default/image/portal/nikeyipoint.gif) no-repeat 5px 9px;border-bottom:1px dashed #cecbc6;color:#000;height:20px;line-height:20px;text-indent:20px;">
+										<a href="space.php?do=poll" class="titlea" target="_blank" title="去看看有啥好玩的投票。">查看最新投票</a>
+									</td>
+								</tr>
+							</table>
+						</td></tr>
+					</table></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+		
+	
+

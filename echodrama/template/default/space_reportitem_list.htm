@@ -1,0 +1,236 @@
+<!--{if $list}-->
+	<table cellspacing="0" cellpadding="0" class="formtable" border="0">
+		<!--{loop $list $key $value}-->
+			<tr>
+				<td>
+					<div class="block style4" >
+						<table width="100%" border=0>
+							<tr>
+								<td align="left" width="130px" nowrap>
+									<strong>举报类型:&nbsp;$value[dispidtype]&nbsp;</strong>
+								</td>
+								<td align="left" width="130px" nowrap>
+									<!--{if $value[processstate]==0 }-->
+										<strong title="还未有管理员注意到该举报信息。">状态:&nbsp;还未处理&nbsp;</strong>
+									<!--{elseif $value[processstate]==1 }-->
+										<strong title="管理员已经注意到该举报信息。">状态:&nbsp;举报确认中&nbsp;</strong>
+									<!--{elseif $value[processstate]==2 }-->
+										<strong title="管理员已经开始处理该举报信息。">状态:&nbsp;举报处理中&nbsp;</strong>
+									<!--{elseif $value[processstate]==3 }-->
+										<strong title="该举报信息已被处理完毕，等待用户反馈。">状态:&nbsp;等待用户反馈&nbsp;</strong>
+									<!--{elseif $value[processstate]==4 }-->
+										<strong title="该举报信息已被处理完毕。">状态:&nbsp;已关闭&nbsp;</strong>
+									<!--{/if}-->
+								</td>
+								<td align="left" width="120px" nowrap>
+									<strong>编号:&nbsp;$value[id]&nbsp;</strong>
+								</td>
+								<td align="right" nowrap>
+									<!--{if $value['idtype']=='blogid'}-->
+										
+										<!--{if empty($value[blog]) }-->
+											<span style="color:red">该日记已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='picid'}-->
+																				
+										<!--{if empty($value[pic]) }-->
+											<span style="color:red">该图片已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+
+									<!--{elseif $value['idtype']=='albumid'}-->
+																			
+										<!--{if empty($value[album]) }-->
+											<span style="color:red">该相册已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='threadid'}-->
+										
+										<!--{if empty($value[event]) }-->
+											<span style="color:red">该群组话题已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+
+									<!--{elseif $value['idtype']=='tagid'}-->
+										
+										<!--{if empty($value[event]) }-->
+											<span style="color:red">该群组已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='shareid'}-->
+										
+										<!--{if empty($value[share]) }-->
+											<span style="color:red">该共享已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='uid'}-->
+										
+										<!--{if empty($value[space]) }-->
+											<span style="color:red">该用户空间已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='pollid'}-->
+										
+										<!--{if empty($value[poll]) }-->
+											<span style="color:red">该投票活动已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='eventid'}-->
+										
+										<!--{if empty($value[event]) }-->
+											<span style="color:red">该招募活动已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='commentid'}-->
+										
+										<!--{if empty($value[comment]) }-->
+											<span style="color:red">该评论已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+									
+									<!--{elseif $value['idtype']=='postid'}-->
+									
+										<!--{if empty($value[post]) }-->
+											<span style="color:red">该回帖已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='topicid'}-->
+									
+										<!--{if empty($value[topic]) }-->
+											<span style="color:red">该广播剧作品已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='coverid'}-->
+									
+										<!--{if empty($value[cover]) }-->
+											<span style="color:red">该翻唱作品已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{elseif $value['idtype']=='videoid'}-->
+									
+										<!--{if empty($value[video]) }-->
+											<span style="color:red">该视频作品已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->	
+										
+									<!--{elseif $value['idtype']=='toneid'}-->
+									
+										<!--{if empty($value[tone]) }-->
+											<span style="color:red">该声线作品已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->	
+										
+									<!--{elseif $value['idtype']=='repasteid'}-->
+									
+										<!--{if empty($value[repaste]) }-->
+											<span style="color:red">该转帖已被删除</span>
+										<!--{else}-->
+											<a href="$value[url]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }-->(查看详情)</a><br>
+										<!--{/if}-->
+										
+									<!--{/if}-->
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="padding:5px;background:#F9FFE8;">
+						<span class="r_option">
+							<strong><a id="report_comments_key_$value[rid]" href="#" onclick="report_comments_load('$value[rid]');return false;" >查看处理消息</a></strong>
+						</span>	
+						<span class="gray">举报次数&nbsp;[</span>$value[num]<span class="gray">]&nbsp;</span>
+						<span class="gray">举报时间&nbsp;[</span>$value[dispdateline]<span class="gray">]&nbsp;</span>
+						<br/>
+						<span class="gray">举报人　&nbsp;[</span>$value[dispusername]<span class="gray">]&nbsp;</span>
+						<br/>
+						<span class="gray">举报原因&nbsp;</span>
+						<ul>$value[reason]</ul>
+						<br/>
+						<span class="gray">你可以：&nbsp;</span>
+						<!--{if $_SGLOBAL['member']['system']==99 }-->
+							<a href="cp.php?ac=report&op=setprocessstate&rid=$value[rid]&processstate=1" title="收到该举报信息，正在确认该举报的内容">确认该举报</a>
+							<span class="pipe">|</span>
+							<a href="cp.php?ac=report&op=setprocessstate&rid=$value[rid]&processstate=2" title="该举报的内存的确存在问题，需要进行处理">处理该举报</a>
+							<span class="pipe">|</span>
+							<a href="cp.php?ac=report&op=setprocessstate&rid=$value[rid]&processstate=3" title="处理完毕，但需要让用户进行确认反馈。">处理完毕，提交给用户确认</a>
+							<span class="pipe">|</span>
+							<a href="cp.php?ac=report&op=setprocessstate&rid=$value[rid]&processstate=4" title="该举报内容已经处理完毕。该举报将会在一个月后自动删除。">关闭该举报</a>
+						<!--{else}-->
+							<!--{if $value[processstate]==3 || $value[processstate]==4 }-->
+								<a href="cp.php?ac=report&op=setprocessstate&rid=$value[rid]&processstate=1" title="该举报内容已经被处理，但仍旧存在问题。">重新举报</a>
+								<span class="pipe">|</span>
+							<!--{/if}-->
+							<a href="cp.php?ac=report&op=setprocessstate&rid=$value[rid]&processstate=4" title="OK，没问题了。">确认处理，并关闭该举报</a>
+						<!--{/if}-->
+					</div>
+					<div id="report_comments_content_$value[rid]" style="padding:5px;background:#F9FFE8;"></div>
+				</td>
+			</tr>
+		<!--{/loop}-->
+	</table>		
+	<div class="footactions">
+		<div class="pages">$multi</div>
+	</div>
+	<script type="text/javascript">
+		<!--{if $activereportitemid>0 }-->
+			report_comments_load($value[rid]);
+		<!--{/if}-->
+
+		var preversion_rid = null;
+		
+		function report_comments_load(rid){
+			if(preversion_rid != rid){
+				if($('report_comments_content_'+preversion_rid)){
+					$('report_comments_content_'+preversion_rid).style.display="none";
+					$('report_comments_content_'+preversion_rid).innerHTML="";
+					$('report_comments_key_'+preversion_rid).innerHTML="查看处理消息";
+				}
+			}
+			
+			if($('report_comments_content_'+rid)){
+				if($('report_comments_content_'+rid).innerHTML==""){
+					$('report_comments_content_'+rid).style.display="block";
+					ajaxget('space.php?do=report&op=loadcomments&reportid='+rid, 'report_comments_content_'+rid);
+					$('report_comments_key_'+rid).innerHTML="关闭处理消息";
+
+					preversion_rid = rid;
+				}else{
+					$('report_comments_content_'+rid).style.display="none";
+					$('report_comments_content_'+rid).innerHTML="";
+					$('report_comments_key_'+rid).innerHTML="查看处理消息";
+				}
+			}
+		}
+	</script>
+		
+
+<!--{else}-->
+	<p>指定条件下还没有数据</p>
+<!--{/if}-->

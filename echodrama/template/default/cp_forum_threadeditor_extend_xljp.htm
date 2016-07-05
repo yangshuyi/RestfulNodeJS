@@ -1,0 +1,219 @@
+<table width="100%" class="infotable">
+	<form id="xljp_ajaxform" name="xljp_ajaxform" method="post" action=""></form>
+	<div class="neverVisible"><div id="__xljp_ajaxform"></div></div>
+	<tr>
+		<td colspan="2" nowrap><h2>帖子关联到的作品</h2></td>
+	</tr>
+	<tr>
+		<th width="120" nowrap>作品分类：</th>
+		<td>
+			<select id="xljp_producttype" name="xljp_producttype">
+				<option value="-1">请选择作品分类</option>
+				<!--{loop $_SGLOBAL[producttype] $key $value}-->
+				<option value="$key"<!--{if $thread[xljp_producttype] == $value[classid]}-->
+				selected<!--{/if}--> >$value[classname]</option>
+				<!--{/loop}-->
+			</select>
+			<input type="hidden" id="xljp_productname" name="xljp_productname" value="$thread[xljp_productname]"/>
+			<input type="hidden" id="xljp_productid" name="xljp_productid" value="$thread[xljp_productid]"/>
+		</td>
+	</tr>
+	<tr>
+		<th nowrap>&nbsp;</th>
+		<td>
+			<table id="xljp_product_exist" width="100%" border=0>
+				<tr>
+					<td>
+						请确认 该作品 的编号：　
+						<input type="text" id="xljp_product_exist_id" name="xljp_product_exist_id" value="" size="8" maxlength="8" onchange="javascript:xljp_loadproductbyid_ajax();"  class="t_input">
+						<a href="#" onclick="javascript:xljp_productquerymds();return false;">查询</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						作品名称：　<input type="text" id="xljp_product_exist_name" name="xljp_product_exist_name" value="" style="border:0px;"  class="t_input" READONLY/>
+						类型：　<input type="text" id="xljp_product_exist_productclassname" name="xljp_product_exist_productclassname" value="" style="border:0px;" size="6"  class="t_input" READONLY/>
+						团队：　<input type="text" id="xljp_product_exist_club" name="xljp_product_exist_club" value="" style="border:0px;" size="16"  class="t_input" READONLY/>
+						<input type="hidden" id="xljp_product_exist_clubtagid" name="xljp_product_exist_clubtagid" value=""/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_xljp_product(false);return false;">没有查到该作品</a>]
+					</td>
+				</tr>
+			</table>
+			<table id="xljp_product_notexist" width="100%">
+				<tr>
+					<td>
+						作品名称：　<input type="text" id="xljp_product_notexist_name" name="xljp_product_notexist_name" value="" style="width: 200px;"  class="t_input"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_xljp_product(true);return false;">重新确认 该作品 的编号</a>]
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript">
+	initInputType_xljp_product();
+	
+	function initInputType_xljp_product() {
+		if( ($("xljp_productid").value=="" || $("xljp_productid").value==0) && $("xljp_productname").value!="" ){
+			displayInputType_product(false);
+			$("xljp_product_notexist_name").value = $("xljp_productname").value;
+		}
+		else{
+			displayInputType_xljp_product(true);
+			$("xljp_product_exist_id").value = $("xljp_productid").value;
+			$("xljp_product_exist_name").value = $("xljp_productname").value;
+		}
+	}
+	
+	function displayInputType_xljp_product(hasid) {
+		if( hasid == true ){
+			$("xljp_product_exist").style.display="";
+			$("xljp_product_notexist").style.display="none";
+			
+		}
+		else{
+			$("xljp_product_exist").style.display="none";
+			$("xljp_product_notexist").style.display="";
+		}	
+	}
+
+	function setInputType_xljp_product() {
+		if( $("xljp_product_exist").style.display!="none" ){
+			if($("xljp_product_exist_id").value==""){
+				alert("请输入该作品编号！");
+				return false;
+			}
+			$("xljp_productid").value = $("xljp_product_exist_id").value;
+			$("xljp_productname").value = $("xljp_product_exist_name").value.trim();
+		}
+		if( $("xljp_product_notexist").style.display!="none" ){
+			if($("xljp_product_notexist_name").value.trim()==""){
+				alert("请输入该作品名称！");
+				return false;
+			}
+			else if ($("xljp_product_notexist_name").value.length > 80) {
+				alert("作品名称太长，请限制在80个字符内！");
+				return false;
+			}
+			$("xljp_productid").value = 0;
+			$("xljp_productname").value = $("xljp_product_notexist_name").value.trim();
+		}
+		return true;
+	}
+	
+	function xljp_productquerymds(){
+		var url="";
+		var param="";
+		if($("xljp_producttype").value=="1"){
+			url = "cp.php?ac=topic&op=querymds&widget=xljp_product_exist_id&topicid="+$('xljp_product_exist_id').value;
+			param = "dialogWidth:850px;dialogHeight:650px;center:yes;help:no;menubar:no;titleBar:no;resizable:no";
+		}
+		else if($("xljp_producttype").value=="2"){
+			url = "cp.php?ac=cover&op=querymds&widget=xljp_product_exist_id&coverid="+$('xljp_product_exist_id').value;
+			param = "dialogWidth:850px;dialogHeight:600px;center:yes;help:no;menubar:no;titleBar:no;resizable:no";
+		}
+		else if($("xljp_producttype").value=="3"){
+			url = "cp.php?ac=video&op=querymds&widget=xljp_product_exist_id&videoid="+$('xljp_product_exist_id').value;
+			param = "dialogWidth:850px;dialogHeight:600px;center:yes;help:no;menubar:no;titleBar:no;resizable:no";
+		}
+		else {
+			alert("请选择作品分类！");
+			$("xljp_producttype").focus();
+			return;
+		}
+		
+		var args=new Object();
+		args.window=window;
+		window.showModalDialog( url, args, param);
+		xljp_loadproductbyid_ajax();
+	}
+			
+	function xljp_loadproductbyid_ajax(){
+		var url="";
+		if($("xljp_producttype").value=="1"){
+			url = "cp.php?ac=topic&op=loadtopicsinglebyid_ajax&topicid="+$('xljp_product_exist_id').value;
+		}
+		else if($("xljp_producttype").value=="2"){
+			url = "cp.php?ac=cover&op=loadcoverbyid_ajax&coverid="+$('xljp_product_exist_id').value;
+		}
+		else if($("xljp_producttype").value=="3"){
+			url = "cp.php?ac=video&op=loadvideobyid_ajax&videoid="+$('xljp_product_exist_id').value;
+		}
+		else {
+			alert("请选择作品分类！");
+			return;
+		}
+
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+					
+		showloading();
+					
+		var form = $('ajaxform');
+			
+		form.action = url;
+		form.method = "post";
+				
+		ajaxpost('xljp_ajaxform', 'xljp_loadproductbyid_ajax_response', 2000);
+	}
+
+	function xljp_loadproductbyid_ajax_response(){
+
+		var productid="";
+		var productname="";
+		var productclassname="";
+		var productclubtagid="";
+		var productclub="";
+		try{
+			var str=$("__xljp_ajaxform").innerHTML;
+					
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				productid="";
+				productname="";
+				productclassname="";
+				productclubtagid="";
+				productclub="";
+			}else{
+				productid = paramsArray[0];
+				productname = paramsArray[1];
+				productclassname = paramsArray[3];
+				productclubtagid = paramsArray[4];
+				productclub = paramsArray[5];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("xljp_product_exist_id").value=productid;
+		$("xljp_product_exist_name").value=productname;
+		$("xljp_product_exist_productclassname").value=productclassname;
+		$("xljp_product_exist_clubtagid").value=productclubtagid;
+		$("xljp_product_exist_club").value=productclub;
+		
+		if(productclubtagid == "" || productclubtagid=="0"){
+			$("xljp_tagflag_unchecked_clubtagid").value="";
+			$("xljp_tagflag_unchecked_club").value=productclub;
+			$("xljp_tagflag_unchecked_value").innerHTML = "社团名称："+productclub;
+		}else{
+			$("xljp_tagflag_unchecked_clubtagid").value=productclubtagid;
+			$("xljp_tagflag_unchecked_club").value=productclub;
+			$("xljp_tagflag_unchecked_value").innerHTML = "社团编号："+productclubtagid + "社团名称："+productclub;
+		}
+	}
+
+</script>

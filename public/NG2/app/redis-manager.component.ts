@@ -1,7 +1,6 @@
 //One or more import statements to reference the things we need.
 import { Router, ActivatedRoute }       from '@angular/router';
-import {Component} from '@angular/core';
-import {OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RedisObject} from "./redis-object";
 
 import * as _ from 'lodash';
@@ -13,15 +12,19 @@ import {RedisManagerService} from "./redis-manager.service";
 @Component({
     selector: 'redis-manager', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     template: '' +
-    '<h1>{{title}}</h1>' +
-    '<label for="keyword">Search Keyword: </label><input id="keyword" [(ngModel)]="keyword" (change)="searchByKeyword()" placeholder="keyword">' +
-    '<hr/>' +
-    '<div *ngIf="keyword && filterRedisObjects">Find [{{filterRedisObjects.length}}] record(s) for Redis Object by keyword [{{keyword}}]</div>' +
-    '<div *ngIf="filterRedisObjects" *ngFor="let redisObject of filterRedisObjects">' +
-    '   <redis-object [redisObject]="redisObject"></redis-object>' +
+    '<div [class.default]="true" >' +
+    '   <h1>{{title}}</h1>' +
+    '   <label for="keyword">Search Keyword: </label><input id="keyword" [(ngModel)]="keyword" (change)="searchByKeyword()" placeholder="keyword">' +
+    '   <hr/>' +
+    '   <div *ngIf="keyword && filterRedisObjects">Find [{{filterRedisObjects.length}}] record(s) for Redis Object by keyword [{{keyword}}]</div>' +
+    '   <div *ngIf="filterRedisObjects" *ngFor="let redisObject of filterRedisObjects">' +
+    '       <redis-object [redisObject]="redisObject"></redis-object>' +
+    '   </div>' +
     '</div>' +
     '',
-    styles: [''],
+    styles: [
+        '.default { background-color: green;}'
+    ],
     directives: [RedisObjectComponent],
     providers: [RedisManagerService]
 })
@@ -46,7 +49,7 @@ export class RedisManagerComponent implements OnInit, OnDestroy {
     ngOnInit() {
         console.log('RedisManagerComponent ngOnInit');
         this.routeSubsriber = this.route.params.subscribe(params => {
-
+            console.log('RedisManagerComponent ngOnInit params:'+params);
         });
 
         this.redisManagerService.listAll().then(redisObjects =>

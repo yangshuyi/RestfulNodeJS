@@ -1,0 +1,32 @@
+<h2 class="title">视频印象</h2>
+<div>
+	<!--{eval $data=buildLabelDisplay('video', $videolabel_list, 240, 240); }-->
+	$data
+</div>
+<!--{if $_SGLOBAL[supe_uid]>0 }-->
+	<!--{if count($videolabel_me_list) <= 0 }-->
+	<table width="100%">
+		<tr><td align="left">请选择/输入你贴出的标签：(限5个字符)</td></tr>
+		<tr><td align="center"><input type="text" id="videolabel" name="videolabel" value="" style="border:1px solid gray;height:19px;width:180px;" maxlength="5"/><input type="button" value="评价" class="submit" onclick="javascript:setVideoLabel();return false;"/></td></tr>
+	</table>
+	<!--{else}-->
+	<div>
+		<h3>你贴的标签是：</h3>
+		<ul class="post_list line_list">
+		<!--{loop $videolabel_me_list $value}-->
+			<li>$value[label] [<a href="#" onclick="javascript:removeVideoLabel();return false;">删除</a>]</li>
+		<!--{/loop}-->
+		</ul>		
+	</div>
+	<!--{/if}-->
+<!--{/if}-->
+<!--{if count($videolabel_lastest_list) > 0 }-->
+<div>
+	<h3>贴标签的朋友有：</h3>
+	<ul class="post_list line_list">
+	<!--{loop $videolabel_lastest_list $value}-->
+		<li><a href="space.php?uid=$value[uid]" target="_blank">$value[username]</a>&nbsp;:&nbsp;$value[label]</li>
+	<!--{/loop}-->
+	</ul>
+</div>	
+<!--{/if}-->

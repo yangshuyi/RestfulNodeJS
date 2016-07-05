@@ -1,0 +1,14 @@
+<!--{template admin/tpl/header}-->
+
+<!--{if $_GET['op'] == 'manage'}-->
+	<!--{template admin/tpl/topic_manage}-->	
+<!--{elseif $_GET['op'] == 'synsina' OR $_GET['op'] == 'quicksynsina'}-->
+	<!--{template admin/tpl/topic_synsina}-->	
+<!--{else}-->
+	<!--{template admin/tpl/topic_list}-->	
+<!--{/if}-->
+<div class="side">
+	<!--{template admin/tpl/side}-->
+</div>
+
+<!--{template admin/tpl/footer}-->

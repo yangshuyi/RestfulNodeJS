@@ -1,0 +1,15 @@
+<table cellspacing="0" cellpadding="0" border=0 width="100%" style="background: url(template/default/image/portal/topic_sitejoin_bg.jpg) no-repeat scroll 0 0;" >
+	<tr height="35px"><td align="left" nowrap>&nbsp;</td></tr>
+	<!--{loop $topic_latest_list $key $value}-->
+	<tr height="31px">
+		<td nowrap width="1%">&nbsp;</td>
+		<td align="left" style="border-bottom:1px solid #FFD6A4;">
+			<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></a>
+		</td>
+		<td nowrap width="1%" align="right" style="border-bottom:1px solid #FFD6A4;">
+			<span class="gray">$value[productclassname]</span>
+		</td>
+		<td nowrap width="1%">&nbsp;</td>
+	</tr>
+	<!--{/loop}-->
+</table>

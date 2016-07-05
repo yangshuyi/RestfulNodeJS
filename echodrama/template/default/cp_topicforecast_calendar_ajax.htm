@@ -1,0 +1,33 @@
+<div class="calendar">
+	<div id="calendar_pre" class="floatleft"><a href="#" onclick="showcalendar('$premonth'); this.blur(); return false;">&lt;&lt;</a></div>
+	<div id="calendar_next" class="floatright"><a href="#" onclick="showcalendar('$nextmonth'); this.blur(); return false;">&gt;&gt;</a></div>
+	<span id="thecalendar_year">$year</span>年 <span id="thecalendar_month">$month</span>月
+	<ul>
+		<li class="calendarli calendarweek">日</li>
+		<li class="calendarli calendarweek">一</li>
+		<li class="calendarli calendarweek">二</li>
+		<li class="calendarli calendarweek">三</li>
+		<li class="calendarli calendarweek">四</li>
+		<li class="calendarli calendarweek">五</li>
+		<li class="calendarli calendarweek">六</li>	
+		<!--{eval echo str_repeat('<li class="calendarblank">&nbsp;</li>', $week)}-->
+		<!--{loop $days $key $value}-->		
+			<!--{if $value[count]}-->		
+				<li class="calendarli $value[class]" onmouseover="$('day_$key').style.display='block';" onmouseout="$('day_$key').style.display='none';">
+					<a href="$url&date=$year-$month-$key">$key</a>
+					<div class="dayevents" id="day_$key" style="display:none;">
+						<ul class="news_list">
+						<!--{loop $value[topicforecasts] $topicforecast}-->
+							<li class="dayeventsli">
+								<span style="color:black;">[{$topicforecast[productclassname]}]<a href="space.php?do=topic&view=forecast&topicforecastid=$topicforecast[topicforecastid]" title="$topicforecast[subject]" style="color:black;"><!--{eval echo getstr($topicforecast[subject], 36, 0, 0, 0, 0, -1); }--></a></span>
+							</li>
+						<!--{/loop}-->
+						</ul>
+					</div>
+				</li>
+			<!--{else}-->
+				<li class="calendarli">$key</li>
+			<!--{/if}-->
+		<!--{/loop}-->
+	</ul>
+</div>

@@ -1,0 +1,285 @@
+<!--{eval $_TPL['titles'] = array('声线库');}-->
+<!--{template header}-->
+
+<!--{if !empty($_SGLOBAL[inajax])}-->
+	<div id="space_photo">
+		<h3 class="feed_header">
+			声线库
+		</h3>
+		<table cellspacing="4" cellpadding="4" width="100%">
+		<!--{loop $list $key $value}-->
+	<tr>
+		<td width="25%" align="center" rowspan="2" valign="top" nowrap >
+			<div class="myavatar48"><a href="space.php?uid=$value[uid]"><!--{avatar($value[uid],small)}--></a></div>
+			<a href="space.php?uid=$value[uid]">$value[username]</a>
+		</td>
+		<td width="50%" align="left" rowspan="2" valign="top" >
+			<span class="gray">编号&nbsp;[</span><a href="space.php?do=tone&toneid=$value[toneid]">$value[toneid]</a><span class="gray">]&nbsp;</span><br/>
+			<span class="gray">类型&nbsp;[</span>$value[classname]<span class="gray">]&nbsp;</span>
+			<span class="gray">上传时间&nbsp;[</span>$value[dateline]<span class="gray">]&nbsp;</span><br/>
+			<span class="gray">标签分类&nbsp;[</span>$value[label]<span class="gray">]&nbsp;</span><br/>
+			$value[descriptionlimit]<br/>
+			$value[viewnum]<span class="gray">&nbsp;次访问,&nbsp;</span>$value[joinnum]<span class="gray">&nbsp;次收藏,&nbsp;</span>&nbsp;$value[replynum]&nbsp;<span class="gray">&nbsp;次评论</span>
+		</td>
+		<td class="event_title" width="20%" align="center" valign="top" nowrap>
+			<!--{if !empty($value[pollsum]) }-->
+				<!--{if $view=="all" }-->
+					<div class="title">
+						<a href="cp.php?ac=share&type=tone&id=$value[toneid]" id="a_share_$value[toneid]" onclick="ajaxmenu(event, this.id, 1)" class="a_share">分享</a>
+						<span style="color: #EF9822; float:right; padding: 0px; margin: 20px -60px 0px 0px;">评级：$value[pollsum]</span>
+					</div>
+				<!--{/if}-->
+				<!--{if $view=="share"}-->
+					<div class="title">
+						<a href="cp.php?ac=share&type=tone&id=$value[toneid]" id="a_share_$value[toneid]" onclick="ajaxmenu(event, this.id, 1)" class="a_share">分享</a>
+						<span style="color: #EF9822; float:right; padding: 0px; margin: 20px -60px 0px 0px;">评级：$value[pollsum]</span>
+					</div>
+				<!--{/if}-->
+			<!--{/if}-->
+		</td>
+		<td width="5%">&nbsp;</td>
+	</tr>	
+	<tr>
+		<td class="event_title" width="20%" align="right" valign="bottom" nowrap>
+			<span>
+				<a href="space.php?do=tone&toneid=$value[toneid]">详细</a>
+				<!--{if $view=="me" && $value[uid]==$_SGLOBAL['supe_uid']}-->
+					<span class="pipe">|</span>
+					<a href="cp.php?ac=tone&op=toedit&toneid=$value[toneid]">编辑</a>
+					<span class="pipe">|</span>
+					<a href="cp.php?ac=tone&op=invite&toneid=$value[toneid]">邀请好友</a>
+				<!--{/if}-->
+			</span>
+		</td>
+		<td width="5%">&nbsp;</td>
+	</tr>	
+	<tr><td colspan="3" style="border-top:1px dashed #ECB2C5;" align="center" >&nbsp;</td>	<td>&nbsp;</td></tr>
+		<!--{/loop}-->
+		</table>
+	</div><br>
+<!--{else}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[all]><a href="space.php?do=tone&view=all"><span>声线库列表</span></a></li>
+		<li$actives[me]><a href="space.php?do=tone&view=me"><span>我的声线库</span></a></li>
+		<li$actives[share]><a href="space.php?do=tone&view=share"><span>我的收藏列表</span></a></li>
+		<li class="null"><a href="cp.php?ac=tone">添加我的新声线</a></li>
+	</ul>
+	<!--{if $_SGLOBAL[refer]}-->
+	<div class="r_option">
+		<a  href="$_SGLOBAL[refer]">&laquo; 返回上一页</a>
+	</div>
+	<!--{/if}-->
+</div>
+<div class="event_list">
+<!--{if $view=="all"}-->
+<form id="ajaxform" name="ajaxform" method="post" action="">
+	<div class="neverVisible"><div id="__ajaxform"></div></div>
+</form>
+<form id="queryform" name="queryform" method="get" action="space.php?do=tone&view=all">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3" width="100%" border="0">
+			<tr>
+				<th width="15%">创作人</th>
+				<td width="30%" nowrap>
+					<input type="text" id="uid" name="uid" value="$_GET[uid]" size="6" onchange="javascript:loadresumebyid_ajax();"/>
+					<a href="#" onclick="javascript:resumequerymds();">查询</a>
+					<span id="username">$_GET[username]</span>
+				</td>
+				<td width="10%" >&nbsp;</td>
+				<th width="15%">声线标签</th>
+				<td width="30%"><input type="text" id="label" name="label" value="$_GET[label]" /></td>
+			</tr>
+			<tr>
+				<th>排序方式</th>
+				<td>
+					<select name="orderby" id="orderby">
+						<option value="t.dateline DESC" <!--{if $_GET[orderby]=='t.dateline DESC'}-->selected<!--{/if}--> >发布时间 - 由新至旧</option>
+						<option value="t.dateline ASC" <!--{if $_GET[orderby]=='t.dateline ASC'}-->selected<!--{/if}--> >发布时间 - 由旧至新</option>
+						<option value="t.viewnum DESC" <!--{if $_GET[orderby]=='t.viewnum DESC'}-->selected<!--{/if}--> >访问量　 - 由多至少</option>
+						<option value="t.viewnum ASC" <!--{if $_GET[orderby]=='t.viewnum ASC'}-->selected<!--{/if}--> >访问量　 - 由少至多</option>
+						<option value="t.replynum DESC" <!--{if $_GET[orderby]=='t.replynum DESC'}-->selected<!--{/if}--> >评论数　 - 由多至少</option>
+						<option value="t.replynum ASC" <!--{if $_GET[orderby]=='t.replynum ASC'}-->selected<!--{/if}--> >评论数　 - 由少至多</option>
+						<option value="t.joinnum DESC" <!--{if $_GET[orderby]=='t.joinnum DESC'}-->selected<!--{/if}--> >收藏数　 - 由多至少</option>
+						<option value="t.joinnum ASC" <!--{if $_GET[orderby]=='t.joinnum ASC'}-->selected<!--{/if}--> >收藏数　 - 由少至多</option>
+					</select>
+				</td>
+				<td>&nbsp;</td>
+				<td colspan="2" align="right">
+					<input type="hidden" name="ac" value="tone" />
+					<input type="hidden" name="do" value="tone" />
+					<input type="hidden" name="view" value="all" />
+					<input type="hidden" name="classid" value="$_GET[classid]" />
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+<br/>
+
+<script type="text/javascript">
+	function resumequerymds(){
+		var args=new Object();
+		args.window=window;
+		
+		window.showModalDialog("cp.php?ac=resume&op=querymds&widget=uid&id="+$('uid').value,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+		loadresumebyid_ajax();
+	}
+	
+	function loadresumebyid_ajax(){
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+			
+		showloading();
+			
+		var form = $('ajaxform');
+	
+		form.action="cp.php?ac=resume&op=loadresumebyid_ajax&uid="+$('uid').value;
+		form.method="post";
+		
+		ajaxpost('ajaxform', 'loadresumebyid_ajax_response', 2000);
+	}
+
+	function loadresumebyid_ajax_response(){
+		
+		var uid="";
+		var username="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+			
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				$("uid").value="";
+				$("username").innerHTML="";
+			}else{
+				uid=paramsArray[0];
+				username=paramsArray[1];
+			}
+		}
+		catch(e){
+		}
+		
+		$("uid").value=uid;
+		$("username").innerHTML=username;
+	}
+</script>
+
+<!--{/if}-->
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td valign="top" width="100%">
+<!--{if $view=="me"}-->
+	<span style="color:red;">[注]目前网站只允许用户最多上传10个声线，请展现出您自己最好的作品吧。</span>
+<!--{/if}-->
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<!--{if $list}-->
+<table cellspacing="0" cellpadding="0" width="100%" border=0>
+<!--{loop $list $key $value}-->
+	<tr>
+		<td width="25%" align="center" rowspan="2" valign="top" nowrap >
+			<div class="myavatar48"><a href="space.php?uid=$value[uid]"><!--{avatar($value[uid],small)}--></a></div>
+			<a href="space.php?uid=$value[uid]">$value[username]</a>
+		</td>
+		<td width="50%" align="left" rowspan="2" valign="top" >
+			<span class="gray">编号&nbsp;[</span><a href="space.php?do=tone&toneid=$value[toneid]">$value[toneid]</a><span class="gray">]&nbsp;</span><br/>
+			<span class="gray">类型&nbsp;[</span>$value[classname]<span class="gray">]&nbsp;</span>
+			<span class="gray">上传时间&nbsp;[</span>$value[dateline]<span class="gray">]&nbsp;</span><br/>
+			<span class="gray">标签分类&nbsp;[</span>$value[label]<span class="gray">]&nbsp;</span><br/>
+			$value[descriptionlimit]<br/>
+			$value[viewnum]<span class="gray">&nbsp;次访问,&nbsp;</span>$value[joinnum]<span class="gray">&nbsp;次收藏,&nbsp;</span>&nbsp;$value[replynum]&nbsp;<span class="gray">&nbsp;次评论</span>
+		</td>
+		<td class="event_title" width="20%" align="center" valign="top" nowrap>
+		<!--{if !empty($value[pollsum]) }-->
+			<div class="title">
+				<span style="color: #EF9822; float:right; padding: 0px; margin: 0 18px 0 5px;">评级：$value[pollsum]</span>
+			</div>
+		<!--{/if}-->
+		</td>
+		<td width="5%">&nbsp;</td>
+	</tr>	
+	<tr>
+		<td class="event_title" width="20%" align="right" valign="bottom" nowrap>
+			<span>
+				<a href="space.php?do=tone&toneid=$value[toneid]">详细</a>
+				<!--{if $view=="me" && $value[uid]==$_SGLOBAL['supe_uid']}-->
+					<span class="pipe">|</span>
+					<a href="cp.php?ac=tone&op=toedit&toneid=$value[toneid]">编辑</a>	
+					<span class="pipe">|</span>
+					<a href="cp.php?ac=tone&op=invite&toneid=$value[toneid]">邀请好友</a>
+				<!--{/if}-->
+			</span>
+		</td>
+		<td width="5%">&nbsp;</td>
+	</tr>	
+	<tr><td colspan="3" style="border-top:1px dashed #ECB2C5;" align="center" >&nbsp;</td>	<td>&nbsp;</td></tr>	
+<!--{/loop}-->
+</table>
+<div class="footactions">
+	<div class="pages" align="right">$multi</div>
+</div>
+<!--{else}-->
+	<div class="c_form">目前还没有相关列表。</div>
+<!--{/if}-->
+</td>
+<td valign="top" >
+<div id="sidebar" style="width:200px;border: 1px solid #DDD;">
+	<div class="sidebox">
+		<h2 class="title">
+			<p class="r_option">
+				<a href="space.php?do=tone&view=$view&uid=$_GET[uid]&label=$_GET[label]">全部</a>
+			</p>
+			声线类型
+		</h2>
+		<ul class="event_cat">
+		<!--{loop $_SGLOBAL[toneclass] $value}-->		
+			<!--{if $value[classid]!=5}--> 
+				<li<!--{if $_GET[classid] == $value[classid]}--> class="on"<!--{/if}-->>
+				<a href="space.php?do=tone&view=$view&uid=$_GET[uid]&classid=$value[classid]&label=$_GET[label]">$value[classname]</a></li>
+			<!--{/if}-->	
+		<!--{/loop}-->
+		</ul>
+	</div>
+	<div class="sidebox">
+		<h2 class="title">
+			<p class="r_option">
+				<a href="space.php?do=tone&view=$view&uid=$_GET[uid]&classid=$_GET[classid]">全部</a>
+			</p>
+			热门声线标签
+		</h2>
+		<ul class="event_cat">
+		<!--{eval $index = 0;}-->		
+		<!--{loop $hottonelabellist $value}-->		
+			<li<!--{if $_GET[label] == $value[classname]}--> class="on"<!--{/if}-->>
+				<a title="引用$value[joinnum]次" href="space.php?do=tone&view=$view&uid=$_GET[uid]&classid=$_GET[classid]&label=$value[classname]">$value[classname]</a></li>
+			
+		<!--{/loop}-->
+		</ul>
+	</div>
+	
+	<div class="sidebox">
+		<h2 class="title">热门声线排行</h2>
+		<ul class="post_list line_list">
+			<!--{loop $hottonelist $value}-->
+				<li><a href="space.php?do=tone&toneid=$value[toneid]" target="_blank"><span>$value[classname]</span> - <span>$value[label]</span></a></li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+
+
+	
+
+<!--{/if}-->		
+<!--{template footer}-->

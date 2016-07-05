@@ -1,0 +1,73 @@
+<div style="margin-top: 10px;">
+<table id="forumcontent" width="100%" cellspacing="0" cellpadding="0" style="border: 1px solid #CDCDCD;">
+	<tr height="30px" style="background:none repeat scroll 0 0 #F2F2F2;">
+		<td rowspan="2" width="70px" align="center" valign="middle" nowrap>
+			&nbsp;<img src="image/forum/forum_golden.gif"/>&nbsp;
+		</td>
+		<td align="left" valign="middle" nowrap>
+			<h2 title="$thread[threadclassname]">&nbsp;&nbsp;$thread[threadclassname]&nbsp;&nbsp;</h2>
+		</td>
+		<td width="90%" align="left" valign="middle" nowrap>	
+			<h2 title="$thread[subject]">&nbsp;&nbsp;$thread[subject]</h2>
+		</td>
+		<td rowspan="2" align="left" valign="bottom" nowrap>
+			<div style="float:right;padding:5px;">
+				<span style="color:red;font-size:16px;font-weight: bold;">$thread[prefix]</span>
+				<!--{if $thread[hot]}--><span class="hot">»»&nbsp;$thread[hot]&nbsp;</span><!--{/if}-->
+				<!--{if $thread[cold]}--><span class="cold">¿‰&nbsp;$thread[cold]&nbsp;</span><!--{/if}-->
+			</div>
+		</td>
+	</tr>
+	<tr style="background:none repeat scroll 0 0 #F2F2F2;">
+		<td colspan="2" align="left" valign="middle" nowrap>
+			<span>&nbsp;&nbsp;±Í«©£∫</span><span>$thread[label]</span>
+		</td>
+	</tr>
+	<form id="actionForm" method="post" action="">
+	<div class="neverVisible"><div id="__actionForm"></div></div>
+	</form>
+	<tr>
+		<td colspan="4" style="background:none repeat scroll 0 0 #F2F2F2; border-top: 1px solid #CDCDCD;">
+			<!--{eval $value=$mainpost; }-->
+
+			<!--{template space_forum_post_li}-->
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" style="background:none repeat scroll 0 0 #F2F2F2; ">
+			<div id="post_ul">
+			<!--{loop $postlist $value}-->
+				<!--{template space_forum_post_li}-->
+			<!--{/loop}-->
+			</div>
+		</td>
+	</tr>
+</table>
+
+<table cellspacing="0" cellpadding="0" style="margin-top: 10px;">
+	<tr>
+		<td align="right">
+			<div class="pages" align="right">$multi</div>
+		</td>
+	</tr>
+</table>
+	
+<script type="text/javascript">
+function resizeForumContentImageSize(){
+	var imgElementArray = $('forumcontent').getElementsByTagName('img');
+	for(var i=0;i<imgElementArray.length;i++){
+		var imgElement = imgElementArray[i];
+		if(imgElement.width>640){
+			imgElement.width = 640;
+		}
+	}
+}
+resizeForumContentImageSize();
+</script>
+<hr/>
+
+<!--{eval $editormode='postview'; }-->
+<!--{template cp_forum_posteditor}-->
+
+</div>
+<!--{template footer}-->

@@ -12,6 +12,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var app_info_model_1 = require("./app-info.model");
+var template = require('./app-header.html');
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var AppHeaderComponent = (function () {
@@ -28,34 +29,7 @@ var AppHeaderComponent = (function () {
     AppHeaderComponent = __decorate([
         core_1.Component({
             selector: 'app-header',
-            template: '<header>' +
-                '<div class="top-bar">' +
-                '   <div class="container">' +
-                '       <div class="row">' +
-                '           <div class="col-sm-12 col-xs-12">' +
-                '               <div class="search">' +
-                '                   <input type="text" autocomplete="off" placeholder="Search">' +
-                '                   <i class="fa fa-search fa-lg"></i>' +
-                '               </div>' +
-                '           </div>' +
-                '       </div>' +
-                '   </div>' +
-                '</div>' +
-                '<nav class="navbar navbar-inverse" role="banner">' +
-                '    <div class="container">' +
-                '       <div class="col-sm-3 col-xs-3 logo">' +
-                '           <img src="images/logo.png" alt="logo">' +
-                '       </div>' +
-                '       <div class="col-sm-9 col-xs-9 navbar-right">' +
-                '           <ul class="nav navbar-nav">' +
-                '               <li *ngFor="let menu of appInfo.menus">' +
-                '                   <a (click)="navigateToModule()" title="{{menu.name}}">{{menu.name}}</a>' +
-                '               </li>' +
-                '           </ul>' +
-                '       </div>' +
-                '   </div>' +
-                '</nav>' +
-                '</header>',
+            template: template,
             styles: ['']
         }), 
         __metadata('design:paramtypes', [router_1.Router])

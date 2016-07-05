@@ -1,0 +1,156 @@
+<!--{if empty($_SGLOBAL['inajax'])}-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html;" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<title><!--{if $_TPL['titles']}--><!--{loop $_TPL['titles'] $value}--><!--{if $value}-->$value - <!--{/if}--><!--{/loop}--><!--{/if}--><!--{if $_SN[$space[uid]]}-->{$_SN[$space[uid]]} - <!--{/if}-->$_SCONFIG[sitename] - Powered by 应声虫</title>
+<script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_common.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_face.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+<style type="text/css">
+@import url(template/default/style.css);
+<!--{if $_TPL['css']}-->
+@import url(template/default/{$_TPL[css]}.css);
+<!--{/if}-->
+<!--{if !empty($_SGLOBAL['space_theme'])}-->
+@import url(theme/$_SGLOBAL[space_theme]/style.css);
+<!--{elseif $_SCONFIG[template] != 'default'}-->
+@import url(template/$_SCONFIG[template]/style.css);
+<!--{/if}-->
+<!--{if !empty($_SGLOBAL['space_css'])}-->
+$_SGLOBAL[space_css]
+<!--{/if}-->
+</style>
+
+<link rel="shortcut icon" href="image/favicon.ico" />
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="xmlrpc.php?rsd=$space[uid]" />
+</head>
+<body>
+<div class="mainarea">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="#"><span>广播剧列表</span></a></li>
+	</ul>
+</div>
+
+<form id="topicform" name="topicform" method="get" action="admincp.php">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="20%">剧名</th>
+				<td width="20%"><input type="text" name="subject" value="$_GET[subject]" /></td>
+				<td width="20%"></td>
+				<th width="20%">所属社团</th>
+				<td width="20%"><input type="text" name="club" value="$_GET[club]" /></td>
+			</tr>
+			<tr>
+				<th>导演</th>
+				<td><input type="text" name="director" value="$_GET[director]" /></td>
+				<td></td>
+				<th>编剧</th>
+				<td><input type="text" name="writer" value="$_GET[writer]" /></td>
+			</tr>
+			<tr>
+				<th>Cast</th>
+				<td><input type="text" name="cast" value="$_GET[cast]" /></td>
+				<td></td>
+				<th>后期</th>
+				<td><input type="text" name="producer" value="$_GET[producer]" /></td>
+			</tr>
+			<!-- tr>
+				<th>发布时间$_GET[producedate1]a</th>
+				<td colspan="4">
+					<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+					<input type="text" name="starttime" id="producedate1" value="<!--{eval echo sgmdate('Y-m-d', $_GET[producedate1])}-->"  onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+					 至
+					<input type="text" name="endtime" id="producedate2" value="<!--{eval echo sgmdate('Y-m-d', $_GET[producedate2])}-->"  onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+					(YYYY-MM-DD)
+				</td>
+			</tr-->
+			<!--  do not support -->
+			<tr>
+				<td colspan="5" align="right">
+					<!-- select name="orderby">
+					<option value="">默认排序</option>
+					<option value="dateline"$orderby[dateline]>创建时间</option>
+					<option value="updatetime"$orderby[updatetime]>更新时间</option>
+					<option value="picnum"$orderby[picnum]>图片数</option>
+					</select>
+					<select name="ordersc">
+					<option value="desc"$ordersc[desc]>递减</option>
+					<option value="asc"$ordersc[asc]>递增</option>
+					</select>
+					<select name="perpage">
+					<option value="20"$perpages[20]>每页显示20个</option>
+					<option value="50"$perpages[50]>每页显示50个</option>
+					<option value="100"$perpages[100]>每页显示100个</option>
+					<option value="1000"$perpages[1000]>一次处理1000个</option>
+					</select-->
+					<input type="hidden" name="ac" value="topic" />
+					<input type="hidden" name="do" value="topic" />
+					<input type="hidden" name="view" value=$view />
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<table width="100%" cellspacing="0" cellpadding="0" class="reclisttable">
+		<tr>
+			<th width="25" colspan="1" align="center">&nbsp;</th>
+			<th width="100" align="center">编号</th>
+			<th width="200" align="center" nowrap>剧名</th>
+			<th align="center">社团</th>
+			<th align="center">上传人</th>
+			<th align="center">上传时间</th>
+		</tr>
+		<!--{loop $list $value}-->
+		<tr>
+			<td><input type="radio" name="id"/></td>
+			<td nowrap align="center" width="200">$value[topicid]</td>
+			<td><a href="space.php?do=topic&topicid=$value[topicid]" target="_blank">$value[subject]</a></td>
+			<td>$value[club]</td>
+			<td>$value[username]</td>
+			<td>$value[dateline]</td>
+		</tr>
+		<!--{/loop}-->
+		<tr>
+			<td align="right" colspan="6">
+				<input type="button" name="searchsubmit" value="选择" class="submit" onclick="javascript:select();"/>
+			</td>
+		</tr>
+	</table>
+
+	<div width="100%" class="pages">$multi</div>
+
+</form>
+</div>
+</div>
+<script type="text/javascript">
+function select(){
+	
+	var selids="";
+	var form=$('topicform');
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.name.match("id")) {
+			if(e.checked){
+				selids=selids+e.value+",";
+			}
+		}
+	}
+	if(selids==""){
+		alert("请选择要操作的记录。");
+	}else{
+		selids=selids+0;
+	}
+	
+	return false;
+	
+}
+</script>
+</body>

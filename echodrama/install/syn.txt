@@ -1,0 +1,126 @@
+同步更新剧团的标签
+update ysys_mtag tag set tag.label = (select distinct t.club from ysys_topic t where tag.tagname=t.club)
+广播剧团 - 广播剧
+select tag.tagid,tag.tagname,mtt.topicid,mtt.topicname, t.club  from ysys_mtag tag left outer join ysys_mtagtopic mtt on tag.tagid=mtt.tagid left outer join ysys_topic t on mtt.topicid=t.topicid  where tag.label is null and mtt.itemid >0
+
+更新 广播剧 clubtagid 属性 （by 广播剧团/工作室 群组）
+update ysys_topic t set t.clubtagid = (select tag.tagid from ysys_mtag tag where tag.tagname = t.club and ( tag.fieldid=1 or tag.fieldid=5))
+
+
+同步更新个人目前社团状态
+select * from ysys_resume r where r.club in (select tag.tagname from ysys_mtag tag where tag.fieldid=1 or tag.fieldid=5)
+
+
+更新个人目前社团状态 clubtagid 属性 （by 广播剧团/工作室 群组）
+update  ysys_resume r set r.clubtagid = (select  tag.tagid from ysys_mtag tag where ( tag.fieldid=1 or tag.fieldid=5 ) and r.club=tag.tagname)
+
+
+
+广播剧评论
+select * from ysys_comment c , ysys_topic t where c.idtype='topicid' and c.id=t.topicid and c.synpostid=0 and t.synthreadid>0
+
+删除群组
+
+
+delete from ysys_mtag where tagid=71;
+delete from ysys_mtag_memberclass where tagid=71;
+delete from ysys_mtag_thread where tagid=71;
+delete from ysys_mtag_threadclass where tagid=71;
+delete from ysys_mtagfans where tagid=71;
+delete from ysys_mtaginvite where tagid=71;
+delete from ysys_mtagmember where tagid=71;
+delete from ysys_mtagtopic where tagid=71;
+
+
+delete from bbs_threads where tid in (2121,2120,2118,2117,2112,2116,2115,2114,2113)
+delete from bbs_posts where tid in (2121,2120,2118,2117,2112,2116,2115,2114,2113)
+
+
+
+
+delete  from ysys_album where uid=4425;
+delete  from ysys_blog where uid=4425;
+delete  from ysys_blogfield where uid=4425;
+delete  from ysys_comment where uid=4425;
+
+delete  from ysys_cover where uid=4425;
+delete  from ysys_coverpoll where uid=4425;
+delete  from ysys_coveruser where uid=4425;
+delete  from ysys_creditlog where uid=4425;
+delete  from ysys_docomment where uid=4425;
+delete  from ysys_doing where uid=4425;
+delete  from ysys_event where uid=4425;
+delete  from ysys_feed where uid=4425;
+delete  from ysys_friend where uid=4425;
+delete  from ysys_member where uid=4425;
+delete  from ysys_mtagfans where uid=4425;
+delete  from ysys_mtagmember where uid=4425;
+delete  from ysys_pic where uid=4425;
+delete  from ysys_poke where uid=4425;
+delete  from ysys_poll where uid=4425;
+delete  from ysys_polluser where uid=4425;
+delete  from ysys_post where uid=4425;
+delete  from ysys_repaste where uid=4425;
+delete  from ysys_resume where uid=4425;
+delete  from ysys_resumehistory where uid=4425;
+delete  from ysys_share where uid=4425;
+delete  from ysys_space where uid=4425;
+delete  from ysys_spacefield where uid=4425;
+delete  from ysys_statuser where uid=4425;
+delete  from ysys_task where uid=4425;
+delete  from ysys_tone where uid=4425;
+delete  from ysys_tonepoll where uid=4425;
+delete  from ysys_toneuser where uid=4425;
+delete  from ysys_topicpoll where uid=4425;
+delete  from ysys_topicuser where uid=4425;
+delete  from ysys_video where uid=4425;
+delete  from ysys_videopoll where uid=4425;
+delete  from ysys_videouser where uid=4425;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

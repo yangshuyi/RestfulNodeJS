@@ -1,0 +1,43 @@
+<h2 class="title"><img src="image/app/mtag.gif" />群组邀请</h2>
+	<div class="tabs_header">
+		<ul class="tabs">
+			<li class="active"><a href="cp.php?ac=mtag&op=mtaginvite"><span>群组邀请</span></a></li>
+			<li><a href="space.php?do=mtag&view=me"><span>返回我的群组</span></a></li>
+		</ul>
+	</div>
+	
+	<div class="h_status">
+		您的好友邀请您加入以下群组
+		<!--{if $invites}-->
+			<span class="pipe">|</span>
+			<a href="cp.php?ac=mtag&op=inviteconfirm&tagid=0&r=0"><span>忽略所有邀请</span></a>
+		<!--{/if}-->
+	</div>
+	
+	<div class="c_form">
+		<!--{if $invites}-->
+		<table cellspacing="4" cellpadding="4" class="formtable">
+		<!--{loop $invites $value}-->
+		<tr>
+			<td width="80">
+			<div class="threadimg60"><a href="space.php?do=mtag&tagid=$value[tagid]" target="_blank"><img src="$value[pic]" width="60"></a></div></td>
+			<td class="h_status">
+				<p><a href="space.php?do=mtag&tagid=$value[tagid]" target="_blank" style="font-size:14px;font-weight:bold;">$value[tagname]</a></p>
+				<div id="tag_$value[tagid]" style="padding:0.5em 0 0.5em 0;">
+					<p>已有 $value[membernum] 人<!--{if $value[viewperm]}-->, 只对会员开放浏览<!--{/if}-->, 所属分类: $value[title]</p>
+					邀请好友：<a href="space.php?uid=$value[fromuid]" target="_blank">{$_SN[$value[fromuid]]}</a>
+					<br>邀请时间：<!--{date('Y-m-d H:i', $value[dateline], 1)}-->
+					<p style="padding:1em 0 0 0;">
+					<a href="cp.php?ac=mtag&op=inviteconfirm&tagid=$value[tagid]&r=1" class="submit" onclick="ajaxget(this.href, 'tag_$value[tagid]');return false;">确认邀请</a> 
+					<a href="cp.php?ac=mtag&op=inviteconfirm&tagid=$value[tagid]&r=0" class="button" onclick="ajaxget(this.href, 'tag_$value[tagid]');return false;">忽略</a>
+					</p>
+				</div>
+			</td>
+		</tr>
+		<!--{/loop}-->
+		</table>
+		<!--{else}-->
+		暂时没有新的群组邀请。
+		<!--{/if}-->
+	
+	</div>	

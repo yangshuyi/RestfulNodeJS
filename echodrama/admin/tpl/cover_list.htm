@@ -1,0 +1,158 @@
+<div class="mainarea">
+<div class="maininner">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[all]><a href="admincp.php?ac=cover&view=all"><span>翻唱列表</span></a></li>
+	</ul>
+</div>
+
+<form id="coverform" name="coverform" method="get" action="admincp.php">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="20%">作品名</th>
+				<td width="20%"><input type="text" name="subject" value="$_GET[subject]" /></td>
+				<td width="20%"></td>
+				<th width="20%">ID</th>
+				<td width="20%"><input type="text" name="coverid" value="$_GET[coverid]" /></td>
+			</tr>
+			
+			<tr>
+				<th width="20%">所属社团</th>
+				<td width="20%"><input type="text" name="club" value="$_GET[club]" /></td>
+				<td width="20%"></td>
+				<th>作品类型</th>
+				<td>
+					<select name="productclassid" id="productclassid">
+						<option value="-1"></option>
+						<!--{loop $_SGLOBAL[coverproductclass] $key $value}-->
+						<option value="$value[classid]"<!--{if $_GET[productclassid] == $value[classid]}-->
+						selected<!--{/if}--> >$value[classname]</option>
+						<!--{/loop}-->
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td colspan="2" align="right">
+					<input type="hidden" name="ac" value="cover" />
+					<input type="hidden" name="do" value="cover" />
+					<input type="hidden" name="view" value="$_GET[view]" />
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+<!--{if $list}-->
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	<div class="bdrcontent">
+	<!--{if $perpage>100}-->
+		<p>总共有满足条件的数据 <strong>$count</strong> 个</p>
+		<!--{loop $list $value}-->
+		<input type="hidden" name="ids[]" value="$value[eventid]">
+		<!--{/loop}-->
+
+	<!--{else}-->
+		<table width="100%" cellspacing="0" cellpadding="0" class="reclisttable">
+		<tr>
+			<td width="25" colspan="1" align="center">&nbsp;</td>
+			<th width="60" align="center">编号</th>
+			<th align="center" nowrap>作品名</th>
+			<th width="30px" align="center" nowrap>SYN</th>
+			<th align="center">类型</th>
+			<th align="center">社团</th>
+			<th align="center">提供者</th>
+			<th align="center">修改时间</th>
+			<th align="center">操作</th>
+		</tr>
+		<!--{loop $list $key $value}-->
+		<tr <!--{if $key%2==1}--> class="alt"<!--{/if}-->>
+			<td><input type="<!--{if $allowbatch}-->checkbox<!--{else}-->radio<!--{/if}-->" name="ids[]" value="$value[coverid]"></td>
+			<td width="60px" nowrap>$value[coverid]</td>
+			<td><a href="space.php?do=cover&coverid=$value[coverid]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></a></td>
+			<td align="center"><!--{if $value[synthreadid]>0}-->1<!--{else}-->0<!--{/if}--></td>
+			<td align="center" nowrap>$value[productclassname]</td>
+			<td nowrap>$value[club]</td>
+			<td >$value[username]</td>
+			<td align="center" nowrap>$value[displastpost]</td>
+			<td align="center" nowrap><a href="admincp.php?ac=cover&op=manage&coverid=$value[coverid]">管理</a></td>
+		</tr>
+		<!--{/loop}-->
+		</table>
+	<!--{/if}-->
+		<div width="100%" class="pages">$multi</div>
+	</div>
+	
+		
+
+	<div class="footactions">
+		<input type="hidden" name="mpurl" value="$mpurl">
+		<!--{if $allowbatch && $perpage<=100}-->
+		<input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'ids')">全选
+		<!--{/if}-->
+		
+		<input id="ckdelete" type="radio" name="op" value="batchdelete"><label for="ckdelete">批量删除</label>
+		<input id="cksyncover" type="radio" name="op" value="batchsyncover"><label for="cksyncover">批量同步/重新同步</label>
+		<input type="submit" name="opsubmit" value="执行操作" onclick="doBatchAction();" class="submit">
+
+		
+	</div>
+</form>
+<!--{else}-->
+	<div class="bdrcontent">
+		<p>指定条件下还没有数据</p>
+	</div>
+<!--{/if}-->
+</div>
+</div>
+
+<div id="flowDiv" class="flowDiv"></div>
+
+<script type="text/javascript">
+
+function doBatchAction(){
+	
+	var selids="";
+	var form=$('actionform');
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.name.match("ids")) {
+			if(e.checked){
+				selids=selids+e.value+",";
+			}
+		}
+	}
+	if(selids==""){
+		alert("请选择要操作的记录。");
+	}else{
+		selids=selids+0;
+	}
+	
+	
+	if($('ckdelete').checked){
+		if(confirm('本操作不可恢复，确认继续？')){
+			form.method="POST";
+			form.action="admincp.php?ac=cover&op=batchdelete&selids="+selids;
+			return true;
+		}
+	}
+	else if($('cksyncover').checked){
+		if(confirm('本操作不可恢复，确认继续？')){
+			form.method="POST";
+			form.action="admincp.php?ac=cover&op=batchsyncover&selids="+selids;
+			return true;
+		}
+	}else{
+		alert("请选择批量操作类型。");
+		return false;
+	}
+	return false;
+	
+}
+
+</script>

@@ -1,0 +1,29 @@
+<div class="mainarea">
+<div class="maininner">
+<h2 class="title"><img src="image/app/topic.gif" />广播剧</h2>
+<div class="tabs_header">
+<ul class="tabs">
+	<li <!--{if $_GET['subop'] == 'manage'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topic&op=manage&subop=manage&topicid=$topic[topicid]"><span>管理广播剧</span></a></li>
+	<li <!--{if $_GET['subop'] == 'process'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topic&op=manage&subop=process&topicid=$topic[topicid]"><span>处理广播剧</span></a></li>
+	<li <!--{if $_GET['subop'] == 'imagethumbprocessor'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topic&op=manage&subop=imagethumbprocessor&topicid=$topic[topicid]"><span>处理缩略海报</span></a></li>
+	<li <!--{if $_GET['op'] == 'synsina'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topic&op=synsina&subop=loginsina&topicid=$topic[topicid]"><span>微博同步</span></a></li>
+	<li><a href="admincp.php?ac=topic"><span>返回广播剧列表</span></a></li>
+</ul>
+</div>
+
+<!--{if $_GET['subop'] == 'manage'}-->
+
+	<!--{template admin/tpl/topic_manage_manage}-->
+
+<!--{elseif $_GET['subop'] == 'process'}-->
+
+	<!--{template admin/tpl/topic_manage_process}-->
+	
+<!--{elseif $_GET['subop'] == 'imagethumbprocessor'}-->
+
+	<!--{template admin/tpl/topic_manage_imagethumbprocessor}-->
+
+<!--{/if}-->
+
+</div>
+</div>

@@ -1,0 +1,192 @@
+<h2 class="title"><img src="image/app/mtag.gif" />群组</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="cp.php?ac=mtag"><span>创建新群组</span></a></li>
+		<li><a href="space.php?do=mtag&view=me"><span>返回我的群组</span></a></li>
+	</ul>
+</div>
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=create" class="c_form">
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	<table cellspacing="6" cellpadding="6" class="infotable">
+		<caption>
+			<h2>创建新群组</h2>
+			<p>您可以自由创建一个属于自己的群组，并邀请好友，前来进行交流讨论。</p>
+		</caption>
+		<tr>
+			<th width="120">要创建的群组名：*</th>
+			<td>
+				<input type="text" id="tagname" name="tagname" value="" class="t_input" maxlength="40" size="40" onchange="javascript:checkrepeatedtagname_ajax();">
+			</td>
+		</tr>
+		<tr>
+			<th width="120">&nbsp;</th>
+			<td id="checkrepeatedtagnameresult">
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<th>群组类型：*</th>
+			<td>
+				<select id="fieldid" name="fieldid" onchange="javascript:displayProfieldDescription()">
+					<option value="-1">请选择群组类型</option>
+					<!--{loop $_SGLOBAL[profield] $value}-->
+					<option value="$value[fieldid]">$value[title]</option>
+					<!--{/loop}-->
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th valign="top">类型描述： </th>
+			<td id="profieldDescription" name="profieldDescription" align="left" valign="top">请选择群组类型</td>
+		</tr>
+		<tr>
+			<th>群组介绍：*</th>
+			<td>
+				<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+				<textarea class="userData" name="announcement" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$mtag[announcement]</textarea>
+				<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+				<br/>请详细填写该群组信息，以便审核通过。
+			</td>
+		</tr>
+		<tr>
+			<th>成立时间：*</th>
+			<td>
+				<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+				<input type="text" name="dateline" id="dateline" value=""  onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+			</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td>
+				<input type="button" name="textsubmit" value="提交审核" class="submit" onclick="javascript:mtagpost()">
+			</td>
+		</tr>
+	</table>
+</form>
+	<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+	<script type="text/javascript">
+		var profieldArray=new Array();
+		var key;
+		var value;
+		<!--{loop $_SGLOBAL[profield] $value}-->
+		key='$value[fieldid]';
+		value='$value[note]';
+		profieldArray[key]=value;
+		<!--{/loop}-->
+	
+		function displayProfieldDescription() {
+			var selIndex=$('fieldid').value;
+			if(selIndex=='-1'){
+				$('profieldDescription').innerHTML="请选择群组类型";
+			}else{
+				$('profieldDescription').innerHTML=profieldArray[selIndex];
+			}	
+		}
+
+		function checkrepeatedtagname_ajax(){
+			var offset = 0;
+			var duration = 3;
+				
+			timeout = 0;
+			isbox = 0;
+			duration = 0;
+				
+			showloading();
+				
+			var form = $('ajaxform');
+		
+			form.action="cp.php?ac=mtag&op=checkmtagbytagname_ajax&tagname="+$('tagname').value;
+			form.method="post";
+			
+			ajaxpost('ajaxform', 'checkrepeatedtagname_ajax_response', 2000);
+		}
+
+		function checkrepeatedtagname_ajax_response(){
+
+			var tagname="";
+			var count="";
+			try{
+				var str=$("__ajaxform").innerHTML;
+				
+				var paramsArray=str.split(",");
+				if(paramsArray.length==1){
+					alert(str);
+					$("checkrepeatedtagnameresult").innerHTML="";
+					$('tagname').value="";
+					return;
+				}else{
+					tagname=paramsArray[0];
+					count=paramsArray[1];
+				}
+			}
+			catch(e){
+				alert(e);
+			}
+
+			if(count==0){
+				$("checkrepeatedtagnameresult").innerHTML="没问题，该群组名称["+tagname+"]还未被使用过";
+			}else{
+				$("checkrepeatedtagnameresult").innerHTML="对不起，该群组名称["+tagname+"]已被使用过["+count+"]次";
+			}
+		}
+	
+
+		function mtagpost() {
+			// 标题
+			if ($("tagname").value.trim() == "") {
+				alert("群组名不能为空！");
+				$("tagname").focus();
+				return false;
+			} 
+
+			if ($("fieldid").value=="-1") {
+				alert("请选择群组类型！");
+				$("fieldid").focus();
+				return false;
+			}
+
+			// 编辑器内容同步
+			edit_save();
+
+			// 群组介绍
+			if ($("uchome-ttHtmlEditor").value.trim() == "") {
+				alert("群组介绍不能为空！");
+				$("uchome-ttHtmlEditor").focus();
+				return false;
+			}
+
+			// 成立时间
+			if ($("dateline").value.trim() == "") {
+				alert("成立时间不能为空！");
+				$("dateline").focus();
+				return false;
+			}
+
+			$("actionform").submit();
+		}
+	</script>
+	
+	<form method="get" action="space.php" class="c_form">
+	<table cellspacing="6" cellpadding="6" class="formtable">
+	<caption>
+		<h2>搜索现有群组</h2>
+		<p>可以搜索一下，看看有没有自己感兴趣的群组，并申请成为粉丝。</p>
+	</caption>
+	<tr>
+		<th width="120">搜索群组名</th>
+		<td>
+		<input name="searchkey" value="" class="t_input" type="text">
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td><input name="searchsubmit" value="搜索群组" class="submit" type="submit"></td>
+	</tr>
+	</table>
+	<input type="hidden" name="searchmode" value="1" />
+	<input type="hidden" name="do" value="mtag" />
+	<input type="hidden" name="view" value="hot" />
+</form>
+

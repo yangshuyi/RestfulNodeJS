@@ -1,0 +1,36 @@
+<?php
+if(!defined('IN_UCHOME')) exit('Access Denied');
+$_SGLOBAL['imageface']=Array
+	(
+	1 => Array('id' => '1', 'name' => '¾ªÑÈ'),
+	2 => Array('id' => '2', 'name' => 'Î¢Ð¦'),
+	3 => Array('id' => '3', 'name' => '¿ªÐÄ'),
+	4 => Array('id' => '4', 'name' => '´óÐ¦'),
+	5 => Array('id' => '5', 'name' => 'ÍµÀÖ'),
+	6 => Array('id' => '6', 'name' => 'ÉúÆø'),
+	7 => Array('id' => '7', 'name' => '¾À½á'),
+	8 => Array('id' => '8', 'name' => '¿à±Æ'),
+	9 => Array('id' => '9', 'name' => '±¯´ß'),
+	10 => Array('id' => '10', 'name' => 'Ð±ÊÓ'),
+	11 => Array('id' => '11', 'name' => 'ÔÎÔÎ'),
+	12 => Array('id' => '12', 'name' => 'Á÷º¹'),
+	13 => Array('id' => '13', 'name' => 'Õ¥¸É'),
+	14 => Array('id' => '14', 'name' => 'µ´Ñú'),
+	15 => Array('id' => '15', 'name' => 'ÉµÁË'),
+	16 => Array('id' => '16', 'name' => '»¶ÀÖ'),
+	17 => Array('id' => '17', 'name' => 'ÑÛºì'),
+	18 => Array('id' => '18', 'name' => 'Ë§¡«'),
+	19 => Array('id' => '19', 'name' => '²Í¾ß'),
+	20 => Array('id' => '20', 'name' => 'Ë¥£¡'),
+	21 => Array('id' => '21', 'name' => 'ºÃÀ§'),
+	22 => Array('id' => '22', 'name' => 'ÍÂÉà'),
+	23 => Array('id' => '23', 'name' => 'Ç×Ç×'),
+	24 => Array('id' => '24', 'name' => 'ºÃÆæ'),
+	25 => Array('id' => '25', 'name' => '±Õ×ì'),
+	26 => Array('id' => '26', 'name' => '²»Ë¬'),
+	27 => Array('id' => '27', 'name' => 'Ä¾ÁË'),
+	28 => Array('id' => '28', 'name' => '¼ÓÓÍ'),
+	29 => Array('id' => '29', 'name' => '±ÉÊÓ'),
+	30 => Array('id' => '30', 'name' => 'ÖíÍ·')
+	)
+?>

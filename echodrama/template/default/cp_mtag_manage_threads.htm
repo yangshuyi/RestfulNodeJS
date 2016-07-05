@@ -1,0 +1,205 @@
+<!--{template cp_mtag_manageheader}-->
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="null"><a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=threadclass">话题类型维护</a></li>
+	</ul>
+</div>
+<form id="queryform" name="queryform" method="get" action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=threads">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3" width="100%">
+			<tr>
+				<th>ID</th><td><input type="text" id="tid" name="tid" value="$_GET[tid]"></td>
+				<th>标题</th><td><input type="text" id="subject" name="subject" value="$_GET[subject]"></td>
+			</tr>
+			<tr>
+				<th>作者ID</th><td><input type="text" id="uid" name="uid" value="$_GET[uid]"></td>
+				<th>作者名</th><td><input type="text" id="username" name="username" value="$_GET[username]"></td>
+			</tr>
+			<tr>
+				<th>分类</th>
+				<td>
+					<select id="threadclassid" name="threadclassid">
+						<option value="-1"></option>
+						<!--{loop $threadclasslist $key $value}-->
+						<option value="$value[classid]"<!--{if $_GET[threadclassid] == $value[classid]}-->
+							selected<!--{/if}--> >$value[classname]</option>
+						<!--{/loop}-->
+					</select>
+				</td>
+				<th>是否关闭</th>
+				<td>
+					<select name="close">
+					<option value="">不限制</option>
+					<option value="1"<!--{if $_GET[close]==1}--> selected<!--{/if}-->>已关闭</option>
+					</select>
+				</td>
+			</tr>
+			<tr>	
+				<th>是否置顶</th>
+				<td>
+					<select name="displayorder">
+					<option value="">不限制</option>
+					<option value="1"<!--{if $_GET[displayorder]==1}--> selected<!--{/if}-->>置顶帖</option>
+					</select>
+				</td>		
+				<th>是否精华</th>
+				<td>
+					<select name="digest">
+					<option value="">不限制</option>
+					<option value="1"<!--{if $_GET[digest]==1}--> selected<!--{/if}-->>精华帖</option>
+					</select>
+				</td>
+			</tr>
+		
+			<tr>
+				<td colspan="4" align="right">
+					<input type="hidden" name="ac" value="mtag">
+					<input type="hidden" name="op" value="manage">
+					<input type="hidden" name="tagid" value="$mtag[tagid]">
+					<input type="hidden" name="subop" value="threads">
+					<input type="submit" name="searchsubmit" value="搜索" class="submit">
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+<form id="threadsactionform" name="threadsactionform" method="post" action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=threads">
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+<input type="hidden" id="threadid" name="threadid" value="" >
+			
+<div>
+	<div class="topic_list">
+		<table cellspacing="0" cellpadding="0" class="reclisttable" width="100%" >
+			<thead>
+				<tr>
+					<th nowrap>选择</th>
+					<th nowrap>ID</th>
+					<th nowrap>分类</th>
+					<th nowrap>标题</th>
+					<th nowrap>查看/回复</th>
+					<th nowrap>作者</th>
+					<th nowrap>发表时间</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!--{loop $threadlist $key $value}-->
+				<!--{if $key%2==1}-->
+				<tr class="alt">
+				<!--{else}-->
+				<tr>
+				<!--{/if}-->
+					<td>
+						<input type="checkbox" name="ids[]" value="$value[tid]">
+					</td>
+					<td align="center" nowrap>
+						&nbsp;$value['tid']&nbsp;  
+					</td>
+					<td align="center" nowrap>
+						&nbsp;$value['threadclassname']&nbsp;
+					</td>
+					<td align="left">
+						<span style="color:red;">$value[prefix]</span>
+						<a href="space.php?do=thread&tid=$value[tid]" title="$value[subject]" target="_blank">$value[subjectlimit]</a>
+						<!--{if $value[hot] > 0 }--><span class="hot"><em>热</em>$value[hot]</span><!--{/if}-->
+						<!--{if $value[cold] > 0 }--><span class="cold"><em>冷</em>$value[cold]</span><!--{/if}-->
+					</td>
+					<td align="center" nowrap>
+						$value[viewnum]&nbsp;/&nbsp;$value[replynum]
+					</td>
+					<td align="center" nowrap>
+						&nbsp;<a href="space.php?uid=$value[uid]" target="_blank">$value[username]</a>&nbsp;  
+					</td>
+					<td align="center">
+						$value['dateline']
+					</td>
+				</tr>
+			<!--{/loop}-->
+			</tbody>
+		</table>
+		<div class="page">$multi</div>
+	</div>
+</div>
+
+<div class="footactions" align="center">
+	<table>
+		<tr>
+			<td width="100px">
+				<input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'ids')">全选
+			</td>
+			<td width="200px">
+				<input type="radio" name="optype" value="delete" checked> 删除
+			</td>	
+			<td width="200px">
+				&nbsp;
+			</td>	
+			<td width="200px">
+				<input type="submit" name="opsubmit" value="执行操作" onclick="return confirm('本操作不可恢复，确认继续？');" class="submit">
+				<input type="hidden" name="mpurl" value="$mpurl">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				<input type="radio" name="optype" value="digest"> 批量精华
+			</td>	
+			<td>
+				<select name="digestv">
+					<option value="1">设为精华</option>
+					<option value="0">取消精华</option>
+				</select>
+			</td>
+			<td>
+				&nbsp;
+			</td>	
+		</tr>	
+		<tr>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				<input type="radio" name="optype" value="top"> 批量置顶
+			</td>	
+			<td>
+				<select name="topv">
+					<option value="1">设为置顶</option>
+					<option value="0">取消置顶</option>
+				</select>
+			</td>	
+			<td>
+				&nbsp;
+			</td>	
+		</tr>			
+		<tr>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				<input type="radio" name="optype" value="close"> 批量关闭
+			</td>	
+			<td>
+				<select name="closev">
+					<option value="1">设为关闭</option>
+					<option value="0">取消关闭</option>
+				</select>
+			</td>	
+			<td>
+				&nbsp;
+			</td>	
+		</tr>
+	</table>	
+</div>
+	
+<script type="text/javascript">
+function updategrade(uid, threadsgradeid){
+	$('uid').value=uid;
+	$('threadsgradeid').value=threadsgradeid;
+	
+	$('threadsactionform').action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=threads";
+	$('threadsactionform').submit();
+}
+</script>
+</form>
+<!--{template cp_mtag_managefooter}-->

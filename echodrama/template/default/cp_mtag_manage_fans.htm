@@ -1,0 +1,112 @@
+<!--{template cp_mtag_manageheader}-->
+
+<form id="fansactionform" name="fansactionform" method="post" action="">
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+<input type="hidden" id="uid" name="uid" value="" >
+<input type="hidden" id="fansgradeid" name="fansgradeid" value="" >
+			
+<div id="content" style="width: 630px;">
+	<div class="topic_list">
+		<table cellspacing="0" cellpadding="0" class="reclisttable" width="600px" >
+			<thead>
+				<tr>
+					<th colspan='2'>粉丝</th>
+					<th>开始关注日期</th>
+					<th>热衷度</th>
+					<th>权限</th>
+					<th>管理</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!--{loop $fanslist $key $value}-->
+				<!--{if $key%2==1}-->
+				<tr class="alt">
+				<!--{else}-->
+				<tr>
+				<!--{/if}-->
+					<td align="center">
+						<!--{if empty($value['uid'])}-->
+							<div class="avatar48" style="padding:5px 0 0 0px;"><!--{avatar($value[uid],small)}--></div>
+						<!--{else}-->
+							<div class="avatar48" style="padding:5px 0 0 0px;"><a href="space.php?uid=$value[uid]"><!--{avatar($value[uid],small)}--></a></div>
+						<!--{/if}-->
+					</td>
+					<td align="center">
+						<!--{if empty($value['uid'])}-->
+							$value['username']
+						<!--{else}-->
+							<a href="space.php?uid=$value[uid]">$value['username']</a>
+						<!--{/if}-->
+					</td>
+					<td align="center">
+						&nbsp;<!--{eval echo sgmdate('Y-m-d',$value['dateline'])}-->&nbsp;
+					</td>
+					<td align="center">
+						&nbsp;$value['level']&nbsp;  
+					</td>
+					<td align="center">
+						&nbsp;$value['fansgradename']&nbsp;  
+					</td>
+					<td align="center">
+						&nbsp;
+						<!--{if $value['fansgradeid']==1}-->
+							<a href="#" onclick="javascript:updategrade('$value[uid]','4');">普通会员</a> | 
+							<a href="#" onclick="javascript:updategrade('$value[uid]','3');">禁止发言</a> | 
+							<a href="#" onclick="javascript:updategrade('$value[uid]','2');">禁止回复</a>
+						<!--{/if}-->
+						<!--{if $value['fansgradeid']==2}-->
+							<a href="#" onclick="javascript:updategrade('$value[uid]','4');">普通会员</a> | 
+							<a href="#" onclick="javascript:updategrade('$value[uid]','3');">禁止发言</a> | 
+							　<a href="#" onclick="javascript:updategrade('$value[uid]','1');">屏蔽</a>　
+						<!--{/if}-->
+						<!--{if $value['fansgradeid']==3}-->
+							<a href="#" onclick="javascript:updategrade('$value[uid]','4');">普通会员</a> | 
+							<a href="#" onclick="javascript:updategrade('$value[uid]','2');">禁止回复</a> | 
+							<a href="#" onclick="javascript:updategrade('$value[uid]','1');">屏蔽</a>　
+						<!--{/if}-->
+						<!--{if $value['fansgradeid']==4}-->
+							<a href="#" onclick="javascript:updategrade('$value[uid]','3');">禁止发言</a> | 
+							<a href="#" onclick="javascript:updategrade('$value[uid]','2');">禁止回复</a> | 
+							<a href="#" onclick="javascript:updategrade('$value[uid]','1');">屏蔽</a>　
+						<!--{/if}-->
+						&nbsp;
+					</td>
+				</tr>
+			<!--{/loop}-->
+			</tbody>
+		</table>
+		<div class="page">$multi</div>
+	</div>
+</div>
+	
+
+<div id="sidebar" style="width: 150px;">
+	<div class="cat">
+		<h3>
+			<p class="r_option">
+				<a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=fans">全部</a>
+			</p>
+			粉丝分类
+		</h3>
+		<ul class="post_list line_list">
+			<!--{loop $fansgradelist $key $value}-->
+				<li<!--{if $_GET[fansgradeid]==$value[classid]}--> class="current"<!--{/if}-->>
+					<a href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=fans&fansgradeid=$value[classid]">$value[classname]</a>
+				</li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+function updategrade(uid, fansgradeid){
+	$('uid').value=uid;
+	$('fansgradeid').value=fansgradeid;
+	
+	$('fansactionform').action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=fans";
+	$('fansactionform').submit();
+}
+</script>
+</form>
+
+<!--{template cp_mtag_managefooter}-->

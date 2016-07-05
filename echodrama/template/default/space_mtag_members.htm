@@ -1,0 +1,151 @@
+<!--{template space_mtagheader}-->
+<div class="topic_list">
+	<table cellspacing="0" cellpadding="0" class="reclisttable" border=0>
+		<!--{loop $memberclasslist $memberclass}-->
+		<tr>
+			<td class="affiche" align="left" colspan="8">
+				<h3>$memberclass[classname]</h3>
+			</td>
+		</tr>
+	
+		<!--{if count($members[$memberclass[classid]])==0 }-->
+			<tr height="10px">
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+			</tr>
+		<!--{else}-->
+			<!--{loop $members[$memberclass[classid]] $key $value}-->
+				<!--{if ($key%8)==0}-->
+				<tr>
+				<!--{/if}-->
+					<td id="member_$value['memberid']" align="center" width="12.5%" onmouseover="member_introduce_onclick($value['memberid'], $value['uid'], $value['usertagid'])">
+						<!--{if empty($value['uid'])}-->
+							<div class="myavatar48"><!--{avatar($value[uid],small)}--></div>
+						<!--{else}-->
+							<div class="myavatar48"><!--{avatar($value[uid],small)}--></div>
+						<!--{/if}-->
+						<!--{if empty($value['uip'])}-->
+							<div>$value['realname']</div>
+						<!--{else}-->
+							<div class="magicflicker">$value['realname']</div>
+						<!--{/if}-->
+						<div id="member_introduce_$value['memberid']" name="member_introduce_$value['memberid']" style="display:none">
+							$value['introduce']
+						</div>
+					</td>
+				<!--{if $key%8==7}-->
+				</tr>
+				<!--{/if}-->
+			<!--{/loop}-->
+		<!--{/if}-->
+		<!--{/loop}-->
+		<tr height="10px">
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+				<td width="12.5%">&nbsp;</td>
+		</tr>
+	</table>
+</div>
+
+<div id="flowDiv" style="display:none; position:absolute; z-index:99999; border: 1px solid #EBE6C9;">
+	<table id="flowDivContent" style="width:100%;" cellspacing="0" cellpadding="0">
+		<tr height="30">
+			<td id="flowDivContentHeader" align="right" valign="middle" style="BACKGROUND-COLOR:#FFCB8C;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td id="flowDivContentBody" align="left">&nbsp;</td>
+		</tr>
+	</table>
+</div>
+
+<script type="text/javascript">
+//彩虹炫
+var elems = selector('div[class~=magicflicker]'); 
+
+for(var i=0; i<elems.length; i++){
+	magicColor(elems[i]);
+}
+
+function getoffset(e) {
+	var t = e.offsetTop;
+	var l = e.offsetLeft;
+	while (e = e.offsetParent) {
+		t += e.offsetTop;
+		l += e.offsetLeft;
+	}
+	var rec = new Array(1);
+	rec[0] = t;
+	rec[1] = l;
+	return rec;
+}
+
+function member_introduce_onclick(memberid, uid, usertagid) {
+	var supe_uid = $_SGLOBAL['supe_uid'];
+	var mtagid = $mtag[tagid];
+	var cellWidget=$("member_"+memberid);
+	var introduceWidget=$("member_introduce_"+memberid);
+	
+	if(uid != supe_uid && introduceWidget.innerHTML==""){
+		return;
+	}
+	
+	var div = $('flowDiv'); //将要弹出的层   
+	var divContent = $('flowDivContent');
+	var divContentHeader = $('flowDivContentHeader');
+	var divContentBody = $('flowDivContentBody');
+	
+	div.style.display=""; //div3初始状态是不可见的，设置可为可见   
+	div.style.left=getoffset(cellWidget)[1]+"px";
+	div.style.width=500;
+	div.style.top=(getoffset(cellWidget)[0]+90)+"px";
+	div.style.height=5; 
+	div.style.position="absolute"; //必须指定这个属性，否则div3层无法跟着鼠标动   
+
+	var space = "<a href='space.php?uid="+uid+"' target='_blank'>访问TA的主页</a>";
+	var usertag = "<a href='space.php?do=mtag&tagid="+usertagid+"' target='_blank'>访问TA的个人群组</a>";
+	var edit = "<a href='cp.php?ac=mtag&op=editmemberintroduce&tagid="+mtagid+"&memberid="+memberid+"'>编辑成员介绍</a>";
+	var quit = "<a href='cp.php?ac=mtag&op=deletemember&tagid="+mtagid+"&memberid="+memberid+"' onclick='if( confirm(\'你确定要退出该群组么？\')==1){ return true;}else{return false;}'>退出该群组</a>";
+	var close = "<a href='#' onclick='javascript:member_introduce_close();return false;'>关闭</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+	
+	var html = "";
+
+	if( uid != '' && uid > 0){
+		html = html + space;
+	}
+	
+	if( usertag != '' && usertag > 0){
+		html = html + "<span class='pipe'>|</span>" + usertag;
+	}
+	
+	if( uid != '' && uid > 0){
+		if( uid == supe_uid ){
+			html = html + "<span class='pipe'>|</span>" + edit;
+			html = html + "<span class='pipe'>|</span>" + quit;
+		}
+	}
+	
+	html = html + "<span class='pipe'>|</span>" + close;
+	
+	divContentHeader.innerHTML = html;
+	
+	divContentBody.innerHTML= "<div style='background:white;border: 1px solid #EBE6C9;'>" + introduceWidget.innerHTML + "</div>";
+}
+
+function member_introduce_close() {
+	var div = $('flowDiv'); //将要弹出的层   
+	div.style.display="none";
+}
+
+</script>
+<!--{template space_mtagfooter}-->

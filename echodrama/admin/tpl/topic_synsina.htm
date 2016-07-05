@@ -1,0 +1,107 @@
+<div class="mainarea">
+<div class="maininner">
+<h2 class="title"><img src="image/app/topic.gif" />广播剧</h2>
+<div class="tabs_header">
+<ul class="tabs">
+	<li <!--{if $_GET['op'] == 'manage' AND $_GET['subop'] == 'manage'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topic&op=manage&subop=manage&topicid=$topic[topicid]"><span>管理广播剧</span></a></li>
+	<li <!--{if $_GET['op'] == 'manage' AND $_GET['subop'] == 'process'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topic&op=manage&subop=process&topicid=$topic[topicid]"><span>处理广播剧</span></a></li>
+	<li <!--{if $_GET['op'] == 'manage' AND $_GET['subop'] == 'imagethumbprocessor'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=topic&op=manage&subop=imagethumbprocessor&topicid=$topic[topicid]"><span>处理缩略海报</span></a></li>
+	<li <!--{if $_GET['op'] == 'synsina'}-->class="active"<!--{/if}-->><a href="#"><span>微博同步</span></a></li>
+	<li><a href="admincp.php?ac=topic"><span>返回广播剧列表</span></a></li>
+</ul>
+</div>
+
+<form id="edit_form" name="edit_form" method="post" action="admincp.php?ac=topic&op=synsina&subop=synsina&topicid=$topicid">
+
+<input type="hidden" id="oauth_token" name="oauth_token" value="$sina[oauth_token]"/>
+<input type="hidden" id="oauth_token_secret" name="oauth_token_secret" value="$sina[oauth_token_secret]"/>
+<input type="hidden" id="url" name="url" value="$sina[url]"/>
+<input type="hidden" id="lastkey_oauth_token" name="lastkey_oauth_token" value="$sina[lastkey_oauth_token]"/>
+<input type="hidden" id="lastkey_oauth_token_secret" name="lastkey_oauth_token_secret" value="$sina[lastkey_oauth_token_secret]"/>
+			
+<table width="100%" cellspacing="3" cellpadding="3"><tr><td align="center" valign="middle">
+<!--{if $_GET['subop'] == 'loginsina'}-->
+	<table width="100%" cellspacing="3" cellpadding="3">
+		<tr height="100">
+			<td align="center">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<a href="$sina[url]">应声虫 - 新浪微博 同步登录</a>
+			</td>
+		</tr>
+	</table>
+<!--{elseif $_GET['subop'] == 'tosynsina'}-->
+	<table cellspacing="4" cellpadding="4">
+		<tr>
+			<td width="100">广播剧名</td>
+			<td>
+				<h2>$topic['subject']</h2>
+			</td>
+		</tr>
+		<tr>
+			<td width="100">&nbsp;</td>
+			<td>
+			<!--{if $topic[pic]}-->
+				<div style="width:400;border:1px solid #EBE6C9;" align="center">
+					<img src="$topic[picthumb]" alt="$topic[subject]"/>
+				</div>
+			<!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<td width="100">&nbsp;</td>
+			<td>
+				{$topic['productclassname']}&nbsp;,&nbsp;由&nbsp;{$topic['club']}&nbsp;发布。
+			</td>
+		</tr>
+		<tr>
+			<td width="100">CAST：</td>
+			<td>
+				$topic['cast']
+			</td>
+		</tr>
+		<tr>
+			<td width="100">STAFF：</td>
+			<td>
+				$topic['group']
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="100">微博宣传</td>
+			<td>
+			<!--{if $topicadditioninfo[weiboFlag]==1}-->
+				<textarea rows="8" cols="100">$topicadditioninfo[weiboMsg]</textarea>
+			<!--{else}-->
+				无
+			<!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<td width="100" valign="top">新浪微博信息：</td>
+			<td>
+				<textarea id="weibo_message" name="weibo_message" rows="8" cols="100">$weibo_message</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<input type="hidden" id="topicid" name="topicid" value="$topic[topicid]" />
+				<input type="button" name="topicsubmit" value="发布微博" class="submit" onclick="synsina();"/>
+			</td>
+<script type="text/javascript">
+function synsina(){
+	$("edit_form").action = 'admincp.php?ac=topic&op=synsina&subop=synsina&topicid=$topicid';
+	$("edit_form").submit();
+}
+</script>
+		</tr>
+	</table>
+<!--{/if}-->
+</td></tr></table>
+
+</form>
+</div>
+</div>

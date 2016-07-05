@@ -1,0 +1,31 @@
+<?php
+if(!defined('IN_UCHOME')) exit('Access Denied');
+$_SGLOBAL['magic']=Array
+	(
+	'invisible' => 'ÒþÉí²Ý',
+	'friendnum' => 'ºÃÓÑÔöÈÝ¿¨',
+	'attachsize' => '¸½¼þÔöÈÝ¿¨',
+	'thunder' => 'À×ÃùÖ®Éù',
+	'updateline' => '¾ÈÉúÈ¦',
+	'downdateline' => 'Ê±¿Õ»ú',
+	'color' => '²ÊÉ«µÆ',
+	'hot' => 'ÈÈµãµÆ',
+	'visit' => '»¥·Ã¿¨',
+	'icon' => '²Êºçµ°',
+	'flicker' => '²ÊºçìÅ',
+	'gift' => 'ºì°ü¿¨',
+	'superstar' => '³¬¼¶Ã÷ÐÇ',
+	'viewmagiclog' => '°ËØÔ¾µ',
+	'viewmagic' => 'Í¸ÊÓ¾µ',
+	'viewvisitor' => 'Íµ¿ú¾µ',
+	'call' => 'µãÃû¿¨',
+	'coupon' => '´ú½ðÈ¯',
+	'frame' => 'Ïà¿ò',
+	'bgimage' => 'ÐÅÖ½',
+	'doodle' => 'Í¿Ñ»°å',
+	'anonymous' => 'ÄäÃû¿¨',
+	'reveal' => 'ÕÕÑý¾µ',
+	'license' => 'µÀ¾ß×ªÈÃÐí¿ÉÖ¤',
+	'detector' => 'Ì½²âÆ÷'
+	)
+?>

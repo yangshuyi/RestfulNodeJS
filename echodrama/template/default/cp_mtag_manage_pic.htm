@@ -1,0 +1,56 @@
+<!--{template cp_mtag_manageheader}-->
+<form id="actionform" name="actionform" method="post" action="" enctype="multipart/form-data">
+	
+	<table cellspacing="4" cellpadding="4" class="reclisttable">
+	<tr>
+		<td id="picImgContent" align="center" valign="middle" height="200px">
+			<!--{if $mtag[picexists]}-->
+				<img id="picImg" name="picImg" src="$mtag[picpath]" alt="宣传画" style="border: 1px solid #7F93BC; padding: 2px 2px 2px 2px;"/>
+			<!--{else}-->
+				<table>
+					<tr>
+						<td>宣传画：*</td>
+						<td><input type="file" id="pic" name="pic" value="" size="50"/></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>请上传60×60大小的图片</td>
+					</tr>
+				</table>
+			<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<!--{if $mtag[picexists]}-->
+			<input type="hidden" id="op" name="op" value="picdel"/>
+			<input type="button" name="basesubmit" value="删除" class="submit" onclick="javascript:postpic();"/>
+		<!--{else}-->
+			<input type="hidden" id="op" name="op" value="picadd"/>
+			<input type="button" name="basesubmit" value="提交保存" class="submit" onclick="javascript:postpic();"/>
+		<!--{/if}-->
+		</td>
+	</tr>
+	</table>
+
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+
+
+
+<script type="text/javascript">
+function postpic(){
+	var form=$('actionform');
+	if($('op').value=='picdel'){
+	}
+	if($('op').value=='picadd'){
+		if($('pic').value==""){
+			alert("宣传画不能为空");
+			return false;
+		}
+	}
+	form.action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop="+$('op').value;
+	form.submit();	
+}
+</script>
+<!--{template cp_mtag_managefooter}-->

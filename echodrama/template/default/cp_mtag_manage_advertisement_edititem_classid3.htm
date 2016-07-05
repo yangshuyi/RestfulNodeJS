@@ -1,0 +1,213 @@
+<table cellspacing="4" cellpadding="4" class="infotable">
+	<tr>
+		<td width="100" nowrap>展现效果类型 *</td>
+		<td>
+			$item[tab_classname]
+			<input type="hidden" id="tab_classid" name="tab_classid" value="$item[tab_classid]"/>
+		</td>
+	</tr>
+	<tr>
+		<td width="100" nowrap>页签显示名 *</td>
+		<td>
+			<input type="text" id="tab_name" name="tab_name" value="$item[tab_name]" size="20" maxlength="20" class="t_input"/>
+		</td>
+	</tr>
+	<tr>
+		<td width="100" nowrap>&nbsp;</td>
+		<td class="red">
+			页签显示名最多只允许输入5个字符。
+		</td>
+	</tr>
+	<!--{if !empty($item[itemid]) }-->
+	<tr>
+		<td width="100" nowrap>页签显示位置 *</td>
+		<td>
+			<input type="text" id="tab_index" name="tab_index" value="$item[tab_index]" size="20" maxlength="20" class="t_input"/>
+		</td>
+	</tr>
+	<tr>
+		<td width="100" nowrap>&nbsp;</td>
+		<td class="red">
+			页签显示位置必须大于1，即次页为2，第三页为3。
+		</td>
+	</tr>
+	<!--{/if}-->
+	<tr>
+		<td width="100" colspan="2" nowrap>$item[tab_classname] 展现类型信息点 *</td>
+	</tr>
+	<tr>
+		<td width="100" nowrap>&nbsp;</td>
+		<td>
+			<table>
+				<tr>
+					<td nowrap>
+						首页海报(大小：480*500，必须项)：
+					</td>
+				</tr>
+				<tr>
+					<td nowrap>
+						关联广播剧(必须项)：
+					</td>
+				</tr>
+				<tr>
+					<td nowrap>
+						<input type="text" id="relatedtopicid" name="relatedtopicid" value="" size="15" onchange="javascript:loadtopicsinglebyid_ajax();" class="t_input"/>
+						<a href="#" onclick="javascript:topicquerymds();">查询</a>
+					</td>
+				</tr>
+				<tr>
+					<td id="td_queryresult" nowrap>
+					<!--{if !empty($item[relatedtopicid])}-->
+						广播剧：$item[topic][subject] 类型：$item[topic][productclassname] 所属社团：$item[topic][club]
+					<!--{/if}-->
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td nowrap>
+						自定义网页(必须项)：
+					</td>
+				</tr>
+				<tr>
+					<td nowrap>
+						<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+						<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$item[message]</textarea>
+						<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=1" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="hidden" id="nextstep" name="nextstep" value=""/>	
+			<!--{if empty($advertisement[advertisementid]) }-->
+			<input type="button" value="保存" class="submit" onclick="javascript:postadvertisementitem('edititem');"/>	
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" value="保存并返回" class="submit" onclick="javascript:postadvertisementitem('return');"/>	
+			<!--{else}-->
+			<input type="button" value="保存" class="submit" onclick="javascript:postadvertisementitem('edititem');"/>	
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" value="保存并返回" class="submit" onclick="javascript:postadvertisementitem('return');"/>	
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" value="删除" class="submit" onclick="javascript:deleteadvertisementitem();"/>	
+			<!--{/if}-->
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+//检查删除
+function deleteadvertisementitem() {
+	if(confirm("你确定要删除该页签吗？")){
+		$("actionform").action="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=delitem&tagid=$advertisement[tagid]&advertisementid=$advertisement[advertisementid]&itemid=$item[itemid]&return="+$_GET('return');
+		$("actionform").submit();
+	}
+}
+
+function postadvertisementitem( nextstep ){
+	//页签显示名
+	if ($("tab_name").value.trim() == "") {
+		alert("页签显示名不能为空！");
+		$("tab_name").focus();
+		return false;
+	} 
+	else if ($("tab_name").value.trim().length > 5) {
+		alert("页签显示名太长，请限制在5个字符内！");
+		$("tab_name").focus();
+		return false;
+	}
+
+	//页签显示位置
+	if(checkNumberError($("tab_index").value)){
+		alert("页签显示位置必须为数字！");
+		$("tab_index").focus();
+		return false;
+	}
+	else if ( ( parseInt($('tab_index').value) )<=1 ) {
+		alert("页签显示位置必须大于1，即次页为2，第三页为3！");
+		$("tab_index").focus();
+		return false;
+	}
+	
+
+	//关联广播剧
+	if ($("relatedtopicid").value.trim() == "") {
+		alert("关联广播剧作品不能为空！");
+		$("relatedtopicid").focus();
+		return false;
+	} 
+	
+	// 编辑器内容同步
+	edit_save();
+
+	// 作品简介
+	if ($("uchome-ttHtmlEditor").value.trim() == "") {
+		alert("作品简介不能为空！");
+		$("uchome-ttHtmlEditor").focus();
+		return false;
+	}
+
+	$('nextstep').value = nextstep;
+
+	$("actionform").submit();
+}
+
+function topicquerymds(){
+	var args=new Object();
+	args.window=window;
+	
+	window.showModalDialog("cp.php?ac=topic&op=querymds&widget=relatedtopicid&id="+$('relatedtopicid').value,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+	loadtopicsinglebyid_ajax();
+}
+
+function loadtopicsinglebyid_ajax(){
+	var offset = 0;
+	var duration = 3;
+		
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+		
+	showloading();
+		
+	var form = $('ajaxform');
+
+	form.action="cp.php?ac=topic&op=loadtopicsinglebyid_ajax&topicid="+$('relatedtopicid').value;
+	form.method="post";
+	
+	ajaxpost('ajaxform', 'loadtopicsinglebyid_ajax_response', 2000);
+}
+
+function loadtopicsinglebyid_ajax_response(){
+	
+	var subject="";
+	var productclassname="";
+	var club="";
+	try{
+		var str=$("__ajaxform").innerHTML;
+		
+		var paramsArray=str.split(",");
+		if(paramsArray.length==1){
+			alert(str);
+			$("relatedtopicid").value="";
+			$("td_queryresult").innerHTML="";
+		}else{
+			subject=paramsArray[1];
+			productclassname=paramsArray[3];
+			club=paramsArray[5];
+			$("td_queryresult").innerHTML="广播剧："+subject+" 类型："+productclassname+" 所属社团："+club;
+		}
+	}
+	catch(e){
+		alert(e);
+	}
+}
+</script>
+	
+	

@@ -1,0 +1,214 @@
+<div style="background:none repeat scroll 0 0 #F2F2F2; border: 1px solid #CDCDCD; line-height: 29px; margin-top: 10px;">
+	<table cellspacing="0" cellpadding="0">
+		<tr>
+			<td rowspan="2" align="center" valign="middle" nowrap style="height:46px; width:60px;">
+				<img src="image/forum/forum_announcement.gif"/>
+			</td>
+			<td align="left" valign="middle" nowrap">
+				
+			</td>
+		</tr>
+		<tr>
+			<td align="center" nowrap>
+<!--{if $_GET[threadclassid] == FORUM_JISHUJIAOLIU_CLASSID }-->
+				<h2>&nbsp;技术交流：配音技巧交流，后期技术交流等内容。</h2>
+<!--{elseif $_GET[threadclassid] == FORUM_ZIYUANHUZHU_CLASSID }-->
+				<h2>&nbsp;资源互助：音效音效，音乐资源，广播剧资源，资源求助等。</h2>
+<!--{elseif $_GET[threadclassid] == FORUM_XILIJUPING_CLASSID }-->
+				<h2>&nbsp;犀利评论：相关的剧评，声评等内容, 欢迎大家推荐自己喜欢的作品。</h2>
+<!--{elseif $_GET[threadclassid] == FORUM_QIZUIBASHE_CLASSID }-->
+				<h2>&nbsp;七嘴八舌：闲聊，灌水，杂七杂八。</h2>
+<!--{else}-->
+				<h2>&nbsp;应声虫游泳池公告：&nbsp;&nbsp;<a href="/space.php?do=event&id=2365" target="_blank">应声虫游泳池招募相关人员,有兴趣的同学请联系应声虫QQ官方招募群 202051380。</a></h2>
+<!--{/if}-->
+			</td>
+		</tr>
+	</table>
+</div>
+
+<!--{if !empty($systemthreadlist)}-->
+<div style="border: 1px solid #CDCDCD; border-bottom:none; margin-top: 10px;">
+	<div style="background:none repeat scroll 0 0 #F2F2F2; margin-top: 1px;">
+		<table cellspacing="0" cellpadding="0" width="100%" border=0>
+			<tr height="30px">
+				<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap>置顶帖</td>
+				<td align="center" valign="middle" width="110px" style="border-bottom:1px solid #CDCDCD;" nowrap>作者/发表时间</td>
+				<td align="center" valign="middle" width="60px" style="border-bottom:1px solid #CDCDCD;" nowrap>回复/查看</td>
+				<td align="center" valign="middle" width="110px" style="border-bottom:1px solid #CDCDCD;" nowrap>回复人/回复时间</td>
+			</tr>
+			
+			<!--{loop $systemthreadlist $key $value}-->
+			<tr height="50px" onmouseover="this.style.background='#FFDA86';" onmouseout="this.style.background='#FFFFFF';" style="background:#ffffff;">
+				<td align="left" valign="middle" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					　<span style="color:red; font-weight: bold;">$value[prefix]</span>
+					<a href="space.php?do=forum&view=viewall&tid=$value[tid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}--> style="font-weight: bold;" title="$value[subject]"><!--{eval echo getstr($value[subject], 60, 0, 0, 0, 0, 1); }--></a>
+					<!--{if !empty($value[postpagelinker])}--><span>$value[postpagelinker]</span><!--{/if}-->
+					<br/>
+					　
+					<!--{if $value[hot] > 0 }--><span class="hot">热&nbsp;$value[hot]&nbsp;&nbsp;</span><!--{/if}-->
+					<!--{if $value[cold] > 0 }--><span class="cold">冷&nbsp;$value[cold]&nbsp;&nbsp;</span><!--{/if}-->
+					<!--{if !empty($value[label]) }-->标签：$value[label]<!--{/if}-->
+				</td>
+				<td width="100px" align="center" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					<span class="gray"><!--{if empty($value[uid])}-->$value[username]<!--{else}--><a href="space.php?uid=$value[uid]" target="_blank" title="$value[username]">$value[username]</a><!--{/if}--></span>
+					<br/>
+					<span class="gray">$value[datelinedisp]</span>
+				</td>
+				<td width="70px" align="center" valign="middle" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					<span class="gray">$value[replynum]&nbsp;/&nbsp;$value[viewnum]</span>
+				</td>
+				<td width="100px" align="center" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					<span class="gray"><!--{if empty($value[lastauthorid])}-->$value[lastauthor]<!--{else}--><a href="space.php?uid=$value[lastauthorid]" target="_blank" title="$value[lastauthor]">$value[lastauthor]</a><!--{/if}--></span>
+					<br/>
+					<!--{if $value[lastpost] > $today }-->
+					<span class="red" title="$value[lastposttimedisp]">今天更新</span>
+					<!--{else}-->
+					<span class="gray" title="$value[lastposttimedisp]">$value[lastpostdisp]</span>
+					<!--{/if}-->
+				</td>
+			</tr>
+			<!--{/loop}-->
+		</table>
+	</div>
+</div>
+<!--{/if}-->
+
+<table id="thread_types" cellspacing="0" cellpadding="5" border=0>
+	<tr height="50">
+	<!--{if empty($_GET[threadclassid]) AND $_GET[view]=='listall' }-->
+		<td style="font-weight:700" nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; background: none repeat scroll 0 0 #E5EDF2; border-color: #336699; color: #336699; "
+	<!--{else}-->
+		<td nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; " 
+	<!--{/if}-->
+		href="{$theurl}&view=listall&threadclassid=0">全部</a></td>
+	<!--{if $_GET[view]=='listall' }-->
+		<!--{loop $threadclasslist $value}-->
+			<!--{if $value[classid] == $_GET[threadclassid]}-->
+		<td style="font-weight:700" nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; background: none repeat scroll 0 0 #E5EDF2; border-color: #336699; color: #336699; "
+			<!--{else}-->
+		<td nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; " 
+			<!--{/if}-->
+			href="{$theurl}&threadclassid=$value[classid]">$value[classname]</a></td>
+		<!--{/loop}-->
+	<!--{/if}-->
+	<!--{if !empty($_SGLOBAL[supe_uid])}-->
+		<!--{if $_GET[view]=='listme' }-->
+		<td style="font-weight:700" nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; background: none repeat scroll 0 0 #E5EDF2; border-color: #336699; color: #336699; "
+		<!--{else}-->
+		<td nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; " 
+		<!--{/if}-->
+		href="space.php?do=forum&view=listme">我发布的帖子</a></td>
+		<!--{if $_GET[view]=='listuser' }-->
+		<td style="font-weight:700" nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; background: none repeat scroll 0 0 #E5EDF2; border-color: #336699; color: #336699; "
+		<!--{else}-->
+		<td nowrap><a style="border: 1px solid #CDCDCD; height: 18px; padding: 5px; white-space: nowrap; text-decoration: none; " 
+		<!--{/if}-->
+		href="space.php?do=forum&view=listuser">我关注的帖子</a></td>
+		<td width="100%">
+			<div style="float:right"><a href="cp.php?ac=forum&op=newthread"><img src="/image/forum/pn_post.png" title="发帖" height="30px"/></a></div>
+		</td>
+	<!--{/if}-->
+	</tr>
+</table>	
+
+<div style="border: 1px solid #CDCDCD;">
+	<div style="background:none repeat scroll 0 0 #F2F2F2; margin-top: 1px;">
+		<table cellspacing="0" cellpadding="0" width="100%" border=0>
+			<tr height="30px">
+				<!--{if 1==2}-->
+				<td colspan="2" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap>
+					&nbsp;&nbsp;&nbsp;&nbsp;筛选:
+					<a href="{$theurl}&digest=on" >精华</a>
+					<span class="pipe">|</span>
+					<a href="{$theurl}&displayorder=on" >置顶</a>
+					<span class="pipe">|</span>
+				</td>
+				<!--{else}-->
+				<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap>
+					分类
+				</td>
+				<td align="center" valign="middle" style="border-bottom:1px solid #CDCDCD;" nowrap>
+					标题
+				</td>
+				<!--{/if}-->
+				<td align="center" valign="middle" width="110px" style="border-bottom:1px solid #CDCDCD;" nowrap>
+				<!--{if $_GET[orderby] == 'datelineasc'}-->
+					<a href="{$theurl}&orderby=datelinedesc" title="按发帖时间-由旧至新排序">作者/发表时间</a><img src="image/pointup.gif" height="12px"/>
+				<!--{elseif $_GET[orderby] == 'datelinedesc'}-->
+					<a href="{$theurl}&orderby=datelineasc" title="按发帖时间-由新至旧排序">作者/发表时间</a><img src="image/pointdown.gif" height="12px"/>
+				<!--{else}-->
+					<a href="{$theurl}&orderby=datelinedesc" title="按发帖时间-由新至旧排序">作者/发表时间</a>
+				<!--{/if}-->
+				</td>
+				<td align="center" valign="middle" width="70px" style="border-bottom:1px solid #CDCDCD;" nowrap>
+				<!--{if $_GET[orderby] == 'viewnumasc'}-->
+					<a href="{$theurl}&orderby=viewnumdesc" title="按查看数-由少至多排序">回复/查看</a><img src="image/pointup.gif" height="12px"/>
+				<!--{elseif $_GET[orderby] == 'viewnumdesc'}-->
+					<a href="{$theurl}&orderby=viewnumasc" title="按查看数-由多至少排序">回复/查看</a><img src="image/pointdown.gif" height="12px"/>
+				<!--{else}-->
+					<a href="{$theurl}&orderby=viewnumdesc" title="按查看数-由多至少排序">回复/查看</a>
+				<!--{/if}-->
+				</td>
+				<td align="center" valign="middle" width="110px" style="border-bottom:1px solid #CDCDCD;" nowrap>
+				<!--{if $_GET[orderby] == 'lastpostasc'}-->
+					<a href="{$theurl}&orderby=lastpostdesc" title="按回复时间-由旧至新排序">回复人/回复时间</a><img src="image/pointup.gif" height="12px"/>
+				<!--{elseif $_GET[orderby] == 'lastpostdesc'}-->
+					<a href="{$theurl}&orderby=lastpostasc" title="按回复时间-由新至旧排序">回复人/回复时间</a><img src="image/pointdown.gif" height="12px"/>
+				<!--{else}-->
+					<a href="{$theurl}&orderby=lastpostdesc" title="按回复时间-由新至旧排序">回复人/回复时间</a>
+				<!--{/if}-->
+				</td>
+			</tr>
+			
+			<!--{loop $threadlist $key $value}-->
+			<tr height="50px" onmouseover="this.style.background='#FFDA86';" onmouseout="this.style.background='#FFFFFF';" style="background:#ffffff;">
+				<td width="70px" align="center" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					<span class="gray">$value[threadclassname]</span>&nbsp;
+				</td>
+				<td align="left" valign="middle" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					<span style="color:red; font-weight: bold;">$value[prefix]</span>
+					<a href="space.php?do=forum&view=viewall&tid=$value[tid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}--> style="font-weight: bold;" title="$value[subject]"><!--{eval echo getstr($value[subject], 60, 0, 0, 0, 0, 1); }--></a>
+					<!--{if !empty($value[postpagelinker])}--><span>$value[postpagelinker]</span><!--{/if}-->
+					<br/>
+					<!--{if $value[hot] > 0 }--><span class="hot">热&nbsp;$value[hot]&nbsp;&nbsp;</span><!--{/if}-->
+					<!--{if $value[cold] > 0 }--><span class="cold">冷&nbsp;$value[cold]&nbsp;&nbsp;</span><!--{/if}-->
+					<!--{if !empty($value[label]) }-->标签：$value[label]<!--{/if}-->
+				</td>
+				<td width="100px" align="center" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					<span class="gray"><!--{if empty($value[uid])}-->$value[username]<!--{else}--><a href="space.php?uid=$value[uid]" target="_blank" title="$value[username]">$value[username]</a><!--{/if}--></span>
+					<br/>
+					<!--{if $value[dateline] > $today }-->
+					<span class="red" title="$value[datelinetimedisp]">今天发表</span>
+					<!--{elseif $value[dateline] > $yesterday }-->
+					<span class="blue" title="$value[datelinetimedisp]">昨天发表</span>
+					<!--{else}-->
+					<span class="gray" title="$value[datelinetimedisp]">$value[datelinedisp]</span>
+					<!--{/if}-->
+				</td>
+				<td width="60px" align="center" valign="middle" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					<span class="gray">$value[replynum]&nbsp;/&nbsp;$value[viewnum]</span>
+				</td>
+				<td width="100px" align="center" <!--{if $key<count($threadlist)-1 }-->style="border-bottom:1px solid #CDCDCD;"<!--{/if}--> nowrap>
+					<span class="gray"><!--{if empty($value[lastauthorid])}-->$value[lastauthor]<!--{else}--><a href="space.php?uid=$value[lastauthorid]" target="_blank" title="$value[lastauthor]">$value[lastauthor]</a><!--{/if}--></span>
+					<br/>
+					<span class="gray" title="$value[lastposttimedisp]"><!--{date('Y-m-d',$value[lastpost],1)}--></span>
+				</td>
+			</tr>
+			<!--{/loop}-->
+		</table>
+	</div>
+</div>
+
+<table cellspacing="0" cellpadding="0" style="margin-top: 10px;">
+	<tr>
+		<td align="right">
+			<div class="pages" align="right">$multi</div>
+		</td>
+	</tr>
+</table>
+
+<!--{if !empty($_SGLOBAL[supe_uid])}-->
+<hr style="margin-top: 10px;"/>
+<!--{eval $editormode='threadlist'; }-->
+<!--{template cp_forum_threadeditor}-->
+<!--{/if}-->

@@ -1,0 +1,153 @@
+<!--{if empty($_SGLOBAL['inajax'])}-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base target="_self"/>
+<meta http-equiv="content-type" content="text/html; charset=gbk" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<title><!--{if $_TPL['titles']}--><!--{loop $_TPL['titles'] $value}--><!--{if $value}-->$value - <!--{/if}--><!--{/loop}--><!--{/if}--><!--{if $_SN[$space[uid]]}-->{$_SN[$space[uid]]} - <!--{/if}-->$_SCONFIG[sitename] - Powered by 应声虫工作室</title>
+<script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_common.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_face.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+<style type="text/css">
+@import url(template/default/style.css);
+<!--{if $_TPL['css']}-->
+@import url(template/default/{$_TPL[css]}.css);
+<!--{/if}-->
+<!--{if !empty($_SGLOBAL['space_theme'])}-->
+@import url(theme/$_SGLOBAL[space_theme]/style.css);
+<!--{elseif $_SCONFIG[template] != 'default'}-->
+@import url(template/$_SCONFIG[template]/style.css);
+<!--{/if}-->
+<!--{if !empty($_SGLOBAL['space_css'])}-->
+$_SGLOBAL[space_css]
+<!--{/if}-->
+</style>
+
+<link rel="shortcut icon" href="image/favicon.ico" />
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="xmlrpc.php?rsd=$space[uid]" />
+</head>
+<body>
+<div class="mainarea">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="#"><span>视频映像列表</span></a></li>
+	</ul>
+</div>
+
+<form id="videoform" name="videoform" method="get" action="cp.php">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3" width="100%">
+			<tr>
+				<th width="20%">作品编号</th>
+				<td width="20%"><input type="text" name="videoid" value="$_GET[videoid]" /></td>
+				<td width="20%"></td>
+				<th width="20%">作品名</th>
+				<td width="20%"><input type="text" name="subject" value="$_GET[subject]" /></td>
+			</tr>
+			<tr>
+				<th width="20%">作品类型</th>
+				<td width="20%">
+					<select id="fieldid" name="fieldid">
+						<option value="-1"></option>
+						<!--{loop $_SGLOBAL[videoproductclass] $value}-->
+						<option value="$value[classid]" <!--{ if $value[classid]==$_GET[productclassid] }-->SELECTED > $value[classname]</option>
+						<!--{/loop}-->
+					</select>	
+				</td>
+				<td width="20%"></td>
+				<th width="20%"></th>
+				<td width="20%" align="right">
+					<input type="hidden" id="ac" name="ac" value="video" />
+					<input type="hidden" id="op" name="op" value="querymds" />
+					<input type="hidden" id="view" name="view" value=$view />
+					<input type="hidden" id="widget" name="widget" value="$_GET['widget']" />
+					<input type="submit" id="searchsubmit" name="searchsubmit" value="搜索" class="submit" />
+					&nbsp;&nbsp;&nbsp;&nbsp;				
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<table width="100%" cellspacing="0" cellpadding="0" class="reclisttable" border=0>
+		<tr>
+			<td align="right" colspan="11">
+				<input type="button" name="searchsubmit" value="选择" class="submit" onclick="javascript:selectRec();"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td align="center" width="25">&nbsp;</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center" width="100px">视频作品编号</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center">作品名</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center" width="100px">所属社团</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center" width="75px">作品类型</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center" width="100px">发布时间</td>
+		</tr>
+		<!--{loop $list $key $value}-->
+			<!--{if $key%2==1}-->
+			<tr class="alt">
+			<!--{else}-->
+			<tr>
+			<!--{/if}-->
+			<td><input type="radio" name="ids[]" value="$value[videoid]"/></td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center" nowrap>$value[videoid]</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="left" >
+				<a href="space.php?do=video&videoid=$value[videoid]" target="_blank" title="$value[subject]">
+					<!--{eval echo getstr($value[subject], 36, 0, 0, 0, 0, -1); }-->
+				</a>
+			</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center" nowrap>$value[club]</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center" nowrap>$value[productclassname]</td>
+			<td align="center"><span class="pipe">|</span></td>
+			<td align="center" nowrap>$value[dispproducedate]</td>
+		</tr>
+		<!--{/loop}-->
+	</table>
+	<div style="width:500px;" class="pages">$multi</div>
+</form>
+</div>
+<script type="text/javascript">
+
+function selectRec(){
+	var selids="";
+	var form=$('videoform');
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		
+		if(e.name.match("ids")) {
+			if(e.checked){
+				selids=e.value;
+			}
+		}
+	}
+	if(selids==""){
+		alert("请选择要操作的记录。");
+		return;
+	}
+
+	var widget=$('widget').value;
+	if(window.dialogArguments!=null){
+		//IE Use
+		window.dialogArguments.window.document.getElementById(widget).value=selids;
+	}else{
+		opener.window.document.getElementById(widget).value=selids;
+	}
+	window.close();
+}
+
+</script>
+</body>
+</html>

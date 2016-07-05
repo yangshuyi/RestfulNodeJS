@@ -1,0 +1,30 @@
+<!--{template header}-->
+
+
+<!--{if $_GET['op'] == 'newthread'}-->
+
+	<!--{template cp_forum_thread}-->
+	
+<!--{elseif $_GET['op'] == 'editthread'}-->
+	
+	<!--{template cp_forum_thread}-->
+	
+<!--{elseif $_GET['op'] == 'newpost'}-->
+
+	<!--{template cp_forum_post}-->
+
+<!--{elseif $_GET['op'] == 'replypost'}-->
+
+	<!--{template cp_forum_post}-->
+
+<!--{elseif $_GET['op'] == 'editpost'}-->
+
+	<!--{template cp_forum_post}-->
+
+<!--{else}-->
+
+	<!--{template cp_forum_maintain}-->
+
+<!--{/if}-->
+
+<!--{template footer}-->

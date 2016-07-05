@@ -5,12 +5,14 @@ body {
   margin: 0px auto;
   background: #fff;
   font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
   color: #4e4e4e;
   line-height: 22px;
 }
 
 input, button, select, textarea {
-  outline: none
+  outline: none;
+  font-size: 14px;
 }
 
 textarea {

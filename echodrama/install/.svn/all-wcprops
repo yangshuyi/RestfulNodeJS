@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/4/trunk/www/install
+END
+my.ini
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/4/trunk/www/install/my.ini
+END
+mod_bw2.dll
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/4/trunk/www/install/mod_bw2.dll
+END
+php.ini
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/4/trunk/www/install/php.ini
+END
+syn.txt
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/4/trunk/www/install/syn.txt
+END
+httpd.conf
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/4/trunk/www/install/httpd.conf
+END
+nginx.conf
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/4/trunk/www/install/nginx.conf
+END
+index.bakphp
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/4/trunk/www/install/index.bakphp
+END

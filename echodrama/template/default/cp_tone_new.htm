@@ -1,0 +1,126 @@
+<div class="c_form">
+<form name="edit_form" id="edit_form" method="post" action="cp.php?ac=tone&op=add" enctype="multipart/form-data">
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+	<tr>
+		<th width="100">作品 *</th>
+		<td>
+			<input id="file" name="file" value="" type="hidden" />
+			<iframe id="uploadFrame" name="uploadFrame" src="jquploader/upload.htm" width="490" height="85" scrolling="no" frameborder="0"></iframe>
+		</td>
+	</tr>
+	<tr>
+		<th width="100">&nbsp;</th>
+		<td>请控制在10M的大小范围</td>
+	</tr>
+	<tr>
+		<th width="100">&nbsp;</th>
+		<td>
+			<br/><span style="color:red">[注]在上传文件时，浏览器有可能会提示Flash控件响应超时，请您放心并允许继续运行上传文件。谢谢～</span>
+			<br/><span style="color:red">虫虫上面音频文件只支持“.mp3”。否则有可能导致该音频无法播放。</span>
+			<br/><span style="color:red">目前上传功能已经支持多浏览器。上传有问题的同学，请及时和管理员联系。</span>
+		</td>
+	</tr>
+	<tr>
+		<th width="100">声线类型 *</th>
+		<td><select name="classid" id="classid">
+			<option value="-1">请选择声线类型</option>
+			<!--{loop $_SGLOBAL[toneclass] $key $value}-->
+			<option value="$key"<!--{if $tone[classid] == $key}-->
+			selected<!--{/if}--> >$value[classname]</option>
+			<!--{/loop}-->
+		</select></td>
+	</tr>
+	<tr>
+		<th width="150">标签</th>
+		<td><input type="text" id="label" name="label" class="t_input" size="80" maxlength="100" /></td>
+	</tr>
+	<tr>
+		<th width="100">&nbsp;</th>
+		<td>请用"/"分隔标签关键字</td>
+	</tr>
+	<tr>
+		<th width="100">作品说明 *</th>
+		<td>
+			<textarea id="description" name="description" rows="8" cols="80" maxlength="500"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<th width="100">作品来源</th>
+		<td>
+			<textarea id="source" name="source" rows="8" cols="80" maxlength="500"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="checkbox" name="makefeed" id="makefeed" value="1" checked> 产生动态 
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+			<input type="button" name="tonesubmit" value="发布" class="submit" onclick="check_tonepost();"/>
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/></form>
+</div>
+
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+
+	//检查提交
+	function check_tonepost() {
+
+		//声线类型
+		if (parseInt($("classid").value) < 0) {
+			alert("声线类型必须选择。");
+			$("classid").focus();
+			return false;
+		}
+
+		if ($("label").value.trim().length > 10) {
+			alert("标签太长，请限制在10个字符内！");
+			$("label").focus();
+			return false;
+		}
+
+		//作品说明
+		if ($("description").value.trim() == "") {
+			alert("作品说明不能为空！");
+			$("description").focus();
+			return false;
+		} else if ($("description").value.trim().length >= 500) {
+			alert("作品说明太长，请限制在500个字符内！");
+			$("description").focus();
+			return false;
+		}
+
+		//作品来源
+		if ($("source").value.trim().length > 80) {
+			alert("作品来源太长，请限制在80个字符内！");
+			$("source").focus();
+			return false;
+		}
+
+		// 作品
+		if(document.getElementById("uploadFrame").contentWindow.document.getElementById("file")==null){
+			alert("作品必须选择。");
+			return false;
+		}
+		var filePath=document.getElementById("uploadFrame").contentWindow.document.getElementById("file").value;
+		if (filePath.trim() == "") {
+			alert("作品必须选择。");
+			return false;
+		}else{
+			$("file").value=filePath;
+		}
+		
+		//验证码
+		$("edit_form").submit();
+	}
+</script>

@@ -1,0 +1,239 @@
+<div class="affiche">
+<form id="actionForm" method="post" action="">
+	<table width="570px" cellspacing="0" cellpadding="0" border=0>
+		<tr>
+			<td align="right">
+				<span class="gray">翻唱作品编号: $cover[coverid]</span>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				$cover['productpath']
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table cellspacing="0" cellpadding="0">
+	  				<tr>
+	  					<td width="200px" align="right" nowrap>
+	  						<!--{if ( (!empty($_SGLOBAL['supe_uid'])) && ($cover[uid]!=$_SGLOBAL['supe_uid']) ) }-->
+	  							<a id="a_toshare"  href="#" onclick="toshare();return false;" target="_blank">收藏</a><span class="pipe">|</span>
+	  							<a href="cp.php?ac=share&type=cover&id=$cover[coverid]" id="a_share_$cover[coverid]" onclick="ajaxmenu(event, this.id, 1)">分享</a><span class="pipe">|</span>
+				  			<!--{/if}-->
+	  					
+	  						<a id="a_report" href="cp.php?ac=common&op=report&idtype=coverid&id=$cover[coverid]" onclick="ajaxmenu(event, this.id, 1)">举报</a><span class="pipe">|</span>
+						
+	  					</td>
+	  					
+						<td width="99%" nowrap>
+							&nbsp;	
+	  					</td>
+						
+						<!--{if empty($coverpoll) }-->
+			  				<td id="poll_content" width="300px" nowrap>
+					  			<span class="pipe">|</span><span id="span_poll_label" class="gray">请您对该作品进行评级：</span>
+								<img id="img_poll_1" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(1);"/>
+					  			<img id="img_poll_2" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(2);"/>
+					  			<img id="img_poll_3" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(3);"/>
+					  			<img id="img_poll_4" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(4);"/>
+					  			<img id="img_poll_5" src="/image/nst.gif" style="cursor:pointer;" onMouseOver="javascript:renderPollStar(5);"/>
+					  			<input id="coverpollvalue" name="coverpollvalue" type="hidden" value="0"/>
+					  			<a id="a_poll" href="#" onclick="javascript:toPollValue();return false;">评级</a>
+					  		</td>
+						<!--{else}-->
+							<td id="poll_label" width="120px" nowrap>
+					  			<span class="pipe">|</span><span id="span_poll_label" class="gray">您给予的评级是：</span>
+					  		</td>
+					  		<td id="poll_content" width="100px" nowrap>
+					  			<span class="bigstar$coverpoll[pollvalue]0">　　　　　</span>
+					  		</td>
+						<!--{/if}-->
+					</tr>
+	  			</table>
+	  			<div class="neverVisible"><div id="__actionForm"></div></div>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width="100%">
+					<tr>
+						<td colspan="2" align="left" valign="top">
+							<span class="gray">作品类型: </span>&nbsp;$cover[productclassname]&nbsp;<br/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="left" valign="top">
+							<span class="gray">标签　　: </span>&nbsp;$cover[label]&nbsp;<br/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="left" valign="top">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td width="50%" align="left" valign="top">
+							<span class="gray">所属团队: </span>
+								&nbsp;
+								<!--{if empty($cover[clubtagid])}-->
+									$cover[club]
+								<!--{else}-->	
+									<a href="space.php?do=mtag&tagid=$cover[clubtagid]" target="_blank">$cover[club]</a>
+								<!--{/if}-->
+								&nbsp;<br/>
+							<span class="gray">原词　　: </span>&nbsp;$cover[originwordwriter]&nbsp;<br/>
+							<span class="gray">原曲　　: </span>&nbsp;$cover[originmelodywriter]&nbsp;<br/>
+							<span class="gray">原唱　　: </span>&nbsp;$cover[originsinger]&nbsp;<br/>
+							<br/>
+							<span class="gray">发布时间: </span>&nbsp;$cover[dispproducedate]&nbsp;<br/>
+							<br/>
+							
+						</td>
+						<td width="50%" align="left" valign="top">
+							<span class="gray">填词　　: </span>&nbsp;$cover[wordwriter]&nbsp;<br/>
+							<span class="gray">翻唱　　: </span>&nbsp;$cover[singer]&nbsp;<br/>
+							<span class="gray">后期　　: </span>&nbsp;$cover[effector]&nbsp;<br/>
+							<span class="gray">美工　　: </span>&nbsp;$cover[photographer]&nbsp;<br/>
+							<br/>
+							<span class="gray">提供时间: </span>&nbsp;$cover[dispdateline]&nbsp;<br/>
+							<span class="gray">提供者　: </span>&nbsp;<a href="space.php?uid=$cover[uid]" target="_blank">$cover[username]</a>&nbsp;<br/>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;	
+			</td>
+		</tr>
+		<tr>
+			<td>作品介绍：</td>
+		</tr>
+		<tr>
+			<td align="left" >
+				<div style="width:570px;  height:450px;  border:1px solid #111111;  overflow-y:scroll;">$cover[message]</div>
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+
+<script type="text/javascript">
+
+<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+var inShare=$inShare;
+renderShareButton();
+
+function toshare() {
+	
+	var offset = 0;
+	var duration = 3;
+	
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+	
+	showloading();
+	
+	var form = $('actionForm');
+	if(inShare==0){
+		inShare=1;
+		form.action="cp.php?ac=cover&op=share&coverid=$cover[coverid]&toshare="+inShare;
+		
+	}else if(inShare==1){
+		inShare=0;
+		form.action="cp.php?ac=cover&op=share&coverid=$cover[coverid]&toshare="+inShare;
+	}
+	
+	ajaxpost('actionForm', 'renderShareButton', 2000);
+}
+
+function renderShareButton(id, result) {
+  
+	$("__actionForm").style.display = 'none';		
+	
+	if(result!=null){
+		var str=$("__actionForm").innerHTML;
+		var paramsArray=str.split(",");
+		inShare=paramsArray[1];
+		if(inShare==0){
+			$("a_toshare").innerHTML="收藏";
+		}else if(inShare==1){
+			$("a_toshare").innerHTML="取消收藏";
+		}
+	}else{
+		if(inShare==0){
+			$("a_toshare").innerHTML="收藏";
+		}else if(inShare==1){
+			$("a_toshare").innerHTML="取消收藏";
+		}
+	}
+}
+<!--{/if}-->
+
+function renderDownloadButton(id, result) {
+}
+
+<!--{if empty($coverpoll) }-->
+function renderPollStar(value) {
+	if($('a_poll').style.display=="none"){
+		return;
+	}
+	
+	for(var i=1;i<=value;i++) {
+		$('img_poll_'+i).src="/image/sth.gif";
+	}
+	for(var i=value+1;i<=5;i++) {
+		$('img_poll_'+i).src="/image/nst.gif";
+	}
+	$('coverpollvalue').value=value;
+}
+
+function toPollValue() {
+	var offset = 0;
+	var duration = 3;
+	
+	timeout = 0;
+	isbox = 0;
+	duration = 0;
+	
+	var coverpollvalue=$('coverpollvalue').value;
+	if(coverpollvalue>=1 && coverpollvalue<=5){
+		if(confirm("您确定要将该翻唱作品评级为 ["+coverpollvalue+"颗星] 吗？")){
+			showloading();
+			
+			var form = $('actionForm');
+			form.action="cp.php?ac=cover&op=poll&coverid=$cover[coverid]&coverpollvalue="+coverpollvalue;
+			ajaxpost('actionForm', 'renderPollValue', 2000);
+		}
+	}else{
+		alert("请选择评分等级");
+	}
+}
+
+function renderPollValue(id, result) {
+  
+	$("__actionForm").style.display = 'none';		
+	
+	if(result!=null){
+		var str=$("__actionForm").innerHTML;
+		var paramsArray=str.split(",");
+		if(paramsArray.length>1){
+			coverid=paramsArray[0];
+			pollvalue=paramsArray[1];
+
+			$('span_poll_label').innerHTML="您给予的评级是：";
+			$('a_poll').style.display="none";
+			for(var i=1;i<=5;i++) {
+				$('img_poll_'+i).onMouseOver="";
+			}
+			ajaxget('cp.php?ac=cover&op=viewpoll&coverid='+coverid, 'cover_poll_content');
+		}
+	}
+}
+<!--{/if}-->
+</script>

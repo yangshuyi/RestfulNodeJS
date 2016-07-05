@@ -1,0 +1,49 @@
+<!--{template cp_mtag_manageheader}-->
+<form id="actionform" name="actionform" method="post" action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=handover">
+	
+	<table cellspacing="4" cellpadding="4" class="reclisttable">
+	<tr>
+		<td id="picImgContent" align="center" valign="middle" height="200px">
+			<table>
+				<tr>
+					<td>当前群主：</td>
+					<td>$mtag[creatorname]</td>
+				</tr>
+				<tr>
+					<td>替代者　：</td>
+					<td><select name="creatorid" id="creatorid">
+						<option value="-1">请选择替代者</option>
+						<!--{loop $secondmemberlist $key $value}-->
+						<option value="$value[uid]">$value[username]</option>
+						<!--{/loop}-->
+					</select></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>只能交接给副群主(该成员必须是网站注册会员)。</td>
+				</tr>				
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+			<input type="button" name="basesubmit" value="提交保存" class="submit" onclick="javascript:posthandover();"/>
+		</td>
+	</tr>
+	</table>
+
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+
+<script type="text/javascript">
+	function posthandover() {
+		if ($("creatorid").value=="-1") {
+			alert("请选择替代者！");
+			$("creatorid").focus();
+			return false;
+		}
+
+		$("actionform").submit();
+	}
+</script>
+<!--{template cp_mtag_managefooter}-->

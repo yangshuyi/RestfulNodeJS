@@ -1,0 +1,166 @@
+<!--{eval $_TPL['titles'] = array('电台');}-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="应声虫,耽美,广播剧,声优,CV,声线,SNS,社团,原创,现代,古风,同人" />
+<meta name="baidu_union_verify" content="ebb067bc50f57e4e5e9bc1293a00937b" />
+<meta name="google-site-verification" content="xlL_34qsmOKAkj-8MnqnwdBmLqCxJ3Y87tVy7bL8u4E" />
+<meta http-equiv="content-type" content="text/html; charset=gbk" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<title><!--{if $_TPL['titles']}--><!--{loop $_TPL['titles'] $value}--><!--{if $value}-->$value - <!--{/if}--><!--{/loop}--><!--{/if}--><!--{if $_SN[$space[uid]]}-->{$_SN[$space[uid]]} - <!--{/if}-->$_SCONFIG[sitename] - Powered by 应声虫</title>
+<script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_common.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_face.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+<style type="text/css">
+@import url(template/default/style.css);
+<!--{if $_TPL['css']}-->
+@import url(template/default/{$_TPL[css]}.css);
+<!--{/if}-->
+<!--{if !empty($_SGLOBAL['space_theme'])}-->
+@import url(theme/$_SGLOBAL[space_theme]/style.css);
+<!--{elseif $_SCONFIG[template] != 'default'}-->
+@import url(template/$_SCONFIG[template]/style.css);
+<!--{/if}-->
+<!--{if !empty($_SGLOBAL['space_css'])}-->
+$_SGLOBAL[space_css]
+<!--{/if}-->
+</style>
+<link rel="shortcut icon" href="image/favicon.ico" />
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="xmlrpc.php?rsd=$space[uid]" />
+
+<script type="text/javascript" src="/radio/swfobject.js"></script>
+<script type="text/javascript">
+	<!-- For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. --> 
+	var swfVersionStr = "10.0.0";
+	<!-- To use express install, set to playerProductInstall.swf, otherwise the empty string. -->
+	var xiSwfUrlStr = "/radio/playerProductInstall.swf";
+	var flashvars = {};
+	var params = {};
+	params.quality = "high";
+	params.bgcolor = "#fbead0";
+	params.allowscriptaccess = "sameDomain";
+	params.allowfullscreen = "true";
+	var attributes = {};
+	attributes.id = "RadioUI";
+	attributes.name = "RadioUI";
+	attributes.align = "middle";
+	swfobject.embedSWF(
+	                "/radio/RadioUI.swf?uId=$_SGLOBAL[supe_uid]&username=$_SGLOBAL[supe_username]&rId=$radio[rid]", "flashContent", 
+	                "100%", "100%", 
+	                swfVersionStr, xiSwfUrlStr, 
+	                flashvars, params, attributes);
+	<!-- JavaScript enabled so display the flashContent div in case it is not replaced with a swf object. -->
+	swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+</script>
+</head>
+<body>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+
+<script language="javascript">
+function click() {
+	if (event.button==2) {
+	}
+}
+</script>
+<div id="header">
+	<!--{if $_SGLOBAL['ad']['header']}--><div id="ad_header"><!--{ad/header}--></div><!--{/if}-->
+	<div class="headerwarp">
+		<h1 class="logo"><a href="network.php"><img src="template/$_SCONFIG[template]/image/logo.gif" alt="$_SCONFIG[sitename]" /></a></h1>
+		<ul class="menu">
+			<li><a href="#" onclick="return false">电台</a></li>
+			<li><a href="http://www.echodrama.com/bbs/viewthread.php?tid=5054" target="_blank">电台使用帮助</a></li>
+		</ul>
+		<div class="nav_account">
+		<!--{if $_SGLOBAL[supe_uid]}-->
+			<a href="space.php?uid=$_SGLOBAL[supe_uid]" class="login_thumb"><!--{avatar($_SGLOBAL[supe_uid])}--></a>
+			<a href="space.php?uid=$_SGLOBAL[supe_uid]" class="loginName">{$_SN[$_SGLOBAL[supe_uid]]}</a>
+			<!--{if $_SGLOBAL[member][credit]}-->
+			<a href="cp.php?ac=credit" style="font-size:11px;padding:0 0 0 5px;"><img src="image/credit.gif">{$_SGLOBAL[member][credit]}</a>
+			<!--{/if}-->
+			<br />
+			<!--{if empty($_SCONFIG['closeinvite'])}-->
+			<a href="cp.php?ac=invite">邀请</a> 
+			<!--{/if}-->
+			<a href="cp.php?ac=task">任务</a> 
+			<a href="cp.php?ac=magic">道具</a>
+			<a href="cp.php">设置</a> 
+			<a href="cp.php?ac=common&op=logout&uhash=$_SGLOBAL[uhash]">退出</a>
+		<!--{else}-->
+			<a href="do.php?ac=$_SCONFIG[register_action]" class="login_thumb"><!--{avatar($_SGLOBAL[supe_uid])}--></a>
+			欢迎您<br/>
+			<a href="do.php?ac=$_SCONFIG[login_action]">登录</a> | 
+			<a href="do.php?ac=$_SCONFIG[register_action]">注册</a>
+		<!--{/if}-->
+		</div>
+	</div>
+</div>
+
+<div id="wrap">
+<!--{template space_radio_player}-->
+<table id="box_container" style="width:100%"><tr><td id="box_container_td">
+<!--{if empty($radio[rid])}-->
+
+	<!--{template space_radio_shutdown}-->
+
+<!--{else}-->
+
+	<!--{template space_radio_start}-->
+	
+<!--{/if}-->
+</td></tr></table>
+
+<script type="text/javascript">
+function fGetViewPortSize(){
+	var   myWidth   =   0,   myHeight   =   0;
+  	if(typeof(window.innerWidth   )   ==   'number '   )  
+  	{//Non-IE
+   		myWidth   =   window.innerWidth;
+    	myHeight   =   window.innerHeight;
+  	}  
+ 	else   if (   	document.documentElement   &&  (   document.documentElement.clientWidth   ||   document.documentElement.clientHeight   )  )  
+	  {//IE   6
+	    myWidth   =   document.documentElement.clientWidth;
+	    myHeight   =   document.documentElement.clientHeight;
+	  }  
+  	else   if(   document.body   &&   (   document.body.clientWidth   ||   document.body.clientHeight   )   )  
+	  {   //IE   4
+	    myWidth   =   document.body.clientWidth;
+	    myHeight   =   document.body.clientHeight;
+	  }
+  return   [myWidth,   myHeight];
+}
+
+function resize_container(){
+	
+	var contentWidth = fGetViewPortSize()[0];
+	var contentHeight = fGetViewPortSize()[1];
+	var topHeight = 220;
+	var sessionViewWidth = 150;
+	var postHeight = 170;
+
+	$("box_container_td").height =(contentHeight - topHeight)>0?(contentHeight - topHeight):560 ;
+}
+
+resize_container();
+
+window.onresize=resize_container; 
+</script>
+
+</div>
+
+<div id="footer">
+<p>Powered by <strong>应声虫工作室</strong> <span title="<!--{eval echo X_RELEASE;}-->"><!--{eval echo X_VER;}--></span> &copy; 2001-2010
+<!--{if $_SCONFIG['miibeian']}--> - <a  href="http://www.miibeian.gov.cn" target="_blank">$_SCONFIG[miibeian]</a><!--{/if}--></p>
+</div>
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18f15e804fc2d73c961f2935e3a6ed31' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>
+

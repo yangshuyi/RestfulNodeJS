@@ -1,0 +1,182 @@
+<div class="mainarea">
+<div class="maininner">
+<h2 class="title"><img src="image/app/topic.gif"/>电台节目</h2>
+<div class="tabs_header">
+<ul class="tabs">
+	<li class="active"><a href="admincp.php?ac=radio&op=$_GET[op]&rid=$radio[rid]"><span>编辑电台节目</span></a></li>
+	<li><a href="admincp.php?ac=radio"><span>返回电台节目列表</span></a></li>
+</ul>
+</div>
+
+<div class="c_form">
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="actionform" name="actionform" method="post" action="">
+<input type="hidden" id="rid" name="rid" value="$radio[rid]" />
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+	<tr>
+		<th width="100">电台节目名称 *</th>
+		<td>
+			<input type="text" id="subject" name="subject" value="$radio[subject]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th width="100">时间段　 *</th>
+		<td>
+			<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+			<input type="text" name="starttime" id="starttime" value="$radio[starttimedisp]" onclick="showcalendar(event,this,1,'<!--{eval echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+			~
+			<input type="text" name="endtime" id="endtime" value="$radio[endtimedisp]" onclick="showcalendar(event,this,1,'<!--{eval echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+		</td>
+	</tr>
+	<!--{if empty($radio[rid])}-->
+	<tr>
+		<th width="100">音频文件 *</th>
+		<td>
+			<input id="file" name="file" value="" type="hidden" />
+			<iframe id="uploadFrame" name="uploadFrame" src="jquploader/upload.htm" width="490" height="85" scrolling="no" frameborder="0"></iframe>
+		</td>
+	</tr>
+	<!--{else}-->
+	<tr>
+		<th width="100">音频文件 *</th>
+		<td>
+			<!--{if empty($radio[file])}-->
+				没有发现音频文件
+			<!--{else}-->
+				<a href="$radio[filepath]" target="_blank">下载</a>
+			<!--{/if}-->
+		</td>
+	</tr>
+	<!--{/if}-->
+	<tr>
+		<th width="100">节目介绍 *</th>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$radio[message]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<!--{if empty($radio[rid])}-->
+				<input type="checkbox" name="makefeed" id="makefeed" value="1" CHECKED> 产生动态 
+			<!--{else}-->
+				<input type="checkbox" name="makefeed" id="makefeed" value="1"> 产生动态 
+			<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+			<!--{if empty($radio[rid])}-->
+			<input type="button" name="radiosubmit" value="发布" class="submit" onclick="radiopost();"/>
+			<!--{else}-->
+			<input type="button" name="radiosubmit" value="发布" class="submit" onclick="radiopost();"/>
+			<input type="button" name="radiodelete" value="删除" class="submit" onclick="deleteradio();"/>
+				<!--{if empty($radio[synthreadid])}-->
+					<input type="button" name="radiosynradio" value="同步节目至BBS" class="submit" onclick="radiosyn();"/>
+					<input type="button" name="radiosynchattings" value="同步聊天室至BBS" class="submit" onclick="chattingssyn();"/>
+				<!--{/if}-->
+			<!--{/if}-->
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/>
+</form>
+</div>
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+	//删除
+	function deleteradio(){
+		if(confirm("你确定要删除该电台节目吗？")){
+			$("actionform").action="admincp.php?ac=radio&op=delete&rid=$radio[rid]";
+			$("actionform").submit();
+		}
+	}
+
+	//同步
+	function radiosyn() {
+		if(confirm("你确定要同步该电台节目至BBS吗？")){
+			$("actionform").action="admincp.php?ac=radio&op=synradio&rid=$radio[rid]";
+			$("actionform").submit();
+		}
+	}
+
+	//同步
+	function chattingssyn() {
+		if(confirm("你确定要同步聊天室至BBS吗？")){
+			$("actionform").action="admincp.php?ac=radio&op=synchattings&rid=$radio[rid]";
+			$("actionform").submit();
+		}
+	}
+		
+	//检查提交
+	function radiopost() {
+
+		// 标题
+		if ($("subject").value.trim() == "") {
+			alert("电台节目名称不能为空！");
+			$("subject").focus();
+			return false;
+		} else if ($("subject").value.trim().length > 80) {
+			alert("电台节目名称太长，请限制在80个字符内！");
+			$("subject").focus();
+			return false;
+		}
+		
+		//开始/结束时间
+		if($("starttime").value.trim() == "") {
+			alert("开始时间不能为空！");
+			$("starttime").focus();
+			return;
+		}
+		else if($("endtime").value.trim() == "") {
+			alert("开始时间不能为空！");
+			$("starttime").focus();
+			return;
+		}
+		else if( $("starttime").value > $("endtime").value ) {
+			alert("开始时间不能晚于结束时间！");
+			$("starttime").focus();
+			return;
+		}
+		
+		// 编辑器内容同步
+		edit_save();
+		
+		// 作品简介
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("电台节目介绍不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+
+		<!--{if empty($radio[rid])}-->
+		// 电台节目音频文件
+		if(document.getElementById("uploadFrame").contentWindow.document.getElementById("file")==null){
+			alert("音频文件必须选择。");
+			return false;
+		}
+		var filePath=document.getElementById("uploadFrame").contentWindow.document.getElementById("file").value;
+		if (filePath.trim() == "") {
+			alert("音频文件必须选择。");
+			return false;
+		}else{
+			$("file").value=filePath;
+		}
+		<!--{/if}-->
+		$("actionform").action="admincp.php?ac=radio&op=save&rid=$radio[rid]";
+		$("actionform").submit();
+	}
+</script>
+
+
+</div>
+</div>

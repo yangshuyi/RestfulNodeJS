@@ -1,0 +1,37 @@
+<div class="mainarea">
+<div class="maininner">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="admincp.php?ac=radio&op=list"><span>电台节目列表</span></a></li>
+		<li class="null"><a href="admincp.php?ac=radio&op=new">添加新节目</a></li>
+	</ul>
+</div>
+
+<!--{if $list}-->
+	<div class="bdrcontent">
+		<table width="100%" cellspacing="0" cellpadding="0" class="reclisttable">
+		<tr>
+			<th width="70" align="center">编号</th>
+			<th align="center" nowrap>时间段</th>
+			<th align="center">节目名称</th>
+			<th align="center">SYN</th>
+			<th align="center">上传时间</th>
+			<th width="30px" align="center">操作</th>
+		</tr>
+		<!--{loop $list $key $value}-->
+		<tr <!--{if $key%2==1}--> class="alt"<!--{/if}-->>
+			<td width="70px" align="center" nowrap>$value[rid]</td>
+			<td align="center" nowrap>$value[starttimedisp] ~ $value[endtimedisp]</td>
+			<td align="center" title="$value[subject]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></td>
+			<td align="center"><!--{if $value[synthreadid]>0}-->1<!--{else}-->0<!--{/if}--></td>
+			<td align="center" nowrap>$value[datelinedisp]</td>
+			<td align="center" nowrap><a href="admincp.php?ac=radio&op=edit&rid=$value[rid]">编辑</a></td>
+		</tr>
+		<!--{/loop}-->
+		</table>
+	
+		<div width="100%" class="pages">$multi</div>
+	</div>
+<!--{/if}-->
+</div>
+</div>

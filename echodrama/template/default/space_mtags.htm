@@ -1,0 +1,75 @@
+<!--{eval $_TPL['titles'] = array('群组');}-->
+<!--{template header}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[all]><a href="space.php?do=mtag&view=all"><span>热门群组</span></a></li>
+		
+		<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+			<li$actives[me]><a href="space.php?do=mtag&view=me"><span>我关注的群组</span></a></li>
+			<li$actives[member]><a href="space.php?do=mtag&view=member"><span>我参与的群组</span></a></li>
+			<li class="null"><a href="cp.php?ac=mtag">创建群组</a></li>
+		<!--{/if}-->
+	</ul>
+</div>
+
+<!--{if $searchkey}-->
+<div class="h_status">以下是搜索群组 <span style="color:red;font-weight:bold;">$searchkey</span> 结果列表</div>
+<!--{/if}-->
+	
+<div id="content">
+<!--{if count($list)>0 }-->
+	<div>
+		<table cellspacing="5" cellpadding="5">
+			<tr>
+			<!--{loop $list $key $value}-->
+				<td width="80">
+					<div class="threadimg60"><a href="space.php?do=mtag&tagid=$value[tagid]"><img src="$value[picpath]" style="width:60px;"></a></div>
+				</td>
+				<td width="200">
+					<a href="space.php?do=mtag&tagid=$value[tagid]" style="font-weight:bold;">$value[tagname]</a>
+					<div class="gray">$value[fieldname]</div>
+					<div class="gray">成员数：$value[membernum]</div>
+					<div class="gray">粉丝数：$value[fansnum]</div>
+				</td>
+			<!--{if $key%2==1}--></tr><tr><!--{/if}-->
+			<!--{/loop}-->
+			</tr>
+		</table>
+	</div>
+	
+	<div class="page">$multi</div>
+
+<!--{else}-->
+	<div class="c_form">还没有群组。</div>
+<!--{/if}-->
+
+</div>
+
+<div id="sidebar">
+
+	<div class="sidebox">
+		<h2 class="title">群组分类</h2>
+		<ul class="post_list line_list">
+			<li $pro_actives[all]><a href="space.php?do=mtag&view=$_GET[view]&orderby=$_GET[orderby]">全部</a>
+			<!--{loop $_SGLOBAL['profield'] $value}-->
+			<li $pro_actives[$value[fieldid]]><a href="space.php?do=mtag&view=$_GET[view]&fieldid=$value[fieldid]&orderby=$_GET[orderby]">$value[title]</a></li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	
+	<div class="sidebox">
+		<h2 class="title">排序方式</h2>
+		<ul class="post_list line_list">
+			<li $orderbyarr[fansnum] ><a href="space.php?do=mtag&view=$_GET[view]&fieldid=$_GET[fieldid]&orderby=fansnum">粉丝数排行</a></li>
+			<li $orderbyarr[membernum] ><a href="space.php?do=mtag&view=$_GET[view]&fieldid=$_GET[fieldid]&orderby=membernum">成员数排行</a></li>
+			<li $orderbyarr[threadnum] ><a href="space.php?do=mtag&view=$_GET[view]&fieldid=$_GET[fieldid]&orderby=threadnum">话题数排行</a></li>
+			<li $orderbyarr[postnum] ><a href="space.php?do=mtag&view=$_GET[view]&fieldid=$_GET[fieldid]&orderby=postnum">回帖数排行</a></li>
+		</ul>
+	</div>
+</div>
+
+<!--/sidebar-->
+<!--{template footer}-->

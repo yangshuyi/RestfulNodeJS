@@ -1,0 +1,41 @@
+<div class="affiche">
+	<form id="actionForm" method="post" action="">
+	<table width="520px" cellspacing="0" cellpadding="0" border=0>
+		<tr>
+			<td align="left">
+				<table width="100%"><tr><td align="right" nowrap><span class="gray">广播剧预告编号: $topicforecast[topicforecastid]</span></td></tr></table>
+			</td>
+		</tr>
+		<tr>
+			<td align="left">
+				<br/>
+				<table width="100%">
+					<tr><td width="70px" nowrap><h3>广播剧名:　</h3></td><td align="left"><h3>&nbsp;$topicforecast[subject]&nbsp;</h3></td></tr>
+					<tr><td nowrap><h3>发布时间:　</h3></td><td align="left"><h3>&nbsp;$topicforecast[producedatedisp]&nbsp;</h3></td></tr>
+					<tr><td nowrap>&nbsp;</td><td>&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">所属团队:　</span></td><td align="left">&nbsp;<!--{if empty($topicforecast[clubtagid])}-->$topicforecast[club]<!--{else}--><a href="space.php?do=mtag&tagid=$topicforecast[clubtagid]" target="_blank">$topicforecast[club]</a><!--{/if}-->&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">作品类型:　</span></td><td align="left">&nbsp;$_SGLOBAL[productclass][$topicforecast[productclassid]][classname]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">标签　　:　</span></td><td align="left">&nbsp;$topicforecast[label]&nbsp;</td></tr>
+					<tr><td nowrap>&nbsp;</td><td>&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">导演　　:　</span></td><td align="left">&nbsp;$topicforecast[director]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">监制　　:　</span></td><td align="left">&nbsp;$topicforecast[producer]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">策划　　:　</span></td><td align="left">&nbsp;$topicforecast[cehua]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">原著　　:　</span></td><td align="left">&nbsp;$topicforecast[yuanzhu]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">编剧　　:　</span></td><td align="left">&nbsp;$topicforecast[writer]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">CAST    :　</span></td><td align="left">&nbsp;$topicforecast[cast]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">后期制作:　</span></td><td align="left">&nbsp;$topicforecast[effector]&nbsp;</td></tr>
+					<tr><td nowrap><span class="gray">美工　　:　</span></td><td align="left">&nbsp;$topicforecast[photographer]&nbsp;</td></tr>
+					<tr><td nowrap>&nbsp;</td><td>&nbsp;</td></tr>
+					<tr><td><span class="gray">作品简介:　</span></td><td>&nbsp;</td></tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="left" >
+				<div style="width:520px;  height:450px;  border:none;  overflow-y:scroll;">$topicforecast[message]</div>
+			</td>
+		</tr>
+	</table>
+	<div class="neverVisible"><div id="__actionForm"></div></div>
+	</form>
+</div>

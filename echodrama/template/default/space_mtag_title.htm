@@ -1,0 +1,123 @@
+<!--{template space_mtagheader}-->
+<form id="actionForm" method="post" action=""></form>
+<div class="neverVisible"><div id="__actionForm"></div></div>
+<div class="affiche">
+		<table width="100%" cellspacing="2" cellpadding="2">
+			<tr>
+				<td rowspan="2" width="1px" align="center" valign="top">
+					<div class="threadimg60" style="padding:5px 0 0 1px;"><a href="space.php?do=mtag&tagid=$mtag[tagid]"><img src="$mtag[picpath]" style="width:60px;"></a></div>
+				</td>
+				<td>
+					<h1>&nbsp;&nbsp;&nbsp;&nbsp;$mtag[tagname] 欢迎您</h1>
+				</td>
+				<td width="170px" valign="top">
+					群主　：<a href="space.php?uid=$mtag[creatorid]" target="_blank">$mtag[realname]</a>
+					<br/>
+					成立于：$mtag[dateline]
+				</td>
+				<td rowspan="2" width="200px" valign="top">
+					<!--{if $mtag[fieldid]==1 || $mtag[fieldid]==5 }-->
+						<p>作品数　：$mtag[productnumdisplayvalue]</p>
+						<p>成员数　：$mtag[membernumdisplayvalue]&nbsp;&nbsp;粉丝数　：$mtag[fansnumdisplayvalue]</p>
+						<p>话题数　：$mtag[threadnumdisplayvalue]&nbsp;&nbsp;回帖数　：$mtag[postnumdisplayvalue]</p>
+						<!--p>活跃度　：$mtag[experience]</p-->
+					<!--{/if}-->
+					<!--{if $mtag[fieldid]==2 }-->
+						<p>成员数　：$mtag[membernumdisplayvalue]&nbsp;&nbsp;粉丝数　：$mtag[fansnumdisplayvalue]</p>
+						<p>话题数　：$mtag[threadnumdisplayvalue]&nbsp;&nbsp;回帖数　：$mtag[postnumdisplayvalue]</p>
+						<!--p>活跃度　：$mtag[experience]</p-->
+						<br/>
+						<!--{if !empty($mtag[relatedclubtagname]) }-->
+							所属社团：
+							<!--{if $mtag[relatedclubtagid]>0 }-->
+								<a href="space.php?do=mtag&tagid=$mtag[relatedclubtagid]" target="_blank">$mtag[relatedclubtagname]</a>
+							<!--{else}-->
+								$mtag[relatedclubtagname]
+							<!--{/if}-->
+						<!--{/if}-->
+					<!--{/if}-->
+					<!--{if ($mtag[fieldid]==3 || $mtag[fieldid]==4) }-->
+						<p>成员数　：$mtag[membernumdisplayvalue]</p>
+						<p>粉丝数　：$mtag[fansnumdisplayvalue]</p>
+						<p>话题数　：$mtag[threadnumdisplayvalue]</p>
+						<p>回帖数　：$mtag[postnumdisplayvalue]</p>
+						<!--p>活跃度　：$mtag[experience]</p-->
+					<!--{/if}-->
+				</td>
+			</tr>
+			<tr>
+				<td class="article" colspan="2" valign="top">
+					<em>&nbsp;&nbsp;&nbsp;&nbsp;<!--{if empty($mtag[message])}-->还没有签名<!--{else}-->$mtag[message]<!--{/if}--></em>
+				</td>
+			</tr>
+		</table>
+</div>
+
+<div class="topic_list">
+	<div id="content" style="width: 540px;">
+		<div style="width:535px;overflow:hidden;border:1px solid #ccc;padding:1px;">
+			$mtag[announcement]
+		</div>
+		
+		<!--{if $_SGLOBAL['admin']==1 }-->
+		<div style="margin: 10px 0 10px; position: relative; width: 540px; overflow: hidden; color: #aaa;">
+			<h3 style="padding: 0 10px; height: 32px; line-height: 32px; color: #333; font-size: 12px; background: #EEE;">闲聊区</h3>
+			<!--{template space_mtag_index_comments}-->
+		</div>
+		<!--{/if}-->
+	</div>
+	<div id="sidebar" style="width: 250px;">
+		<div id="fans_content" class="sidebox">
+			<h2 class="title">资金池　：<img src="image/credit.gif" title="$mtag[credit]"/>&nbsp;&nbsp;$mtag[credit]&nbsp;&nbsp;</h2>
+			<table cellpadding="1" cellspacing="0" width="95%" align="center" border="0">
+				<!--{if count($creditloglist)>0 }-->
+				<tr height="30px">
+					<td align="left" nowrap style="border-bottom:1px solid #FFD6A4;"><h2>最近捐助人员</h2></td>
+					<td align="right" nowrap style="border-bottom:1px solid #FFD6A4;"><a href="space.php?do=mtag&view=creditlog&tagid=$mtag[tagid]" target="_blank" title="全部">全部</a></td>
+				</tr>
+					<!--{loop $creditloglist $key $value}-->
+				<tr height="30px">
+					<td align="left" nowrap style="border-bottom:1px solid #FFD6A4;">
+						<span class="black"><a href="space.php?uid=$value[uid]" target="_blank" title="$value[username]">$value[username]</a></span>
+					</td>
+					<td align="right" nowrap style="border-bottom:1px solid #FFD6A4;">
+						<span class="black">捐助</span>
+						<img src="image/credit.gif"/>
+						<span class="red">$value[credit]</span>
+					</td>
+					
+
+				</tr>
+					<!--{/loop}-->
+				<!--{else}-->
+				<tr height="40px"><td align="left" valign="middle" colspan="2" nowrap>还没有人捐助过该群组</td></tr>
+				<!--{/if}-->
+				<tr height="30px">
+					<td align="center" colspan="2" nowrap>
+						<div class="addbuttonouterdiv" style="width:70px"><div class="addbuttoninnerdiv">
+							<a href="cp.php?ac=mtag&op=injectcredit&tagid=$tagid" id="injectcreditbtn" onclick="ajaxmenu(event, this.id, 1);" class="addbutton">我要捐助</a>
+						</div></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="fans_content" class="sidebox">
+			<h2 class="title">新来的粉丝</h2>
+			<ul class="avatar_list">
+				<!--{loop $latestfanslist $value}-->
+				<li>
+					<div class="avatar48"><a href="space.php?uid=$value[uid]"><!--{avatar($value[uid],small)}--></a></div>
+					<!--{if empty($value[userip]) OR !empty($value[usermagichidden]) }-->
+					<p>
+					<!--{else}-->
+					<p class="online_icon_p">
+					<!--{/if}-->
+						<a href="space.php?uid=$value[uid]" title="$value[username]">$value[username]</a>
+					</p>
+				</li>
+				<!--{/loop}-->
+			</ul>
+		</div>
+	</div>
+</div>
+<!--{template space_mtagfooter}-->

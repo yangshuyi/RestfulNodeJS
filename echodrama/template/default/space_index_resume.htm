@@ -1,0 +1,111 @@
+<h2 class="spaceindex_name" style="width:100%">
+	<!--{if $space[name]}-->
+		<!--{if $space[namestatus]==1 }-->
+			<img src="image/locked.gif" alt="官方验证通过" title="官方验证通过" height="18"/>
+		<!--{/if}-->
+	<!--{/if}-->
+	<a href="space.php?uid=$space[uid]"<!--{eval g_color($space[groupid]);}-->>$space[username]</a>
+	<!--{if $space[name]}-->
+		&nbsp;<em>(社团成员名: $space[name])</em>
+	<!--{/if}-->
+	<!--{if $space[spacenote]}-->
+	　-　<span class="gray">$space[note] <a href="space.php?do=doing&uid=$space[uid]">&raquo;</a></span>
+	<!--{/if}-->
+</h2>
+<br>
+<h3 class="feed_header" style="background:#F8F3CE;width:100%">
+	<span class="r_option"><a href="space.php?uid=$space[uid]" >返回个人主页</a>　　</span>
+	自我介绍
+</h3>
+<br>
+<!--{if resume }-->
+<table cellspacing="0" cellpadding="0" class="infotable" width="100%">
+	<tr>
+		<th width="120" nowrap>所属社团:</th>
+		<td>&nbsp;$resume[club]&nbsp;</td>
+	</tr>
+	<tr>
+		<th nowrap>担任职务:</th>
+		<td>&nbsp;$resume[jobname]&nbsp;</td>
+	</tr>
+	<tr>
+		<th nowrap>自我介绍:</th>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<th nowrap></th>
+		<td>$resume[introduce]</td>
+	</tr>
+</table>
+
+<!--{else}-->
+对不起，该用户并未填写任何简介信息。
+<!--{/if}-->
+<br>
+<h3 class="feed_header" style="background:#F8F3CE;width:100%">
+	目前状态
+</h3>
+<br>
+<!--{if $resumecurrentlist}-->
+<table cellspacing="0" cellpadding="0" class="reclisttable" width="100%">
+	<tr>
+		<th width="80px" nowrap>作品分类</th>
+		<th nowrap>作品名称</th>
+		<th width="150px" nowrap>所属社团</th>
+		<th width="200px" nowrap>职务</th>
+	</tr >
+	<!--{loop $resumecurrentlist $key $value}-->
+	<tr id="resume_current_title_$key" style="cursor:pointer;" <!--{if $key%2==1}--> class="alt"<!--{/if}--> onclick="if( $('resume_current_content_$key').style.display=='none' ){$('resume_current_content_$key').style.display='block';}else{$('resume_current_content_$key').style.display='none';};" >
+		<td align="center" nowrap>$value[producttypename]</td>
+		<!--{if empty($value[productid]) }--> 
+		<td align="left" title="$value[productname]" nowrap><!--{eval echo getstr($value[productname], 80, 0, 0, 0, 0, -1); }--></td>
+		<!--{else}--> 
+		<td align="left" title="$value[productname]" nowrap><a href="$value[producturl]" target="_blank"><!--{eval echo getstr($value[productname], 80, 0, 0, 0, 0, -1); }--></a></td>
+		<!--{/if}--> 
+		<td align="center" title="$value[club]" nowrap><!--{eval echo getstr($value[club], 80, 0, 0, 0, 0, -1); }--></td>
+		<td align="left" title="$value[jobname]" nowrap><!--{eval echo getstr($value[jobname], 80, 0, 0, 0, 0, -1); }--></td>
+	</tr>
+	<tr id="resume_current_content_$key" style="display:none">
+		<td colspan="5" align="left">$value[introduce]</td>
+	</tr>
+	<!--{/loop}-->
+</table>
+<!--{else}-->
+	<div align="center" style="border: none;">无</div>
+<!--{/if}-->
+
+<br/>
+
+<h3 class="feed_header" style="background:#F8F3CE;width:100%">
+	成就栏
+</h3>
+<br>
+<!--{if $resumehistorylist}-->
+<table cellspacing="0" cellpadding="0" class="reclisttable" border=0 width="100%">
+	<tr>
+		<th width="80px" nowrap>作品分类</th>
+		<th nowrap>作品名称</th>
+		<th width="150px" nowrap>所属社团</th>
+		<th width="200px" nowrap>职务</th>
+	</tr>
+	<!--{loop $resumehistorylist $key $value}-->
+	<tr id="resume_history_title_$key" style="cursor:pointer;" <!--{if $key%2==1}--> class="alt"<!--{/if}--> onclick="if( $('resume_history_content_$key').style.display=='none' ){$('resume_history_content_$key').style.display='block';}else{$('resume_history_content_$key').style.display='none';};" >
+		<td align="center" nowrap>$value[producttypename]</td>
+		<!--{if empty($value[productid]) }--> 
+		<td align="left" title="$value[productname]" nowrap><!--{eval echo getstr($value[productname], 80, 0, 0, 0, 0, -1); }--></td>
+		<!--{else}--> 
+		<td align="left" title="$value[productname]" nowrap><a href="$value[producturl]" target="_blank"><!--{eval echo getstr($value[productname], 80, 0, 0, 0, 0, -1); }--></a></td>
+		<!--{/if}--> 
+		<td align="center" title="$value[club]" nowrap><!--{eval echo getstr($value[club], 80, 0, 0, 0, 0, -1); }--></td>
+		<td align="left" title="$value[jobname]" nowrap><!--{eval echo getstr($value[jobname], 80, 0, 0, 0, 0, -1); }--></td>
+	</tr>
+	<tr id="resume_history_content_$key" style="display:none">
+		<td colspan="5" align="left">$value[introduce]</td>
+	</tr>	
+	<!--{/loop}-->
+</table>
+<div class="pages" align="right">$multi</div>
+<!--{else}-->
+	<div align="center" style="border: none;">无</div>
+<!--{/if}-->
+<br>

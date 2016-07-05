@@ -1,0 +1,108 @@
+<div class="mainarea">
+<div class="maininner">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="#"><span>全站消息</span></a></li>
+	</ul>
+</div>
+
+<form id="actionform" name="actionform" method="post" action="">
+<input type="hidden" id="ac" name="ac" value="sitepm" />
+<input type="hidden" id="op" name="op" value="" />
+<input type="hidden" id="pmid" name="pmid" value="" />
+				
+<div class="bdrcontent">
+	<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+				
+	<table width="100%" cellspacing="0" cellpadding="0" class="infotable">
+		<tr valign="top">
+			<th width="120px" align="right" >模板　　：</th>
+			<td align="left">
+				<select name="pmtemplate" id="pmtemplate" onchange="javascript:usingtemplate();">
+					<option value=""></option>
+					<!--{loop $pmtemplatelist $key $pmtemplate}-->
+					<option value="$pmtemplate[queryusersql]">$pmtemplate[name]</option>
+					<!--{/loop}-->
+				</select>
+			</td>
+		</tr>
+		<tr valign="top">
+			<th width="120px" align="right" >通知用户：</th>
+			<td align="left">
+				<textarea id="queryusersql" name="queryusersql" rows="7" cols="90"></textarea>
+			</td>
+		</tr>
+		<tr height="40px">
+			<th width="120px" align="right"></th>
+			<td align="left" >
+				<input type="button" class="submit" value="预执行" onclick="javascript:queryuser()"/>
+			</td>
+		</tr>
+		<tr height="40px">
+			<th width="120px" align="right"></th>
+			<td align="left" >
+				<div id="queryuserresult_content" style="width:570px;  height:300px;  border:none;  overflow-y:scroll;"></div>
+			</td>
+		</tr>
+		<tr valign="top">
+			<th align="right" >内容　　:</th>
+			<td align="left">
+				<textarea id="note" name="note" rows="7" cols="90">全站消息<br/></textarea>
+			</td>
+		</tr>
+		<tr valign="top">
+			<th align="right"></th>
+			<td align="left">支持链接等html标签</td>
+		</tr>
+		<tr height="40px">
+			<th align="right"></th>
+			<td align="left">
+				<input id="previewbtn" name="previewbtn" type="button" class="submit" value="预览消息" onclick="javascript:dispsitepm()"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="submitbtn" name="submitbtn" type="button" class="submit" value="发送消息" onclick="javascript:sendsitepm()"/>
+			</td>
+		</tr>
+		<tr height="40px">
+			<th align="right"></th>
+			<td align="left">
+				<div id="dispsitepm_div">
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="neverVisible"><div id="__actionform"></div></div>
+</form>
+
+<script type="text/javascript">
+
+function usingtemplate(){
+	$('queryusersql').value=$('pmtemplate').value;
+}
+
+function queryuser(){
+	ajaxget("cp.php?ac=resume&op=queryuserbysql_ajax&queryusersql="+$('queryusersql').value, 'queryuserresult_content');
+	//ajaxget('admincp.php?ac=sitepm&queryusersql='+$('queryusersql'), 'queryuserresult_content');
+}
+
+function sendsitepm(){
+	var form = $('actionform');
+	form.action="admincp.php?ac=sitepm&op=send";
+	form.method="post";
+	$("op").value="send";
+	//$('submitbtn').style="display:none";
+	form.submit();
+
+	
+	
+}
+
+function dispsitepm(){
+	$("dispsitepm_div").innerHTML=$("note").value;
+}
+
+
+</script>
+
+</div>
+</div>
+

@@ -1,0 +1,18 @@
+<div class="mainarea">
+<div class="maininner">
+<h2 class="title"><img src="image/app/video.gif" />视频</h2>
+<div class="tabs_header">
+<ul class="tabs">
+	<li <!--{if $_GET['subop'] == 'manage'}-->class="active"<!--{/if}-->><a href="admincp.php?ac=video&op=manage&subop=manage&videoid=$video[videoid]"><span>管理视频</span></a></li>
+	<li><a href="admincp.php?ac=video"><span>返回视频列表</span></a></li>
+</ul>
+</div>
+
+<!--{if $_GET['subop'] == 'manage'}-->
+
+	<!--{template admin/tpl/video_manage_manage}-->
+
+<!--{/if}-->
+
+</div>
+</div>

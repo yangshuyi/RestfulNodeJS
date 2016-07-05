@@ -1,0 +1,248 @@
+<div class="mainarea">
+<div class="maininner">
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[single]><a href="admincp.php?ac=topic&view=single"><span>广播剧列表</span></a></li>
+		<li$actives[audit]><a href="admincp.php?ac=topic&view=audit"><span>待审核的广播剧</span></a></li>
+	</ul>
+</div>
+
+<form id="topicform" name="topicform" method="get" action="admincp.php">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="20%">剧名</th>
+				<td width="20%"><input type="text" name="subject" value="$_GET[subject]" /></td>
+				<td width="20%"></td>
+				<th width="20%">所属社团</th>
+				<td width="20%"><input type="text" name="club" value="$_GET[club]" /></td>
+			</tr>
+			<tr>
+				<th>导演</th>
+				<td><input type="text" name="director" value="$_GET[director]" /></td>
+				<td></td>
+				<th>监制</th>
+				<td><input type="text" name="producer" value="$_GET[producer]" /></td>
+			</tr>
+			<tr>
+				<th>编剧</th>
+				<td><input type="text" name="writer" value="$_GET[writer]" /></td>
+				<td></td>
+				<th>Cast</th>
+				<td><input type="text" name="cast" value="$_GET[cast]" /></td>
+			</tr>
+			<tr>
+				<th>后期</th>
+				<td><input type="text" name="effector" value="$_GET[effector]" /></td>
+				<td></td>
+				<th>美工</th>
+				<td><input type="text" name="photographer" value="$_GET[photographer]" /></td>
+			</tr>
+			<tr>
+				<th>作品类型</th>
+				<td>
+					<select name="productclassid" id="productclassid">
+						<option value="-1"></option>
+						<!--{loop $_SGLOBAL[productclass] $key $value}-->
+						<option value="$key"<!--{if $_GET[productclassid] == $key}-->
+						selected<!--{/if}--> >$value[classname]</option>
+						<!--{/loop}-->
+					</select>
+				</td>
+				<td></td>
+				<td colspan="2" align="right">
+					<input type="hidden" name="ac" value="topic" />
+					<input type="hidden" name="do" value="topic" />
+					<input type="hidden" name="view" value="$_GET[view]" />
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+<!--{if $list}-->
+	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	<div class="bdrcontent">
+	<!--{if $perpage>100}-->
+		<p>总共有满足条件的数据 <strong>$count</strong> 个</p>
+		<!--{loop $list $value}-->
+		<input type="hidden" name="ids[]" value="$value[eventid]">
+		<!--{/loop}-->
+
+	<!--{else}-->
+		<table width="100%" cellspacing="0" cellpadding="0" class="reclisttable">
+		<tr>
+			<th width="25" colspan="1" align="center">&nbsp;</th>
+			<th width="60" align="center">编号</th>
+			<th align="center" nowrap>剧名</th>
+			<th align="center">社团</th>
+			<th align="center">上传人</th>
+			<th align="center">上传时间</th>
+			<th width="70px" align="center">审核状态</th>
+			<th width="30px" align="center">操作</th>
+			<th width="30px" align="center" nowrap>SYN</th>
+			<th width="30px" align="center">操作</th>
+		</tr>
+		<!--{loop $list $key $value}-->
+		<tr onmouseOver="topic_row_mouseover($value[index]);" onmouseout="topic_row_mouseout()" <!--{if $key%2==1}--> class="alt"<!--{/if}-->>
+			<td><input type="<!--{if $allowbatch}-->checkbox<!--{else}-->radio<!--{/if}-->" name="ids[]" value="$value[topicid]"></td>
+			<td width="60px" nowrap>$value[topicid]</td>
+			<td><a href="space.php?do=topic&topicid=$value[topicid]" target="_blank" title="$value[subject]"><!--{eval echo getstr($value[subject], 30, 0, 0, 0, 0, -1); }--></a></td>
+			<td nowrap>$value[club]</td>
+			<td ><a href="space.php?uid=$value[uid]" target="_blank">$value[username]</a></td>
+			<td align="center" nowrap>$value[dateline]</td>
+			<td align="center" nowrap>$_SGLOBAL[topicauditclass][$value[auditstate]][classname]</td>
+			<td align="center" nowrap><a href="admincp.php?ac=topic&op=manage&topicid=$value[topicid]">管理</a></td>
+			<td align="center"><!--{if $value[synthreadid]>0}-->1<!--{else}-->0<!--{/if}--></td>
+			<!-- td align="center" nowrap><a href="admincp.php?ac=topic&op=synsina&subop=loginsina&topicid=$value[topicid]">同步</a></td -->
+			<td align="center" nowrap><a href="admincp.php?ac=topic&op=quicksynsina&subop=tosynsina&topicid=$value[topicid]">同步</a></td>
+		</tr>
+		<!--{/loop}-->
+		</table>
+	<!--{/if}-->
+		<div width="100%" class="pages">$multi</div>
+	</div>
+	
+		
+
+	<div class="footactions">
+		<input type="hidden" name="mpurl" value="$mpurl">
+		<!--{if $allowbatch && $perpage<=100}-->
+		<input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'ids')">全选
+		<!--{/if}-->
+		
+		<input id="ckdelete" type="radio" value="delete"><label for="ckdelete">批量删除</label>
+		<input id="ckauditpass" type="radio" value="auditpass"><label for="ckauditpass">批量通过审核</label>
+		<input id="ckauditfail" type="radio" value="auditfail"><label for="ckauditfail">批量不通过审核</label>
+		<input id="ckrename" type="radio" value="rename"><label for="rename">批量改名</label>
+		<input type="submit" name="opsubmit" value="执行操作" onclick="doBatchAction();" class="submit">
+	</div>
+</form>
+<!--{else}-->
+	<div class="bdrcontent">
+		<p>指定条件下还没有数据</p>
+	</div>
+<!--{/if}-->
+
+
+<!--{template admin/tpl/topic_list_process}-->	
+
+</div>
+
+
+</div>
+
+<div id="flowDiv" class="flowDiv"></div>
+
+<script type="text/javascript">
+
+var rowValue=new Array();
+pageinit();
+
+function doBatchAction(){
+	
+	var selids="";
+	var form=$('topicform');
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.name.match("ids")) {
+			if(e.checked){
+				selids=selids+e.value+",";
+			}
+		}
+	}
+	if(selids==""){
+		alert("请选择要操作的记录。");
+	}else{
+		selids=selids+0;
+	}
+	
+	
+	if($('ckdelete').checked){
+		if(confirm('本操作不可恢复，确认继续？')){
+			form.method="POST";
+			form.action="admincp.php?ac=topic&op=batchdelete&selids="+selids;
+			return true;
+		}
+	}
+	else if($('ckauditpass').checked){
+		if(confirm('本操作不可恢复，确认继续？')){
+			form.method="POST";
+			form.action="admincp.php?ac=topic&op=batchauditpass&selids="+selids;
+			return true;
+		}
+	}
+	else if($('ckauditfail').checked){
+		if(confirm('本操作不可恢复，确认继续？')){
+			form.method="POST";
+			form.action="admincp.php?ac=topic&op=batchauditfail&selids="+selids;
+			return true;
+		}
+	}	
+	else if($('ckrename').checked){
+		if(confirm('本操作不可恢复，确认继续？')){
+			form.method="POST";
+			form.action="admincp.php?ac=topic&op=batchrename&selids="+selids;
+			return true;
+		}
+	}
+	else{
+		alert("请选择批量操作类型。");
+		return false;
+	}
+	return false;
+	
+}
+
+function pageinit() {
+	<!--{loop $list $value}-->
+	var row="所属社团:$value[club]&nbsp;"+"作品类型:$_SGLOBAL[productclass][$value[productclassid]][classname]</br>"
+	+"导演:$value[director]&nbsp;"+"编剧:$value[writer]&nbsp;"+"后期:$value[producer]</br>"
+	+"CAST:$value[cast]";
+	rowValue.push(row);
+	<!--{/loop}-->		
+}
+
+function topic_row_mouseover(index) {
+	if(!event){
+		return;
+	}
+	
+	var div = $('flowDiv'); //将要弹出的层   
+	var pos;
+	if (window.innerHeight){
+		pos = window.pageYOffset;
+	}else if (document.documentElement && document.documentElement.scrollTop) {
+		pos = document.documentElement.scrollTop; 
+	}else if (document.body) {
+	  	pos = document.body.scrollTop; 
+	}
+	 
+	
+	div.style.display="block"; //div3初始状态是不可见的，设置可为可见   
+	//window.event代表事件状态，如事件发生的元素，键盘状态，鼠标位置和鼠标按钮状.   
+	//clientX是鼠标指针位置相对于窗口客户区域的 x 坐标，其中客户区域不包括窗口自身的控件和滚动条。   
+	div.style.left=event.clientX+10; //鼠标目前在X轴上的位置，加10是为了向右边移动10个px方便看到内容   
+	div.style.width=400;
+	div.style.top=pos+event.clientY+5;  
+	div.style.height=80; 
+	div.style.position="absolute"; //必须指定这个属性，否则div3层无法跟着鼠标动   
+	 
+	div.innerHTML=rowValue[index];
+}
+
+function topic_row_mouseout() {
+	var div = $('flowDiv'); //将要弹出的层   
+	div.style.display="none";
+}
+</script>
+
+
+
+
+
+
+
+
+

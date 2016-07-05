@@ -1,0 +1,30 @@
+<!--{eval $_TPL['titles'] = array($video[subject],'视频映像');}-->
+<!--{template header}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="space.php?do=video&videoid=$videoid"><span>查看视频</span></a></li>
+		<li><a href="space.php?do=video"><span>视频列表</span></a></li>
+	</ul>
+</div>
+
+
+<div id="content" style="width: 540px;">
+
+	<form id="actionForm" method="post" action="">
+	<div class="neverVisible"><div id="__actionForm"></div></div>
+		<!--{template space_video_view_content}-->
+	</form>		
+	
+	<!--{template space_video_view_comment}-->
+
+</div>
+
+<div id="sidebar" style="width: 250px;">
+
+	<!--{template space_video_view_sidebar}-->
+	
+</div>
+<!--{template footer}-->

@@ -1,0 +1,202 @@
+<!--{template space_mtagheader}-->
+<div class="block style4">
+	<table width="100%">
+		<tr>
+			<td nowrap>
+				<h3>
+				<!--{if $task[importance]==1 }-->
+					<span style="color:red;">[{$task[importancename]}]</span>
+				<!--{elseif $task[importance]==2 }-->
+					<span style="color:blue;">[{$task[importancename]}]</span>
+				<!--{elseif $task[importance]==3 }-->
+					<span style="color:black;">[{$task[importancename]}]</span>
+				<!--{/if}-->
+				成员任务：$task[subject]
+				</h3>
+			</td>
+			<td>
+				<span style="float:right;padding: 0px;">发起人:<a href="space.php?uid=$task[uid]">$task[username][{$realnamemap[$task[uid]]}]</a></span>
+			</td>
+		</tr>	
+	</table>
+</div>
+<div style="padding:5px;background:#F9FFE8;">
+	<table cellspacing="4" cellpadding="4" class="infotable">
+		<tr>	
+			<td nowrap><h3>任务类型:</h3></td>
+			<td nowrap>$task[taskclassname]</td>
+			<td nowrap><h3>开始/结束时间:</h3></td>
+			<td nowrap>$task[starttimedisp] ~ $task[endtimedisp]</td>
+			<td width="90%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="5" nowrap><h3>任务说明:</h3></td>
+		</tr>
+		<tr>
+			<td colspan="5" nowrap >
+				$task[description]
+			</td>
+		</tr>
+	</table>					
+</div>
+<table width="100%">
+	<tr height="10px"><td><h3>参与成员:</h3></td></tr>
+<!--{loop $memberlist $key $member}-->
+	<!--{if ($key%8)==0}-->
+	<tr>
+	<!--{/if}-->
+		<td id="member_$member['memberid']" align="center" width="12.5%" nowrap onmouseover="member_introduce_onclick($member['memberid'], $member['uid'], $member['usertagid'])">
+			<div class="myavatar48"><!--{avatar($member[uid],small)}--></div>
+			<!--{if empty($member['uip'])}-->
+			<div>$member[memberclassname]<br/>$member['realname']</div>
+			
+			<!--{else}-->
+			<div class="magicflicker">$member[memberclassname]<br/>$member['realname']</div>
+			<!--{/if}-->
+			<div id="member_introduce_$member['memberid']" name="member_introduce_$member['memberid']" style="display:none">
+			$member['introduce']
+			</div>
+		</td>
+	<!--{if $key%8==7}-->
+	</tr>
+	<!--{/if}-->
+<!--{/loop}-->
+	<tr height="10px">
+		<td width="12.5%">&nbsp;</td>
+		<td width="12.5%">&nbsp;</td>
+		<td width="12.5%">&nbsp;</td>
+		<td width="12.5%">&nbsp;</td>
+		<td width="12.5%">&nbsp;</td>
+		<td width="12.5%">&nbsp;</td>
+		<td width="12.5%">&nbsp;</td>
+		<td width="12.5%">&nbsp;</td>
+	</tr>
+</table>
+
+<div id="flowDiv" class="flowDiv" style="display:none; position:absolute; z-index:99999; border: 1px solid #EBE6C9; background: #FFCB8C; padding:5px;">
+	<div id="flowDivContent" style="overflow-y:auto;overflow-x:auto;">
+	</div>
+</div>
+
+<script type="text/javascript">
+//彩虹炫
+var elems = selector('div[class~=magicflicker]'); 
+
+for(var i=0; i<elems.length; i++){
+	magicColor(elems[i]);
+}
+
+function getoffset(e) {
+	var t = e.offsetTop;
+	var l = e.offsetLeft;
+	while (e = e.offsetParent) {
+		t += e.offsetTop;
+		l += e.offsetLeft;
+	}
+	var rec = new Array(1);
+	rec[0] = t;
+	rec[1] = l;
+	return rec;
+}
+
+function member_introduce_onclick(memberid, uid, usertagid) {
+	var supe_uid = $_SGLOBAL['supe_uid'];
+	var mtagid = $mtag[tagid];
+	var cellWidget=$("member_"+memberid);
+	var introduceWidget=$("member_introduce_"+memberid);
+	
+	if(uid != supe_uid && introduceWidget.innerHTML==""){
+		return;
+	}
+	
+	var div = $('flowDiv'); //将要弹出的层   
+	var divContent = $('flowDivContent');
+	
+	div.style.display="block"; //div3初始状态是不可见的，设置可为可见   
+	div.style.left=getoffset(cellWidget)[1]+"px";
+	div.style.width=500;
+	div.style.top=(getoffset(cellWidget)[0]+90)+"px";
+	div.style.height=5; 
+	div.style.position="absolute"; //必须指定这个属性，否则div3层无法跟着鼠标动   
+
+	
+	var header = "<div style='width:100%'><p align='right'>";
+	var space = "<a href='space.php?uid="+uid+"' target='_blank'>访问TA的主页</a>";
+	var usertag = "<a href='space.php?do=mtag&tagid="+usertagid+"' target='_blank'>访问TA的个人群组</a>";
+	var edit = "<a href='cp.php?ac=mtag&op=editmemberintroduce&tagid="+mtagid+"&memberid="+memberid+"'>编辑成员介绍</a>";
+	var close = "<a href='#' onclick='javascript:member_introduce_close();return false;'>关闭</a>";
+	var footer = "</p></div>";
+
+	var html = header + space;
+	if( usertag != '' && usertag > 0){
+		html = html + "<span class='pipe'>|</span>" + usertag;
+	}
+	//alert(uid+"-"+supe_uid);
+	if( uid == supe_uid ){
+		html = html + "<span class='pipe'>|</span>" + edit;
+	}
+	
+	html = html + "<span class='pipe'>|</span>" + close + footer;
+	divContent.innerHTML= html + "<div style='background:white;border: 1px solid #EBE6C9;'>" + introduceWidget.innerHTML + "</div>";
+}
+
+function member_introduce_close() {
+	var div = $('flowDiv'); //将要弹出的层   
+	div.style.display="none";
+}
+
+function posttaskmember( nextstep ){
+	$('nextstep').value=nextstep;
+	$("actionform").submit();
+}
+
+</script>
+
+
+<div class="comments" id="div_main_content">
+	<h2><a href="#quickcommentform" class="r_option">回复</a> 回复 (<span id="comment_replynum">$task[replynum]</span> 个回复)</h2>
+		<div class="page">$multi</div>
+		<div class="comments_list" id="comment">
+			<ul id="comment_ul">
+				<!--{loop $commentlist $value}-->
+				<!--{template space_comment_li}-->
+				<!--{/loop}-->
+			</ul>
+		</div>
+		<div class="page">$multi</div>
+
+<!--{if $membergrade>=1 }-->
+<form id="quickcommentform" name="quickcommentform"
+	action="cp.php?ac=comment" method="post" class="quickpost">
+<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><a href="###" id="comment_face" title="插入表情"
+			onclick="showFace(this.id, 'comment_message');return false;"><img
+			src="image/facelist.gif" align="absmiddle" /></a> <!--{if $_SGLOBAL['magic']['doodle']}-->
+		<a id="a_magic_doodle"
+			href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message"
+			onclick="ajaxmenu(event, this.id, 1)"><img
+			src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a> <!--{/if}-->
+		<br />
+		<textarea id="comment_message"
+			onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message"
+			rows="5" style="width: 500px;"></textarea></td>
+	</tr>
+	<tr>
+		<td>
+			<input type="hidden" name="refer" value="#" /> 
+			<input type="hidden" name="id" value="$task[taskid]"> 
+			<input type="hidden" name="idtype" value="mtagtaskid"> 
+			<input type="hidden" name="commentsubmit" value="true" /> 
+			<input type="button" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="回复" 
+				onclick="ajaxpost('quickcommentform', 'comment_add')" />
+			<div id="__quickcommentform"></div>
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"
+/></form>
+<br />
+<!--{/if}-->
+</div>
+<!--{template space_mtagfooter}-->

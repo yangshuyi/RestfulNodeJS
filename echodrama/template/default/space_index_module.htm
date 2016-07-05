@@ -1,0 +1,87 @@
+<!--{eval $_TPL['nosidebar']=1;}-->
+<!--{template header}-->
+
+<!--{if $narrowlist || $widelist}-->
+<script type="text/javascript" src="source/script_swfobject.js"></script>
+<!--{/if}-->
+
+<div id="space_page">
+
+	<div id="ubar">
+
+		<div id="space_avatar">
+			<!--{if $space[magicstar] && $space[magicexpire]>$_SGLOBAL[timestamp]}-->
+			<div class="magicstar">
+			<object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,45,0" width="200" height="250">
+				<param name="movie" value="image/magic/star/{$space[magicstar]}.swf" />
+				<param name="quality" value="high" />
+				<param NAME="wmode" value="transparent">
+				<embed src="image/magic/star/{$space[magicstar]}.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash"  wmode="transparent" width="200" height="250"></embed>
+			</object>
+			</div>
+			
+			<div class="magicavatar"><!--{else}--><div><!--{/if}--><!--{avatar($space[uid],big)}--></div>
+			
+		</div>
+
+		<!--{if $space[self] && $_SGLOBAL[magic][superstar]}-->
+		<div class="borderbox">
+			<div style="width:100%; overflow:hidden;">
+			<img src="image/magic/superstar.small.gif" class="magicicon" />
+			<!--{if $space[magicstar] && $space[magicexpire]>$_SGLOBAL[timestamp]}-->
+			<a id="a_magic_superstar" href="cp.php?ac=magic&op=cancelsuperstar" onclick="ajaxmenu(event, this.id)">取消超级明星</a>
+			<!--{else}-->
+			<a id="a_magic_superstar" href="magic.php?mid=superstar" onclick="ajaxmenu(event, this.id, 1)">我要变超级明星</a>
+			<!--{/if}-->
+			</div>
+		</div><br />
+		<!--{/if}-->
+
+		<div class="borderbox">
+			<ul class="spacemenu_list" style="width:100%; overflow:hidden;">
+		<!--{if $space[self]}-->
+			<li><a href="cp.php?ac=avatar">我的头像</a></li>
+			<li><a href="cp.php?ac=profile">个人资料</a></li>
+			<li><a href="cp.php?ac=credit">我的积分</a></li>
+			<!--{if $_SCONFIG[sendmailday]}-->
+			<li><a href="cp.php?ac=sendmail">邮件提醒</a></li>
+			<!--{/if}-->
+			<li><a href="cp.php?ac=privacy">隐私筛选</a></li>
+		<!--{else}-->
+			<!--{if !$space['isfriend']}-->
+			<li><img src="image/icon/friend.gif"><a href="cp.php?ac=friend&op=add&uid=$space[uid]" id="a_friend_li" onclick="ajaxmenu(event, this.id, 1)">加为好友</a></li>
+			<!--{/if}-->
+			<li><img src="image/icon/wall.gif"><a href="#comment">给我留言</a></li>
+			<li><img src="image/icon/poke.gif"><a href="cp.php?ac=poke&op=send&uid=$space[uid]" id="a_poke" onclick="ajaxmenu(event, this.id, 1)">打个招呼</a></li>
+			<li><img src="image/icon/pm.gif"><a href="cp.php?ac=pm&uid=$space[uid]" id="a_pm" onclick="ajaxmenu(event, this.id, 1)">发送消息</a></li>
+			<!--{if $space['isfriend']}-->
+			<li><img src="image/icon/friend.gif"><a href="cp.php?ac=friend&op=ignore&uid=$space[uid]" id="a_ignore" onclick="ajaxmenu(event, this.id)">解除好友</a></li>
+			<!--{/if}-->
+			<li><img src="image/icon/report.gif"><a href="cp.php?ac=common&op=report&idtype=uid&id=$space[uid]" id="a_report" onclick="ajaxmenu(event, this.id, 1)">违规举报</a></li>
+			<!--{if checkperm('managename')||checkperm('managespacegroup')||checkperm('managespaceinfo')||checkperm('managespacecredit')||checkperm('managespacenote')}-->
+			<li><img src="image/icon/profile.gif"><a href="admincp.php?ac=space&op=manage&uid=$space[uid]" id="a_manage">管理用户</a></li>
+			<!--{/if}-->
+		<!--{/if}-->
+			</ul>
+		</div><br />
+
+	</div>
+
+	<div id="content" style="width:740px">
+		<!--{if $_GET[do]=="resume"}-->
+			<!--{template space_index_resume}-->
+		<!--{/if}-->	
+	</div>
+</div>
+
+<!--{template footer}-->
+
+<script>
+
+//彩虹炫
+var elems = selector('div[class~=magicflicker]'); 
+for(var i=0; i<elems.length; i++){
+	magicColor(elems[i]);
+}
+
+</script>

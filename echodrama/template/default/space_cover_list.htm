@@ -1,0 +1,266 @@
+<!--{eval $_TPL['titles'] = array('乐虫翻唱');}-->
+<!--{template header}-->
+
+<!--{if !empty($_SGLOBAL[inajax])}-->
+	<div id="space_photo">
+		<h3 class="feed_header">
+			<a href="cp.php?ac=cover&op=new" class="r_option" target="_blank">上传翻唱</a>
+			我发布的翻唱
+		</h3>
+		<table cellspacing="4" cellpadding="4" width="100%">
+			<!--{loop $list $value}-->
+				<tr>
+					<td align="left" valign="top" colspan="2">
+						<div class="title">
+							<span style="float:right;" class="gray">编号：$value[coverid]</span>
+						</div>
+						<strong>
+							&nbsp;&nbsp;[&nbsp;$value[productclassname]&nbsp;]&nbsp;-&nbsp;<a href="space.php?do=cover&coverid=$value[coverid]" title="$value[subject]" class="event_title">$value[subject]</a> 
+							<!--{if $value[originwordflag]==1 }-->&nbsp;&nbsp;<img src="image/originwordflag.gif" title="词原创"/><!--{/if}-->
+							<!--{if $value[originmelodyflag]==1 }-->&nbsp;&nbsp;<img src="image/originmelodyflag.gif" title="曲原创"/><!--{/if}--> 
+						</strong>
+					</td>
+					<td width="50px" align="right" valign="top" rowspan="2">
+						<div class="title">	
+							<!--{if $view!="me"}-->
+								<a href="cp.php?ac=share&type=cover&id=$value[coverid]" id="a_share_$value[coverid]" onclick="ajaxmenu(event, this.id, 1)" class="a_share">分享</a>
+							<!--{/if}-->
+							<span style="color: #EF9822; float:right; padding: 0px;">评级：$value[pollsum]</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+						<span class="gray">原词　: </span>$value[originwordwriter]<br/>
+						<span class="gray">原曲　: </span>$value[originmelodywriter]<br/>
+						<span class="gray">原唱　: </span>$value[originsinger]<br/>
+						<span class="gray">提供者: </span>$value[username]<br/>
+						<br/>
+					</td>
+					<td align="left" valign="top">
+						<span class="gray">所属团队: </span>
+							<!--{if empty($value[clubtagid])}-->
+								$value[club]
+							<!--{else}-->	
+								<a href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a>
+							<!--{/if}-->
+						<br/>
+						<span class="gray">翻唱　　: </span>$value[singer]<br/>
+						<span class="gray">发布时间: </span>$value[dispproducedate]<br/>
+						<span class="gray">提供时间: </span>$value[dispdateline]<br/>
+						<br/>
+					</td>
+				</tr>	
+				<tr>
+					<td colspan="3" align="left">
+						<!--{if ($view=="me") && ($value[uid]==$_SGLOBAL['supe_uid']) }-->
+							<div class="title">
+								<div style="float:right;">
+									<a href="cp.php?ac=cover&op=edit&coverid=$value[coverid]">编辑</a>
+									<span class="pipe">|</span>
+									<a href="cp.php?ac=cover&op=invite&coverid=$value[coverid]">邀请好友</a>
+								</div>
+							</div>
+						<!--{/if}-->
+						<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+					</td>
+				</tr>
+				<tr><td colspan="3" style="border-top:1px dashed #ECB2C5;" align="center" >&nbsp;</td></tr>	
+			<!--{/loop}-->
+		</table>
+		<div class="footactions">
+			<div class="pages" align="right">$multi</div>
+		</div>
+	</div><br>
+<!--{else}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[all]><a href="space.php?do=cover&view=all"><span>翻唱库</span></a></li>
+		<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+			<li$actives[me]><a href="space.php?do=cover&view=me"><span>我的翻唱列表</span></a></li>
+			<li$actives[share]><a href="space.php?do=cover&view=share"><span>我的收藏列表</span></a></li>
+			<li class="null"><a href="cp.php?ac=cover&op=new">添加新翻唱</a></li>
+		<!--{/if}-->
+	</ul>
+	<!--{if $_SGLOBAL[refer]}-->
+	<div class="r_option">
+		<a  href="$_SGLOBAL[refer]">&laquo; 返回上一页</a>
+	</div>
+	<!--{/if}-->
+</div>
+<form method="get" action="space.php">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="20%">翻唱作品名</th>
+				<td width="20%"><input type="text" id="subject" name="subject" value="$_GET[subject]" /></td>
+				<td width="20%"></td>
+				<th width="20%">所属团队</th>
+				<td width="20%"><input type="text" id="club" name="club" value="$_GET[club]" /></td>
+			</tr>
+			<tr>
+				<th>填词</th>
+				<td><input type="text" id="wordwriter" name="wordwriter" value="$_GET[wordwriter]" /></td>
+				<td></td>
+				<th>翻唱</th>
+				<td><input type="text" id="singer" name="singer" value="$_GET[singer]" /></td>
+			</tr>
+			<tr>
+				<th>词原创</th>
+				<td>
+					<select name="originwordflag" id="originwordflag">
+						<option value="0" ></option>
+						<option value="1" <!--{if $_GET[originwordflag] == 1}-->selected<!--{/if}--> >是</option>
+						<option value="-1" <!--{if $_GET[originwordflag] == -1}-->selected<!--{/if}--> >否</option>
+					</select>
+				</td>
+				<td></td>
+				<th>曲原创</th>
+				<td>
+					<select name="originmelodyflag" id="originmelodyflag">
+						<option value="0" ></option>
+						<option value="1" <!--{if $_GET[originmelodyflag] == 1}-->selected<!--{/if}--> >是</option>
+						<option value="-1" <!--{if $_GET[originmelodyflag] == -1}-->selected<!--{/if}--> >否</option>
+					</select>				
+				</td>
+			</tr>
+			<tr>
+				<th>作品类型</th>
+				<td>
+					<select name="productclassid" id="productclassid">
+						<option value="-1"></option>
+						<!--{loop $_SGLOBAL[coverproductclass] $value}-->
+						<option value="$value[classid]"<!--{if $_GET[productclassid] == $value[classid]}-->
+						selected<!--{/if}--> >$value[classname]</option>
+						<!--{/loop}-->
+					</select>
+				</td>
+				<td></td>
+				<td colspan="2" align="right">
+					<input type="hidden" name="label" value="$_GET[label]"/>
+					<input type="hidden" name="ac" value="cover" />
+					<input type="hidden" name="do" value="cover" />
+					<input type="hidden" name="view" value=$view />
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+<table cellspacing="5" cellpadding="5" border=0>
+<tr>
+<td valign="top">
+
+<!--{if $list}-->
+<table cellspacing="0" cellpadding="0" width="595" border=0>
+<!--{loop $list $value}-->
+	<tr>
+		<td align="left" valign="top" colspan="2">
+			<div class="title">
+				<span style="float:right;" class="gray">编号：$value[coverid]</span>
+			</div>
+			<strong>
+				&nbsp;&nbsp;[&nbsp;$value[productclassname]&nbsp;]&nbsp;-&nbsp;<a href="space.php?do=cover&coverid=$value[coverid]" title="$value[subject]" class="event_title">$value[subject]</a>
+				<!--{if $value[originwordflag]==1 }-->&nbsp;&nbsp;<a href="space.php?do=cover&view=$view&uid=$_GET[uid]&label=$value[classname]&subject=$_GET[subject]&club=$_GET[club]&wordwriter=$_GET[wordwriter]&singer=$_GET[singer]&originwordflag=1&originmelodyflag=$_GET[originmelodyflag]&productclassid=$_GET[productclassid]"><img src="image/originwordflag.gif" title="词原创"/></a><!--{/if}-->
+				<!--{if $value[originmelodyflag]==1 }-->&nbsp;&nbsp;<a href="space.php?do=cover&view=$view&uid=$_GET[uid]&label=$value[classname]&subject=$_GET[subject]&club=$_GET[club]&wordwriter=$_GET[wordwriter]&singer=$_GET[singer]&originwordflag=$_GET[originwordflag]&originmelodyflag=1&productclassid=$_GET[productclassid]"><img src="image/originmelodyflag.gif" title="曲原创"/></a><!--{/if}--> 
+			</strong>
+		</td>
+		<td width="60px" align="right" valign="top" rowspan="2">
+			<div class="title">	
+				<span style="color: #EF9822; float:right; padding: 0px;">评级：$value[pollsum]</span>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">
+			<span class="gray">原词　: </span>$value[originwordwriter]<br/>
+			<span class="gray">原曲　: </span>$value[originmelodywriter]<br/>
+			<span class="gray">原唱　: </span>$value[originsinger]<br/>
+			<span class="gray">提供者: </span><a href="space.php?uid=$value[uid]" target="_blank">$value[username]</a><br/>
+			<br/>
+		</td>
+		<td align="left" valign="top">
+			<span class="gray">所属团队: </span>
+				<!--{if empty($value[clubtagid])}-->
+					$value[club]
+				<!--{else}-->	
+					<a href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a>
+				<!--{/if}-->
+				<br/>
+			<span class="gray">翻唱　　: </span>$value[singer]<br/>
+			<span class="gray">发布时间: </span>$value[dispproducedate]<br/>
+			<span class="gray">提供时间: </span>$value[dispdateline]<br/>
+			<br/>
+		</td>
+	</tr>	
+	<tr>
+		<td colspan="3" align="left">
+			<!--{if ( ($view=="me") && ($value[uid]==$_SGLOBAL['supe_uid']) ) || ($value[uid]==6) }-->
+				<div class="title">
+					<div style="float:right;">
+						<a href="cp.php?ac=cover&op=edit&coverid=$value[coverid]">编辑</a>
+						<span class="pipe">|</span>
+						<a href="cp.php?ac=cover&op=invite&coverid=$value[coverid]">邀请好友</a>
+					</div>
+				</div>
+			<!--{/if}-->
+			<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+		</td>
+	</tr>
+	<tr><td colspan="3" style="border-top:1px dashed #ECB2C5;" align="center" >&nbsp;</td></tr>	
+<!--{/loop}-->
+</table>
+<div class="footactions">
+	<div class="pages" align="right">$multi</div>
+</div>
+<!--{else}-->
+	<div class="c_form" style="width:520px;">目前还没有相关列表。</div>
+	
+<!--{/if}-->
+</td>
+<td valign="top" style="border: 1px solid #DDD;">
+<div id="sidebar" style="width:180px;" >
+	<div class="sidebox">
+		<h2 class="title">
+			<p class="r_option">
+				<a href="space.php?do=cover&view=$view&uid=$_GET[uid]&subject=$_GET[subject]&club=$_GET[club]&wordwriter=$_GET[wordwriter]&singer=$_GET[singer]&originwordflag=$_GET[originwordflag]&originmelodyflag=$_GET[originmelodyflag]">全部</a>
+			</p>
+			热门翻唱标签
+		</h2>
+		<ul class="event_cat">
+		<!--{eval $index = 0;}-->		
+		<!--{loop $hotcoverlabellist $value}-->		
+			<li<!--{if $_GET[label] == $value[classname]}--> class="on"<!--{/if}-->>
+				<a title="$value[classname]" href="space.php?do=cover&view=$view&uid=$_GET[uid]&label=$value[classname]&subject=$_GET[subject]&club=$_GET[club]&wordwriter=$_GET[wordwriter]&singer=$_GET[singer]&originwordflag=$_GET[originwordflag]&originmelodyflag=$_GET[originmelodyflag]&productclassid=$_GET[productclassid]">$value[classname]</a>
+			</li>
+		<!--{/loop}-->
+		</ul>
+	</div>
+	
+	<div class="sidebox">
+		<h2 class="title">
+			票选排行榜
+		</h2>
+		<!--{loop $popupcoverlist $value}-->
+			<div class="attention" align="left">
+				<div class="gray">编号: $value[coverid]&nbsp;类型：$value[productclassname]</div>	
+				<strong><a href="space.php?do=cover&coverid=$value[coverid]" title="$value[subject]" class="event_title"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></a></strong>
+				<div class="gray">翻唱者: $value[singer]</div>	
+				<div class="gray">&nbsp;</div>
+			</div>
+		<!--{/loop}-->
+	</div>
+</div>
+</td>
+</tr>
+</table>
+
+
+	
+
+<!--{/if}-->		
+<!--{template footer}-->

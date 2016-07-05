@@ -1,0 +1,497 @@
+<div class="c_form">
+<form id="ajaxform" name="ajaxform" method="post" action=""></form>
+<div class="neverVisible"><div id="__ajaxform"></div></div>
+
+<form id="edit_form" name="edit_form" method="post" action="cp.php?ac=cover&op=save&coverid=$cover[coverid]" enctype="multipart/form-data">
+<input type="hidden" name="coverid" value="$cover[coverid]"/>
+
+<table cellspacing="4" cellpadding="4" class="infotable" style="width:650px" border=0>
+<!--{if $cover[coverid]>0 }-->
+	<tr>
+		<th width="150">&nbsp;</th>
+		<td align="right">
+			<ul>
+				<li class="gray">翻唱ID: $cover[coverid]</li>
+			</ul>
+		</td>
+	</tr>
+<!--{/if}-->
+	<tr>
+		<th width="150">翻唱作品名&nbsp;*</th>
+		<td>
+			<input type="text" id="subject" name="subject" value="$cover[subject]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">作品Flash链接*</th>
+		<td>
+			<input type="text" id="product" name="product" value="$cover[product]" size="80" maxlength="500" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">&nbsp;</th>
+		<td>
+			<div class="title">
+				<span style="color: #EF9822; float:right; padding: 0px; margin: 0px 0px 0px 0px;">
+					<a href="space.php?do=thread&tid=434" target="_blank">
+						<img title="‘乐虫翻唱’外链地址获取及歌曲发布教程" src="/image/cover_help.gif"/>
+					</a>
+				</span>
+			</div>
+			<span style="color:red">土豆/优酷的分享Flash地址，必须为“.swf”结尾。</span><br/>
+			<span style="color:red">YYFC的分享MP3地址，必须为“.mp3”结尾。</span><br/>
+			<span style="color:red">YYFC的分享WMA地址，必须为“.wma”结尾。</span><br/>
+			<span style="color:red">其他格式暂不支持，有需求请和我们联系。</span><br/>
+		</td>
+	</tr>
+	<tr>
+		<th width="150">作品介绍</th>
+		<td>
+			<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+			<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:500px;display:none;border:0px">$cover[message]</textarea>
+			<iframe src="editor.php?charset=$_SC[charset]&allowhtml=0&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:500px;border: 1px solid #C5C5C5;" height="400"></iframe>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+			<table width="100%"><tr>
+				<td><input type="checkbox" name="originwordflag" id="originwordflag" value="1" <!--{if $cover[originwordflag]}-->CHECKED<!--{/if}--> > 词原创 <img src="image/originwordflag.gif" title="词原创"/></td>
+				<td><input type="checkbox" name="originmelodyflag" id="originmelodyflag" value="1"  <!--{if $cover[originmelodyflag]}-->CHECKED<!--{/if}--> > 曲原创 <img src="image/originmelodyflag.gif" title="曲原创"/></td>
+			</tr></table>
+		</td>
+	</tr>
+	<tr>
+		<th width="150">作品类型 *</th>
+		<td><select name="productclassid" id="productclassid">
+			<option value="-1">请选择作品类型</option>
+			<!--{loop $_SGLOBAL[coverproductclass] $value}-->
+			<option value="$value[classid]"<!--{if $cover[productclassid] == $value[classid]}-->
+			selected<!--{/if}--> >$value[classname]</option>
+			<!--{/loop}-->
+		</select></td>
+	</tr>
+	<tr>
+		<th width="150">标签</th>
+		<td><input type="text" id="label" name="label" value="$cover[label]" class="t_input" size="80" maxlength="100" /></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td>
+			标签指的是该作品的相关属性：时代（古风，现代等），类型（爱情，武侠等），风格（悲剧，搞笑等）。<br/>
+			标签与标签之间，请用'/'隔开。每个标签需控制在8个字符内。
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+			&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<th>所属团队</th>
+		<td>
+			<input type="hidden" id="club" name="club" value="$cover[club]"/>
+			<input type="hidden" id="clubtagid" name="clubtagid" value="$cover[clubtagid]"/>
+			
+			<select id="clubtype" name="clubtype" onchange="javascript:displayInputType_club()">
+				<option value="1">个人剧</option>
+				<option value="2">社团</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td nowrap>&nbsp;</td>
+		<td>				
+			<table id="club_free" width="100%">
+				<tr>
+					<td>
+						<input type="text" id="club_free_name" name="club_free_name" value="个人剧" style="width: 200px;" READONLY/>
+					</td>
+				</tr>
+			</table>
+			<table id="club_tag" width="100%" border=0>
+				<tr>
+					<td>
+						请确认 该社团/工作室 的编号：　
+						<input type="text" id="club_tag_tagid" name="club_tag_tagid" value="" size="8" maxlength="8" onchange="javascript:loadmtagbyid_ajax('1,5');">
+						<a href="#" onclick="javascript:mtagquerymds('1,5');return false;">查询</a>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						群组名称：　<input type="text" id="club_tag_tagname" name="club_tag_tagname" value="" style="border:0px;" READONLY/>
+						　
+						群组类型：　<input type="text" id="club_tag_fieldname" name="club_tag_fieldname" value="" style="border:0px;" READONLY/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_club_tag(false);return false;">没有查到该群组</a>]
+					</td>
+				</tr>
+			</table>
+			<table id="club_notag" width="100%">
+				<tr>
+					<td>
+						社团/工作室 名称：　<input type="text" id="club_notag_name" name="club_notag_name" value="" style="width: 200px;"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						[<a href="#" onclick="javascript:displayInputType_club_tag(true);return false;">重新确认 社团/工作室 的编号</a>]
+					</td>
+				</tr>
+			</table>
+			<br/>
+		</td>
+<script type="text/javascript">
+
+	initInputType_club();
+	
+	function initInputType_club() {
+		if($("clubtagid").value!="" && $("clubtagid").value!=0){
+			$("clubtype").value=2;
+			$("club_tag_tagid").value=$("clubtagid").value;
+			$("club_tag_tagname").value=$("club").value;
+			
+			displayInputType_club();
+			displayInputType_club_tag(true);
+		}
+		else{
+			if($("club").value=="个人剧"){
+				$("clubtype").value=1;
+				$("club_free_name").value="个人剧";
+
+				displayInputType_club();
+			}
+			else{
+				$("clubtype").value=2;
+				$("club_notag_name").value=$("club").value;
+
+				displayInputType_club();
+				displayInputType_club_tag(false);
+			}
+		}
+	}
+	
+	function displayInputType_club() {
+		if($("clubtype").value=="1"){
+			$("club_free").style.display="block";
+			$("club_tag").style.display="none";
+			$("club_notag").style.display="none";
+		}
+
+		if($("clubtype").value=="2"){
+			$("club_free").style.display="none";
+			$("club_tag").style.display="block";
+			$("club_notag").style.display="none";
+		}
+	}
+
+	function displayInputType_club_tag(hastag) {
+		if( hastag == true ){
+			$("club_tag").style.display="block";
+			$("club_notag").style.display="none";
+		}
+		else{
+			$("club_tag").style.display="none";
+			$("club_notag").style.display="block";
+		}	
+	}
+
+	function setInputType_club() {
+		if( $("clubtype").value=="1" ){
+			$("clubtagid").value = 0;
+			$("club").value = "个人剧";
+		}
+		if( $("clubtype").value=="2" ){
+			if( $("club_tag").style.display=="block" ){
+				if($("club_tag_tagid").value==""){
+					alert("请输入该社团/工作组编号！");
+					return false;
+				}
+				$("clubtagid").value = $("club_tag_tagid").value;
+				$("club").value = $("club_tag_tagname").value;
+			}
+			if( $("club_notag").style.display=="block" ){
+				if ($("club_notag_name").value.length > 80) {
+					alert("社团/工作组名称太长，请限制在80个字符内！");
+					return false;
+				}
+				$("clubtagid").value = 0
+				$("club").value = $("club_notag_name").value.trim();
+			}
+		}
+		return true;
+	}
+	
+	function mtagquerymds(fieldid){
+		var args=new Object();
+		args.window=window;
+		window.showModalDialog("cp.php?ac=mtag&op=querymds&widget=club_tag_tagid&tagid="+$('club_tag_tagid').value+"&lockfieldid="+fieldid
+				,args,"dialogWidth:850px;dialogHeight:550px;center:yes;help:no;menubar:no;titleBar:no;resizable:no");
+		loadmtagbyid_ajax(fieldid);
+	}
+			
+	function loadmtagbyid_ajax(fieldid){
+		var offset = 0;
+		var duration = 3;
+			
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+					
+		showloading();
+					
+		var form = $('ajaxform');
+			
+		form.action="cp.php?ac=mtag&op=loadmtagbyid_ajax&tagid="+$('club_tag_tagid').value+"&lockfieldid="+fieldid;
+		form.method="post";
+				
+		ajaxpost('ajaxform', 'loadmtagbyid_ajax_response', 2000);
+	}
+
+	function loadmtagbyid_ajax_response(){
+		var tagid="";
+		var tagname="";
+		var fieldname="";
+		try{
+			var str=$("__ajaxform").innerHTML;
+					
+			var paramsArray=str.split(",");
+			if(paramsArray.length==1){
+				alert(str);
+				$("club_tag_tagid").value="";
+				$("club_tag_tagname").value="";
+				$("club_tag_fieldname").value="";
+			}else{
+				tagid=paramsArray[0];
+				tagname=paramsArray[1];
+				fieldname=paramsArray[3];
+			}
+		}
+		catch(e){
+			alert(e);
+		}
+		
+		$("club_tag_tagid").value=tagid;
+		$("club_tag_tagname").value=tagname;
+		$("club_tag_fieldname").value=fieldname;
+	}
+</script>
+	</tr>
+	<tr>
+		<th width="150">&nbsp;</th>
+		<td>
+			<span style="color:red">[注]以下信息只需要填写成员名。成员与成员之间，请用'/'隔开。</span>
+		</td>
+	</tr>
+	<tr>
+		<th width="150">原词</th>
+		<td>
+			<input type="text" id="originwordwriter" name="originwordwriter" value="$cover[originwordwriter]"	size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">原曲</th>
+		<td>
+			<input type="text" id="originmelodywriter" name="originmelodywriter" value="$cover[originmelodywriter]"	size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">原唱</th>
+		<td>
+			<input type="text" id="originsinger" name="originsinger" value="$cover[originsinger]"	size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">填词</th>
+		<td>
+			<input type="text" id="wordwriter" name="wordwriter" value="$cover[wordwriter]"	size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">翻唱*</th>
+		<td>
+			<input type="text" id="singer" name="singer" value="$cover[singer]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">后期</th>
+		<td>
+			<input type="text" id="effector" name="effector" value="$cover[effector]" size="80" maxlength="100" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">美工</th>
+		<td>
+			<input type="text" id="photographer" name="photographer" value="$cover[photographer]"	size="80" maxlength="200" />
+		</td>
+	</tr>
+	<tr>
+		<th width="150">发布时间</th>
+		<td>
+			<script type="text/javascript" src="source/script_calendar.js" charset="$_SC[charset]"></script>
+			<input type="text" name="producedate" id="producedate" value="$cover[dispproducedate]"  onclick="showcalendar(event,this,0,'<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+		<!--{if $cover[coverid]>0 }-->
+			<input type="checkbox" name="makefeed" id="makefeed" value="1"> 产生动态 
+		<!--{else}-->		
+			<input type="checkbox" name="makefeed" id="makefeed" value="1" checked> 产生动态 
+		<!--{/if}-->
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+			<input type="button" name="coversubmitbtn" value="发布" class="submit" onclick="check_coverpost();"/>
+			<!--{if $cover[coverid]>0 }-->
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" name="coverdeletebtn" value="删除" class="submit" onclick="check_coverdelete();"/>
+			<!--{/if}-->
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->"/></form>
+</div>
+
+
+<script type="text/javascript" src="image/editor/editor_function.js" charset="$_SC[charset]"></script>
+<script type="text/javascript">
+
+	//检查提交
+	function check_coverdelete() {
+		if(confirm("你确定要删除该翻唱作品吗？")){
+			$("edit_form").action="cp.php?ac=cover&op=delete&coverid=$cover[coverid]";
+			$("edit_form").submit();
+		} 
+	}
+	
+	//检查提交
+	function check_coverpost() {
+
+		// 标题
+		if ($("subject").value.trim() == "") {
+			alert("翻唱作品名不能为空！");
+			$("subject").focus();
+			return false;
+		} else if ($("subject").value.trim().length > 80) {
+			alert("翻唱作品名太长，请限制在80个字符内！");
+			$("subject").focus();
+			return false;
+		}
+
+		// 作品
+		if ($("product").value.trim() == "") {
+			alert("视频作品不能为空！");
+			$("product").focus();
+			return false;
+		} else if ($("product").value.trim().length > 500) {
+			alert("视频作品太长，请限制在500个字符内！");
+			$("product").focus();
+			return false;
+		}
+
+		
+		// 编辑器内容同步
+		edit_save();
+
+		// 作品简介
+		if ($("uchome-ttHtmlEditor").value.trim() == "") {
+			alert("作品及介绍不能为空！");
+			$("uchome-ttHtmlEditor").focus();
+			return false;
+		}
+
+		// 作品类型
+		if (parseInt($("productclassid").value) <= 0) {
+			alert("作品类型必须选择。");
+			$("productclassid").focus();
+			return false;
+		}
+
+		// 所属团队	
+		var clubvalid = setInputType_club();
+		if (clubvalid == false) {
+			$("clubtype").focus();
+			return false;
+		}
+
+		// 原词
+		if ($("originwordwriter").value.trim().length > 100) {
+			alert("原词输入太长，请限制在100个字符内！");
+			$("originwordwriter").focus();
+			return false;
+		}
+
+		// 原曲
+		if ($("originmelodywriter").value.trim().length > 100) {
+			alert("原曲输入太长，请限制在100个字符内！");
+			$("originmelodywriter").focus();
+			return false;
+		}
+
+		// 原唱
+		if ($("originsinger").value.trim().length > 100) {
+			alert("原唱输入太长，请限制在100个字符内！");
+			$("originsinger").focus();
+			return false;
+		}
+		
+		// 填词
+		if ($("wordwriter").value.trim().length > 100) {
+			alert("填词输入太长，请限制在100个字符内！");
+			$("wordwriter").focus();
+			return false;
+		}
+
+		// 翻唱
+		if ($("singer").value.trim() == "") {
+			alert("翻唱输入不能为空！");
+			$("singer").focus();
+			return false;
+		} else if ($("singer").value.trim().length > 100) {
+			alert("翻唱输入太长，请限制在100个字符内！");
+			$("singer").focus();
+			return false;
+		}
+
+		// 后期
+		if ($("effector").value.trim().length > 100) {
+			alert("后期输入太长，请限制在100个字符内！");
+			$("effector").focus();
+			return false;
+		}
+
+		// 美工
+		if ($("photographer").value.trim().length > 100) {
+			alert("美工输入太长，请限制在100个字符内！");
+			$("photographer").focus();
+			return false;
+		}
+
+		//验证码
+		if ($('seccode')) {
+			var code = $('seccode').value;
+			var x = new Ajax();
+			x.get('cp.php?ac=common&op=seccode&code=' + code, function(s) {
+				s = trim(s);
+				if (s.indexOf('succeed') == -1) {
+					alert(s);
+					$('seccode').focus();
+					return false;
+				} else {
+					$("edit_form").submit();
+				}
+			});
+		} else {
+			$("edit_form").submit();
+		}
+	}
+</script>

@@ -1,0 +1,33 @@
+<!--{template header}-->
+
+<!--{if $_GET[op]=='manage'}-->
+
+	<!--{template cp_mtag_manage}-->
+	
+<!--{elseif $_GET[op]=='editmemberintroduce'}-->
+	
+	<!--{template cp_mtag_editmemberintroduce}-->
+	
+<!--{elseif $_GET[op]=='mtaginvite'}-->
+	
+	<!--{template cp_mtag_mtaginvite}-->
+
+<!--{elseif $_GET[op]=='join'}-->
+	
+	<!--{template cp_mtag_join}-->
+
+<!--{elseif $_GET[op]=='out'}-->
+	
+	<!--{template cp_mtag_out}-->
+
+<!--{elseif $_GET[op]=='apply'}-->
+
+	<!--{template cp_mtag_apply}-->
+
+<!--{else}-->
+
+	<!--{template cp_mtag_new}-->	
+	
+<!--{/if}-->
+
+<!--{template footer}-->

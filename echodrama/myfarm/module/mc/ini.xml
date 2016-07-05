@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<main>
+	<postUrl url = "newmc.php?mod=" common="common&m" fbRequest = "cgi_app_buy?" /><!-- http请求地址 -->
+	<loading url="module/loading_v_2.swf" />
+	<folder url = "module/mc/" />
+	<version value = "xiaoyou" loginurl = "http://home.sd265.com/" />	
+	<openControl><!-- 功能开放控制 -->
+		<item name = "tool" open = "true" /><!-- 道具 -->
+		<item name = "pack" open = "false" /><!-- 好友背包 -->
+	</openControl>
+	<security host="127.0.0.1" port="3333" />	
+	<moduleList><!-- 模块列表 -->
+		<module name="main" url="module/Master.swf?v=41" statusText="加载主文件..." size="121132">
+			<material url="module/mc/main/farmui1.swf?v=33" statusText="加载UI素材..." size="260905" />
+			<material url="module/mc/main/commonui.swf?v=28" statusText="加载UI素材..." size="34441" />
+			<material url="module/mc/main/task.swf?v=6" statusText="加载任务素材..." size="51559" />		
+			<material url="module/mc/main/upgrade.swf?v=2" statusText="加载升级素材..." size="71325" />
+			<material url="module/mc/main/shopui.swf?v=7" statusText="加载图标素材..." size="155480" />
+		</module>
+	</moduleList>
+	<animals sort="1,2,3,4,5,6,7,8,9,10"><!--hour=time/3600 -->
+		<animal id="1001" name="鸡" childNum="20" product="鸡蛋" u="个" house="窝">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="14400,14400,129600,180,21420,158400"/>
+		</animal>
+		<animal id="1002" name="兔子" childNum="12" product="兔仔"  u="只" house="窝">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="18000,18000,129600,180,28620,165600"/>
+		</animal>
+		<animal id="1003" name="鹅" childNum="20" product="鹅蛋"  u="个" house="窝">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="16200,16200,151200,180,25200,183600"/>
+		</animal>
+		<animal id="1004" name="猫" childNum="12" product="小猫仔"  u="只" house="窝">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="34200,34200,216000,180,32400,284400"/>
+		</animal>		
+		<animal id="1005" name="孔雀" childNum="24" product="孔雀蛋"  u="个" house="窝">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="37800,37800,237600,180,43200,313200"/>
+		</animal>		
+		<animal id="1006" name="企鹅" childNum="16" product="小企鹅"  u="只" house="窝">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="41400,41400,259200,180,54000,342000"/>
+		</animal>
+		<animal id="1501" name="羊" childNum="24" product="羊毛"  u="卷" house="棚">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="27000,27000,172800,180,43020,226800"/>
+		</animal>
+		<animal id="1502" name="牛" childNum="12" product="牛奶"  u="瓶" house="棚">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="32400,32400,216000,180,43020,280800"/>
+		</animal>	
+		<animal id="1503" name="猴子" childNum="12" product="小猴仔"  u="只" house="棚">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="36000,36000,216000,180,36000,288000"/>
+		</animal>
+		<animal id="1504" name="袋鼠" childNum="12" product="小袋鼠"  u="只" house="棚">
+			<nextText value="幼仔,成长期,生产期,生产期,待产期,收获期"/>
+			<nextTime value="39600,39600,237600,180,43200,316800"/>
+		</animal>		
+	</animals>
+</main>

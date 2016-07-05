@@ -1,0 +1,287 @@
+<!--{eval $_TPL['titles'] = array('视频映像');}-->
+<!--{template header}-->
+
+<!--{if !empty($_SGLOBAL[inajax])}-->
+	<div id="space_photo">
+		<h3 class="feed_header">
+			<a href="cp.php?ac=video&op=new" class="r_option" target="_blank">上传视频</a>
+			我发布的视频
+		</h3>
+		<table cellspacing="4" cellpadding="4" width="100%">
+			<!--{loop $list $value}-->
+				<tr>
+					<td align="left" valign="top" colspan="2">
+						<div class="title">
+							<span style="float:right;" class="gray">编号：$value[videoid]</span>
+						</div>
+						<strong>
+							&nbsp;&nbsp;[&nbsp;$value[productclassname]&nbsp;]&nbsp;-&nbsp;<a href="space.php?do=video&videoid=$value[videoid]" title="$value[subject]" class="event_title">$value[subject]</a> 
+						</strong>
+					</td>
+					<td width="50px" align="right" valign="top" rowspan="5">
+						<div class="title">	
+							<!--{if $view!="me"}-->
+								<a href="cp.php?ac=share&type=video&id=$value[videoid]" id="a_share_$value[videoid]" onclick="ajaxmenu(event, this.id, 1)" class="a_share">分享</a>
+							<!--{/if}-->
+							<span style="color: #EF9822; float:right; padding: 0px;">评级：$value[pollsum]</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+						<span class="gray">所属团队: </span>
+							<!--{if empty($value[clubtagid])}-->
+								$value[club]
+							<!--{else}-->	
+								<a href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a>
+							<!--{/if}-->
+						<br/>
+					</td>
+					<td align="left" valign="top">
+						<span class="gray">导演／监制: </span>{$value[director]}／{$value[producer]}
+						<br/>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" colspan="2">
+						<span class="gray">CAST　　: </span><span title="$value[cast]"><!--{eval echo getstr($value[cast], 60, 0, 0, 0, 0, -1); }--></span>
+						<br/>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" colspan="2">
+						<span class="gray">后期　　: </span>$value[effector]
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+						<span class="gray">字幕　　: </span>$value[captionssmaker]<br/>
+						<span class="gray">提供者　: </span><a href="space.php?uid=$value[uid]" target="_blank">$value[username]</a><br/>
+						<br/>
+					</td>
+					<td align="left" valign="top">
+						<span class="gray">发布时间: </span>$value[dispproducedate]<br/>
+						<span class="gray">提供时间: </span>$value[dispdateline]<br/>
+						<br/>
+					</td>
+				</tr>	
+
+				<tr>
+					<td colspan="3" align="left">
+						<!--{if ($view=="me") && ($value[uid]==$_SGLOBAL['supe_uid']) }-->
+							<div class="title">
+								<div style="float:right;">
+									<a href="cp.php?ac=video&op=edit&videoid=$value[videoid]">编辑</a>
+									<span class="pipe">|</span>
+									<a href="cp.php?ac=video&op=invite&videoid=$value[videoid]">邀请好友</a>
+								</div>
+							</div>
+						<!--{/if}-->
+						<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+					</td>
+				</tr>
+				<tr><td colspan="3" style="border-top:1px dashed #ECB2C5;" align="center" >&nbsp;</td></tr>	
+			<!--{/loop}-->
+		</table>
+		<div class="footactions">
+			<div class="pages" align="right">$multi</div>
+		</div>
+	</div><br>
+<!--{else}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li$actives[all]><a href="space.php?do=video&view=all"><span>视频库</span></a></li>
+		<!--{if !empty($_SGLOBAL['supe_uid']) }-->
+			<li$actives[me]><a href="space.php?do=video&view=me"><span>我的视频列表</span></a></li>
+			<li$actives[share]><a href="space.php?do=video&view=share"><span>我的收藏列表</span></a></li>
+			<li class="null"><a href="cp.php?ac=video&op=new">添加新视频</a></li>
+		<!--{/if}-->
+	</ul>
+	<!--{if $_SGLOBAL[refer]}-->
+	<div class="r_option">
+		<a  href="$_SGLOBAL[refer]">&laquo; 返回上一页</a>
+	</div>
+	<!--{/if}-->
+</div>
+
+<form method="get" action="space.php">
+	<div class="block style4">
+		<table cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="20%">视频作品名</th>
+				<td width="20%"><input type="text" id="subject" name="subject" value="$_GET[subject]" class="t_input"/></td>
+				<td width="20%"></td>
+				<th width="20%">标签</th>
+				<td width="20%"><input type="text" id="label" name="label" value="$_GET[label]" class="t_input"/></td>
+			</tr>
+			<tr>
+				<th width="20%">所属团队</th>
+				<td width="20%"><input type="text" id="club" name="club" value="$_GET[club]" class="t_input"/></td>
+				<td></td>
+				<th>作品类型</th>
+				<td>
+					<select name="productclassid" id="productclassid" class="t_input">
+						<option value="-1"></option>
+						<!--{loop $_SGLOBAL[videoproductclass] $value}-->
+						<option value="$value[classid]"<!--{if $_GET[productclassid] == $value[classid]}-->
+						selected<!--{/if}--> >$value[classname]</option>
+						<!--{/loop}-->
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>导演／监制</th>
+				<td><input type="text" id="director" name="directorproducer" value="$_GET[directorproducer]" class="t_input"/></td>
+				<td></td>
+				<th>后期制作</th>
+				<td><input type="text" id="effector" name="effector" value="$_GET[effector]" class="t_input"/></td>
+			</tr>
+			<tr>
+				<th>CAST</th>
+				<td><input type="text" id="cast" name="cast" value="$_GET[cast]" class="t_input"/></td>
+				<td></td>
+				<td colspan="2" align="right">
+					<input type="hidden" name="label" value="$_GET[label]"/>
+					<input type="hidden" name="ac" value="video" />
+					<input type="hidden" name="do" value="video" />
+					<input type="hidden" name="view" value=$view />
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+<table cellspacing="5" cellpadding="5" border=0>
+<tr>
+<td valign="top">
+
+<!--{if $list}-->
+<table cellspacing="0" cellpadding="0" width="585" border=0>
+<!--{loop $list $value}-->
+	<tr>
+		<td align="left" valign="top" colspan="2">
+			<div class="title">
+				<span style="float:right;" class="gray">编号：$value[videoid]</span>
+			</div>
+			<strong>
+				&nbsp;&nbsp;[&nbsp;$value[productclassname]&nbsp;]&nbsp;-&nbsp;<a href="space.php?do=video&videoid=$value[videoid]" title="$value[subject]" class="event_title"><!--{eval echo getstr($value[subject], 40, 0, 0, 0, 0, -1); }--></a> 
+			</strong>
+		</td>
+		<td width="60px" align="right" valign="top" rowspan="5">
+			<div class="title">	
+				<span style="color: #EF9822; float:right; padding: 0px;">评级：$value[pollsum]</span>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">
+			<span class="gray">所属团队: </span>
+				<!--{if empty($value[clubtagid])}-->
+					$value[club]
+				<!--{else}-->	
+					<a href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a>
+				<!--{/if}-->
+			<br/>
+		</td>
+		<td align="left" valign="top">
+			<span class="gray">导演／监制: </span>
+			<!--{if !empty($value[director]) AND !empty($value[producer]) }-->
+			{$value[director]}／{$value[producer]}
+			<!--{else}-->
+			{$value[director]}{$value[producer]}
+			<!--{/if}-->
+			<br/>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top" colspan="2">
+			<span class="gray">ＣＡＳＴ: </span><span title="$value[cast]"><!--{eval echo getstr($value[cast], 60, 0, 0, 0, 0, -1); }--></span>
+			<br/>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top" colspan="2">
+			<span class="gray">后期　　: </span>$value[effector]
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">
+			<span class="gray">字幕　　: </span>$value[captionsmaker]<br/>
+			<span class="gray">提供者　: </span><a href="space.php?uid=$value[uid]" target="_blank">$value[username]</a><br/>
+			<br/>
+		</td>
+		<td align="left" valign="top">
+			<span class="gray">发布时间: </span>$value[dispproducedate]<br/>
+			<span class="gray">提供时间: </span>$value[dispdateline]<br/>
+			<br/>
+		</td>
+	</tr>	
+	<tr>
+		<td colspan="3" align="left">
+			<!--{if ( ($view=="me") && ($value[uid]==$_SGLOBAL['supe_uid']) ) || ($value[uid]==6) }-->
+				<div class="title">
+					<div style="float:right;">
+						<a href="cp.php?ac=video&op=edit&videoid=$value[videoid]">编辑</a>
+						<span class="pipe">|</span>
+						<a href="cp.php?ac=video&op=invite&videoid=$value[videoid]">邀请好友</a>
+					</div>
+				</div>
+			<!--{/if}-->
+			<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+		</td>
+	</tr>
+	<tr><td colspan="3" style="border-top:1px dashed #ECB2C5;" align="center" >&nbsp;</td></tr>	
+<!--{/loop}-->
+</table>
+<div class="footactions">
+	<div class="pages" align="right">$multi</div>
+</div>
+<!--{else}-->
+	<div style="width:585px;">目前还没有相关列表。</div>
+<!--{/if}-->
+</td>
+<td valign="top" style="border: 1px solid #DDD;">
+<div id="sidebar" style="width:190px;" >
+	<div class="sidebox">
+		<h2 class="title">
+			<p class="r_option">
+				<a href="space.php?do=video&view=$view&uid=$_GET[uid]&subject=$_GET[subject]&club=$_GET[club]&directorproducer=$_GET[directorproducer]&effector=$_GET[effector]&cast=$_GET[cast]&productclassid=$_GET[productclassid]">全部</a>
+			</p>
+			标签关键字
+		</h2>
+		<ul class="label_ul">
+		<!--{loop $videolabel_hot_list $value}-->
+			<li<!--{if $_GET[label] == $value[label]}--> class="on"<!--{/if}--> style="width:100px;">
+				<a href="space.php?do=video&view=$view&uid=$_GET[uid]&label=$value[label]&subject=$_GET[subject]&club=$_GET[club]&directorproducer=$_GET[directorproducer]&effector=$_GET[effector]&cast=$_GET[cast]&productclassid=$_GET[productclassid]" target="_self" title="{$value[label]} - 被使用[{$value[num]}]次">{$value[label]}</a>
+			</li>
+		<!--{/loop}-->
+		</ul>
+	</div>
+	
+	<div class="sidebox">
+		<h2 class="title">
+			票选排行榜
+		</h2>
+		<!--{loop $popupvideolist $value}-->
+			<div class="attention" align="left">
+				<div class="gray">编号: $value[videoid]&nbsp;类型：$value[productclassname]</div>	
+				<strong><a href="space.php?do=video&videoid=$value[videoid]" title="$value[subject]" class="event_title"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></a></strong>
+				<div class="gray">提供者: $value[username]</div>	
+				<div class="gray">&nbsp;</div>
+			</div>
+		<!--{/loop}-->
+	</div>
+</div>
+</td>
+</tr>
+</table>
+
+
+	
+
+<!--{/if}-->		
+<!--{template footer}-->

@@ -1,0 +1,85 @@
+<!--{template header}-->
+
+<h2 class="title"><img src="image/app/mtag.gif" />$mtag[fieldname] - $mtag[tagname]</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+			<!--{if $membergrade >= 8}-->
+			<li$actives[index]><a href="cp.php?ac=mtag&op=manage&subop=index&tagid=$mtag[tagid]"><span>基本设置</span></a></li>
+			<!--{/if}-->
+			
+			<!--{if $membergrade >= 8}-->
+			<li$actives[pic]><a href="cp.php?ac=mtag&op=manage&subop=pic&tagid=$mtag[tagid]"><span>宣传画</span></a></li>
+			<!--{/if}-->
+			
+			<!--{if $membergrade == 9}-->
+			<li$actives[handover]><a href="cp.php?ac=mtag&op=manage&subop=handover&tagid=$mtag[tagid]"><span>群主变更</span></a></li>
+			<!--{/if}-->
+		
+			<!--{if $_SGLOBAL['admin']==1 }-->
+			<!--{if $membergrade >= 8}-->
+			<li$actives[advertisements] $actives[advertisement]><a href="cp.php?ac=mtag&op=manage&subop=advertisements&tagid=$mtag[tagid]"><span>站内宣传</span></a></li>
+			<!--{/if}-->
+			<!--{/if}-->
+			
+			<!--{if $membergrade >= 8}-->
+			<li$actives[members] $actives[member]><a href="cp.php?ac=mtag&op=manage&subop=members&tagid=$mtag[tagid]"><span>成员管理</span></a></li>
+			<!--{/if}-->
+			
+			<!--{if $membergrade >= 8}-->
+				<!--{if $mtag[fieldid] == 1 || $mtag[fieldid] == 2 || $mtag[fieldid] == 5 }-->
+			<li$actives[products] $actives[product]><a href="cp.php?ac=mtag&op=manage&subop=products&tagid=$mtag[tagid]"><span>作品管理</span></a></li>
+				<!--{/if}-->
+			<!--{/if}-->
+			
+			<!--{if $membergrade >= 8}-->
+			<li$actives[fans]><a href="cp.php?ac=mtag&op=manage&subop=fans&tagid=$mtag[tagid]"><span>粉丝管理</span></a></li>
+			<!--{/if}-->
+			
+			<!--{if $membergrade >= 8}-->
+			<li$actives[tasks] $actives[task]><a href="cp.php?ac=mtag&op=manage&subop=tasks&tagid=$mtag[tagid]"><span>任务管理</span></a></li>
+			<!--{/if}-->
+			
+			<!--{if $membergrade >= 8}-->
+			<li$actives[threads]><a href="cp.php?ac=mtag&op=manage&subop=threads&tagid=$mtag[tagid]"><span>话题管理</span></a></li>
+			<!--{/if}-->
+		<li><a href="space.php?do=mtag&tagid=$mtag[tagid]"><span>返回</span></a></li>
+	</ul>
+	
+	<!--{if ($actives[members] || $actives['products'] || $actives['fans'] || $actives['threads']) }-->
+	<script>
+		function searchUser() {
+			$('searchform').submit();
+		}
+	</script>
+	<form name="searchform" id="searchform" method="get" action="cp.php">
+		<div style="float:right;margin:0 6px 5px 0;">
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<!--{if $actives[members] || $actives[tasks] }-->
+						<td style="padding: 0;"><input type="text" id="key" name="key" value="<!--{if empty($_GET[key])}-->搜索成员<!--{else}-->$_GET[key]<!--{/if}-->" onfocus="if(this.value=='搜索成员')this.value='';" class="t_input" tabindex="1" style="width: 60px; border-right: none;" /></td>
+					<!--{/if}-->
+					<!--{if $actives['products'] }-->
+						<td style="padding: 0;"><input type="text" id="key" name="key" value="<!--{if empty($_GET[key])}-->搜索作品<!--{else}-->$_GET[key]<!--{/if}-->" onfocus="if(this.value=='搜索作品')this.value='';" class="t_input" tabindex="1" style="width: 60px; border-right: none;" /></td>
+					<!--{/if}-->
+					<!--{if $actives['fans'] }-->
+						<td style="padding: 0;"><input type="text" id="key" name="key" value="<!--{if empty($_GET[key])}-->搜索粉丝<!--{else}-->$_GET[key]<!--{/if}-->" onfocus="if(this.value=='搜索粉丝')this.value='';" class="t_input" tabindex="1" style="width: 60px; border-right: none;" /></td>
+					<!--{/if}-->
+					<!--{if $actives['threads'] }-->
+						<td style="padding: 0;"><input type="text" id="key" name="key" value="<!--{if empty($_GET[key])}-->搜索话题<!--{else}-->$_GET[key]<!--{/if}-->" onfocus="if(this.value=='搜索话题')this.value='';" class="t_input" tabindex="1" style="width: 60px; border-right: none;" /></td>
+					<!--{/if}-->
+					<td style="padding: 0;"><a href="javascript:searchUser();"><img src="image/search_btn.gif" alt="搜索" /></a></td>
+				</tr>
+			</table>
+		</div>
+		<input type="hidden" name="ac" value="mtag">
+		<input type="hidden" name="op" value="manage">
+		<input type="hidden" name="tagid" value="$mtag[tagid]">
+		<input type="hidden" name="subop" value="$_GET[subop]">
+		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+	</form>
+	<!--{/if}-->
+</div>
+
+<!--{if $_GET[key]}-->
+<div class="h_status">以下是搜索<span style="color:red;font-weight:bold;">$_GET[key]</span> 结果列表</div>
+<!--{/if}-->

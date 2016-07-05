@@ -1,0 +1,80 @@
+<!--{template cp_mtag_manageheader}-->
+
+<form id="advertisementsactionform" name="advertisementsactionform" method="post" action="">
+<input type="hidden" id="taskid" name="taskid" value="" >
+
+<div id="content" style="width: 790px;">
+	<div class="tabs_header">
+		<ul class="tabs">
+			<li class="null"><a href="cp.php?ac=mtag&op=manage&subop=advertisement&tagid=$mtag[tagid]">新增站内宣传</a></li>
+		</ul>
+	</div>		
+	
+	<div class="topic_list">
+		<table cellspacing="0" cellpadding="0" class="reclisttable" >
+			<thead>
+				<tr>
+					<th>目前状态</th>
+					<th>宣传广告名称</th>
+					<!--{if 1==2 }-->
+					<th>投入资金</th>
+					<th>权重</th>
+					<!--{/if}-->
+					<th>创建人/时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!--{loop $advertisementlist $key $value}-->
+				<!--{if $key%2==1}-->
+				<tr class="alt">
+				<!--{else}-->
+				<tr>
+				<!--{/if}-->
+					<td align="center" title="$value['statusnote']">
+						$value['statusdisp']
+					</td>
+					<td align="center" title="$value['subject']">
+						<!--{eval echo getstr($value[subject], 26, 0, 0, 0, 0, -1); }-->
+					</td>
+					<!--{if 1==2 }-->
+					<td align="center">
+						$value['credit']
+					</td>
+					<td align="center">
+						$value['weight']
+					</td>
+					<!--{/if}-->
+					<td align="center">
+						$value['username'] / $value['datelinedisp']
+					</td>
+					<td align="center" title="$value[subject]">
+						<!--{eval echo getstr($value[subject], 36, 0, 0, 0, 0, -1); }-->
+					</td>
+					<td align="center">
+						<a href="#" onclick="javascript:manageadverisement('$value[advertisementid]');">管理</a>
+						 | <a href="#" onclick="javascript:deleteadverisement('$value[advertisementid]');">删除</a>
+					</td>
+				</tr>
+			<!--{/loop}-->
+			</tbody>
+		</table>
+		<div class="page">$multi</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+function manageadverisement(advertisementid){
+	 location.href="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=editheader&tagid=$mtag[tagid]&advertisementid="+advertisementid+"&return=cpmtagadvertisements";
+}
+
+function deleteadvertisement(advertisementid){
+	$('advertisementsactionform').action="cp.php?ac=mtag&op=manage&subop=advertisement&atomop=delete&tagid=$mtag[tagid]&advertisementid="+advertisementid+"&return=cpmtagadvertisements";
+	$('advertisementsactionform').submit();
+}
+
+</script>
+</form>
+
+<!--{template cp_mtag_managefooter}-->

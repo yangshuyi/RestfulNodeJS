@@ -1,0 +1,189 @@
+<!--{template cp_mtag_manageheader}-->
+<form id="memberclassactionform" name="memberclassactionform" method="post" 
+	action="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=$_GET[subop]">
+	
+<h1>成员职务类型维护</h1>
+<table id="memberclasstable" name="memberclasstable" cellspacing="0" cellpadding="0" class="reclisttable" >
+<tbody id="memberclasstbody" name="memberclasstbody">
+	<tr>
+		<th width="150" nowrap>职务</th>
+		<th width="150" nowrap>目前状态</th>
+		<th width="150" nowrap>分类</th>
+		<th width="80" nowrap>显示顺序</th>
+		<th width="80" nowrap><input type="button" name="topicsubmit" value="添加职务" class="submit" onclick="javascript:addmemberclass();"/>	</th>
+	</tr>
+	
+	<!--{loop $memberclasslist $key $memberclassvalue}-->
+	<tr id="TR_$memberclassvalue[classid]">
+		<td align="center" >
+			<input type="hidden" id="classid[]" name="classid[]" value="$memberclassvalue[classid]" >
+			<input type="hidden" id="systemflag[]" name="systemflag[]" value="$memberclassvalue[systemflag]" >
+			<input type="text" id="classname[]" name="classname[]" value="$memberclassvalue[classname]" size="20" <!--{if $memberclassvalue[systemflag]==1}-->READONLY style="border-color:white;border:1px solid white;" <!--{/if}-->>
+		</td>
+		<td align="center" >
+			$memberclassvalue[statename]
+		</td>
+		<td align="center" >
+			<!--{if $memberclassvalue[systemflag]==0}-->
+			用户自定义
+			<!--{else}-->
+			系统设置
+			<!--{/if}-->
+		</td>
+		<td align="center" >
+			<input type="text" name="displayorder[]" value="$memberclassvalue[displayorder]" size="5">
+		</td>
+		<td align="center">
+			<!--{if $memberclassvalue[state]==0}-->
+				<!--{if $memberclassvalue[systemflag]==0}-->
+					<input type="button" id="BN_$memberclassvalue[classid]" name="BN_$memberclassvalue[classid]" value="删除" onclick="javascript:removememberclass(this);"/>	
+				<!--{/if}-->
+			<!--{else}-->
+				&nbsp;
+			<!--{/if}-->
+		</td>
+	</tr>
+	<!--{/loop}-->
+</tbody>
+</table>
+<table id="threadclasstable" name="threadclasstable" cellspacing="20" cellpadding="20" class="reclisttable" >
+	<tr>
+		<td align="right">
+			<input type="button" value="保存修改" class="submit" onclick="javascript:postmemberclass();"/>	
+		</td>
+		<td align="left">
+			<input type="button" value="放弃修改" class="submit" onclick="javascript:revertmemberclass();"/>	
+		</td>
+	</tr>
+</table>
+
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+
+<script type="text/javascript">
+
+function revertmemberclass(){
+	location.href="cp.php?ac=mtag&op=manage&tagid=$mtag[tagid]&subop=members";
+}
+
+function postmemberclass(){
+	var form=$('memberclassactionform');
+	var classnames=new Map();
+	var classnamesize=0;
+	for(var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+		if(e.type=="hidden" && e.name.indexOf("classid")>=0) {
+			
+		}else if(e.type=="text" && e.name.indexOf("classname")>=0) {
+			classnamesize++;
+			if(e.value==""){
+				alert("职务不能为空！");
+				e.focus();
+				return false;
+			}
+			else{
+				classnames.put(e.value,e.value);  
+			}
+		}else if(e.type=="text" && e.name.indexOf("displayorder")>=0) {
+			if(e.value==""){
+				alert("显示顺序不能为空！");
+				e.focus();
+				return false;
+			}
+			else {
+				var reg = /^[0-9]*[1-9][0-9]*$/;
+			    var isNum = reg.test(e.value);
+				if( !isNum ){
+					alert("显示顺序必须为数字！");
+					e.focus();
+					return false;
+				}
+			}
+		}
+	}	
+	if(classnames.size()!=classnamesize){
+		alert("职务定义有重复！");
+		e.focus();
+		return false;
+	}
+	$('memberclassactionform').submit();
+}
+
+function removememberclass(deletebtn){
+	var name=deletebtn.name;
+	var id = deletebtn.name.substring(3,name.length);
+
+	var row=$('TR_'+id);
+	row.parentNode.removeChild(row);
+}
+
+function addmemberclass(){
+	var table=$('memberclasstbody');
+
+	row = document.createElement("TR");
+	var id=parseInt(10000*Math.random());
+	row.setAttribute("id", "TR_"+id);
+
+	var classid=document.createElement("INPUT");  
+	classid.setAttribute("type","hidden");  
+	classid.setAttribute("name","classid[]");  
+	classid.setAttribute("value","0");  
+
+	var systemflag=document.createElement("INPUT");  
+	systemflag.setAttribute("type","hidden");  
+	systemflag.setAttribute("name","systemflag[]");  
+	systemflag.setAttribute("value","0"); 
+	
+	var classname=document.createElement("INPUT");  
+	classname.setAttribute("type","text");  
+	classname.setAttribute("name","classname[]");  
+	classname.setAttribute("value","");  
+
+	var displayorder=document.createElement("INPUT");  
+	displayorder.setAttribute("type","text");  
+	displayorder.setAttribute("name","displayorder[]");  
+	displayorder.setAttribute("value","1"); 
+	displayorder.setAttribute("size","5"); 
+
+	var deletebtn=document.createElement("INPUT");  
+	deletebtn.setAttribute("type","button");  
+	deletebtn.setAttribute("id","BN_"+id);  
+	deletebtn.setAttribute("name","BN_"+id);  
+	deletebtn.setAttribute("value","删除"); 
+	deletebtn.onclick = function click(){
+		removememberclass(deletebtn);
+	}; 
+	
+	cell1 = document.createElement("TD");
+	cell1.setAttribute("align","center");  
+	cell1.appendChild(classid);
+	cell1.appendChild(systemflag);
+	cell1.appendChild(classname);
+	row.appendChild(cell1);
+
+	cell2 = document.createElement("TD");
+	cell2.setAttribute("align","center"); 
+	cell2.appendChild(document.createTextNode("未含成员"));
+	row.appendChild(cell2);
+
+	cell3 = document.createElement("TD");
+	cell3.setAttribute("align","center"); 
+	cell3.appendChild(document.createTextNode("用户自定义"));
+	row.appendChild(cell3);
+	
+	cell4 = document.createElement("TD");
+	cell4.setAttribute("align","center"); 
+	cell4.appendChild(displayorder);
+	row.appendChild(cell4);
+	
+	cell5 = document.createElement("TD");
+	cell5.setAttribute("align","center"); 
+	cell5.appendChild(deletebtn);
+	
+	row.appendChild(cell5);
+	
+	table.appendChild(row);
+}
+</script>
+</form>
+<!--{template cp_mtag_managefooter}-->
+

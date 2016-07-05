@@ -1,0 +1,55 @@
+<div id="div_post">
+	<div class="board">
+		<div class="page">$multi</div>
+		
+		<div id="post_ul">
+			<!--{loop $discussionpostlist $value}-->
+				<!--{template space_post_li}-->
+			<!--{/loop}-->
+		</div>
+
+		<div class="page">$multi</div>
+
+		<!--{if $fansgrade>=3 || $fansgrade==0  }-->
+
+		<div class="quickpost" id="postform">
+			<form method="post" action="cp.php?ac=thread&op=savepost" class="quickpost" id="quickpostform" name="quickpostform">
+				<table>
+					<tr>
+						<td>
+							<a href="###" id="quickpost" onclick="showFace(this.id, 'message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
+							<!--{if $_SGLOBAL['magic']['doodle']}-->
+							<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
+							<!--{/if}-->
+							<br />
+							<textarea id="message" name="message" onkeydown="ctrlEnter(event, 'postsubmit_btn');" col="50" rows="6" style="width: 430px; height: 6em;"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="hidden" name="tid" value="0" />
+							<input type="hidden" name="tagid" value="$mtag[tagid]" />
+							<input type="hidden" name="op" value="savepost" />
+							<input type="hidden" name="postsubmit" value="true" />
+							<input type="button" value="回复" class="submit" onclick="javascript:postpost();"/>
+							<div id="__quickpostform"></div>
+						</td>
+					</tr>
+				</table>
+				<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+			</form>
+		</div>
+		<!--{else}-->
+		<div class="c_form">
+			你已被该群组屏蔽，不能参与话题讨论。
+		</div>
+		<!--{/if}-->
+	</div>
+</div>
+
+<script type="text/javascript">
+	function postpost(){
+		$('quickpostform').submit();
+		resizeImg('div_post','600');
+	}
+</script>

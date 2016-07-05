@@ -1,0 +1,47 @@
+<div>
+	<h2 class="title"><div class="r_option"><a href="cp.php?ac=resume&op=addcurrent">&raquo; 添加</a></div>
+	</h2>
+	
+	<table width="100%" cellspacing="0" cellpadding="0" class="reclisttable">
+	<tr>
+		<td width="50" align="center" nowrap>作品分类</td>
+		<td><span class="pipe">|</span></td>
+		<td width="300" align="center" nowrap>作品名</td>
+		<td><span class="pipe">|</span></td>
+		<td width="150" align="center">所属社团</td>
+		<td><span class="pipe">|</span></td>
+		<td width="300" align="center">职务</td>
+		<td><span class="pipe">|</span></td>
+		<td width="50" align="center">&nbsp;</td>
+	</tr>
+	<!--{loop $currentlist $value}-->
+	<tr>
+		<td align="center" nowrap>$value[producttypename]</td>
+		<td><span class="pipe">|</span></td>
+		<td title="$value[productname]">
+			<!--{if empty($value[productid]) }--> 
+				<!--{eval echo getstr($value[productname], 30, 0, 0, 0, 0, -1); }-->
+			<!--{else}--> 
+				<a href="$value[producturl]" target="_blank"><!--{eval echo getstr($value[productname], 30, 0, 0, 0, 0, -1); }--></a>
+			<!--{/if}-->
+		</td>
+		<td><span class="pipe">|</span></td>
+		<td  title="$value[club]" align="center" nowrap>
+			<!--{if empty($value[clubtagid]) }--> 
+				<!--{eval echo getstr($value[club], 30, 0, 0, 0, 0, -1); }-->
+			<!--{else}--> 
+				<a href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank"><!--{eval echo getstr($value[club], 30, 0, 0, 0, 0, -1); }--></a>
+			<!--{/if}-->
+		</td>
+		<td><span class="pipe">|</span></td>
+		<td title="$value[jobname]"><!--{eval echo getstr($value[jobname], 30, 0, 0, 0, 0, -1); }--></td>
+		<td><span class="pipe">|</span></td>
+		<!--{if $value[uid]==$_SGLOBAL['supe_uid']}--> 
+			<td align="center" nowrap><a href="cp.php?ac=resume&op=toeditcurrent&resumehistoryid=$value[resumehistoryid]">管理</a></td>
+		<!--{else}--> 
+			<td align="center" nowrap><a href="cp.php?ac=resume&op=viewcurrent&resumehistoryid=$value[resumehistoryid]">详细</a></td>
+		<!--{/if}--> 
+	</tr>
+	<!--{/loop}-->
+</table>
+</div>

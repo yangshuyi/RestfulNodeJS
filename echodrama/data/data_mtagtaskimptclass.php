@@ -1,0 +1,24 @@
+<?php
+if(!defined('IN_UCHOME')) exit('Access Denied');
+$_SGLOBAL['mtagtaskimptclass']=Array
+	(
+	1 => Array
+		(
+		'classid' => 1,
+		'classname' => '½ô¼±',
+		'displayorder' => 1
+		),
+	2 => Array
+		(
+		'classid' => 2,
+		'classname' => 'ÖØÒª',
+		'displayorder' => 2
+		),
+	3 => Array
+		(
+		'classid' => 3,
+		'classname' => 'Ò»°ã',
+		'displayorder' => 3
+		)
+	)
+?>

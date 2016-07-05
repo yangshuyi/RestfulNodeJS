@@ -1,0 +1,226 @@
+<!--{eval $_TPL['titles'] = array($searchengine_description,'广播剧场');}-->
+<!--{template header}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="space.php?do=topic&topicid=$topicid"><span>查看广播剧</span></a></li>
+		<li><a href="space.php?do=topic"><span>广播剧列表</span></a></li>
+	</ul>
+</div>
+
+<div id="content" style="width: 540px;">
+
+	<!--{template cp_topic_view}-->
+
+	<!--{template space_topic_sns_comment}-->
+	
+</div>
+
+<div id="sidebar" style="width: 250px;">
+
+	<!--{if 1==2}-->
+	<div id="site_gift_content" class="sidebox">
+		<!--{template space_site_gift}-->
+	</div>
+	<!--{/if}-->
+
+	<!--{if $_SGLOBAL['administrator'] == 1 }-->
+	<div id="topic_share_content" class="sidebox"  style="height:120px">
+		<h2 class="title">分享广播剧</h2>
+			<table width="100%" style="" border=0 cellspacing="0" cellpadding="0"  >
+				<tr height="30px">
+					<td align="center" valign="middle" colspan="2" >
+						<table><tr><td><div class="addbuttonouterdiv"><div class="addbuttoninnerdiv">
+							<a href="cp.php?ac=share&type=topic&id=$topic[topicid]" id="a_share_$topic[topicid]" onclick="ajaxmenu(event, this.id, 1)" class="addbutton" title="站内分享">站内分享</a>
+						</div></div></td></tr></table>
+					</td>
+				</tr>
+				<tr height="30px">
+					<td align="center" valign="middle" colspan="2" >
+						<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+								<a class="bds_qzone"></a>
+								<a class="bds_tsina"></a>
+								<a class="bds_tqq"></a>
+								<a class="bds_renren"></a>
+								<span class="bds_more">更多</span>
+								<a class="shareCount"></a>
+							</div>
+							<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+							<script type="text/javascript" id="bdshell_js"></script>
+							<script type="text/javascript">
+								document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();
+							</script>
+						</div>
+					</td>
+				</tr>
+			</table>
+	</div>
+	<!--{/if}-->
+	
+	<div id="topic_poll_content" class="sidebox">
+		<!--{template space_topic_poll}-->
+	</div>
+	
+	<!--{if 1==2}-->
+	<div id="link_content" class="sidebox">
+		<h2 class="title">相关链接</h2>
+		<ul class="post_list line_list">
+			<!--{if $topic[clubtagid]>0 }-->
+			<li>&nbsp;&nbsp;<a href="space.php?do=mtag&tagid=$topic[clubtagid]" target="_blank">&raquo;访问该社团群组</a></li>
+			<!--{/if}-->
+			
+			<!--{if $topic[topictagid]>0 }-->
+			<li>&nbsp;&nbsp;<a href="space.php?do=mtag&tagid=$topic[topictagid]" target="_blank">&raquo;访问该广播剧群组</a></li>
+			<!--{/if}-->
+		</ul>
+	</div>
+	<br/>
+	<!--{/if}-->
+	
+	<!--{if !empty($othertopiclist)}-->
+	<div id="link_content" class="sidebox">
+		<h2 class="title">相关广播剧</h2>
+		<ul class="post_list line_list">
+			<!--{loop $othertopiclist $value}-->
+				<li>
+					<a href="space.php?do=topic&topicid=$value[topicid]" target="_blank" title="$value[hint]">
+						<span><!--{eval echo getstr($value[subject], 28, 0, 0, 0, 0, -1); }--></span>
+					</a>
+				</li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	<br/>
+	<!--{/if}-->
+
+	<div id="topic_attachment_content" class="sidebox">
+		<!--{template space_topic_attachment}-->
+	</div>
+	<br/>
+	
+	<div id="topic_label_content" class="sidebox">
+		<!--{template space_topic_label}-->
+	</div>
+	
+<script type="text/javascript">
+	function setTopicPollValue() {
+		var offset = 0;
+		var duration = 3;
+	
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+	
+		var topicpollvalue=$('topicpollvalue').value;
+		if(topicpollvalue>=1 && topicpollvalue<=5){
+			if(confirm("您确定要将该广播剧评级为 ["+topicpollvalue+"颗星] 吗？")){
+				showloading();
+			
+				var form = $('actionForm');
+				form.action="cp.php?ac=topic&op=poll&topicid=$topic[topicid]&topicpollvalue="+topicpollvalue;
+				ajaxpost('actionForm', 'renderTopicPollValue', 2000);
+			}
+		}else{
+			alert("请选择评分等级");
+		}
+	}
+
+	function renderTopicPollValue(id, result) {
+  		if(result!=null){
+			var str=$("__actionForm").innerHTML;
+			var paramsArray=str.split(",");
+			if(paramsArray.length>1){
+				topicid=paramsArray[0];
+				pollvalue=paramsArray[1];
+				ajaxget('cp.php?ac=topic&op=viewpoll&topicid='+topicid, 'topic_poll_content');
+			}
+		}
+	}
+
+
+	function labeldisplaydivitem_onclick(divItem){
+		if($('topiclabel')){
+			$('topiclabel').value=divItem.innerHTML;
+		}
+	}
+
+	function setTopicLabel() {
+		var offset = 0;
+		var duration = 3;
+		
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+		
+		var topiclabel=$('topiclabel').value.trim();
+		if(topiclabel==""){
+			alert("你给出的标签内容不能为空");
+			return false;
+		}else if(topiclabel.length>10){
+			alert("你给出的标签内容过长，只允许输入8个字符。");
+			return false;
+		}
+	
+		showloading();
+		
+		var form = $('actionForm');
+		form.action="cp.php?ac=topic&op=settopiclabel&topicid=$topic[topicid]&topiclabel="+topiclabel;
+		ajaxpost('actionForm', 'renderTopicLabel', 2000);
+	}
+
+	function removeTopicLabel() {
+		var offset = 0;
+		var duration = 3;
+		
+		timeout = 0;
+		isbox = 0;
+		duration = 0;
+		
+		showloading();
+		
+		var form = $('actionForm');
+		form.action="cp.php?ac=topic&op=removetopiclabel&topicid=$topic[topicid]";
+		ajaxpost('actionForm', 'renderTopicLabel', 2000);
+	}
+
+	function renderTopicLabel(id, result) {
+	  	$("__actionForm").style.display = 'none';		
+		
+		if(result!=null){
+			var str=$("__actionForm").innerHTML;
+			var paramsArray=str.split(",");
+			if(paramsArray.length>1){
+				ajaxget('cp.php?ac=topic&op=viewtopiclabel&topicid=$topic[topicid]', 'topic_label_content');
+			}
+		}
+	}
+	</script>	
+	<br/>
+	
+	<div id="link_content" class="sidebox">
+		<h2 class="title">
+			<span class="r_option"><a href="cp.php?ac=forum&op=newthread&threadclassid={FORUM_XILIJUPING_CLASSID}&topicid=$topic[topicid]">撰写</a></span>
+			犀利评论
+		</h2>
+		<ul class="post_list line_list">
+			<!--{loop $topicthread_list $value}-->
+			<li>&nbsp;&nbsp;<a href="space.php?do=forum&view=viewall&tid=$value[tid]" title="$value[subject]" target="_blank"><!--{eval echo getstr($value[subject], 28, 0, 0, 0, 0, -1); }--></a></li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+	<br/>	
+	
+	<div class="sidebox">
+		<h2 class="title">统计信息</h2>
+		<ul class="news_list">
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$topic[viewnum]&nbsp;次访问</li>
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$topic[joinnum]&nbsp;次收藏</li>
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$topic[downloadnum]&nbsp;次下载</li>
+			<li style="height:auto; color: #EF9822;">&nbsp;&nbsp;&nbsp;&nbsp;$topic[replynum]&nbsp;次评论</li>
+		</ul>
+	</div>
+</div>
+	
+<!--{template footer}-->

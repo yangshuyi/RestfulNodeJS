@@ -1,0 +1,28 @@
+<!--{if $resumecurrentlist}-->
+<table cellspacing="0" cellpadding="0" class="reclisttable">
+	<tr>
+		<th width="60px" nowrap>作品分类</th>
+		<th nowrap>作品名称</th>
+		<th width="70px" nowrap>所属社团</th>
+		<th width="70px" nowrap>职务</th>
+	</tr >
+	<!--{loop $resumecurrentlist $key $value}-->
+	<tr id="resume_current_title_$key" style="cursor:pointer;" <!--{if $key%2==1}--> class="alt"<!--{/if}--> onclick="if( $('resume_current_content_$key').style.display=='none' ){$('resume_current_content_$key').style.display='';}else{$('resume_current_content_$key').style.display='none';};" >
+		<td align="center" nowrap>$value[producttypename]</td>
+		<!--{if empty($value[productid]) }--> 
+		<td align="left" title="$value[productname]" nowrap><!--{eval echo getstr($value[productname], 50, 0, 0, 0, 0, -1); }--></td>
+		<!--{else}--> 
+		<td align="left" title="$value[productname]" nowrap><a href="$value[producturl]" target="_blank"><!--{eval echo getstr($value[productname], 50, 0, 0, 0, 0, -1); }--></a></td>
+		<!--{/if}--> 
+		<td align="center" title="$value[club]" nowrap><!--{eval echo getstr($value[club], 12, 0, 0, 0, 0, -1); }--></td>
+		<td align="left" title="$value[jobname]" nowrap><!--{eval echo getstr($value[jobname], 10, 0, 0, 0, 0, -1); }--></td>
+	</tr>
+	<tr id="resume_current_content_$key" style="display:none">
+		<td colspan="5" align="left">$value[introduce]</td>
+	</tr>
+	<!--{/loop}-->
+</table>
+<div class="pages" align="right">$multi</div>
+<!--{else}-->
+	<div align="center" style="border: none;">无</div>
+<!--{/if}-->

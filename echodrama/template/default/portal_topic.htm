@@ -1,0 +1,160 @@
+<!--{eval $_TPL['nosidebar']=1;}-->
+<!--{template header}-->
+
+<div id="network" style="margin: 0 0 5px; ">
+<!--{template portal_intromusic}-->
+
+<!--{template portal_topic_searchbar}-->
+
+<div class="topicbox">
+ 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	    <tr>
+			<td width="310" valign="top">
+				<!--{template portal_topic_recommand}-->
+	      	</td>
+			<td width="650" valign="top">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr height="70">
+						<td class="topicforecastnotice" width="122">
+						
+						</td>
+						<td align="left" width="540" valign="middle" class="topicforecastbline">
+							<!--{template portal_topic_forecast}-->
+			         	</td>
+					</tr>
+				</table>
+				<div style="float:left;width:386px;margin-top:3px">
+					<div class="topicsitejointitle">热评推荐</div>
+		          	<table width="100%" border="0" cellspacing="0" cellpadding="3" style="margin-top:3px;margin-right:3px">
+		          	<!--{eval $index=0; }-->
+		          	<!--{loop $topic_sitejoin_list $value}-->
+		          		<!--{eval $index=$index+1; }-->
+		  				<!--{if $index < 4 }-->
+						<tr>
+		    				<td nowrap>
+		    					<h3>
+			    					<span style="color:black"><!--{if empty($topic_command[clubtagid])}-->$value[club]<!--{else}--><a class="gray" href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a><!--{/if}-->&nbsp;发布</span>
+			    					<span style="color:black">$value[productclassname]</span>
+			    					<a href="space.php?do=topic&&topicid=$value[topicid]" title="$value[subject]" target="_blank" style="overflow:hidden;">$value[subject]</a>
+			    				</h3>
+			    				<span class="gray">广播剧标签：</span><span title="$value[label]" class="gray" style="overflow:hidden;">$value[label]</span>
+			    				<br/>
+			      				<span class="gray" >STAFF：</span><span title="$value[group]" class="gray" style="overflow:hidden;">$value[group]</span>
+			      				<br />
+			     				<span class="gray" >CAST ：</span><span title="$value[cast]" class="gray" style="overflow:hidden;">$value[cast]</span>
+			     				<br />
+			      				<span class="egz">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;$value[downloadnum]&nbsp;次下载,&nbsp;$value[replynum]&nbsp;次评论</span>
+			      				<hr />	
+		      				</td>
+						</tr>
+						
+		 				<!--{/if}-->
+		 			<!--{/loop}-->
+					</table>
+				</div>
+				<div style="float:right;width:252px;margin-top:3px">
+	          		<div class="topiclatestborder">
+	            		<div class="topiclatesttitle"></div>
+	            		<table width="95%" border="0" align="center" cellpadding="6" cellspacing="0">
+	            		<!--{loop $topic_latest_list $value}-->
+	  						<tr>
+						    	<td class="blue">	
+						    		<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[hint]" target="_blank" ><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></a>
+								</td>
+						    	<td align="right"><span class="gray">$value[productclassname]</span></td>
+						  	</tr>
+						<!--{/loop}-->
+						</table>
+					</div>	
+		        </div>
+			</td>
+	    </tr>
+	</table>
+</div>
+<!--{if $_SGLOBAL['administrator'] == 1 }-->
+<div class="nbox_portal">
+	<h2 class="ntitle"><span class="r_option"><a href="cp.php?ac=topic&op=new" target="_blank">&raquo;&nbsp;发剧</a>&nbsp;|&nbsp;<a href="space.php?do=topic&view=single&firstpublish=1" target="_blank">&raquo;&nbsp;查看全部首发剧</a></span>&nbsp;&nbsp;&nbsp;&nbsp;应声虫首发剧 &raquo;</h2>
+	<div class="titlebline"></div>
+	<!--{template portal_topic_firstpublish}-->
+</div>
+<!--{/if}-->
+
+<div class="nbox_portal">
+	<h2 class="ntitle"><!-- span class="r_option"><a href="space.php?do=topic&view=rank" target="_blank">&raquo;&nbsp;全部</a></span -->&nbsp;&nbsp;&nbsp;&nbsp;点击量排行榜 &raquo;</h2>
+	<div class="titlebline"></div>
+	<!--{template portal_topic_rank}-->
+</div>
+<div class="nbox_portal" style="border: none; ">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="topicalbumbox">
+		<tr>
+			<td width="6" height="6"></td>
+			<td bgcolor="#f2f0f1"><div style="border-top:1px solid #dedede;height:6px;margin-top:-3px;width:955px;position:absolute;"></div></td>
+			<td width="6" height="6"><img src="template/default/image/portal/righttoproundborder.gif" width="6" height="6" /></td>
+		</tr>
+		<tr>
+			<td style="border-left:1px solid #dedede;background-color:#f2f0f1;">&nbsp;</td>
+			<td bgcolor="#f2f0f1">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td><div class="topicalbumnotice"></div></td>
+						<td align="right"><a href="space.php?do=thread&tid=475" target="_blank">&raquo;&nbsp;完结剧申请</a>&nbsp;|&nbsp;<a href="space.php?do=topic&view=album" target="_blank">&raquo;&nbsp;更多</a></td>
+					</tr>
+					<tr height="250px">
+						<td colspan="2" class="topicalbumoverborder">
+							<!--{template portal_topic_album}-->
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td style="border-right:1px solid #dedede;background-color:#f2f0f1;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="6" height="6"><img src="template/default/image/portal/leftbottomroundborder.gif" width="6" height="6" /></td>
+			<td bgcolor="#f2f0f1"><div style="border-bottom:1px solid #dedede;height:5px!important;height:6px;_margin-top:-14px;width:955px;"></div></td>
+			<td width="6" height="6"><img src="template/default/image/portal/rightbottomroundborder.gif" width="6" height="6" /></td>
+		</tr>
+	</table>
+</div>
+<div class="nbox_portal">
+	<h2 class="ntitle"><span class="r_option"><a href="space.php?do=mtag&view=all" target="_blank">&raquo;&nbsp;更多</a></span>&nbsp;&nbsp;&nbsp;&nbsp;社团工作室 &raquo;</h2>
+	<div class="titlebline"></div>
+	<!--{template portal_topic_mtag}-->
+</div>
+
+<div class="nbox_portal" style="width:400px; height:560px; margin-right:5px">
+	<h2 class="ntitle"><span class="r_option"><a href="space.php?do=thread&tid=476" target="_blank">&raquo;&nbsp;申请</a></span>&nbsp;&nbsp;&nbsp;&nbsp;社团宣传&raquo;</h2>
+	<div class="titlebline"></div>
+	
+	<!--{eval $adv_borderwidth=410; }-->
+	<!--{eval $adv_width=369; }-->
+	<!--{eval $adv_height=492; }-->
+	<!--{template portal_topic_advertisement}-->
+</div>
+
+<div class="nbox_portal" style="width:555px;">
+	<h2 class="ntitle"><span class="r_option"><a href="space.php?do=forum&threadclassid={FORUM_XILIJUPING_CLASSID}" target="_blank">&raquo;&nbsp;更多</a></span>&nbsp;&nbsp;&nbsp;&nbsp;广播剧长评&raquo;</h2>
+	<div class="titlebline"></div>
+	<!--{template portal_topic_threads}-->
+</div>
+
+<div class="nbox_portal">
+	<h2 class="ntitle"><span class="r_option"><a href="cp.php?ac=event&op=new" target="_blank">&raquo;&nbsp;发布招募</a>&nbsp;|&nbsp;<a href="space.php?do=event&view=recommend">&raquo;&nbsp;更多招募活动</a></span>&nbsp;&nbsp;&nbsp;&nbsp;招募&nbsp;&raquo;
+	<!--{eval $index=0; }-->
+	<!--{loop $_SGLOBAL[jobclass] $value}-->
+		<!--{eval $index=$index+1; }-->
+		<!--{if $value[realjob]==1}-->
+			<!--{if $value[classid]!=99}-->
+			&nbsp; <a href="space.php?do=event&view=all&type=going&classid=$value[classid]" title="$value[classname]" target="_blank">$value[classname]</a>
+			<!--{/if}-->
+		<!--{/if}-->
+		<!--{if $index>11}-->
+		<!--{eval break;}-->
+		<!--{/if}-->
+	<!--{/loop}-->
+	</h2>
+	<div class="titlebline"></div>
+	<!--{template portal_topic_event}-->
+</div>
+
+</div>
+<!--{template footer}-->

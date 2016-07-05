@@ -1,0 +1,242 @@
+<form method="get" action="space.php">
+	<div class="block style4">
+	<table width="100%" cellspacing="3" cellpadding="3">
+	<tr><td>
+		
+		<table width="100%" cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="15%">剧名</th>
+				<td width="34%"><input type="text" id="subject" name="subject" value="$_GET[subject]" class="t_input"/></td>
+				<td width="2%">&nbsp;</td>
+				<th width="15%">标签</th>
+				<td width="34%"><input type="text" id="label" name="label" value="$_GET[label]" class="t_input"/>
+				</td>
+			</tr>
+		</table>
+		<table id="morefilterTable" width="100%" cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="15%">所属团队</th>
+				<td width="34%"><input type="text" id="club" name="club" value="$_GET[club]" class="t_input"/></td>
+				<td width="2%">&nbsp;</td>
+				<th width="15%">导演</th>
+				<td width="34%"><input type="text" id="director" name="director" value="$_GET[director]" class="t_input"/></td>
+			</tr>
+			<tr>
+				<th>策划</th>
+				<td><input type="text" id="cehua" name="cehua" value="$_GET[cehua]" class="t_input"/></td>
+				<td></td>
+				<th>监制</th>
+				<td><input type="text" id="producer" name="producer" value="$_GET[producer]" class="t_input"/></td>
+			</tr>
+			<tr>
+				<th>编剧</th>
+				<td><input type="text" id="writer" name="writer" value="$_GET[writer]" class="t_input"/></td>
+				<td></td>
+				<th>后期</th>
+				<td><input type="text" id="effector" name="effector" value="$_GET[effector]" class="t_input"/></td>
+			</tr>
+			<tr>
+				<th>Cast</th>
+				<td><input type="text" id="cast" name="cast" value="$_GET[cast]" class="t_input"/></td>
+				<td></td>
+				<th>美工</th>
+				<td><input type="text" id="photographer" name="photographer" value="$_GET[photographer]" class="t_input"/></td>
+			</tr>
+			<tr>
+				<th>作品类型</th>
+				<td>
+					<select name="productclassid" id="productclassid" class="t_input">
+						<option value="-1"></option>
+						<!--{loop $_SGLOBAL[productclass] $key $value}-->
+						<option value="$key"<!--{if $_GET[productclassid] == $key}-->
+						selected<!--{/if}--> >$value[classname]</option>
+						<!--{/loop}-->
+					</select>
+				</td>
+				<td></td>
+				<th>宣传</th>
+				<td><input type="text" id="propagandizer" name="propagandizer" value="$_GET[propagandizer]" class="t_input"/></td>
+			</tr>
+		</table>
+		<table width="100%" cellspacing="3" cellpadding="3">
+			<tr>
+				<th width="15%">排序方式</th>
+				<td width="34%" align="left">
+					<select name="orderby" id="orderby" class="t_input">
+						<option value="t.replydateline DESC" <!--{if $_GET[orderby]=='t.replydateline DESC'}-->selected<!--{/if}--> >评论时间 - 由新至旧</option>
+						<option value="t.dateline DESC" <!--{if $_GET[orderby]=='t.dateline DESC'}-->selected<!--{/if}--> >发布时间 - 由新至旧</option>
+						<option value="t.viewnum DESC" <!--{if $_GET[orderby]=='t.viewnum DESC'}-->selected<!--{/if}--> >访问量　 - 由多至少</option>
+					</select>
+					<input type="hidden" name="ac" value="topic" />
+					<input type="hidden" name="do" value="topic" />
+					<input type="hidden" name="view" value=$view />
+
+				</td>
+				<td width="2%">&nbsp;</td>
+				<th width="15%">&nbsp;</th>
+				<td width="34%" align="right">
+					<input type="submit" name="searchsubmit" value="搜索" class="submit" />
+				</td>
+			</tr>
+		</table>
+	</td>
+	<td width="100px" valign="top" nowrap>
+		<span id="showFilterDiv" class="r_option" style="margin-top:7px;">
+			<a id="showFilterLinkShowFlag" href="#" onclick="javascript:showfilterFunction(1);return false;" <!--{if empty($_GET[showfilter])}--><!--{else}-->style="display:none;"<!--{/if}-->> + 显示搜索条件</a>
+			<a id="showFilterLinkUnShowFlag" href="#" onclick="javascript:showfilterFunction(0);return false;" <!--{if empty($_GET[showfilter])}-->style="display:none;"<!--{else}--><!--{/if}-->> - 隐藏搜索条件</a>
+		</span>
+		<input type="hidden" id="showfilter" name="showfilter" value="$_GET[showfilter]"/>
+	</td>
+<script type="text/javascript">
+function showfilterFunction(showFlag) {
+	if(showFlag){
+		$('morefilterTable').style.display="";
+		$('showFilterLinkShowFlag').style.display="none";
+		$('showFilterLinkUnShowFlag').style.display="";
+	}else{
+		$('morefilterTable').style.display="none";
+		$('showFilterLinkShowFlag').style.display="";
+		$('showFilterLinkUnShowFlag').style.display="none";
+	}
+}
+showfilterFunction($_GET[showfilter]);
+</script>
+	</tr></table>
+	</div>
+</form>
+
+<!--{if $view=="me"}-->
+<br/><span style="color:red">[注]广播剧审核： 关于时间：0点之前，在2~3小时之内就能完成审核。0点之后，将不作审核。</span>
+<!--{/if}-->
+<div class="event_list" style="margin-top:5px;">
+	<table cellspacing="0" cellpadding="0" border="0">
+		<tr>
+			<td valign="top" width="600">
+			<!--{if $list}-->
+				<table cellspacing="0" cellpadding="0" width="100%">
+				<!--{loop $list $key $value}-->
+					<tr height="30px">
+						<td width="150px" align="center" valign="top" rowspan="2">
+						<!--{if $view=="single" }-->
+							<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" target="_blank"><img alt="$value[subject]" src="$value[picthumb]" width="100px" style="padding: 4px; background: #FFF; border: 1px solid #DDD;"/></a><br/>
+						<!--{/if}-->
+						<!--{if $view=="album" }-->
+							<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" target="_blank"><img alt="$value[subject]" src="$value[picthumb]" width="100px" style="padding: 4px; background: #FFF; border: 1px solid #DDD;"/></a><br/>
+						<!--{/if}-->
+						<!--{if $view=="share"}-->
+							<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" target="_blank"><img alt="$value[subject]" src="$value[picthumb]" width="100px" style="padding: 4px; background: #FFF; border: 1px solid #DDD;"/></a><br/>
+						<!--{/if}-->
+						<!--{if $view=="me"}-->
+							<a href="cp.php?ac=topic&op=edit&topicid=$value[topicid]" title="$value[subject]" target="_blank"><img alt="$value[subject]" src="$value[picthumb]" width="100px" style="padding: 4px; background: #FFF; border: 1px solid #DDD;"/></a><br/>
+						<!--{/if}-->
+						</td>
+						<td width="460px" colspan="2" align="left" valign="top">
+							<div class="title">
+								<!--{if !empty($value[pollsum])}-->
+								<span style="color: #EF9822; float:right; padding: 0px; margin: 0 18px 0 5px;">评级：$value[pollsum]</span>
+								<!--{/if}-->
+							</div>
+							<span class="gray">$value[typename]名：</span>
+							<!--{if $view=="single"}-->
+								<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" target="_blank" class="event_title">$value[subject]</a> 
+							<!--{/if}-->
+							<!--{if $view=="album"}-->
+								<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" target="_blank" class="event_title">$value[subject]</a> 
+							<!--{/if}-->
+							<!--{if $view=="share"}-->
+								<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]" target="_blank" class="event_title">$value[subject]</a> 
+							<!--{/if}-->
+							<!--{if $view=="me"}-->
+								<a href="cp.php?ac=topic&op=edit&topicid=$value[topicid]" title="$value[subject]" target="_blank" class="event_title">$value[subject]</a> 
+							<!--{/if}-->
+							<p>&nbsp;</p>
+							<!--{if !empty($value[label]) }-->
+							<span class="gray">标签　　：</span>$value[label]<br/>
+							<!--{/if}-->
+						</td>
+						<td width="20px" >&nbsp;</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" >
+							<span class="gray">作品类型：</span>$value[productclassname]<br/>
+							<span class="gray">所属团队：</span><!--{if empty($value[clubtagid])}-->$value[club]<!--{else}--><a class="black" href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a><!--{/if}--><br/>
+							<span class="gray">原著　　：</span>$value[yuanzhu]<br/><br/>
+							<span class="gray">上传时间：</span>$value[dateline]<br/>
+						</td>
+						<td align="left" valign="top" >
+							<span class="gray">导演：</span>$value[director]<br/>
+							<span class="gray">编剧：</span>$value[writer]<br/>
+							<span class="gray">后期：</span>$value[effector]<br/>
+						</td>
+						<td>&nbsp;</td>
+					</tr>	
+					<tr>
+						<td align="center" class="gray" nowrap>
+							编号: $value[dispnumber]
+						</td>
+						<td colspan="2" align="left">
+							<!--{if $view=="single"}-->
+								<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[downloadnum]&nbsp;&nbsp;次下载,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+							<!--{/if}-->
+							<!--{if $view=="album"}-->
+								<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[downloadnum]&nbsp;&nbsp;次下载,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+							<!--{/if}-->
+							<!--{if $view=="share"}-->
+								<span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次收藏,&nbsp;&nbsp;$value[downloadnum]&nbsp;&nbsp;次下载,&nbsp;&nbsp;$value[replynum]&nbsp;&nbsp;次评论</span>
+							<!--{/if}-->
+							<!--{if $view=="me"}-->
+								<span class="gray">目前状态&nbsp;[</span>&nbsp;$_SGLOBAL[topicauditclass][$value[auditstate]][classname]&nbsp;<span class="gray">]</span>
+							<!--{/if}-->
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr><td colspan="3" style="border-top:1px dashed #ECB2C5;" align="center" >&nbsp;</td><td>&nbsp;</td></tr>	
+				<!--{/loop}-->
+				</table>
+				<div class="footactions">
+					<div class="pages" align="right">$multi</div>
+				</div>
+			<!--{else}-->
+				<div class="c_form">目前还没有相关列表。</div>
+			<!--{/if}-->
+			</td>
+			<td valign="top" style="border: 1px solid #DDD;" width="207">
+				<div id="sidebar" style="width:206px;" >
+					<div class="sidebox">
+						<h2 class="title">
+							<p class="r_option">
+								<a href="space.php?do=topic&view=$_GET[view]&subject=$_GET[subject]&club=$_GET[club]&director=$_GET[director]&writer=$_GET[writer]&producer=$_GET[producer]&effector=$_GET[effector]&cast=$_GET[cast]&productclassid=$_GET[productclassid]&orderby=$_GET[orderby]">全部</a>
+							</p>
+							标签关键字
+						</h2>
+						<ul class="label_ul">
+						<!--{loop $topiclabel_hot_list $value}-->
+							<li<!--{if $_GET[label] == $value[label]}--> class="on"<!--{/if}--> style="width:70px;">
+								<a href="space.php?do=topic&view=$_GET[view]&subject=$_GET[subject]&club=$_GET[club]&director=$_GET[director]&writer=$_GET[writer]&producer=$_GET[producer]&effector=$_GET[effector]&cast=$_GET[cast]&productclassid=$_GET[productclassid]&orderby=$_GET[orderby]&label=$value[label]" target="_self" title="{$value[label]} - 被使用[{$value[num]}]次">{$value[label]}</a>
+							</li>
+						<!--{/loop}-->
+						</ul>	
+					</div>
+					
+					<p>&nbsp;</p>
+					
+					<div class="sidebox" align="center">
+						<h2 class="title">
+							每月新剧推荐
+						</h2>
+						<!--{loop $popuptopiclist $value}-->
+							<div class="attention" align="center">
+								<a href="space.php?do=topic&topicid=$value[topicid]" title="$value[subject]"><img class='imageborder' width="110px" alt="$value[subject]" src="$value[picthumb]"/></a>	
+								<div class="event_title"  title="$value[hint]"><!--{eval echo getstr($value[subject], 24, 0, 0, 0, 0, -1); }--></div>	
+								<div class="gray">编号: $value[dispnumber]<br/><br/></div>	
+							</div>
+						<!--{/loop}-->
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+		

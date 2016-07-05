@@ -1,0 +1,25 @@
+<!--{template admin/tpl/header}-->
+
+<!--{if $_GET['op'] == 'new'}-->
+
+	<!--{template admin/tpl/topicalbum_manage}-->
+	
+<!--{elseif $_GET['op'] == 'manage'}-->
+
+	<!--{template admin/tpl/topicalbum_manage}-->	
+	
+<!--{elseif $_GET['op'] == 'list'}-->
+
+	<!--{template admin/tpl/topicalbum_list}-->	
+	
+<!--{elseif $_GET['op'] == 'order'}-->
+
+	<!--{template admin/tpl/topicalbum_order}-->	
+	
+<!--{/if}-->
+
+<div class="side">
+	<!--{template admin/tpl/side}-->
+</div>
+
+<!--{template admin/tpl/footer}-->

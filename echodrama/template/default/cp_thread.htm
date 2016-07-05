@@ -1,0 +1,34 @@
+<!--{template header}-->
+
+
+<!--{if $_GET['op'] == 'newthread'}-->
+
+	<!--{template cp_thread_maintain}-->
+	
+<!--{elseif $_GET['op'] == 'editthread'}-->
+	
+	<!--{template cp_thread_maintain}-->
+	
+<!--{elseif $_GET['op'] == 'edit'}-->
+
+	<!--{template cp_thread_edit}-->
+
+<!--{elseif $_GET['op'] == 'delete'}-->
+
+	<!--{template cp_thread_delete}-->
+	
+<!--{elseif $_GET['op'] == 'edithot'}-->
+
+	<!--{template cp_thread_edithot}-->
+	
+<!--{elseif $_GET['op'] == 'reply'}-->
+
+	<!--{template cp_thread_reply}-->
+
+<!--{else}-->
+
+	<!--{template cp_thread_maintain}-->
+
+<!--{/if}-->
+
+<!--{template footer}-->

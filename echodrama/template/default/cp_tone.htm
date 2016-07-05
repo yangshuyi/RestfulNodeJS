@@ -1,0 +1,37 @@
+<!--{template header}-->
+
+<!--{template nav_header}-->
+
+<div class="tabs_header">
+<ul class="tabs">
+	<!--{if $_GET[op]=='new'}-->
+		<li <!--{if $_GET[op]=='new'}-->class="active"<!--{/if}-->><a href="cp.php?ac=tone&op=new"><span>提交新声线</span></a></li>
+	<!--{else}-->
+		<li <!--{if $_GET[op]=='toedit'}-->class="active"<!--{/if}-->><a href="cp.php?ac=tone&op=toedit&toneid=$tone[toneid]"><span>编辑声线</span></a></li>
+		<li <!--{if $_GET[op]=='invite'}-->class="active"<!--{/if}-->><a href="cp.php?ac=tone&op=invite&toneid=$tone[toneid]"><span>邀请好友</span></a></li>
+	<!--{/if}-->
+	<li><a href="space.php?do=tone&view=me"><span>返回声线列表</span></a></li>
+</ul>
+<!--{if $_SGLOBAL[refer]}-->
+<div class="r_option"><a href="$_SGLOBAL[refer]">&laquo; 返回上一页</a>
+</div>
+<!--{/if}--></div>
+
+<!--{if $_GET[op]=='new'}-->
+	
+	<!--{template cp_tone_new}-->
+
+<!--{elseif $_GET[op]=='toedit'}-->
+	
+	<!--{template cp_tone_edit}-->
+
+<!--{elseif $_GET[op]=='invite'}-->
+
+	<!--{template cp_tone_invite}-->
+	
+<!--{else}-->
+
+	
+<!--{/if}-->
+
+<!--{template footer}-->
