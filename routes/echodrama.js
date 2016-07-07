@@ -15,79 +15,42 @@ var connection = mysql.createConnection({
     port: '3307',                   //端口号
 });
 
-//创建一个connection
-connection.connect(function (err) {
-    if (err) {
-        console.log('[query] - :' + err);
-        return;
-    }
-    console.log('[connection connect]  succeed!');
-});
-
-//执行SQL语句
-connection.query('SELECT * from ysys_topic', function (err, rows, fields) {
-    if (err) {
-        console.log('[query] - :' + err);
-        return;
-    }
-    console.log('The solution is: ', rows[0]);
-});
-//关闭connection
-connection.end(function (err) {
-    if (err) {
-        return;
-    }
-    console.log('[connection end] succeed!');
-});
-
-
 /* Get listing. */
-router.get('/', function (request, response, next) {
+router.get('/topic/list', function (request, response, next) {
     var result = {code:1,message:'success',data: null};
 
-    client.keys('*', function (error, keys) {
-        if (error){
+    //创建一个connection
+    connection.connect(function (err) {
+        if (err) {
+            console.log('[query] - :' + err);
+            return;
+        }
+        console.log('[connection connect]  succeed!');
+    });
+
+    var sql = 'SELECT * from ysys_topic';
+    connection.query(sql, function (err, rows, fields) {
+        if (err){
             result.code = -1;
-            result.message = error;
+            result.message = err;
             response.send(result);
         } else{
-            result.data = keys;
+            result.data = rows;
             response.send(result);
         }
     });
-});
 
-router.get('/:key', function (request, response, next) {
-    var key = request.param('key');
-    var result = {code:1,message:'success',data: null};
 
-    redis.get(key, function(error, value) {
-        if (error){
-            result.code = -1;
-            result.message = error;
-            response.send(result);
-        } else{
-            result.data = value;
-            response.send(result);
+
+    //关闭connection
+    connection.end(function (err) {
+        if (err) {
+            return;
         }
+        console.log('[connection end] succeed!');
     });
-});
 
 
-router.post('/delete', function (request, response, next) {
-    var key = request.param('key');
-    var result = {code:1,message:'success',data: null};
-
-    client.delete(key, function (err, o) {
-        if (error){
-            result.code = -1;
-            result.message = error;
-            response.send(result);
-        } else{
-            result.data = o;
-            response.send(result);
-        }
-    });
 });
 
 module.exports = router;

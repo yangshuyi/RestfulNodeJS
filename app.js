@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var redisManage = require('./routes/redisManage');
 var httpClient = require('./routes/httpClient');
+var echodrama = require('./routes/echodrama');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/redisManage', redisManage);
 app.use('/httpClient', httpClient);
+app.use('/echodrama', echodrama);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

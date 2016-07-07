@@ -1,0 +1,34 @@
+export interface Topic {
+    topicId:number;
+    topicTagId?:number;
+    number:number;
+    type:string;
+    singletonAlbum:number;
+    uId:number;
+    userName:string;
+    label:string;
+    subject:string;
+    message:string;
+    productClassId:number;
+    club:string;
+    clubTagId:number;
+    director:string;
+    cehua:string;
+    producer:string;
+    yuanzhu:string;
+    writer:string;
+    cast:string;
+    effector:string;
+    photographer:string;
+    produceDate:string;
+    dateline:string;
+    replyNum:number;
+    viewNum:number;
+    downloadNum:number;
+    joinNum:number;
+    poll_1:number;
+    poll_2:number;
+    poll_3:number;
+    poll_4:number;
+    poll_5:number;
+}
