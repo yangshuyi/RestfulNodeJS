@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17,7 +16,7 @@ var AppFooterComponent = (function () {
     function AppFooterComponent() {
     }
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', app_info_model_1.AppInfo)
     ], AppFooterComponent.prototype, "appInfo", void 0);
     AppFooterComponent = __decorate([
@@ -26,7 +25,7 @@ var AppFooterComponent = (function () {
             template: '' +
                 '<div class="container">' +
                 '    <div class="row">' +
-                '       <div class="col-sm-12 center">&copy; 2013 <a target="_blank" href="{{url}}" title="{{footName}}">{{footName}}</a>. All Rights Reserved.</div>' +
+                '       <div class="col-sm-12 center">&copy; 2016 <a target="_blank" href="{{url}}" title="{{appInfo.siteHyperlink}}">{{appInfo.siteHyperlink}}</a>. All Rights Reserved.Version {{appInfo.version}}</div>' +
                 '   </div>' +
                 '</div>' +
                 '',
@@ -35,6 +34,6 @@ var AppFooterComponent = (function () {
         __metadata('design:paramtypes', [])
     ], AppFooterComponent);
     return AppFooterComponent;
-}());
+})();
 exports.AppFooterComponent = AppFooterComponent;
 //# sourceMappingURL=app-footer.component.js.map

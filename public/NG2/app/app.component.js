@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -26,14 +25,14 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             template: '<app-header [appInfo]="appInfo"></app-header>' +
-                '<router-outlet></router-outlet>' +
-                'Footer',
+                '<div class="container"><router-outlet></router-outlet></div>' +
+                '<app-footer [appInfo]="appInfo"></app-footer>',
             styles: [''],
             directives: [app_header_component_1.AppHeaderComponent, redis_manager_component_1.RedisManagerComponent, router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
-}());
+})();
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

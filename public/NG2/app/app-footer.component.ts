@@ -1,6 +1,6 @@
 //One or more import statements to reference the things we need.
-import {Component} from '@angular/core';
-import { OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import { Router }       from '@angular/router';
 import {AppInfo} from "./app-info.model";
 
 //A @Component decorator that tells Angular what template to use and how to create the component.
@@ -10,7 +10,7 @@ import {AppInfo} from "./app-info.model";
     template: '' +
     '<div class="container">' +
     '    <div class="row">' +
-    '       <div class="col-sm-12 center">&copy; 2013 <a target="_blank" href="{{url}}" title="{{footName}}">{{footName}}</a>. All Rights Reserved.</div>' +
+    '       <div class="col-sm-12 center">&copy; 2016 <a target="_blank" href="{{url}}" title="{{appInfo.siteHyperlink}}">{{appInfo.siteHyperlink}}</a>. All Rights Reserved.Version {{appInfo.version}}</div>' +
     '   </div>' +
     '</div>' +
     '',
@@ -19,10 +19,12 @@ import {AppInfo} from "./app-info.model";
 
 //A component class that controls the appearance and behavior of a view through its template.
 //AppComponent is the root of the application
-export class AppFooterComponent implements OnInit {
+export class AppFooterComponent {
     @Input()
     private appInfo:AppInfo;
 
     constructor() {
     }
 }
+
+
