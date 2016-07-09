@@ -3,14 +3,14 @@ import {Component, Input} from '@angular/core';
 import { Router }       from '@angular/router';
 import {AppInfo} from "./app-info.model";
 
-let template = require('./app-header.html');
+//let template = require('./app-header.html');
 
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 @Component({
     selector: 'app-header', //The selector specifies a simple CSS selector for an HTML element that represents the component.
-    templateUrl: 'app-header.html',
-    atemplate: '<header>' +
+    //templateUrl: 'app-header.html',
+    template: '<header>' +
     '<div class="top-bar">'+
     '   <div class="container">'+
     '       <div class="row">'+
@@ -46,7 +46,7 @@ export class AppHeaderComponent{
     ) {
     }
 
-    navigateToModule(menu:Object){
+    navigateToModule(menu:{routerLink:string}){
         this.router.navigate([menu.routerLink, {}]);
     }
 }

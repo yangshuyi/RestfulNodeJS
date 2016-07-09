@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var image_properties_model_1 = require("./common/image-properties.model");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var BootstrapComponent = (function () {
@@ -15,6 +17,11 @@ var BootstrapComponent = (function () {
         //When we're ready to build a substantive application, we can expand this class with properties and application logic.
         this.title = 'NATIVE ANGULAR 2 DIRECTIVES FOR BOOTSTRAP';
         console.log('RedisManagerComponent constructor');
+        this.imageProperties = new image_properties_model_1.ImageProperties();
+        this.imageProperties.srcUrl = 'images/topic-thumbnail.jpg';
+        this.imageProperties.containerWidth = 200;
+        this.imageProperties.containerHeight = 200;
+        this.imageProperties.title = 'Topic-Thumbnail';
     }
     BootstrapComponent.prototype.ngOnInit = function () {
     };
@@ -25,6 +32,11 @@ var BootstrapComponent = (function () {
                 '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
                 '<div>About fontawesome</div>' +
                 '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>' +
+                '<br/>' +
+                '<image-thumbnail [imageproperties]="imageProperties"></image-thumbnail>' +
+                '' +
+                '' +
+                '' +
                 '',
             styles: [''],
             directives: [],
@@ -33,6 +45,6 @@ var BootstrapComponent = (function () {
         __metadata('design:paramtypes', [])
     ], BootstrapComponent);
     return BootstrapComponent;
-})();
+}());
 exports.BootstrapComponent = BootstrapComponent;
 //# sourceMappingURL=bootstrap.component.js.map

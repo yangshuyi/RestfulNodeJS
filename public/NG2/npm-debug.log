@@ -1,0 +1,1805 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@3.9.5
+3 info using node@v6.2.2
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly install loadAllDepsIntoIdealTree
+19 silly fetchNamedPackageData @angular/common
+20 silly mapToRegistry name @angular/common
+21 silly mapToRegistry scope (from package name) @angular
+22 verbose mapToRegistry no registry URL found in name for scope @angular
+23 silly mapToRegistry using default registry
+24 silly mapToRegistry registry https://registry.npm.taobao.org/
+25 silly mapToRegistry data Result {
+25 silly mapToRegistry   raw: '@angular/common',
+25 silly mapToRegistry   scope: '@angular',
+25 silly mapToRegistry   name: '@angular/common',
+25 silly mapToRegistry   rawSpec: '',
+25 silly mapToRegistry   spec: 'latest',
+25 silly mapToRegistry   type: 'tag' }
+26 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcommon
+27 silly fetchNamedPackageData @angular/compiler
+28 silly mapToRegistry name @angular/compiler
+29 silly mapToRegistry scope (from package name) @angular
+30 verbose mapToRegistry no registry URL found in name for scope @angular
+31 silly mapToRegistry using default registry
+32 silly mapToRegistry registry https://registry.npm.taobao.org/
+33 silly mapToRegistry data Result {
+33 silly mapToRegistry   raw: '@angular/compiler',
+33 silly mapToRegistry   scope: '@angular',
+33 silly mapToRegistry   name: '@angular/compiler',
+33 silly mapToRegistry   rawSpec: '',
+33 silly mapToRegistry   spec: 'latest',
+33 silly mapToRegistry   type: 'tag' }
+34 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcompiler
+35 silly fetchNamedPackageData @angular/core
+36 silly mapToRegistry name @angular/core
+37 silly mapToRegistry scope (from package name) @angular
+38 verbose mapToRegistry no registry URL found in name for scope @angular
+39 silly mapToRegistry using default registry
+40 silly mapToRegistry registry https://registry.npm.taobao.org/
+41 silly mapToRegistry data Result {
+41 silly mapToRegistry   raw: '@angular/core',
+41 silly mapToRegistry   scope: '@angular',
+41 silly mapToRegistry   name: '@angular/core',
+41 silly mapToRegistry   rawSpec: '',
+41 silly mapToRegistry   spec: 'latest',
+41 silly mapToRegistry   type: 'tag' }
+42 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcore
+43 silly fetchNamedPackageData @angular/forms
+44 silly mapToRegistry name @angular/forms
+45 silly mapToRegistry scope (from package name) @angular
+46 verbose mapToRegistry no registry URL found in name for scope @angular
+47 silly mapToRegistry using default registry
+48 silly mapToRegistry registry https://registry.npm.taobao.org/
+49 silly mapToRegistry data Result {
+49 silly mapToRegistry   raw: '@angular/forms',
+49 silly mapToRegistry   scope: '@angular',
+49 silly mapToRegistry   name: '@angular/forms',
+49 silly mapToRegistry   rawSpec: '',
+49 silly mapToRegistry   spec: 'latest',
+49 silly mapToRegistry   type: 'tag' }
+50 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fforms
+51 silly fetchNamedPackageData @angular/http
+52 silly mapToRegistry name @angular/http
+53 silly mapToRegistry scope (from package name) @angular
+54 verbose mapToRegistry no registry URL found in name for scope @angular
+55 silly mapToRegistry using default registry
+56 silly mapToRegistry registry https://registry.npm.taobao.org/
+57 silly mapToRegistry data Result {
+57 silly mapToRegistry   raw: '@angular/http',
+57 silly mapToRegistry   scope: '@angular',
+57 silly mapToRegistry   name: '@angular/http',
+57 silly mapToRegistry   rawSpec: '',
+57 silly mapToRegistry   spec: 'latest',
+57 silly mapToRegistry   type: 'tag' }
+58 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fhttp
+59 silly fetchNamedPackageData @angular/platform-browser
+60 silly mapToRegistry name @angular/platform-browser
+61 silly mapToRegistry scope (from package name) @angular
+62 verbose mapToRegistry no registry URL found in name for scope @angular
+63 silly mapToRegistry using default registry
+64 silly mapToRegistry registry https://registry.npm.taobao.org/
+65 silly mapToRegistry data Result {
+65 silly mapToRegistry   raw: '@angular/platform-browser',
+65 silly mapToRegistry   scope: '@angular',
+65 silly mapToRegistry   name: '@angular/platform-browser',
+65 silly mapToRegistry   rawSpec: '',
+65 silly mapToRegistry   spec: 'latest',
+65 silly mapToRegistry   type: 'tag' }
+66 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fplatform-browser
+67 silly fetchNamedPackageData @angular/platform-browser-dynamic
+68 silly mapToRegistry name @angular/platform-browser-dynamic
+69 silly mapToRegistry scope (from package name) @angular
+70 verbose mapToRegistry no registry URL found in name for scope @angular
+71 silly mapToRegistry using default registry
+72 silly mapToRegistry registry https://registry.npm.taobao.org/
+73 silly mapToRegistry data Result {
+73 silly mapToRegistry   raw: '@angular/platform-browser-dynamic',
+73 silly mapToRegistry   scope: '@angular',
+73 silly mapToRegistry   name: '@angular/platform-browser-dynamic',
+73 silly mapToRegistry   rawSpec: '',
+73 silly mapToRegistry   spec: 'latest',
+73 silly mapToRegistry   type: 'tag' }
+74 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fplatform-browser-dynamic
+75 silly fetchNamedPackageData @angular/router
+76 silly mapToRegistry name @angular/router
+77 silly mapToRegistry scope (from package name) @angular
+78 verbose mapToRegistry no registry URL found in name for scope @angular
+79 silly mapToRegistry using default registry
+80 silly mapToRegistry registry https://registry.npm.taobao.org/
+81 silly mapToRegistry data Result {
+81 silly mapToRegistry   raw: '@angular/router',
+81 silly mapToRegistry   scope: '@angular',
+81 silly mapToRegistry   name: '@angular/router',
+81 silly mapToRegistry   rawSpec: '',
+81 silly mapToRegistry   spec: 'latest',
+81 silly mapToRegistry   type: 'tag' }
+82 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2frouter
+83 silly fetchNamedPackageData @angular/upgrade
+84 silly mapToRegistry name @angular/upgrade
+85 silly mapToRegistry scope (from package name) @angular
+86 verbose mapToRegistry no registry URL found in name for scope @angular
+87 silly mapToRegistry using default registry
+88 silly mapToRegistry registry https://registry.npm.taobao.org/
+89 silly mapToRegistry data Result {
+89 silly mapToRegistry   raw: '@angular/upgrade',
+89 silly mapToRegistry   scope: '@angular',
+89 silly mapToRegistry   name: '@angular/upgrade',
+89 silly mapToRegistry   rawSpec: '',
+89 silly mapToRegistry   spec: 'latest',
+89 silly mapToRegistry   type: 'tag' }
+90 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fupgrade
+91 silly fetchNamedPackageData angular2-in-memory-web-api
+92 silly mapToRegistry name angular2-in-memory-web-api
+93 silly mapToRegistry using default registry
+94 silly mapToRegistry registry https://registry.npm.taobao.org/
+95 silly mapToRegistry data Result {
+95 silly mapToRegistry   raw: 'angular2-in-memory-web-api',
+95 silly mapToRegistry   scope: null,
+95 silly mapToRegistry   name: 'angular2-in-memory-web-api',
+95 silly mapToRegistry   rawSpec: '',
+95 silly mapToRegistry   spec: 'latest',
+95 silly mapToRegistry   type: 'tag' }
+96 silly mapToRegistry uri https://registry.npm.taobao.org/angular2-in-memory-web-api
+97 silly fetchNamedPackageData bootstrap
+98 silly mapToRegistry name bootstrap
+99 silly mapToRegistry using default registry
+100 silly mapToRegistry registry https://registry.npm.taobao.org/
+101 silly mapToRegistry data Result {
+101 silly mapToRegistry   raw: 'bootstrap',
+101 silly mapToRegistry   scope: null,
+101 silly mapToRegistry   name: 'bootstrap',
+101 silly mapToRegistry   rawSpec: '',
+101 silly mapToRegistry   spec: 'latest',
+101 silly mapToRegistry   type: 'tag' }
+102 silly mapToRegistry uri https://registry.npm.taobao.org/bootstrap
+103 silly fetchNamedPackageData core-js
+104 silly mapToRegistry name core-js
+105 silly mapToRegistry using default registry
+106 silly mapToRegistry registry https://registry.npm.taobao.org/
+107 silly mapToRegistry data Result {
+107 silly mapToRegistry   raw: 'core-js',
+107 silly mapToRegistry   scope: null,
+107 silly mapToRegistry   name: 'core-js',
+107 silly mapToRegistry   rawSpec: '',
+107 silly mapToRegistry   spec: 'latest',
+107 silly mapToRegistry   type: 'tag' }
+108 silly mapToRegistry uri https://registry.npm.taobao.org/core-js
+109 silly fetchOtherPackageData font-awesome@github:fortawesome/Font-Awesome
+110 silly cache add args [ 'font-awesome@github:fortawesome/Font-Awesome', null ]
+111 verbose cache add spec font-awesome@github:fortawesome/Font-Awesome
+112 silly fetchNamedPackageData lodash
+113 silly mapToRegistry name lodash
+114 silly mapToRegistry using default registry
+115 silly mapToRegistry registry https://registry.npm.taobao.org/
+116 silly mapToRegistry data Result {
+116 silly mapToRegistry   raw: 'lodash',
+116 silly mapToRegistry   scope: null,
+116 silly mapToRegistry   name: 'lodash',
+116 silly mapToRegistry   rawSpec: '',
+116 silly mapToRegistry   spec: 'latest',
+116 silly mapToRegistry   type: 'tag' }
+117 silly mapToRegistry uri https://registry.npm.taobao.org/lodash
+118 silly fetchNamedPackageData ng2-bootstrap
+119 silly mapToRegistry name ng2-bootstrap
+120 silly mapToRegistry using default registry
+121 silly mapToRegistry registry https://registry.npm.taobao.org/
+122 silly mapToRegistry data Result {
+122 silly mapToRegistry   raw: 'ng2-bootstrap',
+122 silly mapToRegistry   scope: null,
+122 silly mapToRegistry   name: 'ng2-bootstrap',
+122 silly mapToRegistry   rawSpec: '',
+122 silly mapToRegistry   spec: 'latest',
+122 silly mapToRegistry   type: 'tag' }
+123 silly mapToRegistry uri https://registry.npm.taobao.org/ng2-bootstrap
+124 silly fetchNamedPackageData reflect-metadata
+125 silly mapToRegistry name reflect-metadata
+126 silly mapToRegistry using default registry
+127 silly mapToRegistry registry https://registry.npm.taobao.org/
+128 silly mapToRegistry data Result {
+128 silly mapToRegistry   raw: 'reflect-metadata',
+128 silly mapToRegistry   scope: null,
+128 silly mapToRegistry   name: 'reflect-metadata',
+128 silly mapToRegistry   rawSpec: '',
+128 silly mapToRegistry   spec: 'latest',
+128 silly mapToRegistry   type: 'tag' }
+129 silly mapToRegistry uri https://registry.npm.taobao.org/reflect-metadata
+130 silly fetchNamedPackageData rxjs
+131 silly mapToRegistry name rxjs
+132 silly mapToRegistry using default registry
+133 silly mapToRegistry registry https://registry.npm.taobao.org/
+134 silly mapToRegistry data Result {
+134 silly mapToRegistry   raw: 'rxjs',
+134 silly mapToRegistry   scope: null,
+134 silly mapToRegistry   name: 'rxjs',
+134 silly mapToRegistry   rawSpec: '',
+134 silly mapToRegistry   spec: 'latest',
+134 silly mapToRegistry   type: 'tag' }
+135 silly mapToRegistry uri https://registry.npm.taobao.org/rxjs
+136 silly fetchNamedPackageData systemjs
+137 silly mapToRegistry name systemjs
+138 silly mapToRegistry using default registry
+139 silly mapToRegistry registry https://registry.npm.taobao.org/
+140 silly mapToRegistry data Result {
+140 silly mapToRegistry   raw: 'systemjs',
+140 silly mapToRegistry   scope: null,
+140 silly mapToRegistry   name: 'systemjs',
+140 silly mapToRegistry   rawSpec: '',
+140 silly mapToRegistry   spec: 'latest',
+140 silly mapToRegistry   type: 'tag' }
+141 silly mapToRegistry uri https://registry.npm.taobao.org/systemjs
+142 silly fetchNamedPackageData zone.js
+143 silly mapToRegistry name zone.js
+144 silly mapToRegistry using default registry
+145 silly mapToRegistry registry https://registry.npm.taobao.org/
+146 silly mapToRegistry data Result {
+146 silly mapToRegistry   raw: 'zone.js',
+146 silly mapToRegistry   scope: null,
+146 silly mapToRegistry   name: 'zone.js',
+146 silly mapToRegistry   rawSpec: '',
+146 silly mapToRegistry   spec: 'latest',
+146 silly mapToRegistry   type: 'tag' }
+147 silly mapToRegistry uri https://registry.npm.taobao.org/zone.js
+148 silly cache add parsed spec Result {
+148 silly cache add   raw: 'font-awesome@github:fortawesome/Font-Awesome',
+148 silly cache add   scope: null,
+148 silly cache add   name: 'font-awesome',
+148 silly cache add   rawSpec: 'github:fortawesome/Font-Awesome',
+148 silly cache add   spec: 'github:fortawesome/Font-Awesome',
+148 silly cache add   type: 'hosted',
+148 silly cache add   hosted:
+148 silly cache add    { type: 'github',
+148 silly cache add      ssh: 'git@github.com:fortawesome/Font-Awesome.git',
+148 silly cache add      sshUrl: 'git+ssh://git@github.com/fortawesome/Font-Awesome.git',
+148 silly cache add      httpsUrl: 'git+https://github.com/fortawesome/Font-Awesome.git',
+148 silly cache add      gitUrl: 'git://github.com/fortawesome/Font-Awesome.git',
+148 silly cache add      shortcut: 'github:fortawesome/Font-Awesome',
+148 silly cache add      directUrl: 'https://raw.githubusercontent.com/fortawesome/Font-Awesome/master/package.json' } }
+149 verbose addRemoteGit caching github:fortawesome/Font-Awesome
+150 verbose addRemoteGit fortawesome/Font-Awesome is a repository hosted by github
+151 silly tryGitProto attempting to clone git://github.com/fortawesome/Font-Awesome.git
+152 silly tryClone cloning fortawesome/Font-Awesome via git://github.com/fortawesome/Font-Awesome.git
+153 verbose tryClone git-github-com-fortawesome-Font-Awesome-git-2bc8429a not in flight; caching
+154 verbose correctMkdir /Users/shuyi/.npm/_git-remotes correctMkdir not in flight; initializing
+155 verbose request uri https://registry.npm.taobao.org/@angular%2fcommon
+156 verbose request no auth needed
+157 info attempt registry request try #1 at 8:33:49 PM
+158 verbose request id 17259f61628074e6
+159 verbose etag "3a43-P0PdO4tnMgrwprv6tVQGBw"
+160 http request GET https://registry.npm.taobao.org/@angular%2fcommon
+161 verbose request uri https://registry.npm.taobao.org/@angular%2fcore
+162 verbose request no auth needed
+163 info attempt registry request try #1 at 8:33:49 PM
+164 verbose etag "3a9f-yJrK5vIBQ1u7pGMeQmlPIg"
+165 http request GET https://registry.npm.taobao.org/@angular%2fcore
+166 verbose request uri https://registry.npm.taobao.org/@angular%2fcompiler
+167 verbose request no auth needed
+168 info attempt registry request try #1 at 8:33:49 PM
+169 verbose etag "3b03-0SadukUxGJNYoNQOfn4GBw"
+170 http request GET https://registry.npm.taobao.org/@angular%2fcompiler
+171 verbose request uri https://registry.npm.taobao.org/@angular%2fforms
+172 verbose request no auth needed
+173 info attempt registry request try #1 at 8:33:49 PM
+174 verbose etag "117b-AdA1gg3nIn5oZs1rm5ofwA"
+175 http request GET https://registry.npm.taobao.org/@angular%2fforms
+176 verbose request uri https://registry.npm.taobao.org/@angular%2fplatform-browser-dynamic
+177 verbose request no auth needed
+178 info attempt registry request try #1 at 8:33:49 PM
+179 verbose etag "4594-CVexRfEmpkoS5c2PyELjVA"
+180 http request GET https://registry.npm.taobao.org/@angular%2fplatform-browser-dynamic
+181 verbose request uri https://registry.npm.taobao.org/@angular%2fhttp
+182 verbose request no auth needed
+183 info attempt registry request try #1 at 8:33:49 PM
+184 verbose etag "3b22-zbWvb2LGyaSlJOV+XYhZyA"
+185 http request GET https://registry.npm.taobao.org/@angular%2fhttp
+186 verbose request uri https://registry.npm.taobao.org/@angular%2frouter
+187 verbose request no auth needed
+188 info attempt registry request try #1 at 8:33:49 PM
+189 verbose etag "a99c-ZSxizA3iyg7waZaA2JLCGw"
+190 http request GET https://registry.npm.taobao.org/@angular%2frouter
+191 verbose request uri https://registry.npm.taobao.org/bootstrap
+192 verbose request no auth needed
+193 info attempt registry request try #1 at 8:33:49 PM
+194 verbose etag "8137-Us43MVW1nG7ez+lBXmnG3g"
+195 http request GET https://registry.npm.taobao.org/bootstrap
+196 verbose request uri https://registry.npm.taobao.org/@angular%2fupgrade
+197 verbose request no auth needed
+198 info attempt registry request try #1 at 8:33:49 PM
+199 verbose etag "38e0-IehBekdC5t66jUXY4fdMGQ"
+200 http request GET https://registry.npm.taobao.org/@angular%2fupgrade
+201 verbose request uri https://registry.npm.taobao.org/@angular%2fplatform-browser
+202 verbose request no auth needed
+203 info attempt registry request try #1 at 8:33:49 PM
+204 verbose etag "4146-mLP8D+AKLMpGbgB6UmcnUQ"
+205 http request GET https://registry.npm.taobao.org/@angular%2fplatform-browser
+206 verbose request uri https://registry.npm.taobao.org/angular2-in-memory-web-api
+207 verbose request no auth needed
+208 info attempt registry request try #1 at 8:33:50 PM
+209 verbose etag "763d-djMLM53hfV0js9XojNaTmA"
+210 http request GET https://registry.npm.taobao.org/angular2-in-memory-web-api
+211 verbose request uri https://registry.npm.taobao.org/reflect-metadata
+212 verbose request no auth needed
+213 info attempt registry request try #1 at 8:33:50 PM
+214 verbose etag "4426-L1QVaRp24xCPtGI1eB9oEw"
+215 http request GET https://registry.npm.taobao.org/reflect-metadata
+216 verbose request uri https://registry.npm.taobao.org/core-js
+217 verbose request no auth needed
+218 info attempt registry request try #1 at 8:33:50 PM
+219 verbose etag "39f2d-a48BC22XdP3Ghv6gBN/qDg"
+220 http request GET https://registry.npm.taobao.org/core-js
+221 verbose request uri https://registry.npm.taobao.org/ng2-bootstrap
+222 verbose request no auth needed
+223 info attempt registry request try #1 at 8:33:50 PM
+224 verbose etag "2b212-WYB21oGyoLIpCkVhMuUN9Q"
+225 http request GET https://registry.npm.taobao.org/ng2-bootstrap
+226 verbose request uri https://registry.npm.taobao.org/lodash
+227 verbose request no auth needed
+228 info attempt registry request try #1 at 8:33:50 PM
+229 verbose etag "25e3b-rsRTM/RXmuhK3K/cHylWxg"
+230 http request GET https://registry.npm.taobao.org/lodash
+231 verbose request uri https://registry.npm.taobao.org/rxjs
+232 verbose request no auth needed
+233 info attempt registry request try #1 at 8:33:50 PM
+234 verbose etag "ffaf-AFvrUwZz1Y9uZm87MBkCsQ"
+235 http request GET https://registry.npm.taobao.org/rxjs
+236 verbose request uri https://registry.npm.taobao.org/systemjs
+237 verbose request no auth needed
+238 info attempt registry request try #1 at 8:33:50 PM
+239 verbose etag "23ec1-eBAUtE8qUjvjdYbZaLbmOA"
+240 http request GET https://registry.npm.taobao.org/systemjs
+241 verbose request uri https://registry.npm.taobao.org/zone.js
+242 verbose request no auth needed
+243 info attempt registry request try #1 at 8:33:50 PM
+244 verbose etag "12780-ibQo+3edKk7FTM9lZTCv8g"
+245 http request GET https://registry.npm.taobao.org/zone.js
+246 info git [ 'config', '--get', 'remote.origin.url' ]
+247 silly validateExistingRemote fortawesome/Font-Awesome remote.origin.url: git://github.com/fortawesome/Font-Awesome.git
+248 verbose validateExistingRemote fortawesome/Font-Awesome is updating existing cached remote /Users/shuyi/.npm/_git-remotes/git-github-com-fortawesome-Font-Awesome-git-2bc8429a
+249 info git [ 'fetch', '-a', 'origin' ]
+250 http 200 https://registry.npm.taobao.org/@angular%2fforms
+251 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+251 verbose headers   'content-type': 'application/json; charset=utf-8',
+251 verbose headers   'content-length': '4497',
+251 verbose headers   connection: 'keep-alive',
+251 verbose headers   etag: '"1191-qOcw27wmwRyfg3fXdHR4Ww"',
+251 verbose headers   'x-readtime': '17' }
+252 silly get cb [ 200,
+252 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+252 silly get     'content-type': 'application/json; charset=utf-8',
+252 silly get     'content-length': '4497',
+252 silly get     connection: 'keep-alive',
+252 silly get     etag: '"1191-qOcw27wmwRyfg3fXdHR4Ww"',
+252 silly get     'x-readtime': '17' } ]
+253 verbose get saving @angular/forms to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252fforms/.cache.json
+254 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+255 http 200 https://registry.npm.taobao.org/angular2-in-memory-web-api
+256 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+256 verbose headers   'content-type': 'application/json; charset=utf-8',
+256 verbose headers   'content-length': '36218',
+256 verbose headers   connection: 'keep-alive',
+256 verbose headers   etag: '"8d7a-9usxjMoWakoIs/bsYtioTw"',
+256 verbose headers   'x-readtime': '32' }
+257 silly get cb [ 200,
+257 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+257 silly get     'content-type': 'application/json; charset=utf-8',
+257 silly get     'content-length': '36218',
+257 silly get     connection: 'keep-alive',
+257 silly get     etag: '"8d7a-9usxjMoWakoIs/bsYtioTw"',
+257 silly get     'x-readtime': '32' } ]
+258 verbose get saving angular2-in-memory-web-api to /Users/shuyi/.npm/registry.npm.taobao.org/angular2-in-memory-web-api/.cache.json
+259 verbose correctMkdir /Users/shuyi/.npm correctMkdir already in flight; waiting
+260 http 200 https://registry.npm.taobao.org/@angular%2fhttp
+261 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+261 verbose headers   'content-type': 'application/json; charset=utf-8',
+261 verbose headers   'content-length': '15160',
+261 verbose headers   connection: 'keep-alive',
+261 verbose headers   etag: '"3b38-jvlLyigE3Ish2N0wiiqoXg"',
+261 verbose headers   'x-readtime': '15' }
+262 silly get cb [ 200,
+262 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+262 silly get     'content-type': 'application/json; charset=utf-8',
+262 silly get     'content-length': '15160',
+262 silly get     connection: 'keep-alive',
+262 silly get     etag: '"3b38-jvlLyigE3Ish2N0wiiqoXg"',
+262 silly get     'x-readtime': '15' } ]
+263 verbose get saving @angular/http to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252fhttp/.cache.json
+264 verbose correctMkdir /Users/shuyi/.npm correctMkdir already in flight; waiting
+265 http 200 https://registry.npm.taobao.org/@angular%2fcommon
+266 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+266 verbose headers   'content-type': 'application/json; charset=utf-8',
+266 verbose headers   'content-length': '14937',
+266 verbose headers   connection: 'keep-alive',
+266 verbose headers   etag: '"3a59-ZZaHHqniSkzCGpriLJYvKA"',
+266 verbose headers   'x-readtime': '30' }
+267 silly get cb [ 200,
+267 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+267 silly get     'content-type': 'application/json; charset=utf-8',
+267 silly get     'content-length': '14937',
+267 silly get     connection: 'keep-alive',
+267 silly get     etag: '"3a59-ZZaHHqniSkzCGpriLJYvKA"',
+267 silly get     'x-readtime': '30' } ]
+268 verbose get saving @angular/common to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252fcommon/.cache.json
+269 verbose correctMkdir /Users/shuyi/.npm correctMkdir already in flight; waiting
+270 http 200 https://registry.npm.taobao.org/bootstrap
+271 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+271 verbose headers   'content-type': 'application/json; charset=utf-8',
+271 verbose headers   'content-length': '33148',
+271 verbose headers   connection: 'keep-alive',
+271 verbose headers   etag: '"817c-aP/GLFQ+udABHIDyxb1DnA"',
+271 verbose headers   'x-readtime': '53' }
+272 silly get cb [ 200,
+272 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+272 silly get     'content-type': 'application/json; charset=utf-8',
+272 silly get     'content-length': '33148',
+272 silly get     connection: 'keep-alive',
+272 silly get     etag: '"817c-aP/GLFQ+udABHIDyxb1DnA"',
+272 silly get     'x-readtime': '53' } ]
+273 verbose get saving bootstrap to /Users/shuyi/.npm/registry.npm.taobao.org/bootstrap/.cache.json
+274 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+275 http 200 https://registry.npm.taobao.org/reflect-metadata
+276 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+276 verbose headers   'content-type': 'application/json; charset=utf-8',
+276 verbose headers   'content-length': '17480',
+276 verbose headers   connection: 'keep-alive',
+276 verbose headers   etag: '"4448-sk6hCWhsBkR/2uYIyv2obA"',
+276 verbose headers   'x-readtime': '30' }
+277 silly get cb [ 200,
+277 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+277 silly get     'content-type': 'application/json; charset=utf-8',
+277 silly get     'content-length': '17480',
+277 silly get     connection: 'keep-alive',
+277 silly get     etag: '"4448-sk6hCWhsBkR/2uYIyv2obA"',
+277 silly get     'x-readtime': '30' } ]
+278 verbose get saving reflect-metadata to /Users/shuyi/.npm/registry.npm.taobao.org/reflect-metadata/.cache.json
+279 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+280 http 200 https://registry.npm.taobao.org/@angular%2frouter
+281 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+281 verbose headers   'content-type': 'application/json; charset=utf-8',
+281 verbose headers   'content-length': '43442',
+281 verbose headers   connection: 'keep-alive',
+281 verbose headers   etag: '"a9b2-Lp3OBcm2yV36GXiZE7dTNg"',
+281 verbose headers   'x-readtime': '31' }
+282 silly get cb [ 200,
+282 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+282 silly get     'content-type': 'application/json; charset=utf-8',
+282 silly get     'content-length': '43442',
+282 silly get     connection: 'keep-alive',
+282 silly get     etag: '"a9b2-Lp3OBcm2yV36GXiZE7dTNg"',
+282 silly get     'x-readtime': '31' } ]
+283 verbose get saving @angular/router to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252frouter/.cache.json
+284 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+285 http 200 https://registry.npm.taobao.org/rxjs
+286 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+286 verbose headers   'content-type': 'application/json; charset=utf-8',
+286 verbose headers   'content-length': '70411',
+286 verbose headers   connection: 'keep-alive',
+286 verbose headers   etag: '"1130b-ZW8y5uIyg0GiuoZKBjym9w"',
+286 verbose headers   'x-readtime': '38' }
+287 silly get cb [ 200,
+287 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+287 silly get     'content-type': 'application/json; charset=utf-8',
+287 silly get     'content-length': '70411',
+287 silly get     connection: 'keep-alive',
+287 silly get     etag: '"1130b-ZW8y5uIyg0GiuoZKBjym9w"',
+287 silly get     'x-readtime': '38' } ]
+288 verbose get saving rxjs to /Users/shuyi/.npm/registry.npm.taobao.org/rxjs/.cache.json
+289 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+290 http 304 https://registry.npm.taobao.org/ng2-bootstrap
+291 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+291 verbose headers   connection: 'keep-alive',
+291 verbose headers   etag: '"2b212-WYB21oGyoLIpCkVhMuUN9Q"',
+291 verbose headers   'x-readtime': '104' }
+292 silly get cb [ 304,
+292 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+292 silly get     connection: 'keep-alive',
+292 silly get     etag: '"2b212-WYB21oGyoLIpCkVhMuUN9Q"',
+292 silly get     'x-readtime': '104' } ]
+293 verbose etag https://registry.npm.taobao.org/ng2-bootstrap from cache
+294 verbose get saving ng2-bootstrap to /Users/shuyi/.npm/registry.npm.taobao.org/ng2-bootstrap/.cache.json
+295 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+296 http 200 https://registry.npm.taobao.org/zone.js
+297 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+297 verbose headers   'content-type': 'application/json; charset=utf-8',
+297 verbose headers   'content-length': '75668',
+297 verbose headers   connection: 'keep-alive',
+297 verbose headers   etag: '"12794-VnXX9KRhuAnCJuLVW8IBsg"',
+297 verbose headers   'x-readtime': '59' }
+298 silly get cb [ 200,
+298 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+298 silly get     'content-type': 'application/json; charset=utf-8',
+298 silly get     'content-length': '75668',
+298 silly get     connection: 'keep-alive',
+298 silly get     etag: '"12794-VnXX9KRhuAnCJuLVW8IBsg"',
+298 silly get     'x-readtime': '59' } ]
+299 verbose get saving zone.js to /Users/shuyi/.npm/registry.npm.taobao.org/zone.js/.cache.json
+300 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+301 silly resolveWithNewModule @angular/forms@0.2.0 checking installable status
+302 silly cache add args [ '@angular/forms@0.2.0', null ]
+303 verbose cache add spec @angular/forms@0.2.0
+304 silly cache add parsed spec Result {
+304 silly cache add   raw: '@angular/forms@0.2.0',
+304 silly cache add   scope: '@angular',
+304 silly cache add   name: '@angular/forms',
+304 silly cache add   rawSpec: '0.2.0',
+304 silly cache add   spec: '0.2.0',
+304 silly cache add   type: 'version' }
+305 silly addNamed @angular/forms@0.2.0
+306 verbose addNamed "0.2.0" is a plain semver version for @angular/forms
+307 silly mapToRegistry name @angular/forms
+308 silly mapToRegistry scope (from package name) @angular
+309 verbose mapToRegistry no registry URL found in name for scope @angular
+310 silly mapToRegistry using default registry
+311 silly mapToRegistry registry https://registry.npm.taobao.org/
+312 silly mapToRegistry data Result {
+312 silly mapToRegistry   raw: '@angular/forms',
+312 silly mapToRegistry   scope: '@angular',
+312 silly mapToRegistry   name: '@angular/forms',
+312 silly mapToRegistry   rawSpec: '',
+312 silly mapToRegistry   spec: 'latest',
+312 silly mapToRegistry   type: 'tag' }
+313 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fforms
+314 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2fforms not in flight; fetching
+315 silly resolveWithNewModule @angular/common@2.0.0-rc.4 checking installable status
+316 silly cache add args [ '@angular/common@2.0.0-rc.4', null ]
+317 verbose cache add spec @angular/common@2.0.0-rc.4
+318 silly cache add parsed spec Result {
+318 silly cache add   raw: '@angular/common@2.0.0-rc.4',
+318 silly cache add   scope: '@angular',
+318 silly cache add   name: '@angular/common',
+318 silly cache add   rawSpec: '2.0.0-rc.4',
+318 silly cache add   spec: '2.0.0-rc.4',
+318 silly cache add   type: 'version' }
+319 silly addNamed @angular/common@2.0.0-rc.4
+320 verbose addNamed "2.0.0-rc.4" is a plain semver version for @angular/common
+321 silly mapToRegistry name @angular/common
+322 silly mapToRegistry scope (from package name) @angular
+323 verbose mapToRegistry no registry URL found in name for scope @angular
+324 silly mapToRegistry using default registry
+325 silly mapToRegistry registry https://registry.npm.taobao.org/
+326 silly mapToRegistry data Result {
+326 silly mapToRegistry   raw: '@angular/common',
+326 silly mapToRegistry   scope: '@angular',
+326 silly mapToRegistry   name: '@angular/common',
+326 silly mapToRegistry   rawSpec: '',
+326 silly mapToRegistry   spec: 'latest',
+326 silly mapToRegistry   type: 'tag' }
+327 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcommon
+328 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2fcommon not in flight; fetching
+329 silly resolveWithNewModule angular2-in-memory-web-api@0.0.14 checking installable status
+330 silly cache add args [ 'angular2-in-memory-web-api@0.0.14', null ]
+331 verbose cache add spec angular2-in-memory-web-api@0.0.14
+332 silly cache add parsed spec Result {
+332 silly cache add   raw: 'angular2-in-memory-web-api@0.0.14',
+332 silly cache add   scope: null,
+332 silly cache add   name: 'angular2-in-memory-web-api',
+332 silly cache add   rawSpec: '0.0.14',
+332 silly cache add   spec: '0.0.14',
+332 silly cache add   type: 'version' }
+333 silly addNamed angular2-in-memory-web-api@0.0.14
+334 verbose addNamed "0.0.14" is a plain semver version for angular2-in-memory-web-api
+335 silly mapToRegistry name angular2-in-memory-web-api
+336 silly mapToRegistry using default registry
+337 silly mapToRegistry registry https://registry.npm.taobao.org/
+338 silly mapToRegistry data Result {
+338 silly mapToRegistry   raw: 'angular2-in-memory-web-api',
+338 silly mapToRegistry   scope: null,
+338 silly mapToRegistry   name: 'angular2-in-memory-web-api',
+338 silly mapToRegistry   rawSpec: '',
+338 silly mapToRegistry   spec: 'latest',
+338 silly mapToRegistry   type: 'tag' }
+339 silly mapToRegistry uri https://registry.npm.taobao.org/angular2-in-memory-web-api
+340 verbose addNameVersion registry:https://registry.npm.taobao.org/angular2-in-memory-web-api not in flight; fetching
+341 silly resolveWithNewModule @angular/http@2.0.0-rc.4 checking installable status
+342 silly cache add args [ '@angular/http@2.0.0-rc.4', null ]
+343 verbose cache add spec @angular/http@2.0.0-rc.4
+344 silly cache add parsed spec Result {
+344 silly cache add   raw: '@angular/http@2.0.0-rc.4',
+344 silly cache add   scope: '@angular',
+344 silly cache add   name: '@angular/http',
+344 silly cache add   rawSpec: '2.0.0-rc.4',
+344 silly cache add   spec: '2.0.0-rc.4',
+344 silly cache add   type: 'version' }
+345 silly addNamed @angular/http@2.0.0-rc.4
+346 verbose addNamed "2.0.0-rc.4" is a plain semver version for @angular/http
+347 silly mapToRegistry name @angular/http
+348 silly mapToRegistry scope (from package name) @angular
+349 verbose mapToRegistry no registry URL found in name for scope @angular
+350 silly mapToRegistry using default registry
+351 silly mapToRegistry registry https://registry.npm.taobao.org/
+352 silly mapToRegistry data Result {
+352 silly mapToRegistry   raw: '@angular/http',
+352 silly mapToRegistry   scope: '@angular',
+352 silly mapToRegistry   name: '@angular/http',
+352 silly mapToRegistry   rawSpec: '',
+352 silly mapToRegistry   spec: 'latest',
+352 silly mapToRegistry   type: 'tag' }
+353 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fhttp
+354 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2fhttp not in flight; fetching
+355 silly resolveWithNewModule bootstrap@3.3.6 checking installable status
+356 silly cache add args [ 'bootstrap@^3.3.6', null ]
+357 verbose cache add spec bootstrap@^3.3.6
+358 silly cache add parsed spec Result {
+358 silly cache add   raw: 'bootstrap@^3.3.6',
+358 silly cache add   scope: null,
+358 silly cache add   name: 'bootstrap',
+358 silly cache add   rawSpec: '^3.3.6',
+358 silly cache add   spec: '>=3.3.6 <4.0.0',
+358 silly cache add   type: 'range' }
+359 silly addNamed bootstrap@>=3.3.6 <4.0.0
+360 verbose addNamed ">=3.3.6 <4.0.0" is a valid semver range for bootstrap
+361 silly addNameRange { name: 'bootstrap', range: '>=3.3.6 <4.0.0', hasData: false }
+362 silly mapToRegistry name bootstrap
+363 silly mapToRegistry using default registry
+364 silly mapToRegistry registry https://registry.npm.taobao.org/
+365 silly mapToRegistry data Result {
+365 silly mapToRegistry   raw: 'bootstrap',
+365 silly mapToRegistry   scope: null,
+365 silly mapToRegistry   name: 'bootstrap',
+365 silly mapToRegistry   rawSpec: '',
+365 silly mapToRegistry   spec: 'latest',
+365 silly mapToRegistry   type: 'tag' }
+366 silly mapToRegistry uri https://registry.npm.taobao.org/bootstrap
+367 verbose addNameRange registry:https://registry.npm.taobao.org/bootstrap not in flight; fetching
+368 silly resolveWithNewModule reflect-metadata@0.1.3 checking installable status
+369 silly cache add args [ 'reflect-metadata@^0.1.3', null ]
+370 verbose cache add spec reflect-metadata@^0.1.3
+371 silly cache add parsed spec Result {
+371 silly cache add   raw: 'reflect-metadata@^0.1.3',
+371 silly cache add   scope: null,
+371 silly cache add   name: 'reflect-metadata',
+371 silly cache add   rawSpec: '^0.1.3',
+371 silly cache add   spec: '>=0.1.3 <0.2.0',
+371 silly cache add   type: 'range' }
+372 silly addNamed reflect-metadata@>=0.1.3 <0.2.0
+373 verbose addNamed ">=0.1.3 <0.2.0" is a valid semver range for reflect-metadata
+374 silly addNameRange { name: 'reflect-metadata',
+374 silly addNameRange   range: '>=0.1.3 <0.2.0',
+374 silly addNameRange   hasData: false }
+375 silly mapToRegistry name reflect-metadata
+376 silly mapToRegistry using default registry
+377 silly mapToRegistry registry https://registry.npm.taobao.org/
+378 silly mapToRegistry data Result {
+378 silly mapToRegistry   raw: 'reflect-metadata',
+378 silly mapToRegistry   scope: null,
+378 silly mapToRegistry   name: 'reflect-metadata',
+378 silly mapToRegistry   rawSpec: '',
+378 silly mapToRegistry   spec: 'latest',
+378 silly mapToRegistry   type: 'tag' }
+379 silly mapToRegistry uri https://registry.npm.taobao.org/reflect-metadata
+380 verbose addNameRange registry:https://registry.npm.taobao.org/reflect-metadata not in flight; fetching
+381 silly resolveWithNewModule @angular/router@3.0.0-alpha.7 checking installable status
+382 silly cache add args [ '@angular/router@3.0.0-alpha.7', null ]
+383 verbose cache add spec @angular/router@3.0.0-alpha.7
+384 silly cache add parsed spec Result {
+384 silly cache add   raw: '@angular/router@3.0.0-alpha.7',
+384 silly cache add   scope: '@angular',
+384 silly cache add   name: '@angular/router',
+384 silly cache add   rawSpec: '3.0.0-alpha.7',
+384 silly cache add   spec: '3.0.0-alpha.7',
+384 silly cache add   type: 'version' }
+385 silly addNamed @angular/router@3.0.0-alpha.7
+386 verbose addNamed "3.0.0-alpha.7" is a plain semver version for @angular/router
+387 silly mapToRegistry name @angular/router
+388 silly mapToRegistry scope (from package name) @angular
+389 verbose mapToRegistry no registry URL found in name for scope @angular
+390 silly mapToRegistry using default registry
+391 silly mapToRegistry registry https://registry.npm.taobao.org/
+392 silly mapToRegistry data Result {
+392 silly mapToRegistry   raw: '@angular/router',
+392 silly mapToRegistry   scope: '@angular',
+392 silly mapToRegistry   name: '@angular/router',
+392 silly mapToRegistry   rawSpec: '',
+392 silly mapToRegistry   spec: 'latest',
+392 silly mapToRegistry   type: 'tag' }
+393 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2frouter
+394 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2frouter not in flight; fetching
+395 silly resolveWithNewModule rxjs@5.0.0-beta.6 checking installable status
+396 silly cache add args [ 'rxjs@5.0.0-beta.6', null ]
+397 verbose cache add spec rxjs@5.0.0-beta.6
+398 silly cache add parsed spec Result {
+398 silly cache add   raw: 'rxjs@5.0.0-beta.6',
+398 silly cache add   scope: null,
+398 silly cache add   name: 'rxjs',
+398 silly cache add   rawSpec: '5.0.0-beta.6',
+398 silly cache add   spec: '5.0.0-beta.6',
+398 silly cache add   type: 'version' }
+399 silly addNamed rxjs@5.0.0-beta.6
+400 verbose addNamed "5.0.0-beta.6" is a plain semver version for rxjs
+401 silly mapToRegistry name rxjs
+402 silly mapToRegistry using default registry
+403 silly mapToRegistry registry https://registry.npm.taobao.org/
+404 silly mapToRegistry data Result {
+404 silly mapToRegistry   raw: 'rxjs',
+404 silly mapToRegistry   scope: null,
+404 silly mapToRegistry   name: 'rxjs',
+404 silly mapToRegistry   rawSpec: '',
+404 silly mapToRegistry   spec: 'latest',
+404 silly mapToRegistry   type: 'tag' }
+405 silly mapToRegistry uri https://registry.npm.taobao.org/rxjs
+406 verbose addNameVersion registry:https://registry.npm.taobao.org/rxjs not in flight; fetching
+407 silly resolveWithNewModule ng2-bootstrap@1.0.17 checking installable status
+408 silly cache add args [ 'ng2-bootstrap@^1.0.17', null ]
+409 verbose cache add spec ng2-bootstrap@^1.0.17
+410 silly cache add parsed spec Result {
+410 silly cache add   raw: 'ng2-bootstrap@^1.0.17',
+410 silly cache add   scope: null,
+410 silly cache add   name: 'ng2-bootstrap',
+410 silly cache add   rawSpec: '^1.0.17',
+410 silly cache add   spec: '>=1.0.17 <2.0.0',
+410 silly cache add   type: 'range' }
+411 silly addNamed ng2-bootstrap@>=1.0.17 <2.0.0
+412 verbose addNamed ">=1.0.17 <2.0.0" is a valid semver range for ng2-bootstrap
+413 silly addNameRange { name: 'ng2-bootstrap',
+413 silly addNameRange   range: '>=1.0.17 <2.0.0',
+413 silly addNameRange   hasData: false }
+414 silly mapToRegistry name ng2-bootstrap
+415 silly mapToRegistry using default registry
+416 silly mapToRegistry registry https://registry.npm.taobao.org/
+417 silly mapToRegistry data Result {
+417 silly mapToRegistry   raw: 'ng2-bootstrap',
+417 silly mapToRegistry   scope: null,
+417 silly mapToRegistry   name: 'ng2-bootstrap',
+417 silly mapToRegistry   rawSpec: '',
+417 silly mapToRegistry   spec: 'latest',
+417 silly mapToRegistry   type: 'tag' }
+418 silly mapToRegistry uri https://registry.npm.taobao.org/ng2-bootstrap
+419 verbose addNameRange registry:https://registry.npm.taobao.org/ng2-bootstrap not in flight; fetching
+420 http 200 https://registry.npm.taobao.org/systemjs
+421 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+421 verbose headers   'content-type': 'application/json; charset=utf-8',
+421 verbose headers   'content-length': '147157',
+421 verbose headers   connection: 'keep-alive',
+421 verbose headers   etag: '"23ed5-TCySetu8ImTc+msKyrb0mA"',
+421 verbose headers   'x-readtime': '117' }
+422 silly get cb [ 200,
+422 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+422 silly get     'content-type': 'application/json; charset=utf-8',
+422 silly get     'content-length': '147157',
+422 silly get     connection: 'keep-alive',
+422 silly get     etag: '"23ed5-TCySetu8ImTc+msKyrb0mA"',
+422 silly get     'x-readtime': '117' } ]
+423 verbose get saving systemjs to /Users/shuyi/.npm/registry.npm.taobao.org/systemjs/.cache.json
+424 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+425 silly resolveWithNewModule zone.js@0.6.12 checking installable status
+426 silly cache add args [ 'zone.js@^0.6.12', null ]
+427 verbose cache add spec zone.js@^0.6.12
+428 silly cache add parsed spec Result {
+428 silly cache add   raw: 'zone.js@^0.6.12',
+428 silly cache add   scope: null,
+428 silly cache add   name: 'zone.js',
+428 silly cache add   rawSpec: '^0.6.12',
+428 silly cache add   spec: '>=0.6.12 <0.7.0',
+428 silly cache add   type: 'range' }
+429 silly addNamed zone.js@>=0.6.12 <0.7.0
+430 verbose addNamed ">=0.6.12 <0.7.0" is a valid semver range for zone.js
+431 silly addNameRange { name: 'zone.js', range: '>=0.6.12 <0.7.0', hasData: false }
+432 silly mapToRegistry name zone.js
+433 silly mapToRegistry using default registry
+434 silly mapToRegistry registry https://registry.npm.taobao.org/
+435 silly mapToRegistry data Result {
+435 silly mapToRegistry   raw: 'zone.js',
+435 silly mapToRegistry   scope: null,
+435 silly mapToRegistry   name: 'zone.js',
+435 silly mapToRegistry   rawSpec: '',
+435 silly mapToRegistry   spec: 'latest',
+435 silly mapToRegistry   type: 'tag' }
+436 silly mapToRegistry uri https://registry.npm.taobao.org/zone.js
+437 verbose addNameRange registry:https://registry.npm.taobao.org/zone.js not in flight; fetching
+438 verbose get https://registry.npm.taobao.org/@angular%2fforms not expired, no request
+439 verbose get https://registry.npm.taobao.org/@angular%2fcommon not expired, no request
+440 verbose get https://registry.npm.taobao.org/angular2-in-memory-web-api not expired, no request
+441 verbose get https://registry.npm.taobao.org/@angular%2fhttp not expired, no request
+442 verbose get https://registry.npm.taobao.org/bootstrap not expired, no request
+443 silly addNameRange number 2 { name: 'bootstrap', range: '>=3.3.6 <4.0.0', hasData: true }
+444 silly addNameRange versions [ 'bootstrap',
+444 silly addNameRange   [ '4.0.0-alpha.2',
+444 silly addNameRange     '3.3.6',
+444 silly addNameRange     '3.3.5',
+444 silly addNameRange     '3.3.4',
+444 silly addNameRange     '3.3.2',
+444 silly addNameRange     '3.3.1',
+444 silly addNameRange     '3.3.0',
+444 silly addNameRange     '3.2.0',
+444 silly addNameRange     '3.1.1',
+444 silly addNameRange     '0.0.2',
+444 silly addNameRange     '0.0.1' ] ]
+445 silly addNamed bootstrap@3.3.6
+446 verbose addNamed "3.3.6" is a plain semver version for bootstrap
+447 verbose get https://registry.npm.taobao.org/reflect-metadata not expired, no request
+448 silly addNameRange number 2 { name: 'reflect-metadata',
+448 silly addNameRange   range: '>=0.1.3 <0.2.0',
+448 silly addNameRange   hasData: true }
+449 silly addNameRange versions [ 'reflect-metadata',
+449 silly addNameRange   [ '0.1.3', '0.1.2', '0.1.1', '0.1.0', '0.0.3', '0.0.2' ] ]
+450 silly addNamed reflect-metadata@0.1.3
+451 verbose addNamed "0.1.3" is a plain semver version for reflect-metadata
+452 verbose get https://registry.npm.taobao.org/@angular%2frouter not expired, no request
+453 verbose get https://registry.npm.taobao.org/rxjs not expired, no request
+454 silly mapToRegistry name @angular/forms
+455 silly mapToRegistry scope (from package name) @angular
+456 verbose mapToRegistry no registry URL found in name for scope @angular
+457 silly mapToRegistry using default registry
+458 silly mapToRegistry registry https://registry.npm.taobao.org/
+459 silly mapToRegistry data Result {
+459 silly mapToRegistry   raw: '@angular/forms',
+459 silly mapToRegistry   scope: '@angular',
+459 silly mapToRegistry   name: '@angular/forms',
+459 silly mapToRegistry   rawSpec: '',
+459 silly mapToRegistry   spec: 'latest',
+459 silly mapToRegistry   type: 'tag' }
+460 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fforms
+461 verbose addRemoteTarball https://registry.npm.taobao.org/@angular/forms/download/@angular/forms-0.2.0.tgz not in flight; adding
+462 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/@angular/forms/download/@angular/forms-0.2.0.tgz',
+462 verbose addRemoteTarball   'fc5d41f16b9f561cb322255626428045f7d14cf9' ]
+463 silly mapToRegistry name @angular/common
+464 silly mapToRegistry scope (from package name) @angular
+465 verbose mapToRegistry no registry URL found in name for scope @angular
+466 silly mapToRegistry using default registry
+467 silly mapToRegistry registry https://registry.npm.taobao.org/
+468 silly mapToRegistry data Result {
+468 silly mapToRegistry   raw: '@angular/common',
+468 silly mapToRegistry   scope: '@angular',
+468 silly mapToRegistry   name: '@angular/common',
+468 silly mapToRegistry   rawSpec: '',
+468 silly mapToRegistry   spec: 'latest',
+468 silly mapToRegistry   type: 'tag' }
+469 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcommon
+470 verbose addRemoteTarball https://registry.npm.taobao.org/@angular/common/download/@angular/common-2.0.0-rc.4.tgz not in flight; adding
+471 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/@angular/common/download/@angular/common-2.0.0-rc.4.tgz',
+471 verbose addRemoteTarball   'c3b0a87cd1e316be2a940bb80319e055898f89e6' ]
+472 silly mapToRegistry name angular2-in-memory-web-api
+473 silly mapToRegistry using default registry
+474 silly mapToRegistry registry https://registry.npm.taobao.org/
+475 silly mapToRegistry data Result {
+475 silly mapToRegistry   raw: 'angular2-in-memory-web-api',
+475 silly mapToRegistry   scope: null,
+475 silly mapToRegistry   name: 'angular2-in-memory-web-api',
+475 silly mapToRegistry   rawSpec: '',
+475 silly mapToRegistry   spec: 'latest',
+475 silly mapToRegistry   type: 'tag' }
+476 silly mapToRegistry uri https://registry.npm.taobao.org/angular2-in-memory-web-api
+477 verbose addRemoteTarball https://registry.npm.taobao.org/angular2-in-memory-web-api/download/angular2-in-memory-web-api-0.0.14.tgz not in flight; adding
+478 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/angular2-in-memory-web-api/download/angular2-in-memory-web-api-0.0.14.tgz',
+478 verbose addRemoteTarball   '338de75e93b9d527429663516427e51bd18e0dd8' ]
+479 silly mapToRegistry name @angular/http
+480 silly mapToRegistry scope (from package name) @angular
+481 verbose mapToRegistry no registry URL found in name for scope @angular
+482 silly mapToRegistry using default registry
+483 silly mapToRegistry registry https://registry.npm.taobao.org/
+484 silly mapToRegistry data Result {
+484 silly mapToRegistry   raw: '@angular/http',
+484 silly mapToRegistry   scope: '@angular',
+484 silly mapToRegistry   name: '@angular/http',
+484 silly mapToRegistry   rawSpec: '',
+484 silly mapToRegistry   spec: 'latest',
+484 silly mapToRegistry   type: 'tag' }
+485 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fhttp
+486 verbose addRemoteTarball https://registry.npm.taobao.org/@angular/http/download/@angular/http-2.0.0-rc.4.tgz not in flight; adding
+487 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/@angular/http/download/@angular/http-2.0.0-rc.4.tgz',
+487 verbose addRemoteTarball   '8f92acd2c5f820f890f37757d9a6c3c7c9d86b8d' ]
+488 verbose get https://registry.npm.taobao.org/ng2-bootstrap not expired, no request
+489 silly addNameRange number 2 { name: 'ng2-bootstrap',
+489 silly addNameRange   range: '>=1.0.17 <2.0.0',
+489 silly addNameRange   hasData: true }
+490 silly addNameRange versions [ 'ng2-bootstrap',
+490 silly addNameRange   [ '1.0.17',
+490 silly addNameRange     '1.0.16',
+490 silly addNameRange     '1.0.15',
+490 silly addNameRange     '1.0.14',
+490 silly addNameRange     '1.0.13',
+490 silly addNameRange     '1.0.12',
+490 silly addNameRange     '1.0.11',
+490 silly addNameRange     '1.0.10',
+490 silly addNameRange     '1.0.9',
+490 silly addNameRange     '1.0.8',
+490 silly addNameRange     '1.0.7',
+490 silly addNameRange     '1.0.6',
+490 silly addNameRange     '1.0.5',
+490 silly addNameRange     '1.0.4',
+490 silly addNameRange     '1.0.3',
+490 silly addNameRange     '1.0.2-beta.2',
+490 silly addNameRange     '1.0.2-beta.1',
+490 silly addNameRange     '1.0.2-beta.0',
+490 silly addNameRange     '1.0.1-beta.2',
+490 silly addNameRange     '1.0.1-beta.1',
+490 silly addNameRange     '1.0.1-beta.0',
+490 silly addNameRange     '1.0.0-beta.2',
+490 silly addNameRange     '1.0.0-beta.1',
+490 silly addNameRange     '1.0.0-beta.0',
+490 silly addNameRange     '0.53.0',
+490 silly addNameRange     '0.48.1',
+490 silly addNameRange     '0.48.0',
+490 silly addNameRange     '0.46.0',
+490 silly addNameRange     '0.44.6',
+490 silly addNameRange     '0.44.5',
+490 silly addNameRange     '0.44.4',
+490 silly addNameRange     '0.44.3',
+490 silly addNameRange     '0.44.2',
+490 silly addNameRange     '0.44.1',
+490 silly addNameRange     '0.44.0',
+490 silly addNameRange     '0.42.0',
+490 silly addNameRange     '0.40.0',
+490 silly addNameRange     '0.37.2',
+490 silly addNameRange     '0.37.1',
+490 silly addNameRange     '0.37.0',
+490 silly addNameRange     '0.36.0',
+490 silly addNameRange     '0.35.9',
+490 silly addNameRange     '0.35.8',
+490 silly addNameRange     '0.35.7',
+490 silly addNameRange     '0.35.6',
+490 silly addNameRange     '0.35.5',
+490 silly addNameRange     '0.35.3',
+490 silly addNameRange     '0.35.2',
+490 silly addNameRange     '0.35.1',
+490 silly addNameRange     '0.35.0',
+490 silly addNameRange     '0.34.14',
+490 silly addNameRange     '0.34.12',
+490 silly addNameRange     '0.34.11',
+490 silly addNameRange     '0.34.10',
+490 silly addNameRange     '0.34.9',
+490 silly addNameRange     '0.34.8',
+490 silly addNameRange     '0.34.7',
+490 silly addNameRange     '0.34.6',
+490 silly addNameRange     '0.34.5',
+490 silly addNameRange     '0.34.4',
+490 silly addNameRange     '0.34.3',
+490 silly addNameRange     '0.34.2',
+490 silly addNameRange     '0.34.1',
+490 silly addNameRange     '0.34.0' ] ]
+491 silly addNamed ng2-bootstrap@1.0.17
+492 verbose addNamed "1.0.17" is a plain semver version for ng2-bootstrap
+493 verbose get https://registry.npm.taobao.org/zone.js not expired, no request
+494 silly addNameRange number 2 { name: 'zone.js', range: '>=0.6.12 <0.7.0', hasData: true }
+495 silly addNameRange versions [ 'zone.js',
+495 silly addNameRange   [ '0.6.12',
+495 silly addNameRange     '0.6.11',
+495 silly addNameRange     '0.6.10',
+495 silly addNameRange     '0.6.9',
+495 silly addNameRange     '0.6.8',
+495 silly addNameRange     '0.6.6',
+495 silly addNameRange     '0.6.5',
+495 silly addNameRange     '0.6.4',
+495 silly addNameRange     '0.6.3',
+495 silly addNameRange     '0.6.2',
+495 silly addNameRange     '0.6.1',
+495 silly addNameRange     '0.6.0',
+495 silly addNameRange     '0.5.15',
+495 silly addNameRange     '0.5.14',
+495 silly addNameRange     '0.5.13',
+495 silly addNameRange     '0.5.12',
+495 silly addNameRange     '0.5.11',
+495 silly addNameRange     '0.5.10',
+495 silly addNameRange     '0.5.9',
+495 silly addNameRange     '0.5.8',
+495 silly addNameRange     '0.5.7',
+495 silly addNameRange     '0.5.6',
+495 silly addNameRange     '0.5.5',
+495 silly addNameRange     '0.5.4',
+495 silly addNameRange     '0.5.3',
+495 silly addNameRange     '0.5.2',
+495 silly addNameRange     '0.5.1',
+495 silly addNameRange     '0.5.0',
+495 silly addNameRange     '0.4.4',
+495 silly addNameRange     '0.4.3',
+495 silly addNameRange     '0.4.2',
+495 silly addNameRange     '0.4.1',
+495 silly addNameRange     '0.4.0',
+495 silly addNameRange     '0.3.0',
+495 silly addNameRange     '0.2.4',
+495 silly addNameRange     '0.2.2',
+495 silly addNameRange     '0.2.3',
+495 silly addNameRange     '0.2.1',
+495 silly addNameRange     '0.2.0',
+495 silly addNameRange     '0.1.1',
+495 silly addNameRange     '0.1.0' ] ]
+496 silly addNamed zone.js@0.6.12
+497 verbose addNamed "0.6.12" is a plain semver version for zone.js
+498 silly resolveWithNewModule systemjs@0.19.27 checking installable status
+499 silly cache add args [ 'systemjs@0.19.27', null ]
+500 verbose cache add spec systemjs@0.19.27
+501 silly cache add parsed spec Result {
+501 silly cache add   raw: 'systemjs@0.19.27',
+501 silly cache add   scope: null,
+501 silly cache add   name: 'systemjs',
+501 silly cache add   rawSpec: '0.19.27',
+501 silly cache add   spec: '0.19.27',
+501 silly cache add   type: 'version' }
+502 silly addNamed systemjs@0.19.27
+503 verbose addNamed "0.19.27" is a plain semver version for systemjs
+504 silly mapToRegistry name systemjs
+505 silly mapToRegistry using default registry
+506 silly mapToRegistry registry https://registry.npm.taobao.org/
+507 silly mapToRegistry data Result {
+507 silly mapToRegistry   raw: 'systemjs',
+507 silly mapToRegistry   scope: null,
+507 silly mapToRegistry   name: 'systemjs',
+507 silly mapToRegistry   rawSpec: '',
+507 silly mapToRegistry   spec: 'latest',
+507 silly mapToRegistry   type: 'tag' }
+508 silly mapToRegistry uri https://registry.npm.taobao.org/systemjs
+509 verbose addNameVersion registry:https://registry.npm.taobao.org/systemjs not in flight; fetching
+510 silly cache afterAdd bootstrap@3.3.6
+511 verbose afterAdd /Users/shuyi/.npm/bootstrap/3.3.6/package/package.json not in flight; writing
+512 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+513 silly cache afterAdd @angular/router@3.0.0-alpha.7
+514 verbose afterAdd /Users/shuyi/.npm/@angular/router/3.0.0-alpha.7/package/package.json not in flight; writing
+515 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+516 silly cache afterAdd rxjs@5.0.0-beta.6
+517 verbose afterAdd /Users/shuyi/.npm/rxjs/5.0.0-beta.6/package/package.json not in flight; writing
+518 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+519 silly cache afterAdd reflect-metadata@0.1.3
+520 verbose afterAdd /Users/shuyi/.npm/reflect-metadata/0.1.3/package/package.json not in flight; writing
+521 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+522 silly cache afterAdd ng2-bootstrap@1.0.17
+523 verbose afterAdd /Users/shuyi/.npm/ng2-bootstrap/1.0.17/package/package.json not in flight; writing
+524 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+525 silly cache afterAdd zone.js@0.6.12
+526 verbose afterAdd /Users/shuyi/.npm/zone.js/0.6.12/package/package.json not in flight; writing
+527 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+528 info retry fetch attempt 1 at 8:33:58 PM
+529 info attempt registry request try #1 at 8:33:58 PM
+530 http fetch GET https://registry.npm.taobao.org/angular2-in-memory-web-api/download/angular2-in-memory-web-api-0.0.14.tgz
+531 info retry fetch attempt 1 at 8:33:58 PM
+532 info attempt registry request try #1 at 8:33:58 PM
+533 http fetch GET https://registry.npm.taobao.org/@angular/forms/download/@angular/forms-0.2.0.tgz
+534 verbose get https://registry.npm.taobao.org/systemjs not expired, no request
+535 http 200 https://registry.npm.taobao.org/core-js
+536 verbose headers { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+536 verbose headers   'content-type': 'application/json; charset=utf-8',
+536 verbose headers   'content-length': '237373',
+536 verbose headers   connection: 'keep-alive',
+536 verbose headers   etag: '"39f3d-2gp1W3x54FwRQNYOLiaVNg"',
+536 verbose headers   'x-readtime': '392' }
+537 silly get cb [ 200,
+537 silly get   { date: 'Fri, 08 Jul 2016 12:33:57 GMT',
+537 silly get     'content-type': 'application/json; charset=utf-8',
+537 silly get     'content-length': '237373',
+537 silly get     connection: 'keep-alive',
+537 silly get     etag: '"39f3d-2gp1W3x54FwRQNYOLiaVNg"',
+537 silly get     'x-readtime': '392' } ]
+538 verbose get saving core-js to /Users/shuyi/.npm/registry.npm.taobao.org/core-js/.cache.json
+539 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+540 verbose afterAdd /Users/shuyi/.npm/bootstrap/3.3.6/package/package.json written
+541 verbose afterAdd /Users/shuyi/.npm/@angular/router/3.0.0-alpha.7/package/package.json written
+542 verbose afterAdd /Users/shuyi/.npm/rxjs/5.0.0-beta.6/package/package.json written
+543 info retry fetch attempt 1 at 8:33:58 PM
+544 info attempt registry request try #1 at 8:33:58 PM
+545 http fetch GET https://registry.npm.taobao.org/@angular/http/download/@angular/http-2.0.0-rc.4.tgz
+546 info retry fetch attempt 1 at 8:33:58 PM
+547 info attempt registry request try #1 at 8:33:58 PM
+548 http fetch GET https://registry.npm.taobao.org/@angular/common/download/@angular/common-2.0.0-rc.4.tgz
+549 verbose afterAdd /Users/shuyi/.npm/reflect-metadata/0.1.3/package/package.json written
+550 verbose afterAdd /Users/shuyi/.npm/ng2-bootstrap/1.0.17/package/package.json written
+551 http 304 https://registry.npm.taobao.org/@angular%2fplatform-browser
+552 verbose headers { date: 'Fri, 08 Jul 2016 12:33:58 GMT',
+552 verbose headers   connection: 'keep-alive',
+552 verbose headers   etag: '"4146-mLP8D+AKLMpGbgB6UmcnUQ"',
+552 verbose headers   'x-readtime': '17' }
+553 silly get cb [ 304,
+553 silly get   { date: 'Fri, 08 Jul 2016 12:33:58 GMT',
+553 silly get     connection: 'keep-alive',
+553 silly get     etag: '"4146-mLP8D+AKLMpGbgB6UmcnUQ"',
+553 silly get     'x-readtime': '17' } ]
+554 verbose etag https://registry.npm.taobao.org/@angular%2fplatform-browser from cache
+555 verbose get saving @angular/platform-browser to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252fplatform-browser/.cache.json
+556 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+557 verbose afterAdd /Users/shuyi/.npm/zone.js/0.6.12/package/package.json written
+558 silly cache afterAdd systemjs@0.19.27
+559 verbose afterAdd /Users/shuyi/.npm/systemjs/0.19.27/package/package.json not in flight; writing
+560 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+561 silly resolveWithNewModule core-js@2.4.0 checking installable status
+562 silly cache add args [ 'core-js@^2.4.0', null ]
+563 verbose cache add spec core-js@^2.4.0
+564 silly cache add parsed spec Result {
+564 silly cache add   raw: 'core-js@^2.4.0',
+564 silly cache add   scope: null,
+564 silly cache add   name: 'core-js',
+564 silly cache add   rawSpec: '^2.4.0',
+564 silly cache add   spec: '>=2.4.0 <3.0.0',
+564 silly cache add   type: 'range' }
+565 silly addNamed core-js@>=2.4.0 <3.0.0
+566 verbose addNamed ">=2.4.0 <3.0.0" is a valid semver range for core-js
+567 silly addNameRange { name: 'core-js', range: '>=2.4.0 <3.0.0', hasData: false }
+568 silly mapToRegistry name core-js
+569 silly mapToRegistry using default registry
+570 silly mapToRegistry registry https://registry.npm.taobao.org/
+571 silly mapToRegistry data Result {
+571 silly mapToRegistry   raw: 'core-js',
+571 silly mapToRegistry   scope: null,
+571 silly mapToRegistry   name: 'core-js',
+571 silly mapToRegistry   rawSpec: '',
+571 silly mapToRegistry   spec: 'latest',
+571 silly mapToRegistry   type: 'tag' }
+572 silly mapToRegistry uri https://registry.npm.taobao.org/core-js
+573 verbose addNameRange registry:https://registry.npm.taobao.org/core-js not in flight; fetching
+574 verbose afterAdd /Users/shuyi/.npm/systemjs/0.19.27/package/package.json written
+575 silly resolveWithNewModule @angular/platform-browser@2.0.0-rc.4 checking installable status
+576 silly cache add args [ '@angular/platform-browser@2.0.0-rc.4', null ]
+577 verbose cache add spec @angular/platform-browser@2.0.0-rc.4
+578 silly cache add parsed spec Result {
+578 silly cache add   raw: '@angular/platform-browser@2.0.0-rc.4',
+578 silly cache add   scope: '@angular',
+578 silly cache add   name: '@angular/platform-browser',
+578 silly cache add   rawSpec: '2.0.0-rc.4',
+578 silly cache add   spec: '2.0.0-rc.4',
+578 silly cache add   type: 'version' }
+579 silly addNamed @angular/platform-browser@2.0.0-rc.4
+580 verbose addNamed "2.0.0-rc.4" is a plain semver version for @angular/platform-browser
+581 silly mapToRegistry name @angular/platform-browser
+582 silly mapToRegistry scope (from package name) @angular
+583 verbose mapToRegistry no registry URL found in name for scope @angular
+584 silly mapToRegistry using default registry
+585 silly mapToRegistry registry https://registry.npm.taobao.org/
+586 silly mapToRegistry data Result {
+586 silly mapToRegistry   raw: '@angular/platform-browser',
+586 silly mapToRegistry   scope: '@angular',
+586 silly mapToRegistry   name: '@angular/platform-browser',
+586 silly mapToRegistry   rawSpec: '',
+586 silly mapToRegistry   spec: 'latest',
+586 silly mapToRegistry   type: 'tag' }
+587 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fplatform-browser
+588 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2fplatform-browser not in flight; fetching
+589 verbose get https://registry.npm.taobao.org/core-js not expired, no request
+590 silly addNameRange number 2 { name: 'core-js', range: '>=2.4.0 <3.0.0', hasData: true }
+591 silly addNameRange versions [ 'core-js',
+591 silly addNameRange   [ '2.4.0',
+591 silly addNameRange     '2.3.0',
+591 silly addNameRange     '2.2.2',
+591 silly addNameRange     '2.2.1',
+591 silly addNameRange     '2.2.0',
+591 silly addNameRange     '2.1.5',
+591 silly addNameRange     '2.1.4',
+591 silly addNameRange     '2.1.3',
+591 silly addNameRange     '2.1.2',
+591 silly addNameRange     '2.1.1',
+591 silly addNameRange     '2.1.0',
+591 silly addNameRange     '2.0.3',
+591 silly addNameRange     '2.0.2',
+591 silly addNameRange     '2.0.1',
+591 silly addNameRange     '2.0.0',
+591 silly addNameRange     '2.0.0-beta.2',
+591 silly addNameRange     '2.0.0-beta',
+591 silly addNameRange     '2.0.0-alpha',
+591 silly addNameRange     '1.2.6',
+591 silly addNameRange     '1.2.5',
+591 silly addNameRange     '1.2.4',
+591 silly addNameRange     '1.2.3',
+591 silly addNameRange     '1.2.2',
+591 silly addNameRange     '1.2.1',
+591 silly addNameRange     '1.2.0',
+591 silly addNameRange     '1.1.4',
+591 silly addNameRange     '1.1.3',
+591 silly addNameRange     '1.1.2',
+591 silly addNameRange     '1.1.1',
+591 silly addNameRange     '1.1.0',
+591 silly addNameRange     '1.0.1',
+591 silly addNameRange     '1.0.0',
+591 silly addNameRange     '0.9.18',
+591 silly addNameRange     '0.9.17',
+591 silly addNameRange     '0.9.16',
+591 silly addNameRange     '0.9.15',
+591 silly addNameRange     '0.9.14',
+591 silly addNameRange     '0.9.13',
+591 silly addNameRange     '0.9.12',
+591 silly addNameRange     '0.9.11',
+591 silly addNameRange     '0.9.10',
+591 silly addNameRange     '0.9.9',
+591 silly addNameRange     '0.9.8',
+591 silly addNameRange     '0.9.7',
+591 silly addNameRange     '0.9.6',
+591 silly addNameRange     '0.9.5',
+591 silly addNameRange     '0.9.4',
+591 silly addNameRange     '0.9.3',
+591 silly addNameRange     '0.9.2',
+591 silly addNameRange     '0.9.1',
+591 silly addNameRange     '0.9.0',
+591 silly addNameRange     '0.8.4',
+591 silly addNameRange     '0.8.3',
+591 silly addNameRange     '0.8.2',
+591 silly addNameRange     '0.8.1',
+591 silly addNameRange     '0.8.0',
+591 silly addNameRange     '0.7.2',
+591 silly addNameRange     '0.7.1',
+591 silly addNameRange     '0.7.0',
+591 silly addNameRange     '0.6.1',
+591 silly addNameRange     '0.6.0',
+591 silly addNameRange     '0.5.4',
+591 silly addNameRange     '0.5.3',
+591 silly addNameRange     '0.5.2',
+591 silly addNameRange     '0.5.1',
+591 silly addNameRange     '0.5.0',
+591 silly addNameRange     '0.4.10',
+591 silly addNameRange     '0.4.9',
+591 silly addNameRange     '0.4.8',
+591 silly addNameRange     '0.4.7',
+591 silly addNameRange     '0.4.6',
+591 silly addNameRange     '0.4.5',
+591 silly addNameRange     '0.4.4',
+591 silly addNameRange     '0.4.3',
+591 silly addNameRange     '0.4.2',
+591 silly addNameRange     '0.4.1',
+591 silly addNameRange     '0.4.0',
+591 silly addNameRange     '0.3.3',
+591 silly addNameRange     '0.3.2',
+591 silly addNameRange     '0.3.1',
+591 silly addNameRange     '0.3.0',
+591 silly addNameRange     '0.2.5',
+591 silly addNameRange     '0.2.4',
+591 silly addNameRange     '0.2.3',
+591 silly addNameRange     '0.2.2',
+591 silly addNameRange     '0.2.1',
+591 silly addNameRange     '0.2.0',
+591 silly addNameRange     '0.1.5',
+591 silly addNameRange     '0.1.4',
+591 silly addNameRange     '0.1.3',
+591 silly addNameRange     '0.1.2',
+591 silly addNameRange     '0.1.1',
+591 silly addNameRange     '0.0.9',
+591 silly addNameRange     '0.0.8',
+591 silly addNameRange     '0.0.7',
+591 silly addNameRange     '0.0.5',
+591 silly addNameRange     '0.0.4',
+591 silly addNameRange     '0.0.3' ] ]
+592 silly addNamed core-js@2.4.0
+593 verbose addNamed "2.4.0" is a plain semver version for core-js
+594 verbose get https://registry.npm.taobao.org/@angular%2fplatform-browser not expired, no request
+595 silly mapToRegistry name @angular/platform-browser
+596 silly mapToRegistry scope (from package name) @angular
+597 verbose mapToRegistry no registry URL found in name for scope @angular
+598 silly mapToRegistry using default registry
+599 silly mapToRegistry registry https://registry.npm.taobao.org/
+600 silly mapToRegistry data Result {
+600 silly mapToRegistry   raw: '@angular/platform-browser',
+600 silly mapToRegistry   scope: '@angular',
+600 silly mapToRegistry   name: '@angular/platform-browser',
+600 silly mapToRegistry   rawSpec: '',
+600 silly mapToRegistry   spec: 'latest',
+600 silly mapToRegistry   type: 'tag' }
+601 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fplatform-browser
+602 verbose addRemoteTarball https://registry.npm.taobao.org/@angular/platform-browser/download/@angular/platform-browser-2.0.0-rc.4.tgz not in flight; adding
+603 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/@angular/platform-browser/download/@angular/platform-browser-2.0.0-rc.4.tgz',
+603 verbose addRemoteTarball   '519e9057b5cc73f0f615c54d45a1c185956df7d1' ]
+604 silly cache afterAdd core-js@2.4.0
+605 verbose afterAdd /Users/shuyi/.npm/core-js/2.4.0/package/package.json not in flight; writing
+606 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+607 info retry fetch attempt 1 at 8:33:59 PM
+608 info attempt registry request try #1 at 8:33:59 PM
+609 http fetch GET https://registry.npm.taobao.org/@angular/platform-browser/download/@angular/platform-browser-2.0.0-rc.4.tgz
+610 verbose afterAdd /Users/shuyi/.npm/core-js/2.4.0/package/package.json written
+611 http fetch 200 https://registry.npm.taobao.org/@angular/http/download/@angular/http-2.0.0-rc.4.tgz
+612 http fetch 200 https://registry.npm.taobao.org/@angular/common/download/@angular/common-2.0.0-rc.4.tgz
+613 http fetch 200 https://registry.npm.taobao.org/@angular/forms/download/@angular/forms-0.2.0.tgz
+614 http fetch 200 https://registry.npm.taobao.org/angular2-in-memory-web-api/download/angular2-in-memory-web-api-0.0.14.tgz
+615 http fetch 200 https://registry.npm.taobao.org/@angular/platform-browser/download/@angular/platform-browser-2.0.0-rc.4.tgz
+616 silly fetchAndShaCheck shasum 338de75e93b9d527429663516427e51bd18e0dd8
+617 verbose addTmpTarball /tmp/npm-810-882ed0f3/registry.npm.taobao.org/angular2-in-memory-web-api/download/angular2-in-memory-web-api-0.0.14.tgz not in flight; adding
+618 verbose addTmpTarball already have metadata; skipping unpack for angular2-in-memory-web-api@0.0.14
+619 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+620 verbose updateRemote git fetch -a origin (git://github.com/fortawesome/Font-Awesome.git)
+621 verbose correctMkdir /Users/shuyi/.npm/_git-remotes correctMkdir not in flight; initializing
+622 http 304 https://registry.npm.taobao.org/@angular%2fupgrade
+623 verbose headers { date: 'Fri, 08 Jul 2016 12:34:00 GMT',
+623 verbose headers   connection: 'keep-alive',
+623 verbose headers   etag: '"38e0-IehBekdC5t66jUXY4fdMGQ"',
+623 verbose headers   'x-readtime': '22' }
+624 silly get cb [ 304,
+624 silly get   { date: 'Fri, 08 Jul 2016 12:34:00 GMT',
+624 silly get     connection: 'keep-alive',
+624 silly get     etag: '"38e0-IehBekdC5t66jUXY4fdMGQ"',
+624 silly get     'x-readtime': '22' } ]
+625 verbose etag https://registry.npm.taobao.org/@angular%2fupgrade from cache
+626 verbose get saving @angular/upgrade to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252fupgrade/.cache.json
+627 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+628 http 304 https://registry.npm.taobao.org/@angular%2fcompiler
+629 verbose headers { date: 'Fri, 08 Jul 2016 12:34:00 GMT',
+629 verbose headers   connection: 'keep-alive',
+629 verbose headers   etag: '"3b03-0SadukUxGJNYoNQOfn4GBw"',
+629 verbose headers   'x-readtime': '24' }
+630 silly get cb [ 304,
+630 silly get   { date: 'Fri, 08 Jul 2016 12:34:00 GMT',
+630 silly get     connection: 'keep-alive',
+630 silly get     etag: '"3b03-0SadukUxGJNYoNQOfn4GBw"',
+630 silly get     'x-readtime': '24' } ]
+631 verbose etag https://registry.npm.taobao.org/@angular%2fcompiler from cache
+632 verbose get saving @angular/compiler to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252fcompiler/.cache.json
+633 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+634 silly cache afterAdd angular2-in-memory-web-api@0.0.14
+635 verbose afterAdd /Users/shuyi/.npm/angular2-in-memory-web-api/0.0.14/package/package.json not in flight; writing
+636 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+637 silly resolveWithNewModule @angular/upgrade@2.0.0-rc.4 checking installable status
+638 silly cache add args [ '@angular/upgrade@2.0.0-rc.4', null ]
+639 verbose cache add spec @angular/upgrade@2.0.0-rc.4
+640 silly cache add parsed spec Result {
+640 silly cache add   raw: '@angular/upgrade@2.0.0-rc.4',
+640 silly cache add   scope: '@angular',
+640 silly cache add   name: '@angular/upgrade',
+640 silly cache add   rawSpec: '2.0.0-rc.4',
+640 silly cache add   spec: '2.0.0-rc.4',
+640 silly cache add   type: 'version' }
+641 silly addNamed @angular/upgrade@2.0.0-rc.4
+642 verbose addNamed "2.0.0-rc.4" is a plain semver version for @angular/upgrade
+643 silly mapToRegistry name @angular/upgrade
+644 silly mapToRegistry scope (from package name) @angular
+645 verbose mapToRegistry no registry URL found in name for scope @angular
+646 silly mapToRegistry using default registry
+647 silly mapToRegistry registry https://registry.npm.taobao.org/
+648 silly mapToRegistry data Result {
+648 silly mapToRegistry   raw: '@angular/upgrade',
+648 silly mapToRegistry   scope: '@angular',
+648 silly mapToRegistry   name: '@angular/upgrade',
+648 silly mapToRegistry   rawSpec: '',
+648 silly mapToRegistry   spec: 'latest',
+648 silly mapToRegistry   type: 'tag' }
+649 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fupgrade
+650 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2fupgrade not in flight; fetching
+651 silly resolveWithNewModule @angular/compiler@2.0.0-rc.4 checking installable status
+652 silly cache add args [ '@angular/compiler@2.0.0-rc.4', null ]
+653 verbose cache add spec @angular/compiler@2.0.0-rc.4
+654 silly cache add parsed spec Result {
+654 silly cache add   raw: '@angular/compiler@2.0.0-rc.4',
+654 silly cache add   scope: '@angular',
+654 silly cache add   name: '@angular/compiler',
+654 silly cache add   rawSpec: '2.0.0-rc.4',
+654 silly cache add   spec: '2.0.0-rc.4',
+654 silly cache add   type: 'version' }
+655 silly addNamed @angular/compiler@2.0.0-rc.4
+656 verbose addNamed "2.0.0-rc.4" is a plain semver version for @angular/compiler
+657 silly mapToRegistry name @angular/compiler
+658 silly mapToRegistry scope (from package name) @angular
+659 verbose mapToRegistry no registry URL found in name for scope @angular
+660 silly mapToRegistry using default registry
+661 silly mapToRegistry registry https://registry.npm.taobao.org/
+662 silly mapToRegistry data Result {
+662 silly mapToRegistry   raw: '@angular/compiler',
+662 silly mapToRegistry   scope: '@angular',
+662 silly mapToRegistry   name: '@angular/compiler',
+662 silly mapToRegistry   rawSpec: '',
+662 silly mapToRegistry   spec: 'latest',
+662 silly mapToRegistry   type: 'tag' }
+663 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcompiler
+664 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2fcompiler not in flight; fetching
+665 http 200 https://registry.npm.taobao.org/@angular%2fcore
+666 verbose headers { date: 'Fri, 08 Jul 2016 12:34:00 GMT',
+666 verbose headers   'content-type': 'application/json; charset=utf-8',
+666 verbose headers   'content-length': '15029',
+666 verbose headers   connection: 'keep-alive',
+666 verbose headers   etag: '"3ab5-2m1bTM3f03ZLdC0cK2YIUQ"',
+666 verbose headers   'x-readtime': '24' }
+667 silly get cb [ 200,
+667 silly get   { date: 'Fri, 08 Jul 2016 12:34:00 GMT',
+667 silly get     'content-type': 'application/json; charset=utf-8',
+667 silly get     'content-length': '15029',
+667 silly get     connection: 'keep-alive',
+667 silly get     etag: '"3ab5-2m1bTM3f03ZLdC0cK2YIUQ"',
+667 silly get     'x-readtime': '24' } ]
+668 verbose get saving @angular/core to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252fcore/.cache.json
+669 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+670 verbose setPermissions fortawesome/Font-Awesome set permissions on /Users/shuyi/.npm/_git-remotes/git-github-com-fortawesome-Font-Awesome-git-2bc8429a
+671 verbose resolveHead fortawesome/Font-Awesome original treeish: master
+672 verbose afterAdd /Users/shuyi/.npm/angular2-in-memory-web-api/0.0.14/package/package.json written
+673 verbose get https://registry.npm.taobao.org/@angular%2fupgrade not expired, no request
+674 verbose get https://registry.npm.taobao.org/@angular%2fcompiler not expired, no request
+675 silly mapToRegistry name @angular/upgrade
+676 silly mapToRegistry scope (from package name) @angular
+677 verbose mapToRegistry no registry URL found in name for scope @angular
+678 silly mapToRegistry using default registry
+679 silly mapToRegistry registry https://registry.npm.taobao.org/
+680 silly mapToRegistry data Result {
+680 silly mapToRegistry   raw: '@angular/upgrade',
+680 silly mapToRegistry   scope: '@angular',
+680 silly mapToRegistry   name: '@angular/upgrade',
+680 silly mapToRegistry   rawSpec: '',
+680 silly mapToRegistry   spec: 'latest',
+680 silly mapToRegistry   type: 'tag' }
+681 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fupgrade
+682 verbose addRemoteTarball https://registry.npm.taobao.org/@angular/upgrade/download/@angular/upgrade-2.0.0-rc.4.tgz not in flight; adding
+683 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/@angular/upgrade/download/@angular/upgrade-2.0.0-rc.4.tgz',
+683 verbose addRemoteTarball   'aa7d56b1c78fca9c0165acf6952b26d0cda81999' ]
+684 silly mapToRegistry name @angular/compiler
+685 silly mapToRegistry scope (from package name) @angular
+686 verbose mapToRegistry no registry URL found in name for scope @angular
+687 silly mapToRegistry using default registry
+688 silly mapToRegistry registry https://registry.npm.taobao.org/
+689 silly mapToRegistry data Result {
+689 silly mapToRegistry   raw: '@angular/compiler',
+689 silly mapToRegistry   scope: '@angular',
+689 silly mapToRegistry   name: '@angular/compiler',
+689 silly mapToRegistry   rawSpec: '',
+689 silly mapToRegistry   spec: 'latest',
+689 silly mapToRegistry   type: 'tag' }
+690 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcompiler
+691 verbose addRemoteTarball https://registry.npm.taobao.org/@angular/compiler/download/@angular/compiler-2.0.0-rc.4.tgz not in flight; adding
+692 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/@angular/compiler/download/@angular/compiler-2.0.0-rc.4.tgz',
+692 verbose addRemoteTarball   '1cb82028b8ed732009cf4c82dbc7f3385dca3684' ]
+693 silly resolveWithNewModule @angular/core@2.0.0-rc.4 checking installable status
+694 silly cache add args [ '@angular/core@2.0.0-rc.4', null ]
+695 verbose cache add spec @angular/core@2.0.0-rc.4
+696 silly cache add parsed spec Result {
+696 silly cache add   raw: '@angular/core@2.0.0-rc.4',
+696 silly cache add   scope: '@angular',
+696 silly cache add   name: '@angular/core',
+696 silly cache add   rawSpec: '2.0.0-rc.4',
+696 silly cache add   spec: '2.0.0-rc.4',
+696 silly cache add   type: 'version' }
+697 silly addNamed @angular/core@2.0.0-rc.4
+698 verbose addNamed "2.0.0-rc.4" is a plain semver version for @angular/core
+699 silly mapToRegistry name @angular/core
+700 silly mapToRegistry scope (from package name) @angular
+701 verbose mapToRegistry no registry URL found in name for scope @angular
+702 silly mapToRegistry using default registry
+703 silly mapToRegistry registry https://registry.npm.taobao.org/
+704 silly mapToRegistry data Result {
+704 silly mapToRegistry   raw: '@angular/core',
+704 silly mapToRegistry   scope: '@angular',
+704 silly mapToRegistry   name: '@angular/core',
+704 silly mapToRegistry   rawSpec: '',
+704 silly mapToRegistry   spec: 'latest',
+704 silly mapToRegistry   type: 'tag' }
+705 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcore
+706 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2fcore not in flight; fetching
+707 info git [ 'rev-list', '-n1', 'master' ]
+708 silly fetchAndShaCheck shasum fc5d41f16b9f561cb322255626428045f7d14cf9
+709 info retry fetch attempt 1 at 8:34:00 PM
+710 info attempt registry request try #1 at 8:34:00 PM
+711 http fetch GET https://registry.npm.taobao.org/@angular/upgrade/download/@angular/upgrade-2.0.0-rc.4.tgz
+712 info retry fetch attempt 1 at 8:34:00 PM
+713 info attempt registry request try #1 at 8:34:00 PM
+714 http fetch GET https://registry.npm.taobao.org/@angular/compiler/download/@angular/compiler-2.0.0-rc.4.tgz
+715 silly resolveHead fortawesome/Font-Awesome resolved treeish: 42136797890295a938dc09536bb7a4ac9ba22e3d
+716 verbose resolveHead fortawesome/Font-Awesome resolved Git URL: git://github.com/fortawesome/Font-Awesome.git#42136797890295a938dc09536bb7a4ac9ba22e3d
+717 silly resolveHead Git working directory: /tmp/npm-810-882ed0f3/git-cache-1b1558a3/42136797890295a938dc09536bb7a4ac9ba22e3d
+718 verbose get https://registry.npm.taobao.org/@angular%2fcore not expired, no request
+719 silly mapToRegistry name @angular/core
+720 silly mapToRegistry scope (from package name) @angular
+721 verbose mapToRegistry no registry URL found in name for scope @angular
+722 silly mapToRegistry using default registry
+723 silly mapToRegistry registry https://registry.npm.taobao.org/
+724 silly mapToRegistry data Result {
+724 silly mapToRegistry   raw: '@angular/core',
+724 silly mapToRegistry   scope: '@angular',
+724 silly mapToRegistry   name: '@angular/core',
+724 silly mapToRegistry   rawSpec: '',
+724 silly mapToRegistry   spec: 'latest',
+724 silly mapToRegistry   type: 'tag' }
+725 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fcore
+726 verbose addRemoteTarball https://registry.npm.taobao.org/@angular/core/download/@angular/core-2.0.0-rc.4.tgz not in flight; adding
+727 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/@angular/core/download/@angular/core-2.0.0-rc.4.tgz',
+727 verbose addRemoteTarball   'f3f98f906fcf0cb87d2c7d7f230ca95ea81cb6e0' ]
+728 verbose addTmpTarball /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/forms/download/_40angular/forms-0.2.0.tgz not in flight; adding
+729 verbose addTmpTarball already have metadata; skipping unpack for @angular/forms@0.2.0
+730 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+731 info retry fetch attempt 1 at 8:34:00 PM
+732 info attempt registry request try #1 at 8:34:00 PM
+733 http fetch GET https://registry.npm.taobao.org/@angular/core/download/@angular/core-2.0.0-rc.4.tgz
+734 info git [ 'clone',
+734 info git   '/Users/shuyi/.npm/_git-remotes/git-github-com-fortawesome-Font-Awesome-git-2bc8429a',
+734 info git   '/tmp/npm-810-882ed0f3/git-cache-1b1558a3/42136797890295a938dc09536bb7a4ac9ba22e3d' ]
+735 silly cache afterAdd @angular/forms@0.2.0
+736 verbose afterAdd /Users/shuyi/.npm/@angular/forms/0.2.0/package/package.json not in flight; writing
+737 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+738 http fetch 200 https://registry.npm.taobao.org/@angular/upgrade/download/@angular/upgrade-2.0.0-rc.4.tgz
+739 http fetch 200 https://registry.npm.taobao.org/@angular/compiler/download/@angular/compiler-2.0.0-rc.4.tgz
+740 silly fetchAndShaCheck shasum 8f92acd2c5f820f890f37757d9a6c3c7c9d86b8d
+741 verbose afterAdd /Users/shuyi/.npm/@angular/forms/0.2.0/package/package.json written
+742 verbose addTmpTarball /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/http/download/_40angular/http-2.0.0-rc.4.tgz not in flight; adding
+743 verbose addTmpTarball already have metadata; skipping unpack for @angular/http@2.0.0-rc.4
+744 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+745 silly cache afterAdd @angular/http@2.0.0-rc.4
+746 verbose afterAdd /Users/shuyi/.npm/@angular/http/2.0.0-rc.4/package/package.json not in flight; writing
+747 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+748 verbose afterAdd /Users/shuyi/.npm/@angular/http/2.0.0-rc.4/package/package.json written
+749 http 200 https://registry.npm.taobao.org/lodash
+750 verbose headers { date: 'Fri, 08 Jul 2016 12:34:00 GMT',
+750 verbose headers   'content-type': 'application/json; charset=utf-8',
+750 verbose headers   'content-length': '155261',
+750 verbose headers   connection: 'keep-alive',
+750 verbose headers   etag: '"25e7d-oNDjkUSSDEox31/aeUizlQ"',
+750 verbose headers   'x-readtime': '191' }
+751 silly get cb [ 200,
+751 silly get   { date: 'Fri, 08 Jul 2016 12:34:00 GMT',
+751 silly get     'content-type': 'application/json; charset=utf-8',
+751 silly get     'content-length': '155261',
+751 silly get     connection: 'keep-alive',
+751 silly get     etag: '"25e7d-oNDjkUSSDEox31/aeUizlQ"',
+751 silly get     'x-readtime': '191' } ]
+752 verbose get saving lodash to /Users/shuyi/.npm/registry.npm.taobao.org/lodash/.cache.json
+753 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+754 silly resolveWithNewModule lodash@4.0.1 checking installable status
+755 silly cache add args [ 'lodash@~4.0.0', null ]
+756 verbose cache add spec lodash@~4.0.0
+757 silly cache add parsed spec Result {
+757 silly cache add   raw: 'lodash@~4.0.0',
+757 silly cache add   scope: null,
+757 silly cache add   name: 'lodash',
+757 silly cache add   rawSpec: '~4.0.0',
+757 silly cache add   spec: '>=4.0.0 <4.1.0',
+757 silly cache add   type: 'range' }
+758 silly addNamed lodash@>=4.0.0 <4.1.0
+759 verbose addNamed ">=4.0.0 <4.1.0" is a valid semver range for lodash
+760 silly addNameRange { name: 'lodash', range: '>=4.0.0 <4.1.0', hasData: false }
+761 silly mapToRegistry name lodash
+762 silly mapToRegistry using default registry
+763 silly mapToRegistry registry https://registry.npm.taobao.org/
+764 silly mapToRegistry data Result {
+764 silly mapToRegistry   raw: 'lodash',
+764 silly mapToRegistry   scope: null,
+764 silly mapToRegistry   name: 'lodash',
+764 silly mapToRegistry   rawSpec: '',
+764 silly mapToRegistry   spec: 'latest',
+764 silly mapToRegistry   type: 'tag' }
+765 silly mapToRegistry uri https://registry.npm.taobao.org/lodash
+766 verbose addNameRange registry:https://registry.npm.taobao.org/lodash not in flight; fetching
+767 verbose get https://registry.npm.taobao.org/lodash not expired, no request
+768 silly addNameRange number 2 { name: 'lodash', range: '>=4.0.0 <4.1.0', hasData: true }
+769 silly addNameRange versions [ 'lodash',
+769 silly addNameRange   [ '4.13.1',
+769 silly addNameRange     '4.13.0',
+769 silly addNameRange     '4.12.0',
+769 silly addNameRange     '4.11.2',
+769 silly addNameRange     '4.11.1',
+769 silly addNameRange     '4.11.0',
+769 silly addNameRange     '4.10.0',
+769 silly addNameRange     '4.9.0',
+769 silly addNameRange     '4.8.2',
+769 silly addNameRange     '4.8.1',
+769 silly addNameRange     '4.8.0',
+769 silly addNameRange     '4.7.0',
+769 silly addNameRange     '4.6.1',
+769 silly addNameRange     '4.6.0',
+769 silly addNameRange     '4.5.1',
+769 silly addNameRange     '4.5.0',
+769 silly addNameRange     '4.4.0',
+769 silly addNameRange     '4.3.0',
+769 silly addNameRange     '4.2.1',
+769 silly addNameRange     '4.2.0',
+769 silly addNameRange     '4.1.0',
+769 silly addNameRange     '4.0.1',
+769 silly addNameRange     '4.0.0',
+769 silly addNameRange     '3.10.1',
+769 silly addNameRange     '3.10.0',
+769 silly addNameRange     '3.9.3',
+769 silly addNameRange     '3.9.2',
+769 silly addNameRange     '3.9.1',
+769 silly addNameRange     '3.9.0',
+769 silly addNameRange     '3.8.0',
+769 silly addNameRange     '2.4.2',
+769 silly addNameRange     '3.7.0',
+769 silly addNameRange     '1.0.2',
+769 silly addNameRange     '3.6.0',
+769 silly addNameRange     '3.5.0',
+769 silly addNameRange     '3.4.0',
+769 silly addNameRange     '3.3.1',
+769 silly addNameRange     '3.3.0',
+769 silly addNameRange     '3.2.0',
+769 silly addNameRange     '3.1.0',
+769 silly addNameRange     '3.0.1',
+769 silly addNameRange     '3.0.0',
+769 silly addNameRange     '0.5.0-rc.1',
+769 silly addNameRange     '0.6.1',
+769 silly addNameRange     '0.5.0',
+769 silly addNameRange     '0.4.1',
+769 silly addNameRange     '0.4.0',
+769 silly addNameRange     '2.4.1',
+769 silly addNameRange     '2.4.0',
+769 silly addNameRange     '2.3.0',
+769 silly addNameRange     '2.2.1',
+769 silly addNameRange     '2.2.0',
+769 silly addNameRange     '2.1.0',
+769 silly addNameRange     '2.0.0',
+769 silly addNameRange     '1.3.1',
+769 silly addNameRange     '1.3.0',
+769 silly addNameRange     '1.2.1',
+769 silly addNameRange     '1.2.0',
+769 silly addNameRange     '1.1.1',
+769 silly addNameRange     '1.1.0',
+769 silly addNameRange     '1.0.1',
+769 silly addNameRange     '1.0.0',
+769 silly addNameRange     '1.0.0-rc.3',
+769 silly addNameRange     '1.0.0-rc.2',
+769 silly addNameRange     '1.0.0-rc.1',
+769 silly addNameRange     '0.10.0',
+769 silly addNameRange     '0.9.2',
+769 silly addNameRange     '0.9.1',
+769 silly addNameRange     '0.9.0',
+769 silly addNameRange     '0.8.2',
+769 silly addNameRange     '0.8.1',
+769 silly addNameRange     '0.8.0',
+769 silly addNameRange     '0.7.0',
+769 silly addNameRange     '0.6.0',
+769 silly addNameRange     '0.5.2',
+769 silly addNameRange     '0.5.1',
+769 silly addNameRange     '0.4.2',
+769 silly addNameRange     '0.3.2',
+769 silly addNameRange     '0.3.1',
+769 silly addNameRange     '0.3.0',
+769 silly addNameRange     '0.2.2',
+769 silly addNameRange     '0.2.1',
+769 silly addNameRange     '0.2.0',
+769 silly addNameRange     '0.1.0' ] ]
+770 silly addNamed lodash@4.0.1
+771 verbose addNamed "4.0.1" is a plain semver version for lodash
+772 silly fetchAndShaCheck shasum c3b0a87cd1e316be2a940bb80319e055898f89e6
+773 silly fetchAndShaCheck shasum aa7d56b1c78fca9c0165acf6952b26d0cda81999
+774 verbose addTmpTarball /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/upgrade/download/_40angular/upgrade-2.0.0-rc.4.tgz not in flight; adding
+775 verbose addTmpTarball already have metadata; skipping unpack for @angular/upgrade@2.0.0-rc.4
+776 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+777 silly cache afterAdd lodash@4.0.1
+778 verbose afterAdd /Users/shuyi/.npm/lodash/4.0.1/package/package.json not in flight; writing
+779 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+780 verbose addTmpTarball /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/common/download/_40angular/common-2.0.0-rc.4.tgz not in flight; adding
+781 verbose addTmpTarball already have metadata; skipping unpack for @angular/common@2.0.0-rc.4
+782 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+783 verbose afterAdd /Users/shuyi/.npm/lodash/4.0.1/package/package.json written
+784 silly cache afterAdd @angular/upgrade@2.0.0-rc.4
+785 verbose afterAdd /Users/shuyi/.npm/@angular/upgrade/2.0.0-rc.4/package/package.json not in flight; writing
+786 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+787 verbose afterAdd /Users/shuyi/.npm/@angular/upgrade/2.0.0-rc.4/package/package.json written
+788 silly cache afterAdd @angular/common@2.0.0-rc.4
+789 verbose afterAdd /Users/shuyi/.npm/@angular/common/2.0.0-rc.4/package/package.json not in flight; writing
+790 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+791 verbose afterAdd /Users/shuyi/.npm/@angular/common/2.0.0-rc.4/package/package.json written
+792 silly fetchAndShaCheck shasum 519e9057b5cc73f0f615c54d45a1c185956df7d1
+793 verbose addTmpTarball /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/platform-browser/download/_40angular/platform-browser-2.0.0-rc.4.tgz not in flight; adding
+794 verbose addTmpTarball already have metadata; skipping unpack for @angular/platform-browser@2.0.0-rc.4
+795 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+796 silly cache afterAdd @angular/platform-browser@2.0.0-rc.4
+797 verbose afterAdd /Users/shuyi/.npm/@angular/platform-browser/2.0.0-rc.4/package/package.json not in flight; writing
+798 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+799 verbose afterAdd /Users/shuyi/.npm/@angular/platform-browser/2.0.0-rc.4/package/package.json written
+800 http fetch 200 https://registry.npm.taobao.org/@angular/core/download/@angular/core-2.0.0-rc.4.tgz
+801 verbose cloneResolved fortawesome/Font-Awesome clone Cloning into '/tmp/npm-810-882ed0f3/git-cache-1b1558a3/42136797890295a938dc09536bb7a4ac9ba22e3d'...
+801 verbose cloneResolved done.
+802 info retry will retry, error on last attempt: Error: 140735141192448:error:1408F119:SSL routines:SSL3_GET_RECORD:decryption failed or bad record mac:../deps/openssl/openssl/ssl/s3_pkt.c:532:
+803 info retry will retry, error on last attempt: Error: 140735141192448:error:1408F119:SSL routines:SSL3_GET_RECORD:decryption failed or bad record mac:../deps/openssl/openssl/ssl/s3_pkt.c:532:
+804 info git [ 'checkout', '42136797890295a938dc09536bb7a4ac9ba22e3d' ]
+805 silly fetchAndShaCheck shasum 1cb82028b8ed732009cf4c82dbc7f3385dca3684
+806 verbose checkoutTreeish fortawesome/Font-Awesome checkout Note: checking out '42136797890295a938dc09536bb7a4ac9ba22e3d'.
+806 verbose checkoutTreeish
+806 verbose checkoutTreeish You are in 'detached HEAD' state. You can look around, make experimental
+806 verbose checkoutTreeish changes and commit them, and you can discard any commits you make in this
+806 verbose checkoutTreeish state without impacting any branches by performing another checkout.
+806 verbose checkoutTreeish
+806 verbose checkoutTreeish If you want to create a new branch to retain commits you create, you may
+806 verbose checkoutTreeish do so (now or later) by using -b with the checkout command again. Example:
+806 verbose checkoutTreeish
+806 verbose checkoutTreeish   git checkout -b <new-branch-name>
+806 verbose checkoutTreeish
+806 verbose checkoutTreeish HEAD is now at 4213679... Update wheelchair-alt filters and categories
+807 info git [ 'submodule', '-q', 'update', '--init', '--recursive' ]
+808 verbose updateSubmodules fortawesome/Font-Awesome submodule update
+809 verbose addLocalDirectory /Users/shuyi/.npm/font-awesome/4.6.3/package.tgz not in flight; packing
+810 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+811 verbose tar pack [ '/Users/shuyi/.npm/font-awesome/4.6.3/package.tgz',
+811 verbose tar pack   '/tmp/npm-810-882ed0f3/git-cache-1b1558a3/42136797890295a938dc09536bb7a4ac9ba22e3d' ]
+812 verbose tarball /Users/shuyi/.npm/font-awesome/4.6.3/package.tgz
+813 verbose folder /tmp/npm-810-882ed0f3/git-cache-1b1558a3/42136797890295a938dc09536bb7a4ac9ba22e3d
+814 verbose addLocalTarball adding from inside cache /Users/shuyi/.npm/font-awesome/4.6.3/package.tgz
+815 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+816 verbose addRemoteGit data._from: fortawesome/Font-Awesome
+817 verbose addRemoteGit data._resolved: git://github.com/fortawesome/Font-Awesome.git#42136797890295a938dc09536bb7a4ac9ba22e3d
+818 silly cache afterAdd font-awesome@4.6.3
+819 verbose afterAdd /Users/shuyi/.npm/font-awesome/4.6.3/package/package.json not in flight; writing
+820 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+821 verbose afterAdd /Users/shuyi/.npm/font-awesome/4.6.3/package/package.json written
+822 silly resolveWithNewModule font-awesome@4.6.3 checking installable status
+823 silly fetchAndShaCheck shasum f3f98f906fcf0cb87d2c7d7f230ca95ea81cb6e0
+824 verbose addTmpTarball /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/core/download/_40angular/core-2.0.0-rc.4.tgz not in flight; adding
+825 verbose addTmpTarball already have metadata; skipping unpack for @angular/core@2.0.0-rc.4
+826 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+827 silly cache afterAdd @angular/core@2.0.0-rc.4
+828 verbose afterAdd /Users/shuyi/.npm/@angular/core/2.0.0-rc.4/package/package.json not in flight; writing
+829 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+830 verbose afterAdd /Users/shuyi/.npm/@angular/core/2.0.0-rc.4/package/package.json written
+831 http 200 https://registry.npm.taobao.org/@angular%2fplatform-browser-dynamic
+832 verbose headers { date: 'Fri, 08 Jul 2016 12:34:03 GMT',
+832 verbose headers   'content-type': 'application/json; charset=utf-8',
+832 verbose headers   'content-length': '17834',
+832 verbose headers   connection: 'keep-alive',
+832 verbose headers   etag: '"45aa-ShzoETcyGGb58i14GyFJ4g"',
+832 verbose headers   'x-readtime': '24' }
+833 silly get cb [ 200,
+833 silly get   { date: 'Fri, 08 Jul 2016 12:34:03 GMT',
+833 silly get     'content-type': 'application/json; charset=utf-8',
+833 silly get     'content-length': '17834',
+833 silly get     connection: 'keep-alive',
+833 silly get     etag: '"45aa-ShzoETcyGGb58i14GyFJ4g"',
+833 silly get     'x-readtime': '24' } ]
+834 verbose get saving @angular/platform-browser-dynamic to /Users/shuyi/.npm/registry.npm.taobao.org/_40angular_252fplatform-browser-dynamic/.cache.json
+835 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+836 silly resolveWithNewModule @angular/platform-browser-dynamic@2.0.0-rc.4 checking installable status
+837 silly cache add args [ '@angular/platform-browser-dynamic@2.0.0-rc.4', null ]
+838 verbose cache add spec @angular/platform-browser-dynamic@2.0.0-rc.4
+839 silly cache add parsed spec Result {
+839 silly cache add   raw: '@angular/platform-browser-dynamic@2.0.0-rc.4',
+839 silly cache add   scope: '@angular',
+839 silly cache add   name: '@angular/platform-browser-dynamic',
+839 silly cache add   rawSpec: '2.0.0-rc.4',
+839 silly cache add   spec: '2.0.0-rc.4',
+839 silly cache add   type: 'version' }
+840 silly addNamed @angular/platform-browser-dynamic@2.0.0-rc.4
+841 verbose addNamed "2.0.0-rc.4" is a plain semver version for @angular/platform-browser-dynamic
+842 silly mapToRegistry name @angular/platform-browser-dynamic
+843 silly mapToRegistry scope (from package name) @angular
+844 verbose mapToRegistry no registry URL found in name for scope @angular
+845 silly mapToRegistry using default registry
+846 silly mapToRegistry registry https://registry.npm.taobao.org/
+847 silly mapToRegistry data Result {
+847 silly mapToRegistry   raw: '@angular/platform-browser-dynamic',
+847 silly mapToRegistry   scope: '@angular',
+847 silly mapToRegistry   name: '@angular/platform-browser-dynamic',
+847 silly mapToRegistry   rawSpec: '',
+847 silly mapToRegistry   spec: 'latest',
+847 silly mapToRegistry   type: 'tag' }
+848 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fplatform-browser-dynamic
+849 verbose addNameVersion registry:https://registry.npm.taobao.org/@angular%2fplatform-browser-dynamic not in flight; fetching
+850 verbose get https://registry.npm.taobao.org/@angular%2fplatform-browser-dynamic not expired, no request
+851 silly mapToRegistry name @angular/platform-browser-dynamic
+852 silly mapToRegistry scope (from package name) @angular
+853 verbose mapToRegistry no registry URL found in name for scope @angular
+854 silly mapToRegistry using default registry
+855 silly mapToRegistry registry https://registry.npm.taobao.org/
+856 silly mapToRegistry data Result {
+856 silly mapToRegistry   raw: '@angular/platform-browser-dynamic',
+856 silly mapToRegistry   scope: '@angular',
+856 silly mapToRegistry   name: '@angular/platform-browser-dynamic',
+856 silly mapToRegistry   rawSpec: '',
+856 silly mapToRegistry   spec: 'latest',
+856 silly mapToRegistry   type: 'tag' }
+857 silly mapToRegistry uri https://registry.npm.taobao.org/@angular%2fplatform-browser-dynamic
+858 verbose addRemoteTarball https://registry.npm.taobao.org/@angular/platform-browser-dynamic/download/@angular/platform-browser-dynamic-2.0.0-rc.4.tgz not in flight; adding
+859 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/@angular/platform-browser-dynamic/download/@angular/platform-browser-dynamic-2.0.0-rc.4.tgz',
+859 verbose addRemoteTarball   '8653d31018c54c65a6d88864bb0af8d024691788' ]
+860 info retry fetch attempt 1 at 8:34:03 PM
+861 info attempt registry request try #1 at 8:34:03 PM
+862 http fetch GET https://registry.npm.taobao.org/@angular/platform-browser-dynamic/download/@angular/platform-browser-dynamic-2.0.0-rc.4.tgz
+863 http fetch 200 https://registry.npm.taobao.org/@angular/platform-browser-dynamic/download/@angular/platform-browser-dynamic-2.0.0-rc.4.tgz
+864 silly fetchAndShaCheck shasum 8653d31018c54c65a6d88864bb0af8d024691788
+865 verbose addTmpTarball /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/platform-browser-dynamic/download/_40angular/platform-browser-dynamic-2.0.0-rc.4.tgz not in flight; adding
+866 verbose addTmpTarball already have metadata; skipping unpack for @angular/platform-browser-dynamic@2.0.0-rc.4
+867 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+868 silly cache afterAdd @angular/platform-browser-dynamic@2.0.0-rc.4
+869 verbose afterAdd /Users/shuyi/.npm/@angular/platform-browser-dynamic/2.0.0-rc.4/package/package.json not in flight; writing
+870 verbose correctMkdir /Users/shuyi/.npm correctMkdir not in flight; initializing
+871 verbose afterAdd /Users/shuyi/.npm/@angular/platform-browser-dynamic/2.0.0-rc.4/package/package.json written
+872 silly rollbackFailedOptional Starting
+873 silly rollbackFailedOptional Finishing
+874 silly runTopLevelLifecycles Starting
+875 silly runTopLevelLifecycles Finishing
+876 silly install printInstalled
+877 verbose stack Error: shasum check failed for /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/compiler/download/_40angular/compiler-2.0.0-rc.4.tgz
+877 verbose stack Expected: 1cb82028b8ed732009cf4c82dbc7f3385dca3684
+877 verbose stack Actual:   1003f2b545a5cbabe75f4fd31142e07f64f0ae82
+877 verbose stack From:     https://registry.npm.taobao.org/@angular/compiler/download/@angular/compiler-2.0.0-rc.4.tgz
+877 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/sha/index.js:25:8
+877 verbose stack     at ReadStream.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/sha/index.js:72:7)
+877 verbose stack     at emitNone (events.js:91:20)
+877 verbose stack     at ReadStream.emit (events.js:185:7)
+877 verbose stack     at endReadableNT (_stream_readable.js:934:12)
+877 verbose stack     at _combinedTickCallback (internal/process/next_tick.js:74:11)
+877 verbose stack     at process._tickCallback (internal/process/next_tick.js:98:9)
+878 verbose cwd /Users/shuyi/workstation/workspace/RestfulNodeJS/public/NG2
+879 error Darwin 14.5.0
+880 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+881 error node v6.2.2
+882 error npm  v3.9.5
+883 error shasum check failed for /tmp/npm-810-882ed0f3/registry.npm.taobao.org/_40angular/compiler/download/_40angular/compiler-2.0.0-rc.4.tgz
+883 error Expected: 1cb82028b8ed732009cf4c82dbc7f3385dca3684
+883 error Actual:   1003f2b545a5cbabe75f4fd31142e07f64f0ae82
+883 error From:     https://registry.npm.taobao.org/@angular/compiler/download/@angular/compiler-2.0.0-rc.4.tgz
+884 error If you need help, you may report this error at:
+884 error     <https://github.com/npm/npm/issues>
+885 verbose exit [ 1, true ]

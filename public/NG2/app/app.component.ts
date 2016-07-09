@@ -6,6 +6,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import {RedisManagerComponent} from "./redis-manager.component";
 import {AppInfo} from "./app-info.model";
 import {AppHeaderComponent} from "./app-header.component";
+import {LogService} from "./common/log.service";
 
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
@@ -15,6 +16,7 @@ import {AppHeaderComponent} from "./app-header.component";
     '<div class="container"><router-outlet></router-outlet></div>' +
     '<app-footer [appInfo]="appInfo"></app-footer>',
     styles: [''],
+    providers: [{provide: LogService, useClass: LogService}],
     directives: [AppHeaderComponent, RedisManagerComponent, ROUTER_DIRECTIVES]
 })
 

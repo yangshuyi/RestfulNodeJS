@@ -17,7 +17,7 @@ import {RedisManagerService} from "./redis-manager.service";
     '   <label for="keyword">Search Keyword: </label><input id="keyword" [(ngModel)]="keyword" (change)="searchByKeyword()" placeholder="keyword">' +
     '   <hr/>' +
     '   <div *ngIf="keyword && filterRedisObjects">Find [{{filterRedisObjects.length}}] record(s) for Redis Object by keyword [{{keyword}}]</div>' +
-    '   <div *ngIf="filterRedisObjects" *ngFor="let redisObject of filterRedisObjects">' +
+    '   <div *ngFor="let redisObject of filterRedisObjects">' +
     '       <redis-object [redisObject]="redisObject"></redis-object>' +
     '   </div>' +
     '</div>' +

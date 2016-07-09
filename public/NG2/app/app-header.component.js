@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,7 +12,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var app_info_model_1 = require("./app-info.model");
-var template = require('./app-header.html');
+//let template = require('./app-header.html');
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var AppHeaderComponent = (function () {
@@ -28,8 +29,8 @@ var AppHeaderComponent = (function () {
     AppHeaderComponent = __decorate([
         core_1.Component({
             selector: 'app-header',
-            templateUrl: 'app-header.html',
-            atemplate: '<header>' +
+            //templateUrl: 'app-header.html',
+            template: '<header>' +
                 '<div class="top-bar">' +
                 '   <div class="container">' +
                 '       <div class="row">' +
@@ -56,6 +57,6 @@ var AppHeaderComponent = (function () {
         __metadata('design:paramtypes', [router_1.Router])
     ], AppHeaderComponent);
     return AppHeaderComponent;
-})();
+}());
 exports.AppHeaderComponent = AppHeaderComponent;
 //# sourceMappingURL=app-header.component.js.map

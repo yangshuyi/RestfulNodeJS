@@ -4,6 +4,7 @@ import {Component} from '@angular/core';
 import {OnInit} from '@angular/core';
 
 import * as _ from 'lodash';
+import {ImageProperties} from "./common/image-properties.model";
 
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
@@ -13,6 +14,11 @@ import * as _ from 'lodash';
     '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
     '<div>About fontawesome</div>'+
     '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>'+
+    '<br/>'+
+    '<image-thumbnail [imageproperties]="imageProperties"></image-thumbnail>'+
+    ''+
+    ''+
+    ''+
     '',
     styles: [''],
     directives: [],
@@ -25,12 +31,22 @@ export class BootstrapComponent implements OnInit {
     //When we're ready to build a substantive application, we can expand this class with properties and application logic.
     title:string = 'NATIVE ANGULAR 2 DIRECTIVES FOR BOOTSTRAP';
 
+    imageProperties: ImageProperties;
+    
     constructor() {
         console.log('RedisManagerComponent constructor');
+        
+        this.imageProperties = new ImageProperties();
+        this.imageProperties.srcUrl = 'images/topic-thumbnail.jpg';
+        this.imageProperties.containerWidth = 200;
+        this.imageProperties.containerHeight = 200;
+        this.imageProperties.title = 'Topic-Thumbnail';
+
+
     }
 
     ngOnInit() {
-
+        
     }
 
 }
