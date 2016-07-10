@@ -15,6 +15,7 @@ var redis_manager_component_1 = require("./redis-manager.component");
 var app_info_model_1 = require("./app-info.model");
 var app_header_component_1 = require("./app-header.component");
 var log_service_1 = require("./common/log.service");
+var image_service_1 = require("./common/image.service");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var AppComponent = (function () {
@@ -30,7 +31,7 @@ var AppComponent = (function () {
                 '<div class="container"><router-outlet></router-outlet></div>' +
                 '<app-footer [appInfo]="appInfo"></app-footer>',
             styles: [''],
-            providers: [{ provide: log_service_1.LogService, useClass: log_service_1.LogService }],
+            providers: [{ provide: log_service_1.LogService, useClass: log_service_1.LogService }, image_service_1.ImageService],
             directives: [app_header_component_1.AppHeaderComponent, redis_manager_component_1.RedisManagerComponent, router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])

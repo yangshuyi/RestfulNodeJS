@@ -10,38 +10,61 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var image_properties_model_1 = require("./image-properties.model");
-var angular_js_1 = require("@angular/upgrade/esm/src/angular_js");
 var _ = require('lodash');
-var ImageThumbnail = (function () {
-    function ImageThumbnail() {
+var image_service_1 = require("./image.service");
+var log_service_1 = require("./log.service");
+var ImageThumbnailComponent = (function () {
+    function ImageThumbnailComponent(imageService, logService) {
+        this.imageService = imageService;
+        this.logService = logService;
+        this.isImageLoadedFlag = false;
+        this.logService.log('ImageThumbnailComponent constructor' + this.imageProperties);
     }
-    ImageThumbnail.prototype.init = function () {
-        var imageSrc = angular_js_1.element.all(by.tagName('img')).src;
+    ImageThumbnailComponent.prototype.ngOnInit = function () {
+        console.log('ImageThumbnailComponent ngOnInit' + this.imageProperties.srcUrl);
+        //let imageSrc = element.all(by.tagName('img')).src;
     };
-    ImageThumbnail.prototype.ngOnChanges = function (changes) {
+    ImageThumbnailComponent.prototype.ngOnChanges = function (changes) {
+        console.log('ImageThumbnailComponent ngOnChanges' + this.imageProperties.srcUrl);
+        this.url = this.imageProperties.srcUrl;
         _.each(changes, function (changedProp) {
             var from = changedProp.previousValue;
             var to = changedProp.currentValue;
             console.log('${propName} changed from ${from} to ${to}');
+            console.log(changedProp + ' changed from ' + from + ' to ' + to);
         });
+    };
+    ImageThumbnailComponent.prototype.onError = function () {
+        console.log('onError');
+        // if(this.url != this.imageProperties.errorUrl){
+        //     this.url = this.imageProperties.errorUrl;
+        // }
+    };
+    ImageThumbnailComponent.prototype.onLoad = function () {
+        console.log('onLoad');
+        this.isImageLoadedFlag = true;
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', image_properties_model_1.ImageProperties)
-    ], ImageThumbnail.prototype, "imageProperties", void 0);
-    ImageThumbnail = __decorate([
+    ], ImageThumbnailComponent.prototype, "imageProperties", void 0);
+    ImageThumbnailComponent = __decorate([
         core_1.Component({
             selector: 'image-thumbnail',
             template: '' +
-                '<div class="content">' +
-                '   <img src="{{url}}" draggable="false" style="width:{{imageProperties.width}}px;height:{{imageProperties.height}}px;top:{{imageProperties.top}}px;left:{{imageProperties.left}}px;"/>' +
+                '<div class="content" [style.width.px]="imageProperties.containerHeight" [style.height.px]="imageProperties.containerHeight">' +
+                '   <img src="{{url}}" (error)="onError()" (load)="onLoad()" [style.display]="isImageLoadedFlag?\'block\':\'none\'" [style.top.px]="imageProperties.top" [style.left.px]="imageProperties.left" [style.width.px]="imageProperties.width" [style.height.px]="imageProperties.height"/>' +
                 '</div>' +
                 '',
-            styles: ['']
+            styles: [
+                '.content { position: relative; border: 1px solid darkgray; background: white;}' +
+                    '.content > img{ position: absolute; }' +
+                    ''
+            ]
         }), 
-        __metadata('design:paramtypes', [])
-    ], ImageThumbnail);
-    return ImageThumbnail;
+        __metadata('design:paramtypes', [image_service_1.ImageService, log_service_1.LogService])
+    ], ImageThumbnailComponent);
+    return ImageThumbnailComponent;
 }());
-exports.ImageThumbnail = ImageThumbnail;
+exports.ImageThumbnailComponent = ImageThumbnailComponent;
 //# sourceMappingURL=image-thumbnail.component.js.map

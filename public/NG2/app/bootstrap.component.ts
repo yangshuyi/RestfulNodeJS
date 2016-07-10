@@ -4,7 +4,9 @@ import {Component} from '@angular/core';
 import {OnInit} from '@angular/core';
 
 import * as _ from 'lodash';
-import {ImageProperties} from "./common/image-properties.model";
+import {ImageProperties, StretchMode} from "./common/image-properties.model";
+import {ImageThumbnailComponent} from "./common/image-thumbnail.component";
+import {ImageService} from "./common/image.service";
 
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
@@ -15,13 +17,12 @@ import {ImageProperties} from "./common/image-properties.model";
     '<div>About fontawesome</div>'+
     '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>'+
     '<br/>'+
-    '<image-thumbnail [imageproperties]="imageProperties"></image-thumbnail>'+
-    ''+
-    ''+
+    '<image-thumbnail [imageProperties]="imageProperties"></image-thumbnail>'+
+    '<br/>'+
     ''+
     '',
     styles: [''],
-    directives: [],
+    directives: [ImageThumbnailComponent],
     providers: []
 })
 
@@ -32,15 +33,16 @@ export class BootstrapComponent implements OnInit {
     title:string = 'NATIVE ANGULAR 2 DIRECTIVES FOR BOOTSTRAP';
 
     imageProperties: ImageProperties;
-    
-    constructor() {
-        console.log('RedisManagerComponent constructor');
+
+    constructor(private imageService:ImageService) {
+        console.log('BootstrapComponent constructor');
         
-        this.imageProperties = new ImageProperties();
-        this.imageProperties.srcUrl = 'images/topic-thumbnail.jpg';
-        this.imageProperties.containerWidth = 200;
-        this.imageProperties.containerHeight = 200;
-        this.imageProperties.title = 'Topic-Thumbnail';
+        this.imageProperties = this.imageService.createImageProperties(570,650,400,400);
+        this.imageProperties.stretchMode = StretchMode.WHOLE;
+        this.imageProperties.srcUrl = 'images/a.jpg';
+        this.imageProperties.errorUrl = 'images/topic-thumbtail.jpg';
+        this.imageService.buildImageProperties(this.imageProperties);
+        
 
 
     }

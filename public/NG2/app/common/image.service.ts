@@ -1,30 +1,28 @@
 import {Injectable} from '@angular/core'
-import {ImageProperties} from "./image-properties.model";
+import {ImageProperties, StretchMode} from "./image-properties.model";
 
 @Injectable()
 export class ImageService {
     createImageProperties(imageWidth:number, imageHeight:number, containerWidth:number, containerHeight:number):ImageProperties {
-        return {
-            imageWidth: imageWidth,
-            imageHeight: imageHeight,
+        let imageProperties = new ImageProperties();
+        imageProperties.imageWidth = imageWidth;
+        imageProperties.imageHeight = imageHeight;
+        imageProperties.containerWidth = containerWidth;
+        imageProperties.containerHeight = containerHeight;
+        imageProperties.scale = 1;
+        imageProperties.rotate = 0;
+        imageProperties.top = 0;
+        imageProperties.left = 0;
+        imageProperties.width = 0;
+        imageProperties.height = 0;
 
-            containerWidth: containerWidth,
-            containerHeight: containerHeight,
-
-            scale: 1,
-            rotate: 0,
-
-            top: 0,
-            left: 0,
-            width: 0,
-            height: 0,
-        }
+        return imageProperties;
     };
 
     buildImageProperties(imageProperties:ImageProperties):void {
-        let stretchMode = imageProperties.stretchMode ? imageProperties.stretchMode : 1;
+        let stretchMode = imageProperties.stretchMode ? imageProperties.stretchMode : StretchMode.INITIAL;
 
-        if (stretchMode == 1) {
+        if (stretchMode == StretchMode.WHOLE) {
             //图片宽高计算
             if (imageProperties.imageWidth > 0 && imageProperties.imageHeight > 0) {
                 if ((imageProperties.imageWidth / imageProperties.imageHeight) > ( imageProperties.containerWidth / imageProperties.containerHeight)) {
@@ -50,7 +48,7 @@ export class ImageService {
                 imageProperties.left = 0;
                 imageProperties.top = 0;
             }
-        } else if (stretchMode == 2) {
+        } else if (stretchMode == StretchMode.FILL) {
             //图片宽高计算
             if (imageProperties.imageWidth > 0 && imageProperties.imageHeight > 0) {
                 if ((imageProperties.imageWidth / imageProperties.imageHeight) > ( imageProperties.containerWidth / imageProperties.containerHeight)) {
@@ -76,6 +74,12 @@ export class ImageService {
                 imageProperties.left = 0;
                 imageProperties.top = 0;
             }
+        } else if(stretchMode == StretchMode.INITIAL){
+            imageProperties.width = imageProperties.imageWidth;
+            imageProperties.height = imageProperties.imageHeight;
+
+            imageProperties.left = (imageProperties.containerWidth - imageProperties.width) / 2;
+            imageProperties.top = (imageProperties.containerHeight - imageProperties.height) / 2;
         }
     };
 

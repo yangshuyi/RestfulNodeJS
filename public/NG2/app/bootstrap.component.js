@@ -10,18 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var image_properties_model_1 = require("./common/image-properties.model");
+var image_thumbnail_component_1 = require("./common/image-thumbnail.component");
+var image_service_1 = require("./common/image.service");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var BootstrapComponent = (function () {
-    function BootstrapComponent() {
+    function BootstrapComponent(imageService) {
+        this.imageService = imageService;
         //When we're ready to build a substantive application, we can expand this class with properties and application logic.
         this.title = 'NATIVE ANGULAR 2 DIRECTIVES FOR BOOTSTRAP';
-        console.log('RedisManagerComponent constructor');
-        this.imageProperties = new image_properties_model_1.ImageProperties();
-        this.imageProperties.srcUrl = 'images/topic-thumbnail.jpg';
-        this.imageProperties.containerWidth = 200;
-        this.imageProperties.containerHeight = 200;
-        this.imageProperties.title = 'Topic-Thumbnail';
+        console.log('BootstrapComponent constructor');
+        this.imageProperties = this.imageService.createImageProperties(570, 650, 400, 400);
+        this.imageProperties.stretchMode = image_properties_model_1.StretchMode.WHOLE;
+        this.imageProperties.srcUrl = 'images/a.jpg';
+        this.imageProperties.errorUrl = 'images/topic-thumbtail.jpg';
+        this.imageService.buildImageProperties(this.imageProperties);
     }
     BootstrapComponent.prototype.ngOnInit = function () {
     };
@@ -33,16 +36,15 @@ var BootstrapComponent = (function () {
                 '<div>About fontawesome</div>' +
                 '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>' +
                 '<br/>' +
-                '<image-thumbnail [imageproperties]="imageProperties"></image-thumbnail>' +
-                '' +
-                '' +
+                '<image-thumbnail [imageProperties]="imageProperties"></image-thumbnail>' +
+                '<br/>' +
                 '' +
                 '',
             styles: [''],
-            directives: [],
+            directives: [image_thumbnail_component_1.ImageThumbnailComponent],
             providers: []
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [image_service_1.ImageService])
     ], BootstrapComponent);
     return BootstrapComponent;
 }());

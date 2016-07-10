@@ -18,8 +18,8 @@ export class ImageProperties {
     stretchMode:StretchMode = StretchMode.INITIAL;
 }
 
-enum StretchMode {
+export enum StretchMode {
     WHOLE = 1,
-    STETCHER = 2,
+    FILL = 2,
     INITIAL = 3
 }
