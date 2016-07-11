@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,44 +8,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var image_properties_model_1 = require("./common/image-properties.model");
-var image_thumbnail_component_1 = require("./common/image-thumbnail.component");
-var image_service_1 = require("./common/image.service");
+var image_service_1 = require("./common/image-viewer/image.service");
+var topic_service_1 = require("./echodrama/topic/topic.service");
+var snapshot_component_1 = require("./echodrama/topic/snapshot.component");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var BootstrapComponent = (function () {
-    function BootstrapComponent(imageService) {
+    function BootstrapComponent(imageService, topicService) {
         this.imageService = imageService;
+        this.topicService = topicService;
         //When we're ready to build a substantive application, we can expand this class with properties and application logic.
         this.title = 'NATIVE ANGULAR 2 DIRECTIVES FOR BOOTSTRAP';
         console.log('BootstrapComponent constructor');
-        this.imageProperties = this.imageService.createImageProperties(570, 650, 400, 400);
-        this.imageProperties.stretchMode = image_properties_model_1.StretchMode.WHOLE;
-        this.imageProperties.srcUrl = 'images/a.jpg';
-        this.imageProperties.errorUrl = 'images/topic-thumbtail.jpg';
-        this.imageService.buildImageProperties(this.imageProperties);
+        this.topic = topicService.loadTopicById(1);
     }
     BootstrapComponent.prototype.ngOnInit = function () {
     };
+    BootstrapComponent.prototype.onTopicSelected = function () {
+    };
     BootstrapComponent = __decorate([
         core_1.Component({
-            selector: 'redis-manager',
+            selector: 'bootstrap-component',
             template: '' +
                 '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
                 '<div>About fontawesome</div>' +
                 '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>' +
                 '<br/>' +
-                '<image-thumbnail [imageProperties]="imageProperties"></image-thumbnail>' +
+                '<div style="width:200px;">' +
+                '   <topic-snapshot [topic]="topic" (on-topic-selected)="onTopicSelected"></topic-snapshot>' +
+                '</div>' +
                 '<br/>' +
                 '' +
                 '',
             styles: [''],
-            directives: [image_thumbnail_component_1.ImageThumbnailComponent],
-            providers: []
+            directives: [snapshot_component_1.TopicSnapshotComponent],
+            providers: [topic_service_1.TopicService]
         }), 
-        __metadata('design:paramtypes', [image_service_1.ImageService])
+        __metadata('design:paramtypes', [image_service_1.ImageService, topic_service_1.TopicService])
     ], BootstrapComponent);
     return BootstrapComponent;
-}());
+})();
 exports.BootstrapComponent = BootstrapComponent;
 //# sourceMappingURL=bootstrap.component.js.map

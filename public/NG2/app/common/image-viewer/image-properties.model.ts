@@ -1,4 +1,5 @@
 export class ImageProperties {
+    id: number;
     srcUrl:string;
     errorUrl:string;
     title:string = '';

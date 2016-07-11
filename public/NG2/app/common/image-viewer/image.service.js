@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15,6 +14,7 @@ var ImageService = (function () {
     }
     ImageService.prototype.createImageProperties = function (imageWidth, imageHeight, containerWidth, containerHeight) {
         var imageProperties = new image_properties_model_1.ImageProperties();
+        imageProperties.id = (new Date()).getTime();
         imageProperties.imageWidth = imageWidth;
         imageProperties.imageHeight = imageHeight;
         imageProperties.containerWidth = containerWidth;
@@ -93,6 +93,6 @@ var ImageService = (function () {
         __metadata('design:paramtypes', [])
     ], ImageService);
     return ImageService;
-}());
+})();
 exports.ImageService = ImageService;
 //# sourceMappingURL=image.service.js.map

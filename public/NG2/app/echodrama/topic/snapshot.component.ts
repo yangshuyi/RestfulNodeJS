@@ -1,64 +1,68 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output,EventEmitter} from '@angular/core';
 import { OnInit } from '@angular/core';
 import {Topic} from "./topic.model";
+import {TopicService} from "./topic.service";
+import {StretchMode} from "../../common/image-viewer/image-properties.model";
+import {ImageService} from "../../common/image-viewer/image.service";
+import {ImageThumbnailComponent} from "../../common/image-viewer/image-thumbnail.component";
 
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 @Component({
-    selector: 'app-footer', //The selector specifies a simple CSS selector for an HTML element that represents the component.
+    selector: 'topic-snapshot', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     template: '' +
     '<div class="container">' +
-    '    <div class="row">' +
-    '       <div class="col-sm-12 center">&copy; 2013 <a target="_blank" href="{{url}}" title="{{footName}}">{{footName}}</a>. All Rights Reserved.</div>' +
+    '   <div class="row">' +
+    '       <image-thumbnail class="col-sm-12 center" [image-properties]="imageProperties" (click)="selectTopic()"></image-thumbnail>' +
+    '   </div>' +
+    '   <div class="row">' +
+    '       <div class="col-sm-12 center">{{topic.subject}}</div>' +
+    '   </div>' +
+    '   <div class="row">' +
+    '       <div class="col-sm-12 center" ><button (click)="aaa()">编号: {{topic.number}}</button></div>' +
     '   </div>' +
     '</div>' +
     '',
-    styles: ['']
+    styles: [''],
+    directives: [ImageThumbnailComponent]
 })
 
-//
-// <table cellspacing="0" cellpadding="0" width="100%" border=0>
-// <!--{loop $list $key $value}-->
-// <tr>
-//     <td align="left" colspan="2">
-// <span class="gray">$value[typename]名：</span><a href="space.php?do=topic&topicforecastid=$value[topicforecastid]" title="$value[subject]">$value[subject]</a><br/>
-// <span class="gray">发布时间：</span>$value['producedatedisp']<br/>
-// <span class="gray">标签　　：</span>$value['label']<br/>
-// </td>
-// <td width="24px" >&nbsp;</td>
-// </tr>
-// <tr>
-//     <td align="left" valign="top" width="50%" >
-// <span class="gray">作品类型：</span>$value[productclassname]<br/>
-// <span class="gray">所属团队：</span><!--{if empty($value[clubtagid])}-->$value[club]<!--{else}--><a class="black" href="space.php?do=mtag&tagid=$value[clubtagid]" target="_blank">$value[club]</a><!--{/if}--><br/>
-// <span class="gray">原著　　：</span>$value[yuanzhu]<br/>
-// </td>
-// <td align="left" valign="top" width="50%" >
-// <span class="gray">导演：</span>$value[director]<br/>
-// <span class="gray">编剧：</span>$value[writer]<br/>
-// <span class="gray">后期：</span>$value[effector]<br/>
-// </td>
-// <td width="24px" >&nbsp;</td>
-// </tr>
-// <tr>
-//     <td align="left" colspan="2">
-// <span style="color: #EF9822;">$value[viewnum]&nbsp;次访问,&nbsp;$value[joinnum]&nbsp;次关注</span>
-// </td>
-// <td width="24px" >&nbsp;</td>
-// </tr>
-// <tr>
-//     <td align="left" colspan="2" style="border-top:1px dashed #ECB2C5;">&nbsp;</td>
-// <td width="24px" >&nbsp;</td>
-// </tr>
-// <!--{/loop}-->
-// </table>
-//
 
-
-export class TopicSnapshotComponent{
+export class TopicSnapshotComponent implements OnChanges{
     @Input()
     private topic: Topic;
 
-    constructor() {
+    @Output()
+    private onTopicSelected: EventEmitter = new EventEmitter();
+
+    constructor(private imageService:ImageService) {
+        console.log('TopicSnapshotComponent constructor'+this.topic);
+    }
+
+    ngOnChanges(changes:{[propKey:string]:SimpleChange}) {
+        console.log('TopicSnapshotComponent ngOnChanges'+this.topic);
+
+        if(this.topic) {
+            this.imageProperties = this.imageService.createImageProperties(null, null, 400, 400);
+            this.imageProperties.stretchMode = StretchMode.WHOLE;
+            this.imageProperties.srcUrl = this.topic.posterUrl;
+            this.imageProperties.errorUrl = 'images/topic-thumbtail.jpg';
+        }
+    }
+
+
+    aaa(){
+        if(this.topic) {
+            this.imageProperties = this.imageService.createImageProperties(null, null, 400, 400);
+            this.imageProperties.stretchMode = StretchMode.WHOLE;
+            this.imageProperties.srcUrl = this.topic.posterUrl;
+            this.imageProperties.errorUrl = 'images/topic-thumbtail.jpg';
+        }
+    }
+
+    selectTopic(){
+        if(this.topic){
+            this.onTopicSelected.emit(this.topic);
+        }
     }
 }

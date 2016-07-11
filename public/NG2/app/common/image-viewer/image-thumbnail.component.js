@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12,20 +11,20 @@ var core_1 = require('@angular/core');
 var image_properties_model_1 = require("./image-properties.model");
 var _ = require('lodash');
 var image_service_1 = require("./image.service");
-var log_service_1 = require("./log.service");
+var log_service_1 = require("../log.service");
 var ImageThumbnailComponent = (function () {
     function ImageThumbnailComponent(imageService, logService) {
         this.imageService = imageService;
         this.logService = logService;
         this.isImageLoadedFlag = false;
+        this.imageProperties = new image_properties_model_1.ImageProperties();
         this.logService.log('ImageThumbnailComponent constructor' + this.imageProperties);
     }
-    ImageThumbnailComponent.prototype.ngOnInit = function () {
-        console.log('ImageThumbnailComponent ngOnInit' + this.imageProperties.srcUrl);
-        //let imageSrc = element.all(by.tagName('img')).src;
-    };
     ImageThumbnailComponent.prototype.ngOnChanges = function (changes) {
-        console.log('ImageThumbnailComponent ngOnChanges' + this.imageProperties.srcUrl);
+        console.log('ImageThumbnailComponent ngOnChanges' + this.imageProperties);
+        if (!this.imageProperties) {
+            return;
+        }
         this.url = this.imageProperties.srcUrl;
         _.each(changes, function (changedProp) {
             var from = changedProp.previousValue;
@@ -34,14 +33,34 @@ var ImageThumbnailComponent = (function () {
             console.log(changedProp + ' changed from ' + from + ' to ' + to);
         });
     };
-    ImageThumbnailComponent.prototype.onError = function () {
-        console.log('onError');
-        // if(this.url != this.imageProperties.errorUrl){
-        //     this.url = this.imageProperties.errorUrl;
-        // }
+    ImageThumbnailComponent.prototype.ngOnInit = function () {
+        console.log('ImageThumbnailComponent ngOnInit' + this.imageProperties);
+        //let imageSrc = element.all(by.tagName('img')).src;
     };
-    ImageThumbnailComponent.prototype.onLoad = function () {
-        console.log('onLoad');
+    ImageThumbnailComponent.prototype.ngAfterViewInit = function () {
+        //$(this.imageElem.nativeElement).chosen().on('change', (e, args) => {
+        //    this.selectedValue = args.selected;
+        //});
+    };
+    ImageThumbnailComponent.prototype.onError = function () {
+        if (!this.imageProperties) {
+            return;
+        }
+        if (this.url != this.imageProperties.errorUrl) {
+            this.url = this.imageProperties.errorUrl;
+        }
+    };
+    ImageThumbnailComponent.prototype.onLoad = function ($event) {
+        if (!this.imageProperties) {
+            return;
+        }
+        if (!this.imageProperties.imageWidth) {
+            this.imageProperties.imageWidth = $event.srcElement.naturalWidth;
+        }
+        if (!this.imageProperties.imageHeight) {
+            this.imageProperties.imageHeight = $event.srcElement.naturalHeight;
+        }
+        this.imageService.buildImageProperties(this.imageProperties);
         this.isImageLoadedFlag = true;
     };
     __decorate([
@@ -53,7 +72,7 @@ var ImageThumbnailComponent = (function () {
             selector: 'image-thumbnail',
             template: '' +
                 '<div class="content" [style.width.px]="imageProperties.containerHeight" [style.height.px]="imageProperties.containerHeight">' +
-                '   <img src="{{url}}" (error)="onError()" (load)="onLoad()" [style.display]="isImageLoadedFlag?\'block\':\'none\'" [style.top.px]="imageProperties.top" [style.left.px]="imageProperties.left" [style.width.px]="imageProperties.width" [style.height.px]="imageProperties.height"/>' +
+                '   <img #img src="{{url}}" (error)="onError()" (load)="onLoad($event)" [style.display]="isImageLoadedFlag?\'block\':\'none\'" [style.top.px]="imageProperties.top" [style.left.px]="imageProperties.left" [style.width.px]="imageProperties.width" [style.height.px]="imageProperties.height"/>' +
                 '</div>' +
                 '',
             styles: [
@@ -65,6 +84,6 @@ var ImageThumbnailComponent = (function () {
         __metadata('design:paramtypes', [image_service_1.ImageService, log_service_1.LogService])
     ], ImageThumbnailComponent);
     return ImageThumbnailComponent;
-}());
+})();
 exports.ImageThumbnailComponent = ImageThumbnailComponent;
 //# sourceMappingURL=image-thumbnail.component.js.map

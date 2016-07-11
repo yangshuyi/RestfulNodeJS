@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15,7 +14,7 @@ var redis_manager_component_1 = require("./redis-manager.component");
 var app_info_model_1 = require("./app-info.model");
 var app_header_component_1 = require("./app-header.component");
 var log_service_1 = require("./common/log.service");
-var image_service_1 = require("./common/image.service");
+var image_service_1 = require("./common/image-viewer/image.service");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var AppComponent = (function () {
@@ -37,6 +36,6 @@ var AppComponent = (function () {
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
-}());
+})();
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

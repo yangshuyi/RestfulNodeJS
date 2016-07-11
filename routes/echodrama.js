@@ -4,16 +4,16 @@ var querystring = require('querystring');
 var express = require('express');
 var router = express.Router();
 
-
-var mysql = require('mysql');  //调用MySQL模块(felixge/node-mysql)
-//创建一个connection
-var connection = mysql.createConnection({
-    host: 'localhost',       //主机
-    database: 'ysys',
-    user: 'root',               //MySQL认证用户名
-    password: '',        //MySQL认证用户密码
-    port: '3307',                   //端口号
-});
+//
+//var mysql = require('mysql');  //调用MySQL模块(felixge/node-mysql)
+////创建一个connection
+//var connection = mysql.createConnection({
+//    host: 'localhost',       //主机
+//    database: 'ysys',
+//    user: 'root',               //MySQL认证用户名
+//    password: '',        //MySQL认证用户密码
+//    port: '3307',                   //端口号
+//});
 
 /* Get listing. */
 router.get('/topic/list', function (request, response, next) {

@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,30 +8,70 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var topic_model_1 = require("./topic.model");
+var image_properties_model_1 = require("../../common/image-viewer/image-properties.model");
+var image_service_1 = require("../../common/image-viewer/image.service");
+var image_thumbnail_component_1 = require("../../common/image-viewer/image-thumbnail.component");
 //A @Component decorator that tells Angular what template to use and how to create the component.
 //associate metadata with the component class
 var TopicSnapshotComponent = (function () {
-    function TopicSnapshotComponent() {
+    function TopicSnapshotComponent(imageService) {
+        this.imageService = imageService;
+        this.onTopicSelected = new core_1.EventEmitter();
+        console.log('TopicSnapshotComponent constructor' + this.topic);
     }
+    TopicSnapshotComponent.prototype.ngOnChanges = function (changes) {
+        console.log('TopicSnapshotComponent ngOnChanges' + this.topic);
+        if (this.topic) {
+            this.imageProperties = this.imageService.createImageProperties(null, null, 400, 400);
+            this.imageProperties.stretchMode = image_properties_model_1.StretchMode.WHOLE;
+            this.imageProperties.srcUrl = this.topic.posterUrl;
+            this.imageProperties.errorUrl = 'images/topic-thumbtail.jpg';
+        }
+    };
+    TopicSnapshotComponent.prototype.aaa = function () {
+        if (this.topic) {
+            this.imageProperties = this.imageService.createImageProperties(null, null, 400, 400);
+            this.imageProperties.stretchMode = image_properties_model_1.StretchMode.WHOLE;
+            this.imageProperties.srcUrl = this.topic.posterUrl;
+            this.imageProperties.errorUrl = 'images/topic-thumbtail.jpg';
+        }
+    };
+    TopicSnapshotComponent.prototype.selectTopic = function () {
+        if (this.topic) {
+            this.onTopicSelected.emit(this.topic);
+        }
+    };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
+        __metadata('design:type', topic_model_1.Topic)
     ], TopicSnapshotComponent.prototype, "topic", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], TopicSnapshotComponent.prototype, "onTopicSelected", void 0);
     TopicSnapshotComponent = __decorate([
         core_1.Component({
-            selector: 'app-footer',
+            selector: 'topic-snapshot',
             template: '' +
                 '<div class="container">' +
-                '    <div class="row">' +
-                '       <div class="col-sm-12 center">&copy; 2013 <a target="_blank" href="{{url}}" title="{{footName}}">{{footName}}</a>. All Rights Reserved.</div>' +
+                '   <div class="row">' +
+                '       <image-thumbnail class="col-sm-12 center" [image-properties]="imageProperties" (click)="selectTopic()"></image-thumbnail>' +
+                '   </div>' +
+                '   <div class="row">' +
+                '       <div class="col-sm-12 center">{{topic.subject}}</div>' +
+                '   </div>' +
+                '   <div class="row">' +
+                '       <div class="col-sm-12 center" ><button (click)="aaa()">编号: {{topic.number}}</button></div>' +
                 '   </div>' +
                 '</div>' +
                 '',
-            styles: ['']
+            styles: [''],
+            directives: [image_thumbnail_component_1.ImageThumbnailComponent]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [image_service_1.ImageService])
     ], TopicSnapshotComponent);
     return TopicSnapshotComponent;
-}());
+})();
 exports.TopicSnapshotComponent = TopicSnapshotComponent;
 //# sourceMappingURL=snapshot.component.js.map

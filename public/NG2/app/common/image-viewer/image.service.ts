@@ -5,6 +5,7 @@ import {ImageProperties, StretchMode} from "./image-properties.model";
 export class ImageService {
     createImageProperties(imageWidth:number, imageHeight:number, containerWidth:number, containerHeight:number):ImageProperties {
         let imageProperties = new ImageProperties();
+        imageProperties.id = (new Date()).getTime();
         imageProperties.imageWidth = imageWidth;
         imageProperties.imageHeight = imageHeight;
         imageProperties.containerWidth = containerWidth;

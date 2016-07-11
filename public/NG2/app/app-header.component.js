@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -29,34 +28,12 @@ var AppHeaderComponent = (function () {
     AppHeaderComponent = __decorate([
         core_1.Component({
             selector: 'app-header',
-            //templateUrl: 'app-header.html',
-            template: '<header>' +
-                '<div class="top-bar">' +
-                '   <div class="container">' +
-                '       <div class="row">' +
-                '           <div class="col-sm-12 col-xs-12">' +
-                '               <div class="search">' +
-                '                   <input type="text" autocomplete="off" placeholder="Search">' +
-                '                   <i class="fa fa-search fa-lg"></i>' +
-                '               </div>' +
-                '           </div>' +
-                '       </div>' +
-                '   </div>' +
-                '</div>' +
-                '<nav class="navbar navbar-static-top navbar-dark bg-inverse">' +
-                '           <img src="images/logo.png" alt="logo">' +
-                '           <ul class="nav navbar-nav">' +
-                '               <li *ngFor="let menu of appInfo.menus" class="nav-item active">' +
-                '                   <a class="nav-link" (click)="navigateToModule()" title="{{menu.name}}">{{menu.name}}</a>' +
-                '               </li>' +
-                '           </ul>' +
-                '</nav>' +
-                '</header>',
+            templateUrl: 'app/app-header.html',
             styles: ['']
         }), 
         __metadata('design:paramtypes', [router_1.Router])
     ], AppHeaderComponent);
     return AppHeaderComponent;
-}());
+})();
 exports.AppHeaderComponent = AppHeaderComponent;
 //# sourceMappingURL=app-header.component.js.map

@@ -1,15 +1,16 @@
-export interface Topic {
-    topicId:number;
-    topicTagId?:number;
+export class Topic {
+    id:number;
     number:number;
     type:string;
     singletonAlbum:number;
     uId:number;
     userName:string;
     label:string;
+    posterUrl:string;
     subject:string;
     message:string;
     productClassId:number;
+    productClassName:string;
     club:string;
     clubTagId:number;
     director:string;
@@ -32,3 +33,4 @@ export interface Topic {
     poll_4:number;
     poll_5:number;
 }
+
