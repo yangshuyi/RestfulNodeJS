@@ -11,6 +11,7 @@ import {TopicSpaceListComponent} from "./echodrama/topic/space-list.component";
 @Component({
     selector: 'bootstrap-component', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     template: '' +
+    '<div>https://github.com/twbs/bootstrap/tree/v4-dev</div>' +
     '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
     '<div>About fontawesome</div>'+
     '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>'+

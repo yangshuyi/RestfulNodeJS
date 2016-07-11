@@ -27,6 +27,7 @@ var BootstrapComponent = (function () {
         core_1.Component({
             selector: 'bootstrap-component',
             template: '' +
+                '<div>https://github.com/twbs/bootstrap/tree/v4-dev</div>' +
                 '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
                 '<div>About fontawesome</div>' +
                 '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>' +
