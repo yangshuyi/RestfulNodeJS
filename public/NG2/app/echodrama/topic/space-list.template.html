@@ -1,0 +1,13 @@
+<div class="topic-space-list container">
+    <div class="row">
+        <div class="col-lg-8 col-md-8">
+            <div style="background: red">
+                hello
+            </div>
+        </div>
+        <div class="sidebox col-lg-4 col-md-4" style="text-align: center;">
+            <div class="title">每月新剧推荐</div>
+            <topic-snapshot *ngFor="let topic of monthlyHotestTopicList" [topic]="topic" (on-topic-selected)="onTopicSelected" class="content"></topic-snapshot>'+
+        </div>
+    </div>
+</div>

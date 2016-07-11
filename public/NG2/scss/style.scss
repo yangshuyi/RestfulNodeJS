@@ -1,7 +1,9 @@
 
+@import '../node_modules/bootstrap/scss/bootstrap-flex';
 @import 'style.variables';
 @import 'base';
 @import 'common.component';
+
 
 
 .estimateTotalAmountPopupPanel {
@@ -21,4 +23,20 @@
 .redis-manager {
   background: black;
   color:white;
+}
+
+
+.topic-space-list{
+  .sidebox{
+    border: 1px solid lightgrey;
+
+    >.title{
+      background: orange;
+      padding:5px;
+    }
+
+    >.content{
+      padding:5px;
+    }
+  }
 }

@@ -6,10 +6,10 @@ export class TopicService {
 
     loadTopicById(topicId:number):Topic {
         let topic:Topic = new Topic();
-        topic.id = '1';
+        topic.id = topicId;
         topic.posterUrl = 'images/a.jpg';
         topic.subject = 'subject';
-        topic.number = 'number';
+        topic.number = topicId;
         topic.cast = 'cast';
         topic.subject = 'xxxxx';
         topic.label = 'xxxxx';
@@ -21,5 +21,13 @@ export class TopicService {
         topic.effector = 'effector';
 
         return topic;
+    }
+
+    listHotestTopic(type:string):Topic[]{
+        let hotestTopic:Topic[] = [];
+        for(let i:number=0;i<10;i++){
+            hotestTopic.push(this.loadTopicById(i));
+        }
+        return hotestTopic;
     }
 }

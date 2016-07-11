@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17,7 +18,6 @@ var ImageThumbnailComponent = (function () {
         this.imageService = imageService;
         this.logService = logService;
         this.isImageLoadedFlag = false;
-        this.imageProperties = new image_properties_model_1.ImageProperties();
         this.logService.log('ImageThumbnailComponent constructor' + this.imageProperties);
     }
     ImageThumbnailComponent.prototype.ngOnChanges = function (changes) {
@@ -71,12 +71,12 @@ var ImageThumbnailComponent = (function () {
         core_1.Component({
             selector: 'image-thumbnail',
             template: '' +
-                '<div class="content" [style.width.px]="imageProperties.containerHeight" [style.height.px]="imageProperties.containerHeight">' +
-                '   <img #img src="{{url}}" (error)="onError()" (load)="onLoad($event)" [style.display]="isImageLoadedFlag?\'block\':\'none\'" [style.top.px]="imageProperties.top" [style.left.px]="imageProperties.left" [style.width.px]="imageProperties.width" [style.height.px]="imageProperties.height"/>' +
+                '<div class="content" [style.width.px]="imageProperties.containerWidth" [style.height.px]="imageProperties.containerHeight">' +
+                '   <img #img src="{{url}}" alt="{{imageProperties.title}}" (error)="onError()" (load)="onLoad($event)" [style.display]="isImageLoadedFlag?\'block\':\'none\'" [style.top.px]="imageProperties.top" [style.left.px]="imageProperties.left" [style.width.px]="imageProperties.width" [style.height.px]="imageProperties.height"/>' +
                 '</div>' +
                 '',
             styles: [
-                '.content { position: relative; border: 1px solid darkgray; background: white;}' +
+                '.content { margin: 0 auto; position: relative; border: 1px solid darkgray; background: white;}' +
                     '.content > img{ position: absolute; }' +
                     ''
             ]
@@ -84,6 +84,6 @@ var ImageThumbnailComponent = (function () {
         __metadata('design:paramtypes', [image_service_1.ImageService, log_service_1.LogService])
     ], ImageThumbnailComponent);
     return ImageThumbnailComponent;
-})();
+}());
 exports.ImageThumbnailComponent = ImageThumbnailComponent;
 //# sourceMappingURL=image-thumbnail.component.js.map

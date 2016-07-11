@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -14,10 +15,10 @@ var TopicService = (function () {
     }
     TopicService.prototype.loadTopicById = function (topicId) {
         var topic = new topic_model_1.Topic();
-        topic.id = '1';
+        topic.id = topicId;
         topic.posterUrl = 'images/a.jpg';
         topic.subject = 'subject';
-        topic.number = 'number';
+        topic.number = topicId;
         topic.cast = 'cast';
         topic.subject = 'xxxxx';
         topic.label = 'xxxxx';
@@ -29,11 +30,18 @@ var TopicService = (function () {
         topic.effector = 'effector';
         return topic;
     };
+    TopicService.prototype.listHotestTopic = function (type) {
+        var hotestTopic = [];
+        for (var i = 0; i < 10; i++) {
+            hotestTopic.push(this.loadTopicById(i));
+        }
+        return hotestTopic;
+    };
     TopicService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
     ], TopicService);
     return TopicService;
-})();
+}());
 exports.TopicService = TopicService;
 //# sourceMappingURL=topic.service.js.map

@@ -3,7 +3,7 @@ export class ImageProperties {
     srcUrl:string;
     errorUrl:string;
     title:string = '';
-
+    
     width:number;
     height:number;
     left:number;
