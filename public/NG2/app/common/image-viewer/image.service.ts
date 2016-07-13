@@ -28,23 +28,23 @@ export class ImageService {
             if (imageProperties.imageWidth > 0 && imageProperties.imageHeight > 0) {
                 if ((imageProperties.imageWidth / imageProperties.imageHeight) > ( imageProperties.containerWidth / imageProperties.containerHeight)) {
                     //过宽
-                    imageProperties.width = imageProperties.containerWidth;
-                    imageProperties.height = imageProperties.imageHeight * ( imageProperties.containerWidth / imageProperties.imageWidth);
+                    imageProperties.width = imageProperties.containerWidth - 2;
+                    imageProperties.height = imageProperties.imageHeight * ( imageProperties.containerWidth / imageProperties.imageWidth) - 2;
 
                     imageProperties.left = 0;
                     imageProperties.top = (imageProperties.containerHeight - imageProperties.height) / 2;
 
                 } else {
                     //过高
-                    imageProperties.width = imageProperties.imageWidth * ( imageProperties.containerHeight / imageProperties.imageHeight);
-                    imageProperties.height = imageProperties.containerHeight;
+                    imageProperties.width = imageProperties.imageWidth * ( imageProperties.containerHeight / imageProperties.imageHeight) - 2;
+                    imageProperties.height = imageProperties.containerHeight - 2;
 
                     imageProperties.left = (imageProperties.containerWidth - imageProperties.width) / 2;
                     imageProperties.top = 0;
                 }
             } else {
-                imageProperties.width = imageProperties.containerWidth;
-                imageProperties.height = imageProperties.containerHeight;
+                imageProperties.width = imageProperties.containerWidth - 2;
+                imageProperties.height = imageProperties.containerHeight - 2;
 
                 imageProperties.left = 0;
                 imageProperties.top = 0;

@@ -1,10 +1,11 @@
-
 @import '../node_modules/bootstrap/scss/bootstrap-flex';
 @import 'style.variables';
 @import 'base';
 @import 'common.component';
 
-
+.row{
+  flex-wrap: initial;
+}
 
 .estimateTotalAmountPopupPanel {
   background-color: #edf6fb;
@@ -19,24 +20,28 @@
   padding: 5px 0px;
 }
 
-
 .redis-manager {
   background: black;
-  color:white;
+  color: white;
 }
 
+.topic-space-list {
+  article {
+    section {
 
-.topic-space-list{
-  .sidebox{
-    border: 1px solid lightgrey;
-
-    >.title{
+    }
+  }
+  aside {
+    > .title {
       background: orange;
-      padding:5px;
+      padding: 10px;
     }
 
-    >.content{
-      padding:5px;
+    > .content {
+      background: white;
+      padding: 20px;
+      border: 1px solid lightgrey;
+      border-top: none;
     }
   }
 }

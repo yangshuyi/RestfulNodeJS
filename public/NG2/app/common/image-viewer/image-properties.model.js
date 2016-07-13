@@ -1,4 +1,3 @@
-"use strict";
 var ImageProperties = (function () {
     function ImageProperties() {
         this.title = '';
@@ -7,7 +6,7 @@ var ImageProperties = (function () {
         this.stretchMode = StretchMode.INITIAL;
     }
     return ImageProperties;
-}());
+})();
 exports.ImageProperties = ImageProperties;
 (function (StretchMode) {
     StretchMode[StretchMode["WHOLE"] = 1] = "WHOLE";

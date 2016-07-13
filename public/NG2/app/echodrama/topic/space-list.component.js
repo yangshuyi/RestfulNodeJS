@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,10 +8,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var core_2 = require('@angular/core');
 var snapshot_component_1 = require("./snapshot.component");
 var topic_service_1 = require("./topic.service");
 var TopicSpaceListComponent = (function () {
-    function TopicSpaceListComponent(topicService) {
+    function TopicSpaceListComponent(element, topicService) {
+        this.element = element;
         this.topicService = topicService;
     }
     TopicSpaceListComponent.prototype.ngOnInit = function () {
@@ -25,13 +26,16 @@ var TopicSpaceListComponent = (function () {
         core_1.Component({
             selector: 'topic-space-list-component',
             templateUrl: 'app/echodrama/topic/space-list.template.html',
+            //host: {
+            //    '(document:click)': 'handleClick($event)',
+            //},
             styles: [''],
             directives: [snapshot_component_1.TopicSnapshotComponent],
             providers: [topic_service_1.TopicService]
         }), 
-        __metadata('design:paramtypes', [topic_service_1.TopicService])
+        __metadata('design:paramtypes', [core_2.ElementRef, topic_service_1.TopicService])
     ], TopicSpaceListComponent);
     return TopicSpaceListComponent;
-}());
+})();
 exports.TopicSpaceListComponent = TopicSpaceListComponent;
 //# sourceMappingURL=space-list.component.js.map
