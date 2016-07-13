@@ -3,6 +3,7 @@ import {OnInit, ElementRef} from '@angular/core';
 import {TopicSnapshotComponent} from "./snapshot.component";
 import {TopicService} from "./topic.service";
 import {Topic} from "./topic.model";
+import {TopicCardItemComponent} from "./card-item.component";
 
 @Component({
     selector: 'topic-space-list-component',
@@ -11,19 +12,22 @@ import {Topic} from "./topic.model";
     //    '(document:click)': 'handleClick($event)',
     //},
     styles: [''],
-    directives: [TopicSnapshotComponent],
+    directives: [TopicCardItemComponent, TopicSnapshotComponent],
     providers: [TopicService]
 })
 
 
 export class TopicSpaceListComponent implements OnInit {
-    monthlyHotestTopicList: Topic[];
+    private monthlyHotestTopicList: Topic[];
+    private topicList: Topic[];
 
     constructor(private element: ElementRef, private topicService:TopicService) {
     
     }
 
     ngOnInit() {
+        var params = {}
+        this.topicList = this.topicService.listTopicByPagination(params);
         this.monthlyHotestTopicList = this.topicService.listHotestTopic('monthly');
     }
 

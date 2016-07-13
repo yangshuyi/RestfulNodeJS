@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,12 +12,15 @@ var core_1 = require('@angular/core');
 var core_2 = require('@angular/core');
 var snapshot_component_1 = require("./snapshot.component");
 var topic_service_1 = require("./topic.service");
+var card_item_component_1 = require("./card-item.component");
 var TopicSpaceListComponent = (function () {
     function TopicSpaceListComponent(element, topicService) {
         this.element = element;
         this.topicService = topicService;
     }
     TopicSpaceListComponent.prototype.ngOnInit = function () {
+        var params = {};
+        this.topicList = this.topicService.listTopicByPagination(params);
         this.monthlyHotestTopicList = this.topicService.listHotestTopic('monthly');
     };
     TopicSpaceListComponent.prototype.onTopicSelected = function (topic) {
@@ -30,12 +34,12 @@ var TopicSpaceListComponent = (function () {
             //    '(document:click)': 'handleClick($event)',
             //},
             styles: [''],
-            directives: [snapshot_component_1.TopicSnapshotComponent],
+            directives: [card_item_component_1.TopicCardItemComponent, snapshot_component_1.TopicSnapshotComponent],
             providers: [topic_service_1.TopicService]
         }), 
         __metadata('design:paramtypes', [core_2.ElementRef, topic_service_1.TopicService])
     ], TopicSpaceListComponent);
     return TopicSpaceListComponent;
-})();
+}());
 exports.TopicSpaceListComponent = TopicSpaceListComponent;
 //# sourceMappingURL=space-list.component.js.map
