@@ -25,7 +25,7 @@ import {DatePipe} from "@angular/common";
     '                      <span *ngFor="let labelItem of topic.labelItemArray" class="mark">{{labelItem}}</span>' +
     '                   </div>' +
     '                   <ul class="list-inline" style="margin-bottom:initial;">' +
-    '                     <li class="list-inline-item" style="vertical-align: top; width:40%;">' +
+    '                     <li class="list-inline-item" style="vertical-align: top; width:48%;">' +
     '                           <ul class="list-unstyled"  style="vertical-align: top; vertical-align: top">' +
     '                               <li><span class="gray">作品类型：</span>{{topic.category.text}}</li>' +
     '                               <li><span class="gray">所属团队：</span>{{topic.club}}</li>' +
@@ -111,4 +111,6 @@ export class TopicCardItemComponent implements OnChanges {
             this.onTopicSelected.emit(this.topic);
         }
     }
+
+    //transform: perspective(600px) rotateY(45deg); */
 }

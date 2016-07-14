@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -70,7 +71,7 @@ var TopicCardItemComponent = (function () {
                 '                      <span *ngFor="let labelItem of topic.labelItemArray" class="mark">{{labelItem}}</span>' +
                 '                   </div>' +
                 '                   <ul class="list-inline" style="margin-bottom:initial;">' +
-                '                     <li class="list-inline-item" style="vertical-align: top; width:40%;">' +
+                '                     <li class="list-inline-item" style="vertical-align: top; width:48%;">' +
                 '                           <ul class="list-unstyled"  style="vertical-align: top; vertical-align: top">' +
                 '                               <li><span class="gray">作品类型：</span>{{topic.category.text}}</li>' +
                 '                               <li><span class="gray">所属团队：</span>{{topic.club}}</li>' +
@@ -120,6 +121,6 @@ var TopicCardItemComponent = (function () {
         __metadata('design:paramtypes', [core_1.ElementRef, image_service_1.ImageService])
     ], TopicCardItemComponent);
     return TopicCardItemComponent;
-})();
+}());
 exports.TopicCardItemComponent = TopicCardItemComponent;
 //# sourceMappingURL=card-item.component.js.map

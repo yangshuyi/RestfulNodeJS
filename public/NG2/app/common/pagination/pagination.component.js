@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,43 +19,9 @@ var ImageThumbnailComponent = (function () {
         if (!this.imageProperties) {
             return;
         }
-        this.url = this.imageProperties.srcUrl;
-        _.each(changes, function (changedProp) {
-            var from = changedProp.previousValue;
-            var to = changedProp.currentValue;
-            console.log('${propName} changed from ${from} to ${to}');
-            console.log(changedProp + ' changed from ' + from + ' to ' + to);
-        });
     };
     ImageThumbnailComponent.prototype.ngOnInit = function () {
         console.log('ImageThumbnailComponent ngOnInit' + this.imageProperties);
-        //let imageSrc = element.all(by.tagName('img')).src;
-    };
-    ImageThumbnailComponent.prototype.ngAfterViewInit = function () {
-        //$(this.imageElem.nativeElement).chosen().on('change', (e, args) => {
-        //    this.selectedValue = args.selected;
-        //});
-    };
-    ImageThumbnailComponent.prototype.onError = function () {
-        if (!this.imageProperties) {
-            return;
-        }
-        if (this.url != this.imageProperties.errorUrl) {
-            this.url = this.imageProperties.errorUrl;
-        }
-    };
-    ImageThumbnailComponent.prototype.onLoad = function ($event) {
-        if (!this.imageProperties) {
-            return;
-        }
-        if (!this.imageProperties.imageWidth) {
-            this.imageProperties.imageWidth = $event.srcElement.naturalWidth;
-        }
-        if (!this.imageProperties.imageHeight) {
-            this.imageProperties.imageHeight = $event.srcElement.naturalHeight;
-        }
-        this.imageService.buildImageProperties(this.imageProperties);
-        this.isImageLoadedFlag = true;
     };
     __decorate([
         Input(), 
@@ -91,6 +58,6 @@ var ImageThumbnailComponent = (function () {
         __metadata('design:paramtypes', [])
     ], ImageThumbnailComponent);
     return ImageThumbnailComponent;
-})();
+}());
 exports.ImageThumbnailComponent = ImageThumbnailComponent;
 //# sourceMappingURL=pagination.component.js.map
