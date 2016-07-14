@@ -41,51 +41,9 @@ export class ImageThumbnailComponent implements OnChanges, OnInit {
         if (!this.imageProperties) {
             return;
         }
-
-        this.url = this.imageProperties.srcUrl;
-        _.each(changes, function (changedProp) {
-            let from = changedProp.previousValue;
-            let to = changedProp.currentValue;
-            console.log('${propName} changed from ${from} to ${to}');
-            console.log(changedProp + ' changed from ' + from + ' to ' + to);
-        });
     }
 
     ngOnInit() {
         console.log('ImageThumbnailComponent ngOnInit' + this.imageProperties);
-        //let imageSrc = element.all(by.tagName('img')).src;
-    }
-
-    ngAfterViewInit() {
-        //$(this.imageElem.nativeElement).chosen().on('change', (e, args) => {
-        //    this.selectedValue = args.selected;
-        //});
-    }
-
-    onError() {
-        if (!this.imageProperties) {
-            return;
-        }
-
-        if (this.url != this.imageProperties.errorUrl) {
-            this.url = this.imageProperties.errorUrl;
-        }
-    }
-
-    onLoad($event) {
-        if (!this.imageProperties) {
-            return;
-        }
-
-        if (!this.imageProperties.imageWidth) {
-            this.imageProperties.imageWidth = $event.srcElement.naturalWidth;
-        }
-        if (!this.imageProperties.imageHeight) {
-            this.imageProperties.imageHeight = $event.srcElement.naturalHeight;
-        }
-
-        this.imageService.buildImageProperties(this.imageProperties);
-
-        this.isImageLoadedFlag = true;
     }
 }
