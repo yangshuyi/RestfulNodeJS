@@ -1,4 +1,3 @@
-"use strict";
 var AuthGuard = (function () {
     function AuthGuard(authService, router) {
         this.authService = authService;
@@ -12,6 +11,6 @@ var AuthGuard = (function () {
         return false;
     };
     return AuthGuard;
-}());
+})();
 exports.AuthGuard = AuthGuard;
 //# sourceMappingURL=auth.guard.js.map

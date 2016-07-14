@@ -1,4 +1,3 @@
-"use strict";
 var Topic = (function () {
     function Topic() {
         this.replyNum = 0;
@@ -12,7 +11,7 @@ var Topic = (function () {
         this.poll_5 = 0;
     }
     return Topic;
-}());
+})();
 exports.Topic = Topic;
 var Type = (function () {
     function Type() {
@@ -45,7 +44,7 @@ var Type = (function () {
         return type;
     };
     return Type;
-}());
+})();
 exports.Type = Type;
 var Category = (function () {
     function Category() {
@@ -59,19 +58,21 @@ var Category = (function () {
             case 1:
                 category.id = 1;
                 category.key = 'BG';
-                category.text = 'BG广播剧';
+                category.text = 'BG';
                 category.orderIdx = 1;
                 break;
             case 2:
                 category.id = 2;
                 category.key = 'DM-BL';
-                category.text = 'BL广播剧';
+                category.text = 'BL';
+                category.shortText = 'BL';
                 category.orderIdx = 2;
                 break;
             case 3:
                 category.id = 3;
                 category.key = 'DM-GL';
-                category.text = 'GL广播剧';
+                category.text = 'GL';
+                category.shortText = 'GL';
                 category.orderIdx = 3;
                 break;
             case 4:
@@ -96,6 +97,6 @@ var Category = (function () {
         return category;
     };
     return Category;
-}());
+})();
 exports.Category = Category;
 //# sourceMappingURL=topic.model.js.map

@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core'
 import {Topic, Category, Type} from "./topic.model";
 
+import * as _ from 'lodash';
+
 @Injectable()
 export class TopicService {
 
@@ -10,13 +12,14 @@ export class TopicService {
         topic.number = 1000060;
         topic.typeId = 'single';
         topic.type = Type.getTypeById(topic.typeId);
-        topic.singletonAlbum = false;
+        topic.singletonAlbum = true;
 
         topic.posterUrl = 'images/a.jpg';
         topic.subject = '《捡个娃娃来爱》第四集 大结局';
         topic.label = '耽美/近代/现代/爱情/轻松';
+        topic.labelItemArray = _.split(topic.label, '/');
         topic.message = '';
-        topic.categoryId = 2;
+        topic.categoryId = 4;
         topic.category = Category.getCategoryById(topic.categoryId);
 
         topic.club = '优声由色';
