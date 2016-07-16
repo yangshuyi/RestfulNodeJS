@@ -4735,7 +4735,7 @@ a.bg-danger:focus, a.bg-danger:hover {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("../scss/fonts/fontawesome/fontawesome-webfont.eot?#iefix&v=4.6.3") format("embedded-opentype"), url("../scss/fonts/fontawesome/fontawesome-webfont.ttf?v=4.6.3") format("truetype"), url("../scss/fonts/fontawesome/FontAwesome.otf") format("opentype");
+  src: url("../node_modules/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.6.3") format("embedded-opentype"), url("../node_modules/font-awesome/fonts/fontawesome-webfont.ttf?v=4.6.3") format("truetype"), url("../node_modules/font-awesome/fonts/FontAwesome.otf") format("opentype");
   font-weight: normal;
   font-style: normal; }
 .fa {
@@ -6912,6 +6912,29 @@ a.bg-danger:focus, a.bg-danger:hover {
   overflow: visible;
   clip: auto; }
 
+input, textarea {
+  outline: none; }
+
+@-webkit-keyframes scaleIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1); } }
 /*************************
 *******Header******
 **************************/
@@ -6985,7 +7008,7 @@ header nav .active {
     display: inline-block;
     background: transparent;
     border: 0 none;
-    width: 200px;
+    width: 300px;
     padding: 0 10px;
     color: #000;
     -webkit-transition: all 400ms;
@@ -6993,8 +7016,6 @@ header nav .active {
     -ms-transition: all 400ms;
     -o-transition: all 400ms;
     transition: all 400ms; }
-  .topic-space-list .search input:hover {
-    width: 300px; }
 .topic-space-list aside > .title {
   background: #ff8e02;
   color: white;

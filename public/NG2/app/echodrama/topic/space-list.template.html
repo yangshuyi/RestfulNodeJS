@@ -1,8 +1,23 @@
 <div class="topic-space-list container">
-    <div id="searchbar" class="row" style="background: orange; display: flex; padding:5px; margin:10px 0px;">
+    <div *ngIf="showSearchPanelFlag!=true" class="row search-bar" style="background: orange; padding:5px; margin:10px 0px;">
         <div class="search">
-            <input type="text" autocomplete="off" placeholder="Search">
+            <input type="text" [(ngModel)]="paramSubject" autocomplete="off" placeholder="请输入要查找的广播剧名">
             <i class="fa fa-search fa-lg"></i>
+
+        </div>
+        <div style="margin-left:20px;" (click)="setSearchPanelVisible(true)">精确查找>></div>
+    </div>
+    <div *ngIf="showSearchPanelFlag==true" class="search-panel row" style="background: #fcf8e3; padding:5px; margin:10px 0px;">
+        <div clas="container" style="width:100%;">
+            <div class="row" >
+                <div class="col-sm-3">广播剧查询</div>
+                <div class="col-sm-9" style="margin-left:20px;" (click)="setSearchPanelVisible(false)">返回<<</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">xx</div>
+                <div class="col-sm-6">xx</div>
+
+            </div>
         </div>
     </div>
     <div class="row">

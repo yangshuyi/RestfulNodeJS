@@ -17,6 +17,7 @@ var TopicSpaceListComponent = (function () {
     function TopicSpaceListComponent(element, topicService) {
         this.element = element;
         this.topicService = topicService;
+        this.showSearchPanelFlag = false;
     }
     TopicSpaceListComponent.prototype.ngOnInit = function () {
         var params = {};
@@ -25,6 +26,9 @@ var TopicSpaceListComponent = (function () {
     };
     TopicSpaceListComponent.prototype.onTopicSelected = function (topic) {
         console.log('select ' + topic);
+    };
+    TopicSpaceListComponent.prototype.setSearchPanelVisible = function (visible) {
+        this.showSearchPanelFlag = visible;
     };
     TopicSpaceListComponent = __decorate([
         core_1.Component({

@@ -5,6 +5,8 @@ import {TopicService} from "./topic.service";
 import {Topic} from "./topic.model";
 import {TopicCardItemComponent} from "./card-item.component";
 
+import { AlertComponent } from 'ng2-bootstrap/ng2-bootstrap';
+
 @Component({
     selector: 'topic-space-list-component',
     templateUrl: 'app/echodrama/topic/space-list.template.html',
@@ -20,6 +22,7 @@ import {TopicCardItemComponent} from "./card-item.component";
 export class TopicSpaceListComponent implements OnInit {
     private monthlyHotestTopicList: Topic[];
     private topicList: Topic[];
+    private showSearchPanelFlag:boolean = false;
 
     constructor(private element: ElementRef, private topicService:TopicService) {
     
@@ -33,6 +36,10 @@ export class TopicSpaceListComponent implements OnInit {
 
     onTopicSelected(topic:Topic){
         console.log('select '+topic);
+    }
+
+    setSearchPanelVisible(visible:boolean){
+        this.showSearchPanelFlag = visible;
     }
 }
 

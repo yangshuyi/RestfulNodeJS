@@ -9,38 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var image_service_1 = require("./common/image-viewer/image.service");
 var topic_service_1 = require("./echodrama/topic/topic.service");
 var space_list_component_1 = require("./echodrama/topic/space-list.component");
+var ng2_bootstrap_1 = require("ng2-bootstrap/ng2-bootstrap");
 var BootstrapComponent = (function () {
-    function BootstrapComponent(imageService, topicService) {
-        this.imageService = imageService;
-        this.topicService = topicService;
+    function BootstrapComponent() {
         //When we're ready to build a substantive application, we can expand this class with properties and application logic.
         this.title = 'NATIVE ANGULAR 2 DIRECTIVES FOR BOOTSTRAP';
+        this.alerts = [
+            {
+                type: 'danger',
+                msg: 'Oh snap! Change a few things up and try submitting again.'
+            },
+            {
+                type: 'success',
+                msg: 'Well done! You successfully read this important alert message.',
+                closable: true
+            }
+        ];
         console.log('BootstrapComponent constructor');
-        this.topic = topicService.loadTopicById(1);
     }
     BootstrapComponent.prototype.ngOnInit = function () {
+    };
+    BootstrapComponent.prototype.closeAlert = function (i) {
+        this.alerts.splice(i, 1);
+    };
+    BootstrapComponent.prototype.addAlert = function () {
+        this.alerts.push({ msg: 'Another alert!', type: 'warning', closable: true });
     };
     BootstrapComponent = __decorate([
         core_1.Component({
             selector: 'bootstrap-component',
-            template: '' +
-                '<div>https://github.com/twbs/bootstrap/tree/v4-dev</div>' +
-                '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
-                '<div>About fontawesome</div>' +
-                '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>' +
-                '<br/>' +
-                '<topic-space-list-component></topic-space-list-component>' +
-                '<br/>' +
-                '' +
-                '',
+            templateUrl: 'app/bootstrap.template.html',
             styles: [''],
-            directives: [space_list_component_1.TopicSpaceListComponent],
+            directives: [space_list_component_1.TopicSpaceListComponent, ng2_bootstrap_1.AlertComponent],
             providers: [topic_service_1.TopicService]
         }), 
-        __metadata('design:paramtypes', [image_service_1.ImageService, topic_service_1.TopicService])
+        __metadata('design:paramtypes', [])
     ], BootstrapComponent);
     return BootstrapComponent;
 }());

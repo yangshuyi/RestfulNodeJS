@@ -3,25 +3,15 @@ import { Router, ActivatedRoute }       from '@angular/router';
 import {Component} from '@angular/core';
 import {OnInit} from '@angular/core';
 
-import {ImageService} from "./common/image-viewer/image.service";
-import {Topic} from "./echodrama/topic/topic.model";
 import {TopicService} from "./echodrama/topic/topic.service";
 import {TopicSpaceListComponent} from "./echodrama/topic/space-list.component";
+import {AlertComponent} from "ng2-bootstrap/ng2-bootstrap";
 
 @Component({
     selector: 'bootstrap-component', //The selector specifies a simple CSS selector for an HTML element that represents the component.
-    template: '' +
-    '<div>https://github.com/twbs/bootstrap/tree/v4-dev</div>' +
-    '<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>' +
-    '<div>About fontawesome</div>'+
-    '<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>'+
-    '<br/>'+
-    '<topic-space-list-component></topic-space-list-component>'+
-    '<br/>'+
-    ''+
-    '',
+    templateUrl: 'app/bootstrap.template.html',
     styles: [''],
-    directives: [TopicSpaceListComponent],
+    directives: [TopicSpaceListComponent, AlertComponent],
     providers: [TopicService]
 })
 
@@ -31,19 +21,37 @@ export class BootstrapComponent implements OnInit {
     //When we're ready to build a substantive application, we can expand this class with properties and application logic.
     title:string = 'NATIVE ANGULAR 2 DIRECTIVES FOR BOOTSTRAP';
 
-    topic: Topic;
-
-    constructor(private imageService:ImageService, private topicService:TopicService) {
+    constructor() {
         console.log('BootstrapComponent constructor');
-        this.topic = topicService.loadTopicById(1);
-
-
-
     }
 
     ngOnInit() {
         
     }
+
+
+
+
+    public alerts:Array<Object> = [
+        {
+            type: 'danger',
+            msg: 'Oh snap! Change a few things up and try submitting again.'
+        },
+        {
+            type: 'success',
+            msg: 'Well done! You successfully read this important alert message.',
+            closable: true
+        }
+    ];
+
+    public closeAlert(i:number):void {
+        this.alerts.splice(i, 1);
+    }
+
+    public addAlert():void {
+        this.alerts.push({msg: 'Another alert!', type: 'warning', closable: true});
+    }
+
 
 }
 

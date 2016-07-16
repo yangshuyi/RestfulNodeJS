@@ -1,0 +1,28 @@
+<div>https://github.com/twbs/bootstrap/tree/v4-dev</div>
+<div>please visit <a href="http://valor-software.com/ng2-bootstrap/index-bs4.html" target="_blank">http://valor-software.com/ng2-bootstrap/</a></div>
+<div>About fontawesome</div>
+<div>please visit <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></div>
+<br/>
+
+<div class="container">
+    <div class="row">
+
+
+
+    </div>
+
+
+</div>
+
+
+<alert *ngFor="let alert of alerts;let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
+    {{ alert?.msg }}
+</alert>
+
+<alert dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
+
+
+
+<topic-space-list-component></topic-space-list-component>
+
+
