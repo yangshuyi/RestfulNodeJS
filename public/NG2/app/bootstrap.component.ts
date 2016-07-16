@@ -6,12 +6,15 @@ import {OnInit} from '@angular/core';
 import {TopicService} from "./echodrama/topic/topic.service";
 import {TopicSpaceListComponent} from "./echodrama/topic/space-list.component";
 import {AlertComponent} from "ng2-bootstrap/ng2-bootstrap";
+import {AlertDialogComponent} from "./common/dialog/alert-dialog.component";
+
+import '$';
 
 @Component({
     selector: 'bootstrap-component', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     templateUrl: 'app/bootstrap.template.html',
     styles: [''],
-    directives: [TopicSpaceListComponent, AlertComponent],
+    directives: [TopicSpaceListComponent, AlertDialogComponent],
     providers: [TopicService]
 })
 
@@ -27,6 +30,10 @@ export class BootstrapComponent implements OnInit {
 
     ngOnInit() {
         
+    }
+
+    showAlertDialog(){
+        $('body').append('<alert-dialog-component title="TITLE" message="helloworld" [dismissible]="true" ></alert-dialog-component>');
     }
 
 

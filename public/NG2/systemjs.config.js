@@ -13,6 +13,8 @@
         'lodash':                     'node_modules/lodash/lodash.js',
         'moment':                     'node_modules/moment/moment.js',
         'ng2-bootstrap':              'node_modules/ng2-bootstrap',
+        '$' : 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js',
+
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {

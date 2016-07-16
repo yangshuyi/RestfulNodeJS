@@ -34,7 +34,7 @@ export class TopicSnapshotComponent implements OnChanges {
     private topic:Topic;
 
     @Output()
-    private onTopicSelected:EventEmitter = new EventEmitter();
+    private onTopicSelected:EventEmitter<any> = new EventEmitter();
 
     @ViewChild('imageThumbnail') el:ElementRef;
     private imageProperties:ImageProperties;

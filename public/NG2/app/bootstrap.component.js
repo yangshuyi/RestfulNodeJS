@@ -11,7 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var topic_service_1 = require("./echodrama/topic/topic.service");
 var space_list_component_1 = require("./echodrama/topic/space-list.component");
-var ng2_bootstrap_1 = require("ng2-bootstrap/ng2-bootstrap");
+var alert_dialog_component_1 = require("./common/dialog/alert-dialog.component");
+require('$');
 var BootstrapComponent = (function () {
     function BootstrapComponent() {
         //When we're ready to build a substantive application, we can expand this class with properties and application logic.
@@ -31,6 +32,9 @@ var BootstrapComponent = (function () {
     }
     BootstrapComponent.prototype.ngOnInit = function () {
     };
+    BootstrapComponent.prototype.showAlertDialog = function () {
+        $('body').append('<alert-dialog-component title="TITLE" message="helloworld" [dismissible]="true" ></alert-dialog-component>');
+    };
     BootstrapComponent.prototype.closeAlert = function (i) {
         this.alerts.splice(i, 1);
     };
@@ -42,7 +46,7 @@ var BootstrapComponent = (function () {
             selector: 'bootstrap-component',
             templateUrl: 'app/bootstrap.template.html',
             styles: [''],
-            directives: [space_list_component_1.TopicSpaceListComponent, ng2_bootstrap_1.AlertComponent],
+            directives: [space_list_component_1.TopicSpaceListComponent, alert_dialog_component_1.AlertDialogComponent],
             providers: [topic_service_1.TopicService]
         }), 
         __metadata('design:paramtypes', [])

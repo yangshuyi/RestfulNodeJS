@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var image_properties_model_1 = require("./image-properties.model");
 var _ = require('lodash');
+require('$');
 var image_service_1 = require("./image.service");
 var log_service_1 = require("../log.service");
 var ImageThumbnailComponent = (function () {

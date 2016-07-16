@@ -2,7 +2,7 @@ import {Component, Input, OnInit, OnChanges, SimpleChange} from '@angular/core';
 import {ImageProperties} from "./image-properties.model";
 
 import * as _ from 'lodash';
-declare var $:JQueryStatic;
+import '$';
 
 import {ImageService} from "./image.service";
 import {LogService} from "../log.service";

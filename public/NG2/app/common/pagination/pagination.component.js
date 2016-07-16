@@ -8,35 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var events_1 = require("events");
-var ImageThumbnailComponent = (function () {
-    function ImageThumbnailComponent() {
-        this.onPageChanged = new events_1.EventEmitter();
-        this.isImageLoadedFlag = false;
+var core_1 = require("@angular/core");
+var PaginationComponent = (function () {
+    function PaginationComponent() {
+        this.onPageChanged = new core_1.EventEmitter();
     }
-    ImageThumbnailComponent.prototype.ngOnChanges = function (changes) {
-        console.log('ImageThumbnailComponent ngOnChanges' + this.imageProperties);
-        if (!this.imageProperties) {
-            return;
-        }
+    PaginationComponent.prototype.ngOnChanges = function (changes) {
     };
-    ImageThumbnailComponent.prototype.ngOnInit = function () {
-        console.log('ImageThumbnailComponent ngOnInit' + this.imageProperties);
+    PaginationComponent.prototype.ngOnInit = function () {
+    };
+    PaginationComponent.prototype.gotoPage = function () {
+        this.onPageChanged.emit(this.currentPageIdx);
     };
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', Number)
-    ], ImageThumbnailComponent.prototype, "pageNum", void 0);
+    ], PaginationComponent.prototype, "pageNum", void 0);
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', Number)
-    ], ImageThumbnailComponent.prototype, "currentPageIdx", void 0);
+    ], PaginationComponent.prototype, "currentPageIdx", void 0);
     __decorate([
-        Output(), 
-        __metadata('design:type', events_1.EventEmitter)
-    ], ImageThumbnailComponent.prototype, "onPageChanged", void 0);
-    ImageThumbnailComponent = __decorate([
-        Component({
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], PaginationComponent.prototype, "onPageChanged", void 0);
+    PaginationComponent = __decorate([
+        core_1.Component({
             selector: 'image-thumbnail',
             template: '' +
                 '<ul class="pagination">' +
@@ -56,8 +53,8 @@ var ImageThumbnailComponent = (function () {
             ]
         }), 
         __metadata('design:paramtypes', [])
-    ], ImageThumbnailComponent);
-    return ImageThumbnailComponent;
+    ], PaginationComponent);
+    return PaginationComponent;
 }());
-exports.ImageThumbnailComponent = ImageThumbnailComponent;
+exports.PaginationComponent = PaginationComponent;
 //# sourceMappingURL=pagination.component.js.map

@@ -15,8 +15,7 @@ var image_service_1 = require("../../common/image-viewer/image.service");
 var image_properties_model_1 = require("../../common/image-viewer/image-properties.model");
 var common_1 = require("@angular/common");
 var TopicCardItemComponent = (function () {
-    function TopicCardItemComponent(imageThumbnailContainerElement, imageService) {
-        this.imageThumbnailContainerElement = imageThumbnailContainerElement;
+    function TopicCardItemComponent(imageService) {
         this.imageService = imageService;
         this.onTopicSelected = new core_1.EventEmitter();
         console.log('TopicCardItemComponent constructor el');
@@ -116,9 +115,9 @@ var TopicCardItemComponent = (function () {
                     ''
             ],
             directives: [image_thumbnail_component_1.ImageThumbnailComponent],
-            pipe: [common_1.DatePipe]
+            pipes: [common_1.DatePipe]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, image_service_1.ImageService])
+        __metadata('design:paramtypes', [image_service_1.ImageService])
     ], TopicCardItemComponent);
     return TopicCardItemComponent;
 }());

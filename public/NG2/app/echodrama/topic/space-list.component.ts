@@ -5,8 +5,6 @@ import {TopicService} from "./topic.service";
 import {Topic} from "./topic.model";
 import {TopicCardItemComponent} from "./card-item.component";
 
-import { AlertComponent } from 'ng2-bootstrap/ng2-bootstrap';
-
 @Component({
     selector: 'topic-space-list-component',
     templateUrl: 'app/echodrama/topic/space-list.template.html',

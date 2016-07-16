@@ -1,5 +1,5 @@
 
-import {EventEmitter} from "events";
+import {Component, OnChanges, OnInit, Input, Output, SimpleChange, EventEmitter} from "@angular/core";
 @Component({
     selector: 'image-thumbnail', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     template: '' +
@@ -20,7 +20,7 @@ import {EventEmitter} from "events";
     ]
 })
 
-export class ImageThumbnailComponent implements OnChanges, OnInit {
+export class PaginationComponent implements OnChanges, OnInit {
     @Input()
     private pageNum:number;
 
@@ -28,22 +28,19 @@ export class ImageThumbnailComponent implements OnChanges, OnInit {
     private currentPageIdx:number;
 
     @Output()
-    private onPageChanged:EventEmitter = new EventEmitter();
-
-    private url:string;
-    private isImageLoadedFlag:boolean = false;
+    private onPageChanged:EventEmitter<any> = new EventEmitter();
 
     constructor() {
     }
 
     ngOnChanges(changes:{[propKey:string]:SimpleChange}) {
-        console.log('ImageThumbnailComponent ngOnChanges' + this.imageProperties);
-        if (!this.imageProperties) {
-            return;
-        }
+
     }
 
     ngOnInit() {
-        console.log('ImageThumbnailComponent ngOnInit' + this.imageProperties);
+    }
+
+    gotoPage(){
+        this.onPageChanged.emit(this.currentPageIdx);
     }
 }

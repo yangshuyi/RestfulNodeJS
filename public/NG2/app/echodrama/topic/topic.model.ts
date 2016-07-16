@@ -8,9 +8,13 @@ export class Topic {
     posterUrl:string;
     subject:string;
     label:string;
+    labelItemArray:string[];
+
     message:string;
+
     categoryId:number;
     category:Category;
+
     club:string;
     clubTagId:number;
     cast:string;
@@ -81,6 +85,7 @@ export class Category {
     id:number;
     key:string;
     text:string;
+    shortText:string;
     orderIdx:number;
 
     static getCategoryById(id:number):Category {

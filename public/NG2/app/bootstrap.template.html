@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-
+        <button (click)="showAlertDialog()">click me</button>
 
 
     </div>
@@ -15,14 +15,14 @@
 </div>
 
 
-<alert *ngFor="let alert of alerts;let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
-    {{ alert?.msg }}
-</alert>
+<!--<alert *ngFor="let alert of alerts;let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">-->
+    <!--{{ alert?.msg }}-->
+<!--</alert>-->
 
-<alert dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
+<!--<alert dismissOnTimeout="3000">This alert will dismiss in 3s</alert>-->
 
 
 
-<topic-space-list-component></topic-space-list-component>
+<!--<topic-space-list-component></topic-space-list-component>-->
 
 

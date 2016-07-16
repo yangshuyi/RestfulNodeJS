@@ -70,7 +70,7 @@ import {DatePipe} from "@angular/common";
         ''
     ],
     directives: [ImageThumbnailComponent],
-    pipe: [DatePipe]
+    pipes: [DatePipe]
 })
 
 
@@ -79,14 +79,14 @@ export class TopicCardItemComponent implements OnChanges {
     private topic:Topic;
 
     @Output()
-    private onTopicSelected:EventEmitter = new EventEmitter();
+    private onTopicSelected:EventEmitter<any> = new EventEmitter();
 
     @ViewChild('imageThumbnail')
     private imageThumbnailContainerElement:ElementRef;
 
     private imageProperties:ImageProperties;
 
-    constructor(private imageThumbnailContainerElement:ElementRef, private imageService:ImageService) {
+    constructor(private imageService:ImageService) {
         console.log('TopicCardItemComponent constructor el');
     }
 
