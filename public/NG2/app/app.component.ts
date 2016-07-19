@@ -13,7 +13,8 @@ import {ImageService} from "./common/image-viewer/image.service";
 //associate metadata with the component class
 @Component({
     selector: 'my-app', //The selector specifies a simple CSS selector for an HTML element that represents the component.
-    template: '<app-header [appInfo]="appInfo"></app-header>' +
+    template: ''+
+    '<app-header [appInfo]="appInfo"></app-header>' +
     '<div class="container"><router-outlet></router-outlet></div>' +
     '<app-footer [appInfo]="appInfo"></app-footer>',
     styles: [''],

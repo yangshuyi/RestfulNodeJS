@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -27,7 +26,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<app-header [appInfo]="appInfo"></app-header>' +
+            template: '' +
+                '<app-header [appInfo]="appInfo"></app-header>' +
                 '<div class="container"><router-outlet></router-outlet></div>' +
                 '<app-footer [appInfo]="appInfo"></app-footer>',
             styles: [''],
@@ -37,6 +37,6 @@ var AppComponent = (function () {
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
-}());
+})();
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

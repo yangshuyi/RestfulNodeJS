@@ -1,58 +1,79 @@
-
 /*************************
 *******Header******
 **************************/
-header {
-  .top-bar {
-    padding: 2px 0;
-    background: #EDEDED;
-    line-height: 28px;
-    text-align: right;
+app-header {
+  display: block;
+  background: $orange;
 
-    .search {
-      display: inline-block;
+  .logo {
 
-      border: 1px solid lightgrey;
-      border-radius: 50px;
+  }
+
+  .navbar-nav {
+
+    a {
+      color: white;
+    }
+
+    .nav-item {
+      float: left;
+    }
+
+    .nav-link {
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+    }
+  }
+
+  .search {
+    padding: 0px 10px;
+    
+    > div {
+      border-radius: 15px;
 
       padding: 2px 10px;
-
+      margin-top: 5px;
       margin-right: 10px;
 
-      cursor: pointer;
+      background: white;
 
       input {
-        display: inline-block;
-        background: transparent;
         border: 0 none;
         width: 200px;
         padding: 0 10px;
         color: #000;
-        -webkit-transition: all 400ms;
-        -moz-transition: all 400ms;
-        -ms-transition: all 400ms;
-        -o-transition: all 400ms;
-        transition: all 400ms;
       }
 
-      input:hover {
-        width: 300px;
+      i {
+        cursor: pointer;
       }
     }
 
   }
 
+  .user-avatar {
+    padding: 0px 10px;
+    position: relative;
+    width: 50px;
 
+    > div {
+      position: absolute;
+      top: -5px;
+      width: 50px;
+      height: 50px;
+      border-radius: 25px;
+      background: $light-orange;
 
-  .logo {
-    margin-left: 0;
+      text-align: center;
+      cursor: pointer;
+      > span {
+        line-height: 50px;
+      }
+    }
   }
 
-  nav {
-    .active{
-      color:white;
-      background-color: red;
-    }
+  .user-setting {
+    padding: 0px 10px;
   }
 }
 

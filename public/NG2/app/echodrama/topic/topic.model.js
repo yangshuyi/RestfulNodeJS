@@ -1,4 +1,3 @@
-"use strict";
 var Topic = (function () {
     function Topic() {
         this.replyNum = 0;
@@ -12,7 +11,7 @@ var Topic = (function () {
         this.poll_5 = 0;
     }
     return Topic;
-}());
+})();
 exports.Topic = Topic;
 var Type = (function () {
     function Type() {
@@ -45,7 +44,7 @@ var Type = (function () {
         return type;
     };
     return Type;
-}());
+})();
 exports.Type = Type;
 var Category = (function () {
     function Category() {
@@ -98,6 +97,6 @@ var Category = (function () {
         return category;
     };
     return Category;
-}());
+})();
 exports.Category = Category;
 //# sourceMappingURL=topic.model.js.map
