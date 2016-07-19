@@ -1,7 +1,7 @@
 <header class="container top-bar">
     <div class="row">
         <div class="col-sm-12 col-xs-12" style="display: flex; justify-content: center;">
-            <img class="navbar-brand" src="images/page-loading-logo.gif" style="height:40px;" alt="loading-logo"/>
+            <img class="item navbar-brand" src="images/page-loading-logo.gif" style="height:40px;" alt="loading-logo"/>
             <div class="navbar navbar-default" role="navigation" style="flex:1;">
                 <ul class="nav navbar-nav">
                     <!--<li *ngFor="let menu of appInfo.menus" [ngClass]="{ active:'active', dropdown:'dropdown'}">-->
@@ -11,20 +11,20 @@
                     </li>
                 </ul>
             </div>
-            <div class="search">
+            <div class="item search">
                 <div>
                     <input type="text" autocomplete="off" placeholder="Search"/>
                     <i class="fa fa-search fa-lg"></i>
                 </div>
             </div>
-            <div class="user-avatar">
+            <div class="item user-avatar">
                 <div (click)="openUserInfo()" title="默认个人资料图片">
                     <span class="fa fa-user fa-2x" aria-label="默认个人资料图片"></span>
                 </div>
             </div>
-            <div class="user-setting">
+            <div class="item user-setting">
                 <div>
-                    <i class="fa fa-gear fa-lg"></i>
+                    <i class="fa fa-gear fa-2x"></i>
                 </div>
             </div>
         </div>

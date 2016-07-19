@@ -1,3 +1,4 @@
+"use strict";
 var AppInfo = (function () {
     function AppInfo() {
         this.title = 'AngularJS2 cache manager';
@@ -5,11 +6,11 @@ var AppInfo = (function () {
         this.siteHyperlink = 'http://www.echodram.com';
         this.menus = [
             {
-                name: 'Redis Manager',
+                name: 'Redis',
                 routerLink: '/redisManager'
             },
             {
-                name: 'MongoDB Manager',
+                name: 'MongoDB',
                 routerLink: '/mongoDBManager'
             },
             {
@@ -19,6 +20,6 @@ var AppInfo = (function () {
         ];
     }
     return AppInfo;
-})();
+}());
 exports.AppInfo = AppInfo;
 //# sourceMappingURL=app-info.model.js.map

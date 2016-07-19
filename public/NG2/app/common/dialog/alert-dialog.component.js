@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,14 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ng2_bootstrap_1 = require("ng2-bootstrap/ng2-bootstrap");
+require('$');
 var AlertDialogComponent = (function () {
     function AlertDialogComponent() {
         this.dismissible = true;
         this.onAlertDialogClose = new core_1.EventEmitter();
+        this.containerTop = 0;
+        this.containerLeft = 0;
     }
     AlertDialogComponent.prototype.ngOnChanges = function (changes) {
+        console.log("ngOnChanges");
     };
     AlertDialogComponent.prototype.ngOnInit = function () {
+        console.log("ngOnInit");
+    };
+    AlertDialogComponent.prototype.ngAfterContentInit = function () {
+        console.log("ngOnInit");
+    };
+    AlertDialogComponent.prototype.ngAfterViewInit = function () {
+        console.log("ngAfterViewInit");
+        var containerWidth = this.alertComponentContainer.nativeElement.offsetWidth;
+        var containerHeight = this.alertComponentContainer.nativeElement.offsetHeight;
+        this.containerLeft = ($(window).width() - containerWidth) / 2;
+        this.containerTop = ($(window).height() - containerHeight) / 2;
+    };
+    AlertDialogComponent.prototype.ngAfterViewChecked = function () {
+        console.log("ngAfterViewChecked");
     };
     AlertDialogComponent.prototype.closeAlertDialog = function () {
         this.onAlertDialogClose.emit({});
@@ -34,6 +53,14 @@ var AlertDialogComponent = (function () {
         __metadata('design:type', Boolean)
     ], AlertDialogComponent.prototype, "dismissible", void 0);
     __decorate([
+        core_1.ViewChild('alertComponentContainer'), 
+        __metadata('design:type', core_1.ElementRef)
+    ], AlertDialogComponent.prototype, "alertComponentContainer", void 0);
+    __decorate([
+        core_1.ViewChild(ng2_bootstrap_1.AlertComponent), 
+        __metadata('design:type', ng2_bootstrap_1.AlertComponent)
+    ], AlertDialogComponent.prototype, "alertComponent", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], AlertDialogComponent.prototype, "onAlertDialogClose", void 0);
@@ -47,6 +74,6 @@ var AlertDialogComponent = (function () {
         __metadata('design:paramtypes', [])
     ], AlertDialogComponent);
     return AlertDialogComponent;
-})();
+}());
 exports.AlertDialogComponent = AlertDialogComponent;
 //# sourceMappingURL=alert-dialog.component.js.map

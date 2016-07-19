@@ -5,6 +5,11 @@ app-header {
   display: block;
   background: $orange;
 
+  .item {
+    padding: 0px 10px;
+    min-width: 70px;
+  }
+
   .logo {
 
   }
@@ -26,8 +31,6 @@ app-header {
   }
 
   .search {
-    padding: 0px 10px;
-    
     > div {
       border-radius: 15px;
 
@@ -52,9 +55,7 @@ app-header {
   }
 
   .user-avatar {
-    padding: 0px 10px;
     position: relative;
-    width: 50px;
 
     > div {
       position: absolute;
@@ -73,7 +74,12 @@ app-header {
   }
 
   .user-setting {
-    padding: 0px 10px;
+    padding: 3px 10px;
+    text-align: center;
+
+    > div {
+      cursor: pointer;
+    }
   }
 }
 

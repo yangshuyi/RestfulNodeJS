@@ -81,6 +81,7 @@ export class TopicCardItemComponent implements OnChanges {
     @Output()
     private onTopicSelected:EventEmitter<any> = new EventEmitter();
 
+    // View child is set before the ngAfterViewInit callback is called.
     @ViewChild('imageThumbnail')
     private imageThumbnailContainerElement:ElementRef;
 

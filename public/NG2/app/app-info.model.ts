@@ -5,11 +5,11 @@ export class AppInfo {
 
     menus:Object = [
         {
-            name: 'Redis Manager',
+            name: 'Redis',
             routerLink: '/redisManager'
         },
         {
-            name: 'MongoDB Manager',
+            name: 'MongoDB',
             routerLink: '/mongoDBManager'
         },
         {

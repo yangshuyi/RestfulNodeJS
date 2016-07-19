@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -46,6 +47,6 @@ var AppHeaderComponent = (function () {
         __metadata('design:paramtypes', [router_1.Router, auth_service_1.AuthService])
     ], AppHeaderComponent);
     return AppHeaderComponent;
-})();
+}());
 exports.AppHeaderComponent = AppHeaderComponent;
 //# sourceMappingURL=app-header.component.js.map
