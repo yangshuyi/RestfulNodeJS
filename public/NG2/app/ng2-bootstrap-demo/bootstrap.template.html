@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>NG2-bootstrap</h1>
+                <p>Native Angular2 directives for Bootstrap, works with Bootstrap 3 and 4-alfa</p>
+                <p><a class="btn btn-primary btn-lg" href="https://github.com/valor-software/ng2-plans" target="blank" role="button">Learn more »</a></p>
+                <p>Usage & Demo</p>
+                <p>http://valor-software.github.io/ng2-bootstrap/</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div *ngFor="let demo of ng2BootstrapDemo.demos" class="col-md-4">
+            <p><button class="btn" [class.btn-secondary]="demo.componentClass" [class.btn-default]="!demo.componentClass" [disabled]="!demo.componentClass" (click)="showDemo(demo)" role="button" style="min-width:150px;">{{demo.name}} »</button></p>
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div #demoContent>
+
+
+
+</div>

@@ -3,10 +3,6 @@
 @import 'base';
 @import 'common.component';
 
-.row {
-  flex-wrap: initial;
-}
-
 .estimateTotalAmountPopupPanel {
   background-color: #edf6fb;
   border: 1px solid #a7bac9;
@@ -52,6 +48,11 @@
       -o-transition: all 400ms;
       transition: all 400ms;
     }
+  }
+
+
+  .row {
+    flex-wrap: initial;
   }
 
   article {

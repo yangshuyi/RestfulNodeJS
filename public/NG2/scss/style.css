@@ -6973,6 +6973,7 @@ app-header {
       height: 50px;
       border-radius: 25px;
       background: #fcf8e3;
+      z-index: 1;
       text-align: center;
       cursor: pointer; }
       app-header .user-avatar > div > span {
@@ -6991,9 +6992,6 @@ app-header {
   .avatar48 img {
     width: 48px;
     height: 48px; }
-
-.row {
-  flex-wrap: initial; }
 
 .estimateTotalAmountPopupPanel {
   background-color: #edf6fb;
@@ -7029,6 +7027,8 @@ app-header {
     -ms-transition: all 400ms;
     -o-transition: all 400ms;
     transition: all 400ms; }
+.topic-space-list .row {
+  flex-wrap: initial; }
 .topic-space-list aside > .title {
   background: #ff8e02;
   color: white;

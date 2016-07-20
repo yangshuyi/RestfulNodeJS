@@ -1,8 +1,8 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 import {RedisManagerComponent} from "./redis-manager.component";
-import {BootstrapComponent} from "./bootstrap.component";
 
 import {LoginComponent} from "./user/login.component";
+import {BootstrapComponent} from "./ng2-bootstrap-demo/bootstrap.component";
 
 export const routes:RouterConfig = [
     {
