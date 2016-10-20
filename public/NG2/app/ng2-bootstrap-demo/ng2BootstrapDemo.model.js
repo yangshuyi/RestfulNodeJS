@@ -1,4 +1,3 @@
-"use strict";
 var demo_buttons_component_1 = require("./demo-buttons.component");
 var demo_carousel_component_1 = require("./demo-carousel.component");
 var demo_accordion_component_1 = require("./demo-accordion.component");
@@ -63,6 +62,6 @@ var NG2BootstrapDemo = (function () {
         ];
     }
     return NG2BootstrapDemo;
-}());
+})();
 exports.NG2BootstrapDemo = NG2BootstrapDemo;
 //# sourceMappingURL=ng2BootstrapDemo.model.js.map

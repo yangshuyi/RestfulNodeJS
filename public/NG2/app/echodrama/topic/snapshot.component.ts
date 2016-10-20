@@ -4,8 +4,6 @@ import {Topic} from "./topic.model";
 import {ImageService} from "../../common/image-viewer/image.service";
 import {StretchMode, ImageProperties} from "../../common/image-viewer/image-properties.model";
 
-//A @Component decorator that tells Angular what template to use and how to create the component.
-//associate metadata with the component class
 @Component({
     selector: 'topic-snapshot', //The selector specifies a simple CSS selector for an HTML element that represents the component.
     template: '' +
@@ -27,8 +25,6 @@ import {StretchMode, ImageProperties} from "../../common/image-viewer/image-prop
     ],
     directives: [ImageThumbnailComponent]
 })
-
-
 export class TopicSnapshotComponent implements OnChanges {
     @Input()
     private topic:Topic;

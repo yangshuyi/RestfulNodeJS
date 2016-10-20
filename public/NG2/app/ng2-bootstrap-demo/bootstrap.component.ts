@@ -1,4 +1,4 @@
-import {Component, ComponentRef, ViewContainerRef, ViewChild, ComponentResolver, ComponentFactory} from '@angular/core';
+import {Component, ComponentRef, ViewContainerRef, ViewChild,Inject, ComponentResolver, ComponentFactory} from '@angular/core';
 
 import '$';
 import {NG2BootstrapDemo} from "./ng2BootstrapDemo.model";
@@ -11,7 +11,6 @@ import {NG2BootstrapDemo} from "./ng2BootstrapDemo.model";
     providers: []
 })
 export class BootstrapComponent {
-
     @ViewChild('demoContent', {read: ViewContainerRef})
     private target;
 
@@ -19,7 +18,7 @@ export class BootstrapComponent {
 
     private ng2BootstrapDemo:NG2BootstrapDemo = new NG2BootstrapDemo();
 
-    constructor(private resolver:ComponentResolver) {
+    constructor() {
         console.log('BootstrapComponent constructor');
     }
 

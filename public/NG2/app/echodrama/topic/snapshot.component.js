@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13,8 +12,6 @@ var image_thumbnail_component_1 = require("../../common/image-viewer/image-thumb
 var topic_model_1 = require("./topic.model");
 var image_service_1 = require("../../common/image-viewer/image.service");
 var image_properties_model_1 = require("../../common/image-viewer/image-properties.model");
-//A @Component decorator that tells Angular what template to use and how to create the component.
-//associate metadata with the component class
 var TopicSnapshotComponent = (function () {
     function TopicSnapshotComponent(element, imageService) {
         this.element = element;
@@ -74,6 +71,6 @@ var TopicSnapshotComponent = (function () {
         __metadata('design:paramtypes', [core_1.ElementRef, image_service_1.ImageService])
     ], TopicSnapshotComponent);
     return TopicSnapshotComponent;
-}());
+})();
 exports.TopicSnapshotComponent = TopicSnapshotComponent;
 //# sourceMappingURL=snapshot.component.js.map

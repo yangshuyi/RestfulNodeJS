@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12,8 +11,7 @@ var core_1 = require('@angular/core');
 require('$');
 var ng2BootstrapDemo_model_1 = require("./ng2BootstrapDemo.model");
 var BootstrapComponent = (function () {
-    function BootstrapComponent(resolver) {
-        this.resolver = resolver;
+    function BootstrapComponent() {
         this.ng2BootstrapDemo = new ng2BootstrapDemo_model_1.NG2BootstrapDemo();
         console.log('BootstrapComponent constructor');
     }
@@ -37,9 +35,9 @@ var BootstrapComponent = (function () {
             directives: [],
             providers: []
         }), 
-        __metadata('design:paramtypes', [core_1.ComponentResolver])
+        __metadata('design:paramtypes', [])
     ], BootstrapComponent);
     return BootstrapComponent;
-}());
+})();
 exports.BootstrapComponent = BootstrapComponent;
 //# sourceMappingURL=bootstrap.component.js.map

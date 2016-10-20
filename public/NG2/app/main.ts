@@ -1,12 +1,10 @@
-import { bootstrap }    from '@angular/platform-browser-dynamic';     //Angular's browser bootstrap function
-import { HTTP_PROVIDERS } from '@angular/http';
+//Start up your application
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'; //Angular's browser bootstrap function
 
-import { AppComponent } from './app.component';                         //The application root component, AppComponent
-import { APP_ROUTER_PROVIDERS } from './app.routes';        //Next we open main.ts where we must register our router providers in the bootstrap method.
+import { AppModule } from './app.module';                    //The application root component, AppComponent
 
-import {provideForms, disableDeprecatedForms} from '@angular/forms';
+//Because the QuickStart application runs directly in the browser, main.ts imports the platformBrowserDynamic function from @angular/platform-browser-dynamic, not @angular/core.
+//On a mobile device, you might load a module with Apache Cordova or NativeScript, using a bootstrap function that's specific to that platform.
 
-bootstrap(AppComponent, [
-    APP_ROUTER_PROVIDERS, HTTP_PROVIDERS, disableDeprecatedForms(), provideForms()
-])
-.catch(err => console.error(err));
+const platform = platformBrowserDynamic();
+platform.bootstrapModule(AppModule);

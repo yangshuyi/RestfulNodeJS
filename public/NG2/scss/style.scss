@@ -3,19 +3,6 @@
 @import 'base';
 @import 'common.component';
 
-.estimateTotalAmountPopupPanel {
-  background-color: #edf6fb;
-  border: 1px solid #a7bac9;
-}
-
-.estimateTotalAmountPopupPanel > div {
-  padding: 10px;
-}
-
-.estimateTotalAmountPopupPanel > div > div {
-  padding: 5px 0px;
-}
-
 .redis-manager {
   background: black;
   color: white;

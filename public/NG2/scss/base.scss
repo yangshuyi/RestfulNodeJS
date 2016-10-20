@@ -1,6 +1,10 @@
 $fa-font-path: "../node_modules/font-awesome/fonts";
 @import "../node_modules/font-awesome/scss/font-awesome.scss";
 
+body {
+  margin: 0;
+}
+
 //取消Chrome蓝框
 input, textarea {
   outline: none;

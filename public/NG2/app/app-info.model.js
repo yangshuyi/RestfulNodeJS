@@ -1,4 +1,3 @@
-"use strict";
 var AppInfo = (function () {
     function AppInfo() {
         this.title = 'AngularJS2 cache manager';
@@ -20,6 +19,6 @@ var AppInfo = (function () {
         ];
     }
     return AppInfo;
-}());
+})();
 exports.AppInfo = AppInfo;
 //# sourceMappingURL=app-info.model.js.map

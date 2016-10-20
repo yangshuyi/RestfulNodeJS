@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,14 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //One or more import statements to reference the things we need.
 var core_1 = require('@angular/core');
+var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var redis_manager_component_1 = require("./redis-manager.component");
 var app_info_model_1 = require("./app-info.model");
 var app_header_component_1 = require("./app-header.component");
 var log_service_1 = require("./common/log.service");
 var image_service_1 = require("./common/image-viewer/image.service");
-//A @Component decorator that tells Angular what template to use and how to create the component.
-//associate metadata with the component class
+//This is the entry point to your application.
 var AppComponent = (function () {
     function AppComponent() {
         this.appInfo = new app_info_model_1.AppInfo();
@@ -25,6 +24,9 @@ var AppComponent = (function () {
     AppComponent.prototype.ngOnInit = function () {
     };
     AppComponent = __decorate([
+        core_1.NgModule({
+            imports: [platform_browser_1.BrowserModule]
+        }),
         core_1.Component({
             selector: 'my-app',
             template: '' +
@@ -38,6 +40,6 @@ var AppComponent = (function () {
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
-}());
+})();
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
